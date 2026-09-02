@@ -25,7 +25,7 @@
 
    v3 is v2 with exactly one thing changed: what the accent resolves to. The
    neutral and surface ramp is untouched — same white page, same black ink,
-   same #565656 muted, same 16%-black hairline, same --chip — and so are
+   same slate muted, same 16% navy hairline, same --chip — and so are
    layout, spacing, type and copy. Only the colours that mark something out
    are restated, and they are restated at the semantic layer wherever the
    component already reads it, which is most places.
@@ -70,8 +70,8 @@
   --page: #ffffff;
   --surface: #ffffff;
   --surface-2: #ffffff;
-  --ink: #000000;
-  --ink-muted: #565656;
+  --ink: #17232B;
+  --ink-muted: #59666B;
   --ink-invert: #ffffff;
   --ink-muted-invert: rgba(255, 255, 255, 0.72);
   /* v3: the accent is no longer black. 600 rather than the base, because
@@ -80,8 +80,8 @@
   --accent: var(--orange-600);
   --accent-ink: #ffffff;
   --accent-quiet: var(--orange-050);
-  --chip: rgba(0, 0, 0, 0.05);
-  --hairline: rgba(0, 0, 0, 0.16);
+  --chip: rgba(23, 35, 43, 0.05);
+  --hairline: rgba(23, 35, 43, 0.16);
   /* v3: the focus ring is the accent. 5.01:1 on the page, 4.19:1 on the
      dark block — both clear the 3:1 a focus indicator has to hold. */
   --focus: var(--orange-600);
@@ -107,7 +107,7 @@
 :root {
   /* One page-layer semantic: the single dark block. The system names no token
      for it, so it is declared once here rather than read as a raw ramp value. */
-  --surface-dark: #000000;
+  --surface-dark: #17232B;
   --hairline-invert: rgba(255, 255, 255, 0.16);
   --fill-invert: rgba(255, 255, 255, 0.06);
 }
@@ -138,8 +138,8 @@
      box, so the weighting to the upper right repeats at every size. */
   --ground-base: #fafafa;
   --ground-wash:
-    radial-gradient(90% 120% at 95% 0%, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0) 62%),
-    radial-gradient(80% 110% at 0% 100%, rgba(0, 0, 0, 0.045), rgba(0, 0, 0, 0) 60%);
+    radial-gradient(90% 120% at 95% 0%, rgba(23, 35, 43, 0.10), rgba(23, 35, 43, 0) 62%),
+    radial-gradient(80% 110% at 0% 100%, rgba(23, 35, 43, 0.045), rgba(23, 35, 43, 0) 60%);
   --ground-size: auto;
 
   /* The flat grey the highlighted rows take. A shade below --ground-base
@@ -2777,7 +2777,7 @@ plainest thing in the drawing rather than the most filled. */
   color: var(--ink);
   --heading: var(--ink);
   --body: var(--ink-muted);
-  --meta: rgba(0, 0, 0, 0.55);
+  --meta: rgba(23, 35, 43, 0.55);
 }
 .hero--shot .hero__img {
   position: absolute;

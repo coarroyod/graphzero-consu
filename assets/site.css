@@ -25,16 +25,16 @@
   --page: #ffffff;
   --surface: #ffffff;
   --surface-2: #ffffff;
-  --ink: #000000;
-  --ink-muted: #565656;
+  --ink: #17232B;
+  --ink-muted: #59666B;
   --ink-invert: #ffffff;
   --ink-muted-invert: rgba(255, 255, 255, 0.72);
-  --accent: #000000;
+  --accent: #FF6A00;
   --accent-ink: #ffffff;
-  --accent-quiet: #f2f2f2;
-  --chip: rgba(0, 0, 0, 0.05);
-  --hairline: rgba(0, 0, 0, 0.16);
-  --focus: #000000;
+  --accent-quiet: #F9E3D8;
+  --chip: rgba(23, 35, 43, 0.05);
+  --hairline: rgba(23, 35, 43, 0.16);
+  --focus: #FF6A00;
 }
 
 /* ==========================================================================
@@ -57,7 +57,7 @@
 :root {
   /* One page-layer semantic: the single dark block. The system names no token
      for it, so it is declared once here rather than read as a raw ramp value. */
-  --surface-dark: #000000;
+  --surface-dark: #17232B;
   --hairline-invert: rgba(255, 255, 255, 0.16);
   --fill-invert: rgba(255, 255, 255, 0.06);
 }

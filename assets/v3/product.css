@@ -12,10 +12,11 @@
 
 /* ---- the palette, for these two sections only ----
 
-   This page never took the brand values: its ink is pure #000000 and its
-   muted grey #565656, where the rest of the site runs the navy #17232B and
-   the slate #59666B. The two sections in scope take the brand palette; the
-   rest of the page keeps what it had, because it is not in scope. */
+   This block predates the palette being unified — the page ran a pure #000000
+   ink and a #565656 grey then, and these two sections were brought onto the
+   brand values ahead of the rest. The base now carries the same values, so
+   this restates rather than overrides. Kept because it is the record of what
+   these two sections require, and it resolves identically either way. */
 .page[data-page="product"] .hero-lattice,
 .page[data-page="product"] #layers {
   --ink: #17232B;
@@ -132,7 +133,7 @@
 /* The second module is the layer people touch, and it is marked in the pink
    rather than the orange — the palette's rare value, used once on the page. */
 .page[data-page="product"] #layers .layer-card + .layer-card {
-  border-top-color: #F5127A;
+  border-top-color: #FF2E93;
   background: #ffffff;
 }
 

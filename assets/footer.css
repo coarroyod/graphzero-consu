@@ -9,7 +9,7 @@
    fighting an override — the dark band's tokens simply do not apply any more.
    Values are literal rather than tokenised for the same reason: the two
    stylesheet families resolve --ink and --ink-muted to different colours
-   (#000000/#565656 on the v3 pages, the brand navy and slate on the others),
+   (they did until the palette was unified, and page-level rules can still),
    and the footer should be one thing on every page.
    ========================================================================== */
 .gz-footer {

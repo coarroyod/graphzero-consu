@@ -92,7 +92,7 @@
   var cs = getComputedStyle(host);
   var C = {
     ink: cs.getPropertyValue('--heading').trim() || '#000',
-    body: cs.getPropertyValue('--meta').trim() || '#565656',
+    body: cs.getPropertyValue('--meta').trim() || '#59666B',
     line: cs.getPropertyValue('--line').trim() || 'rgba(0,0,0,.16)',
     accent: cs.getPropertyValue('--eu-blue').trim() || '#003399'
   };

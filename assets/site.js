@@ -1434,7 +1434,7 @@
      second accent on three of the twenty-two nodes and nowhere else. Orange
      carries the figure; the pink is a detail you find rather than one you
      are shown. */
-  var C = { accent: '#FF6A00', pink: '#F5127A' };
+  var C = { accent: '#FF6A00', pink: '#FF2E93' };
   function readColours() {
     var cs = getComputedStyle(canvas);
     C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
