@@ -15,14 +15,14 @@
   --ink: #17232B;
   --ink-muted: #59666B;
   --ink-invert: #ffffff;
-  --accent: #D95C32;
-  --accent-strong: #C24E27;
+  --accent: #FF6A00;
+  --accent-strong: #FF6A00;
   --accent-ink: #ffffff;
   --chip: rgba(23, 35, 43, 0.05);
   --hairline: rgba(23, 35, 43, 0.16);
   --surface-dark: #17232B;
-  --hl: #D95C32;
-  --focus: #D95C32;
+  --hl: #FF6A00;
+  --focus: #FF6A00;
 
   --heading: var(--ink);
   --body: var(--ink-muted);
@@ -139,7 +139,7 @@
   pointer-events: none;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 760' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0' stop-color='%23D95C32'/%3E%3Cstop offset='1' stop-color='%23F5127A'/%3E%3C/linearGradient%3E%3Cpath d='M135 -40 C 350 180 175 385 425 495 C 640 590 760 670 840 845' fill='none' stroke='url(%23g)' stroke-width='2.25' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M215 -40 C 435 195 260 410 510 520 C 715 610 820 685 900 855' fill='none' stroke='url(%23g)' stroke-width='1' stroke-opacity='0.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 760' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0' stop-color='%23FF6A00'/%3E%3Cstop offset='1' stop-color='%23F5127A'/%3E%3C/linearGradient%3E%3Cpath d='M135 -40 C 350 180 175 385 425 495 C 640 590 760 670 840 845' fill='none' stroke='url(%23g)' stroke-width='2.25' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M215 -40 C 435 195 260 410 510 520 C 715 610 820 685 900 855' fill='none' stroke='url(%23g)' stroke-width='1' stroke-opacity='0.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
 }
 
 .page[data-page="security"] .secsplit__marks .markrow {
@@ -781,7 +781,7 @@
   transition: border-color 300ms var(--ease), background-color 300ms var(--ease);
 }
 .page[data-page="security"] main > section:nth-of-type(6) .pick:hover {
-  border-color: rgba(217, 92, 50, 0.45);
+  border-color: rgba(255, 106, 0, 0.45);
   background: #FDFAF9;
 }
 .page[data-page="security"] main > section:nth-of-type(6) .pick__dot {

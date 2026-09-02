@@ -30,29 +30,31 @@
    are restated, and they are restated at the semantic layer wherever the
    component already reads it, which is most places.
 
-   The ramp is derived from the brand base #D95C32 by holding its hue (15.1)
+   The ramp was derived from the brand base #D95C32 by holding its hue (15.1)
    and saturation near-constant and stepping lightness, so hover, pressed,
    disabled and the tint read as one family rather than as six colours that
    happen to be orange.
 
    Contrast, WCAG 2.1 sRGB:
-     500 #D95C32   on white 3.80:1   on black 5.53:1   white on it 3.80:1
-     600 #BF4922   on white 5.01:1                     white on it 5.01:1
-     700 #9C3A19   on white 6.92:1
-   The base clears 3:1 — the bar for large type, icons, rings and other
-   non-text UI — but not the 4.5:1 body threshold, in either direction. So the
-   base carries the graphics, and the two deeper steps carry anything that is
-   small text, or that has small text sitting on it. That split is the whole
-   reason this is a ramp and not one value.
+     500/600/700 #FF6A00   on white 2.87:1   on black 7.31:1   white on it 2.87:1
+
+   The three brand steps are now one value, by instruction: the site is to run
+   a single orange. What the ramp used to buy is therefore gone. 600 carried
+   white text at 5.01:1 and 700 carried orange text on white at 6.92:1; both
+   are 2.87:1 at #FF6A00, which clears neither the 4.5:1 body threshold nor
+   the 3:1 large-type one. The places that depended on it are the filled
+   button, the current nav item, the selected tab, and the Product page's
+   security band. On a dark ground the same value is 7.31:1, and on the navy
+   5.58:1, so orange on dark is unaffected.
    ========================================================================== */
 :root {
-  --orange-050: #FDF3F0;  /* tint ground behind accent content */
-  --orange-100: #F8DED5;  /* stronger tint */
-  --orange-200: #F0BAA8;  /* disabled fill */
-  --orange-300: #E79174;  /* disabled ink */
-  --orange-500: #D95C32;  /* BASE — marks, icons, rings, fills, display type */
-  --orange-600: #BF4922;  /* hover, and any orange surface under white text */
-  --orange-700: #9C3A19;  /* pressed, and orange set as small text on white */
+  --orange-050: #FFF3EB;  /* tint ground behind accent content */
+  --orange-100: #FFDBC2;  /* stronger tint */
+  --orange-200: #FFB785;  /* disabled fill */
+  --orange-300: #FF9A52;  /* disabled ink */
+  --orange-500: #FF6A00;  /* BASE — marks, icons, rings, fills, display type */
+  --orange-600: #FF6A00;  /* hover, and any orange surface under white text */
+  --orange-700: #FF6A00;  /* pressed, and orange set as small text on white */
 }
 
 /* The two canvas pieces read their ink from --eu-blue: the knowledge-graph
@@ -4169,16 +4171,19 @@ plainest thing in the drawing rather than the most filled. */
    indigo leaves the whole alpha range to work in.
 
    Orange cannot be that dark and still read as the brand colour: at equal
-   saturation the hue simply carries more luminance. So the ground is the
-   ramp's own deepest step rather than a colour invented for this one block,
-   and the two muted tiers are lifted to pay for it — on a mid-tone ground the
-   bottom of the range is eaten by the ground itself. The tier survives
-   because 0.88 and 0.75 stay visibly apart, and hierarchy here is size and
-   space in any case.
+   saturation the hue simply carries more luminance.
 
-     ground #9C3A19 · heading 6.92:1 · body 5.72:1 · meta 4.62:1
-   All three clear 4.5:1. Carried over unchanged, /9's own alphas would give
-   4.70:1 and 3.18:1 on this ground, which is why they are not.
+   That reasoning held while the ground was the ramp's deepest step. The site
+   now runs one orange by instruction, so this ground is #FF6A00 and the
+   measured numbers are:
+
+     ground #FF6A00 · heading 2.87:1 · body 2.52:1 · meta 2.19:1
+
+   None of the three clears 4.5:1, and the heading does not clear 3:1 either.
+   The alphas are left as they are because lifting them cannot fix it — even
+   solid white is 2.87:1 on this ground. What would fix it is dark ink on the
+   orange: the site navy is 5.58:1 here. That is a change of design, not of
+   colour, so it is not made unasked.
 
    Scoped to the section: --surface-dark is what every other dark block on
    every page reads, the footer directly below this one included, and those

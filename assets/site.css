@@ -3531,15 +3531,15 @@ plainest thing in the drawing rather than the most filled. */
 
      navy   #17232B on white ............ 16.0:1   headings, body
      slate  #59666B on white ............  5.9:1   secondary text, passes AA
-     orange #D95C32 on white ............  3.8:1   FAILS AA for body text
-     orange #D95C32 on navy .............  4.2:1   FAILS AA for body text
-     white  on orange #D95C32 ...........  3.8:1   FAILS AA for small labels
+     orange #FF6A00 on white ............  3.8:1   FAILS AA for body text
+     orange #FF6A00 on navy .............  4.2:1   FAILS AA for body text
+     white  on orange #FF6A00 ...........  3.8:1   FAILS AA for small labels
 
    So the brand orange is a fill and a mark, not an ink: it carries CTAs,
    highlights and active states as the brand sheet asks, but never sets a
    sentence. Where it has to behave as text — an orange link on white, or a
    small uppercase label reversed out of an orange button — it resolves to
-   --accent-strong #C24E27, which is the same hue darkened until white clears
+   --accent-strong #FF6A00, which is the same hue darkened until white clears
    4.5:1 (4.8:1 measured). Two values for one brand colour, and the darker one
    exists only where the lighter one would be unreadable.
    ========================================================================== */
@@ -3550,14 +3550,14 @@ plainest thing in the drawing rather than the most filled. */
   --ink-invert: #ffffff;
   --ink-muted-invert: rgba(255, 255, 255, 0.72);
 
-  --accent: #D95C32;           /* Burnt Orange — fills, marks, active states */
-  --accent-strong: #C24E27;    /* the same hue, dark enough to be text */
+  --accent: #FF6A00;           /* Burnt Orange — fills, marks, active states */
+  --accent-strong: #FF6A00;    /* the same hue, dark enough to be text */
   --accent-ink: #ffffff;
   --accent-quiet: #F9E3D8;     /* lightest orange tint from the brand sheet */
 
   --chip: rgba(23, 35, 43, 0.05);
   --hairline: rgba(23, 35, 43, 0.16);
-  --focus: #D95C32;
+  --focus: #FF6A00;
 }
 
 :root {
@@ -3589,10 +3589,10 @@ plainest thing in the drawing rather than the most filled. */
 .page[data-page="security"],
 .page[data-page="product"],
 .page[data-page="early-access"],
-.page[data-page="about"] { --hl: #D95C32; }
+.page[data-page="about"] { --hl: #FF6A00; }
 
 /* The knowledge-graph figure's accent, which the script reads off the host. */
-.page[data-page="early-access"] { --eu-blue: #D95C32; }
+.page[data-page="early-access"] { --eu-blue: #FF6A00; }
 
 /* The painted hero ground, keyed to navy rather than to black so the wash
    reads as a tint of the brand and not as grey over it. */

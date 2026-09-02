@@ -1061,7 +1061,7 @@
     n.dr = 0.3 + rand() * 0.5;
   });
 
-  var C = { ink: '#17232B', line: 'rgba(23,35,43,0.16)', accent: '#D95C32' };
+  var C = { ink: '#17232B', line: 'rgba(23,35,43,0.16)', accent: '#FF6A00' };
   function readColours() {
     var cs = getComputedStyle(canvas);
     C.ink = cs.getPropertyValue('--heading').trim() || C.ink;
@@ -1434,7 +1434,7 @@
      second accent on three of the twenty-two nodes and nowhere else. Orange
      carries the figure; the pink is a detail you find rather than one you
      are shown. */
-  var C = { accent: '#D95C32', pink: '#F5127A' };
+  var C = { accent: '#FF6A00', pink: '#F5127A' };
   function readColours() {
     var cs = getComputedStyle(canvas);
     C.accent = cs.getPropertyValue('--accent').trim() || C.accent;

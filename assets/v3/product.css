@@ -2,8 +2,8 @@
    Product page — the fold and the two layer modules.
 
    Scoped overrides, loaded after v3/site.css. Nothing here reaches any other
-   page, and inside this page nothing here reaches any section but the two
-   named below: the lattice fold, and #layers.
+   page, and inside this page nothing here reaches any section but the three
+   named below: the lattice fold, #layers, and the security band's ground.
 
    The lattice canvas is untouched. .hero-lattice__stage, its fade and its
    reduced-motion fallback are not referenced in this file — only the type
@@ -20,11 +20,11 @@
 .page[data-page="product"] #layers {
   --ink: #17232B;
   --ink-muted: #59666B;
-  --accent: #D95C32;
+  --accent: #FF6A00;
   /* Orange fails AA as body text, so anything reading as type takes the
      darker value — the same split the rest of the site follows. */
-  --accent-text: #C24E27;
-  --hl: #D95C32;
+  --accent-text: #FF6A00;
+  --hl: #FF6A00;
   --heading: var(--ink);
   --body: var(--ink-muted);
   --meta: var(--ink-muted);
@@ -206,4 +206,26 @@
   .page[data-page="product"] #layers .layer-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+
+/* ==========================================================================
+   03 · the security band's ground
+
+   The band is the page's one saturated field, and it now runs the site's
+   single orange. Flat, a field that size reads as printed ink; the texture
+   gives it a surface — fine light flecks, drawn by an SVG turbulence filter
+   rather than shipped as an image, tiled at 240px and stitched so the tile
+   seam does not show. It is blended into the colour with soft-light, so the
+   orange stays exactly #FF6A00 and the weave only modulates it.
+
+   Colour and texture only. The band's layout, its copy and its marks are
+   untouched.
+   ========================================================================== */
+.page[data-page="product"] #security {
+  background-color: #FF6A00;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62 0.36' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23w)' opacity='0.85'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 240px 240px;
+  background-blend-mode: soft-light;
 }
