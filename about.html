@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=39">
+<link rel="stylesheet" href="assets/site.css?v=40">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -84,28 +84,32 @@
 
     </section>
 
-    <!-- 02 — ORIGIN
-         The largest editorial moment on the page: the portrait carries it,
-         and the copy sits against it rather than under a heading in a box. -->
+    <!-- 02 — THE STORY
+         One editorial feature rather than a heading with a picture beside it:
+         the copy fills the left half, the portrait the right, and the whole
+         thing is the link — so the card answers to the pointer as one object
+         and clicking anywhere on it opens the article.
+
+         The cue is a span, not a nested anchor, because the feature around it
+         is already the anchor. Same words, same destination. -->
     <section class="wrap sec ab-story" id="story">
-      <p class="eyebrow" data-reveal>The story</p>
-      <div class="ab-story__row">
-        <div class="ab-story__copy">
-          <h2 class="h2 ab-story__head" data-reveal>From Ascending AI to graphzero</h2>
-          <p class="lead ab-story__lead" data-reveal>Founder &amp; CEO Lennard Zwart on why greater AI capability demands greater control &mdash; and the thinking behind graphzero.</p>
-          <p class="ab-story__cue" data-reveal>
-            <a class="link-underline" href="https://fd.nl/tech-en-innovatie/1598537/als-onze-kinderen-opgroeien-met-kunstmatige-intelligentie-wil-je-meer-controle-over-de-modellen" target="_blank" rel="noopener">Read the story in Het Financieele Dagblad &rarr;<span class="vh"> Opens fd.nl in a new tab</span></a>
-          </p>
+      <a class="ab-feature" href="https://fd.nl/tech-en-innovatie/1598537/als-onze-kinderen-opgroeien-met-kunstmatige-intelligentie-wil-je-meer-controle-over-de-modellen" target="_blank" rel="noopener" data-reveal>
+        <div class="ab-feature__copy">
+          <p class="eyebrow ab-feature__label">The story</p>
+          <h2 class="ab-feature__head">From Ascending AI to graphzero</h2>
+          <p class="ab-feature__lead">Founder &amp; CEO Lennard Zwart on why greater AI capability demands greater control &mdash; and the thinking behind graphzero.</p>
+          <span class="ab-feature__cue">Read the story in Het Financieele Dagblad &rarr;<span class="vh"> Opens fd.nl in a new tab</span></span>
         </div>
-        <figure class="ab-story__media" data-reveal>
+
+        <div class="ab-feature__media">
           <img src="assets/media/founder-lennard-1200.jpg"
                srcset="assets/media/founder-lennard-600.jpg 600w,
                        assets/media/founder-lennard-1200.jpg 1200w"
-               sizes="(min-width: 900px) 46vw, 100vw"
+               sizes="(min-width: 900px) 50vw, 100vw"
                alt="Lennard Zwart, founder and CEO of graphzero"
                width="1200" height="800" loading="lazy" decoding="async">
-        </figure>
-      </div>
+        </div>
+      </a>
     </section>
 
     <!-- 03 / 04 — THE ECOSYSTEM
@@ -185,6 +189,6 @@
 
 </div>
 
-<script src="assets/site.js?v=39" defer></script>
+<script src="assets/site.js?v=40" defer></script>
 </body>
 </html>

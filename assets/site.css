@@ -4209,48 +4209,110 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- 02 the story ----
 
-   A new chapter, so it opens on a lot of air rather than on a rule. The label
-   stays quiet, the heading carries the section, and the picture supports the
-   text rather than competing with it. */
+   One editorial feature, not a heading with a picture beside it. The copy
+   takes the left half and the portrait the right, filling it edge to edge —
+   the photograph is the section's weight now rather than an illustration of
+   it, and at roughly 576 by 450 it is nearly four times the area it had.
+
+   The whole feature is the link, so it answers to the pointer as one object:
+   on hover it comes forward one per cent and the portrait pushes to six
+   inside its frame, which is clipped, so the picture opens toward you while
+   the type stays where it is. Easing only — no bounce, no rotation, and
+   nothing at all under prefers-reduced-motion.
+
+   No ring, no shadow, no fill. The picture is the edge on one side and the
+   page is the ground on the other, which is what keeps it from reading as a
+   card. */
 .page[data-page="about"] .ab-story { padding-top: clamp(4rem, 9vw, 7rem); }
 
-.page[data-page="about"] .ab-story__row {
+.page[data-page="about"] .ab-feature {
   display: grid;
-  gap: var(--space-12);
+  gap: var(--space-8);
   margin-top: clamp(2rem, 4vw, 3rem);
-  align-items: start;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 420ms var(--ease);
+  will-change: transform;
 }
 @media (min-width: 900px) {
-  .page[data-page="about"] .ab-story__row {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.42fr);
-    /* More room around the photograph than the page uses anywhere else, so it
-       reads as placed rather than fitted. */
-    column-gap: var(--section-md);
+  .page[data-page="about"] .ab-feature {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: stretch;
+    min-height: clamp(24rem, 33vw, 30rem);
   }
 }
-/* Strong, and still a clear step below the fold: about 52 against 92. */
-.page[data-page="about"] .ab-story__head {
+
+.page[data-page="about"] .ab-feature__copy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0;
+}
+
+/* The one label on the page in the accent, and the section's only colour. */
+.page[data-page="about"] .ab-feature__label {
+  margin: 0 0 var(--space-6);
+  color: var(--accent-text);
+}
+
+.page[data-page="about"] .ab-feature__head {
+  margin: 0;
   max-width: 14ch;
   font-size: clamp(2.125rem, 3.8vw, 3.25rem);
   line-height: 1.04;
+  letter-spacing: var(--tracking-h2);
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+  text-wrap: balance;
 }
-.page[data-page="about"] .ab-story__lead { margin-top: var(--space-6); max-width: 44ch; }
-.page[data-page="about"] .ab-story__cue { margin: var(--space-8) 0 0; }
+.page[data-page="about"] .ab-feature__lead {
+  margin: var(--space-6) 0 0;
+  max-width: 42ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--body);
+}
+.page[data-page="about"] .ab-feature__cue {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: var(--fs-body);
+  color: var(--accent-text);
+  text-underline-offset: 0.22em;
+}
+.page[data-page="about"] .ab-feature:hover .ab-feature__cue,
+.page[data-page="about"] .ab-feature:focus-visible .ab-feature__cue { text-decoration: underline; }
 
-.page[data-page="about"] .ab-story__media { margin: 0; }
-@media (min-width: 900px) {
-  /* Set down from the top of its column so it aligns with the heading rather
-     than the label above it. */
-  .page[data-page="about"] .ab-story__media { padding-top: var(--space-8); }
+/* The frame is what the zoom happens inside; without the clip the picture
+   would simply get bigger and push the layout around. */
+.page[data-page="about"] .ab-feature__media {
+  overflow: hidden;
+  border-radius: 2px;
+  min-height: clamp(17rem, 42vw, 22rem);
 }
-.page[data-page="about"] .ab-story__media img {
+@media (min-width: 900px) {
+  .page[data-page="about"] .ab-feature__media { min-height: 0; }
+}
+.page[data-page="about"] .ab-feature__media img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 5 / 4;
+  height: 100%;
   object-fit: cover;
-  object-position: 50% 24%;
-  border-radius: 2px;
+  object-position: 50% 22%;
+  transition: transform 620ms var(--ease);
+  will-change: transform;
+}
+
+.page[data-page="about"] .ab-feature:hover,
+.page[data-page="about"] .ab-feature:focus-visible { transform: scale(1.01); }
+.page[data-page="about"] .ab-feature:hover .ab-feature__media img,
+.page[data-page="about"] .ab-feature:focus-visible .ab-feature__media img { transform: scale(1.06); }
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="about"] .ab-feature,
+  .page[data-page="about"] .ab-feature__media img { transition: none; }
+  .page[data-page="about"] .ab-feature:hover,
+  .page[data-page="about"] .ab-feature:focus-visible { transform: none; }
+  .page[data-page="about"] .ab-feature:hover .ab-feature__media img { transform: none; }
 }
 
 /* ---- 03 / 04 the ecosystem ----
@@ -4387,7 +4449,8 @@ plainest thing in the drawing rather than the most filled. */
    so they stay the secondary element at every width. Below the cap — a phone
    — nothing changes. */
 @media (max-width: 899px) {
-  .page[data-page="about"] .ab-story__media img,
+  /* The story feature is exempt: its portrait is meant to stay large on a
+     phone, and it is clipped by its own frame rather than sized here. */
   .page[data-page="about"] .ab-eco__media img { max-width: 26rem; }
 }
 
