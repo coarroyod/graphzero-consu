@@ -222,10 +222,20 @@
    Colour and texture only. The band's layout, its copy and its marks are
    untouched.
    ========================================================================== */
+/* The band ran 128px of orange above the copy and 128px below it — the light
+   sections' own section-lg. On a saturated ground that reads as a lot of empty
+   colour, so the inset is cut to 72px top and foot. Only the padding moves:
+   the copy, the marks, the link and their spacing are untouched, and the band
+   goes 810px to 698. */
+.page[data-page="product"] #security > .wrap {
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
 .page[data-page="product"] #security {
   background-color: #FF6A00;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62 0.36' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23w)' opacity='0.85'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23w)' opacity='0.55'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 240px 240px;
-  background-blend-mode: soft-light;
+  background-blend-mode: overlay;
 }
