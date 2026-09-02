@@ -3667,8 +3667,12 @@ plainest thing in the drawing rather than the most filled. */
 .page[data-page="early-access"] .ea-fold__band {
   position: relative;
   width: 100%;
-  height: clamp(8rem, 14vw, 12rem);
-  margin-block: clamp(2rem, 4.2vw, 4rem);
+  /* Trimmed to pay for the larger first paragraph. The copy grew by about
+     sixty pixels when it took its proper size, and the ask has to stay inside
+     the first screen — so the height comes off the band, which has it to
+     spare, rather than off the type, which is the point of the fold. */
+  height: clamp(7.5rem, 13vw, 11rem);
+  margin-block: clamp(1.75rem, 3.2vw, 3rem);
 }
 .page[data-page="early-access"] .ea-fold__band canvas {
   display: block;
@@ -3691,12 +3695,54 @@ plainest thing in the drawing rather than the most filled. */
     align-items: end;
   }
 }
+/* The two paragraphs under the fold are not the same thing said twice: the
+   first is the problem and the second is the answer to it, and until now they
+   were the same size, a line apart, with the answer carrying the darker ink —
+   which read as one flat block with the emphasis in the wrong half.
+
+   One measure for both, so their edges line up and the block reads as
+   deliberately placed rather than as body text that happened to land there.
+   Everything separating them is type: size, ink, and the space between. No
+   label, no rule, no second colour. */
 .page[data-page="early-access"] .ea-fold__copy {
   display: grid;
-  gap: var(--space-4);
-  max-width: 46ch;
+  /* Wide enough for a comfortable line at the larger size, short enough that
+     the first paragraph breaks over four lines rather than running the
+     column. */
+  max-width: 30rem;
+  /* Twice what it was. At a line's distance the two read as one paragraph
+     broken in half; at this distance the second is clearly a response. */
+  gap: clamp(1.5rem, 2.2vw, 2rem);
 }
-.page[data-page="early-access"] .ea-fold__answer { color: var(--heading); }
+
+/* The problem. The primary supporting text, and the thing the headline hands
+   off to — so it takes full ink and sits a step above body size. */
+.page[data-page="early-access"] .ea-fold__setup {
+  font-size: clamp(1.1875rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.42;
+  letter-spacing: -0.011em;
+  color: var(--heading);
+  max-width: none;
+}
+
+/* The answer. Secondary, not quiet: a step down in size and back to the body
+   ink, with the space above doing the work of separating it. */
+.page[data-page="early-access"] .ea-fold__answer {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--body);
+  max-width: none;
+}
+
+/* The one word in the sentence that is the subject of it. Full ink and the
+   system's single heading weight — the same emphasis a heading uses, at body
+   size. Not the accent: orange measures 3.8:1 on this ground and cannot
+   carry text this small, and a coloured word here would be louder than the
+   sentence it sits in. */
+.page[data-page="early-access"] .ea-fold__mark {
+  color: var(--heading);
+  font-weight: var(--weight-heading);
+}
 
 /* No rule above the ask any more — the band is the fold's rule, and a second
    hairline this close to it would be one horizontal too many. */
