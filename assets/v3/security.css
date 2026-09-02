@@ -85,8 +85,7 @@
    design system holds to deliberately ("never 600/700"). Both headings on
    this page set from this one block, so the two sections and Early Access
    are the same typography rather than three near-misses. */
-.page[data-page="security"] .band--dark.dark .h2,
-.page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
+.page[data-page="security"] .band--dark.dark .h2 {
   font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 500;
   line-height: 0.97;
@@ -316,73 +315,72 @@
    closing line. No two neighbours share a shape.
    ========================================================================== */
 
-/* ---- 02 · "Your knowledge stays yours." — a statement, then three modules --
+/* ---- 02 · "Your knowledge stays yours." — a navy band ----------------------
 
-   The section opens rather than splits: the claim takes the page at full
-   width, the sentence under it, and the three guarantees sit below as navy
-   modules. The contrast lives inside the section instead of around it, which
-   is a harder edge than a tinted panel and makes this the page's first real
-   change of ground.
+   The section is the page's one saturated field: navy edge to edge, with the
+   statement, the sentence and the three modules all sitting on it. The
+   contrast is the section itself now, rather than three dark blocks on white.
 
-   The modules are the site's own #17232B — --surface-dark, the same navy the
-   footer and the dark bands run. No new blue enters the page.
+   Full-bleed from inside a centred container: the band is a pseudo-element
+   pinned to the viewport's width behind the content. .page already carries
+   overflow-x: clip, so 100vw cannot open a horizontal scrollbar.
+   ------------------------------------------------------------------------- */
+.page[data-page="security"] main > section:nth-of-type(2) {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+  /* Every ink in the section is set here rather than on each element, so the
+     type reads white by inheritance and the hairlines are white alphas. */
+  --heading: #ffffff;
+  --body: rgba(255, 255, 255, 0.74);
+  --meta: rgba(255, 255, 255, 0.74);
+  --line: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+.page[data-page="security"] main > section:nth-of-type(2)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: var(--surface-dark);
+}
 
-   The composition is borrowed from enterprise module layouts rather than from
-   feature cards: the figure sits at the top of the module, the claim and its
-   note are pushed to the foot, and the space between them is left empty. That
-   emptiness is what makes a module read as substantial; filling it would make
-   it a card. -------------------------------------------------------------- */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit {
   display: block;
 }
 
-/* Size, weight, leading and tracking come from the shared Early Access block
-   above — this rule only lifts the measure so the column governs the break.
-   Anything set here would win on order and quietly break that. */
+/* Larger and heavier than the fold's, which stays on the Early Access ramp.
+   106px at 1440 against that 80px, and at 700 rather than the system's 500. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
-  max-width: none;
+  max-width: 14ch;
+  font-size: clamp(2.75rem, 7.4vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.93;
+  letter-spacing: -0.048em;
+  color: #ffffff;
 }
+/* Secondary but not faint: 0.74 white on the navy is 9.7:1, well past the
+   4.5:1 body threshold, so it reads as a step down in the hierarchy rather
+   than as small print. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
-  margin-top: 0;
-  /* The site's 18px reads as a caption under type this size. */
+  margin-top: clamp(1.25rem, 2.2vw, 1.875rem);
+  max-width: 48ch;
   font-size: clamp(1.125rem, 0.6vw + 0.95rem, 1.4375rem);
   line-height: 1.5;
-  color: var(--ink-muted);
-}
-
-/* Claim left, sentence right — the fold's split, at the fold's proportions.
-   The heading's long line measures 661px at this size, so the columns are cut
-   1.5 : 1 to leave it clear of wrapping rather than by eye. Ends are aligned,
-   not tops: the sentence sits on the claim's last line. */
-/* Claim left, sentence right, on the container's own grid. The heading's long
-   line measures 661px at this size, so the columns are cut 1.5 : 1 to leave it
-   clear of wrapping rather than by eye. The sentence is set on the claim's
-   last line — placement and alignment carry it, not a panel behind it. The
-   page's only colour is the fold's line, so nothing is tinted here. */
-@media (min-width: 900px) {
-  .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    column-gap: clamp(2rem, 4vw, 3rem);
-    align-items: end;
-  }
-  .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
-    max-width: none;
-    padding-bottom: 0.4em;
-  }
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .page[data-page="security"] main > section:nth-of-type(2) .numlist {
-  margin-top: clamp(2.75rem, 5.5vw, 4.5rem);
-  gap: clamp(1rem, 1.6vw, 1.5rem);
-  /* The hairline this set used to sit under is gone: three navy blocks are
-     already a rule across the page. */
+  margin-top: clamp(3rem, 6vw, 5rem);
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
   padding-top: 0;
   border-top: 0;
 }
 
-/* Three across only where a third of the container is still a readable
-   measure. Below that they stack full width and keep the navy. */
 @media (min-width: 940px) {
   .page[data-page="security"] main > section:nth-of-type(2) .numlist {
     /* Not equal thirds. The notes run 79, 103 and 108 characters, so the
@@ -391,23 +389,28 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr) minmax(0, 1.1fr);
   }
   .page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
-    min-height: clamp(19rem, 29vw, 26rem);
+    min-height: clamp(18rem, 27vw, 24rem);
   }
-  /* The notes run two lines, three and three. With the pair anchored to the
-     foot, that put 01's claim 21px below its neighbours' — a misalignment the
-     eye catches across three blocks on one line. A three-line floor on the
-     note squares the group heights so the three claims read on one line. */
+  /* With the pair anchored to the foot, notes of different line counts put the
+     three claims on different lines. The floor squares them. It is set from
+     the measured longest — at 17px the notes come out three, three and four
+     lines, so four lines (4 x 1.55) is the number, not the three that squared
+     them at 14px. */
   .page[data-page="security"] main > section:nth-of-type(2) .card-note {
-    min-height: 4.65em;
+    min-height: 6.2em;
   }
 }
 
+/* One system, not three cards: no fill of their own, the same hairline on
+   three sides, and the same orange rule opening each. What separates them from
+   the band is the rule and the ring, not a second shade of navy. */
 .page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
   display: flex;
   flex-direction: column;
-  background: var(--surface-dark);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 3px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 2px solid #FF6A00;
+  border-radius: 0;
   padding: clamp(1.75rem, 2.8vw, 2.75rem);
 }
 
@@ -421,65 +424,24 @@
   margin-top: auto;
   padding-top: clamp(2.5rem, 5vw, 4rem);
   color: #ffffff;
-  font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+  font-size: clamp(1.25rem, 1.6vw, 1.625rem);
+  line-height: 1.2;
 }
 .page[data-page="security"] main > section:nth-of-type(2) .card-note {
   margin-top: var(--space-3);
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.74);
+  font-size: clamp(0.9375rem, 0.55vw + 0.8rem, 1.0625rem);
   line-height: 1.55;
 }
 
-/* Large, and quiet against the navy — the accent on these modules is the rule,
-   not the figure. */
+/* White, as they are on the band — the figure is the module's marker and the
+   orange is spent on the rule above it. */
 .page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
   display: block;
   width: fit-content;
   font-size: clamp(2.25rem, 3.4vw, 3.25rem);
   line-height: 1;
-  color: rgba(255, 255, 255, 0.45);
-}
-
-/* Between the two — too narrow for three columns, too wide for the stacked
-   composition, where the note's reading measure left half of each module
-   empty. The figure takes a column of its own and the claim sits beside it, so
-   a full-width module reads as a structured row rather than as a wide block
-   with text in one corner. */
-@media (min-width: 620px) and (max-width: 939px) {
-  .page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
-    display: grid;
-    grid-template-columns: clamp(5rem, 13vw, 8.5rem) minmax(0, 1fr);
-    column-gap: clamp(1.5rem, 4vw, 2.5rem);
-    align-items: start;
-  }
-  .page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-  }
-  .page[data-page="security"] main > section:nth-of-type(2) .card-title {
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 0;
-    padding-top: 0;
-  }
-  .page[data-page="security"] main > section:nth-of-type(2) .card-note {
-    grid-column: 2;
-    grid-row: 2;
-  }
-}
-
-/* The three are one system, varied by where the accent falls. The rule travels
-   down the module as the sequence moves from holding the data, to taking it
-   out, to erasing it: the top edge of 01, inside 02 under its figure, the foot
-   of 03. One 2px orange device, three positions — cohesive, not identical. */
-.page[data-page="security"] main > section:nth-of-type(2) .numlist__item:nth-child(1) {
-  border-top: 2px solid var(--accent);
-}
-.page[data-page="security"] main > section:nth-of-type(2) .numlist__item:nth-child(2) .numlist__num {
-  padding-bottom: var(--space-4);
-  border-bottom: 2px solid var(--accent);
-}
-.page[data-page="security"] main > section:nth-of-type(2) .numlist__item:nth-child(3) {
-  border-bottom: 2px solid var(--accent);
+  color: #ffffff;
 }
 
 /* ---- 03 · "Sensitive data…" — a spec table ----
