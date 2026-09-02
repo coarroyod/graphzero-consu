@@ -3904,7 +3904,12 @@ plainest thing in the drawing rather than the most filled. */
   top: 0;
   /* svh, not vh: on a phone the browser chrome collapses as you scroll and vh
      would resize the pinned area mid-sequence. */
-  min-height: 100svh;
+  /* Short of a full screen on purpose. Centred in 100svh the composition left
+     189px of empty navy under the progress rule, and that void plus the
+     foot's own padding was what put the ask a quarter of a screen away from
+     the end of the sequence. A min-height, so it still grows if the
+     introduction needs more room. */
+  min-height: 84svh;
   display: grid;
   grid-template-rows: auto auto auto;
   /* Centred as a group, so the air is above and below the composition rather
@@ -3914,7 +3919,10 @@ plainest thing in the drawing rather than the most filled. */
   /* The one deliberate breath in the composition: bigger than any step
      inside the head, so the sequence reads as the next element. */
   row-gap: clamp(2.25rem, 5.5vh, 3.5rem);
-  padding-block: clamp(2.5rem, 7vh, 4.5rem);
+  /* Asymmetric: the air belongs above the introduction, not under the rule
+     that closes the sequence. */
+  padding-top: clamp(2.25rem, 6vh, 4rem);
+  padding-bottom: clamp(1.25rem, 2.5vh, 2rem);
 }
 /* The only thing hiding the track's overflow: no scrollbar, nothing to drag. */
 .page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__viewport { overflow: hidden; }
@@ -3959,34 +3967,56 @@ plainest thing in the drawing rather than the most filled. */
 }
 
 /* ---- the ask, once the sequence has finished ---- */
+/* The ask is the end of the sequence, not a separate element after it — so
+   it follows closely. Still a clear step, just not the quarter-screen the
+   centred pin used to leave. */
 .page[data-page="early-access"] .ea-gets__foot {
-  padding-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: clamp(1.75rem, 2.8vw, 2.5rem);
   padding-bottom: clamp(3rem, 7vw, 5.5rem);
 }
 .page[data-page="early-access"] .ea-gets__cta { margin: 0; }
 
-/* ---- 06 the close ---- */
+/* ---- 06 the close ----
+
+   Centred, narrow and still. The section above it is the one place on the
+   page that moves, and this is the counterweight to it — so the composition
+   is the opposite in every respect: no track, no accent, no button, one
+   column on the page's own axis.
+
+   Centring is done on the children rather than by narrowing this element: it
+   carries .wrap, and a max-width here would beat the container and take the
+   hairline above it down to the width of the text. */
 .page[data-page="early-access"] .ea-closing {
-  padding-top: clamp(3.5rem, 7vw, 6rem);
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
   border-top: 1px solid var(--line);
+  text-align: center;
 }
+
+.page[data-page="early-access"] .ea-closing .eyebrow { margin: 0; }
+
+/* The statement. The largest thing in the section and the only full-ink
+   type in it. */
 .page[data-page="early-access"] .ea-closing__head {
-  margin: var(--space-6) 0 0;
-  max-width: 20ch;
-  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  margin: var(--space-6) auto 0;
+  max-width: 22ch;
+  font-size: clamp(1.875rem, 3.6vw, 3rem);
   line-height: 1.1;
   letter-spacing: var(--tracking-h3);
   color: var(--heading);
+  text-wrap: balance;
+}
+
+/* What the statement means. A clear step down — body ink and a third of the
+   size — and set on a wider measure so it reads as a paragraph under a
+   headline rather than as a second headline. */
+.page[data-page="early-access"] .ea-closing__turn {
+  margin: clamp(1.25rem, 2vw, 1.75rem) auto 0;
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--body);
   text-wrap: pretty;
 }
-.page[data-page="early-access"] .ea-closing__turn {
-  margin: var(--space-6) 0 0;
-  max-width: 44ch;
-  font-size: var(--fs-lead);
-  line-height: 1.45;
-  color: var(--body);
-}
-.page[data-page="early-access"] .ea-closing__cta { margin: var(--space-12) 0 0; }
 
 /* The page's two buttons.
 
