@@ -1369,11 +1369,11 @@
   /* name kept only so the list is readable; nothing is drawn from it */
   var CITY = [
     ['Amsterdam',52.37,4.90,1], ['London',51.51,-0.13,0], ['Paris',48.86,2.35,0],
-    ['Berlin',52.52,13.40,0],   ['Madrid',40.42,-3.70,0], ['Rome',41.90,12.50,0],
-    ['Warsaw',52.23,21.01,0],   ['Stockholm',59.33,18.07,0], ['Copenhagen',55.68,12.57,0],
+    ['Berlin',52.52,13.40,0],   ['Madrid',40.42,-3.70,2], ['Rome',41.90,12.50,0],
+    ['Warsaw',52.23,21.01,0],   ['Stockholm',59.33,18.07,2], ['Copenhagen',55.68,12.57,0],
     ['Vienna',48.21,16.37,0],   ['Zurich',47.38,8.54,0],  ['Dublin',53.35,-6.26,0],
     ['Lisbon',38.72,-9.14,0],   ['Prague',50.08,14.44,0], ['Oslo',59.91,10.75,0],
-    ['Milan',45.46,9.19,0],     ['Munich',48.14,11.58,0], ['Brussels',50.85,4.35,0],
+    ['Milan',45.46,9.19,2],     ['Munich',48.14,11.58,0], ['Brussels',50.85,4.35,0],
     ['Barcelona',41.39,2.17,0], ['Hamburg',53.55,9.99,0], ['Helsinki',60.17,24.94,0],
     ['Budapest',47.50,19.04,0]
   ];
@@ -1425,15 +1425,18 @@
 
     nodes = CITY.map(function (c, i) {
       var p = project(c[2], c[1]);
-      return { x: p.x, y: p.y, accent: !!c[3], ph: (i * 2.399) % (Math.PI * 2) };
+      return { x: p.x, y: p.y, hub: c[3] === 1, pink: c[3] === 2,
+               ph: (i * 2.399) % (Math.PI * 2) };
     });
   }
 
-  var C = { ink: '#17232B', line: 'rgba(23,35,43,0.16)', accent: '#D95C32' };
+  /* Drawn in the brand orange throughout — field, links and nodes — with a
+     second accent on three of the twenty-two nodes and nowhere else. Orange
+     carries the figure; the pink is a detail you find rather than one you
+     are shown. */
+  var C = { accent: '#D95C32', pink: '#F5127A' };
   function readColours() {
     var cs = getComputedStyle(canvas);
-    C.ink = cs.getPropertyValue('--heading').trim() || C.ink;
-    C.line = cs.getPropertyValue('--line').trim() || C.line;
     C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
   }
 
@@ -1456,8 +1459,8 @@
     ctx.clearRect(0, 0, W, H);
 
     /* the landmass */
-    ctx.fillStyle = C.ink;
-    ctx.globalAlpha = 0.13;
+    ctx.fillStyle = C.accent;
+    ctx.globalAlpha = 0.22;
     for (var i = 0; i < dots.length; i++) {
       ctx.beginPath();
       ctx.arc(dots[i].x, dots[i].y, 1.15, 0, Math.PI * 2);
@@ -1465,8 +1468,8 @@
     }
 
     /* the standing links */
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = C.line;
+    ctx.globalAlpha = 0.3;
+    ctx.strokeStyle = C.accent;
     ctx.lineWidth = 1;
     ctx.beginPath();
     for (var l = 0; l < LINK.length; l++) {
@@ -1502,9 +1505,9 @@
       var nd = nodes[n];
       var pulse = still ? 0 : Math.sin(t / 1000 * 0.55 + nd.ph);
       ctx.beginPath();
-      ctx.fillStyle = nd.accent ? C.accent : C.ink;
-      ctx.globalAlpha = nd.accent ? 1 : 0.62 + 0.14 * pulse;
-      ctx.arc(nd.x, nd.y, (nd.accent ? 3.1 : 2.05) + (nd.accent ? 0.25 : 0.18) * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = nd.pink ? C.pink : C.accent;
+      ctx.globalAlpha = nd.hub ? 1 : nd.pink ? 0.8 : 0.6 + 0.14 * pulse;
+      ctx.arc(nd.x, nd.y, (nd.hub ? 3.1 : 2.05) + (nd.hub ? 0.25 : 0.18) * pulse, 0, Math.PI * 2);
       ctx.fill();
     }
 

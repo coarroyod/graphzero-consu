@@ -4159,16 +4159,6 @@ plainest thing in the drawing rather than the most filled. */
      plainly part of the same grid, and the asymmetry comes from its width
      against the claim rather than from an offset. */
   .page[data-page="about"] .ab-hero__lead { grid-column: 1 / 6; }
-  /* The columns the copy leaves free, in the row below the claim. Placed on
-     the grid rather than floated into the gap, so it lines up with everything
-     else and cannot crowd the type. */
-  .page[data-page="about"] .ab-hero__net {
-    grid-column: 7 / 13;
-    grid-row: 2;
-    justify-self: end;
-    align-self: center;
-    max-width: 30rem;
-  }
 }
 
 /* The dominant thing on the page, and now that nothing shares its row it can
@@ -4403,8 +4393,14 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- the network figure ----
 
-   Sized by ratio rather than height so it scales with the column, and never
-   given more room than the copy beside it. */
+   A layer over the fold, not a cell in it. It was placed on the hero grid,
+   and a 461px figure in the row the supporting copy occupies made that row
+   461px tall — which stretched the copy's box and took the fold from 720 to
+   862. Taken out of the flow it cannot affect the type at all: the text
+   measures exactly what it did before this was added.
+
+   Anchored to the container's right margin by the same expression .wrap uses
+   for its gutter, so its right edge lands on the page's own column edge. */
 .page[data-page="about"] .ab-hero__net {
   margin: 0;
   width: 100%;
@@ -4412,8 +4408,21 @@ plainest thing in the drawing rather than the most filled. */
 }
 .page[data-page="about"] .ab-hero__net canvas { display: block; width: 100%; height: 100%; }
 
-/* Below the two-column breakpoint it drops under the copy and is capped, so
-   it stays a detail rather than becoming the fold. */
+@media (min-width: 900px) {
+  .page[data-page="about"] .ab-hero__net {
+    position: absolute;
+    right: max(var(--gutter), calc((100vw - var(--container)) / 2));
+    width: min(27rem, 31vw);
+    /* Sat in the lower half, which is the part of the right side the copy
+       genuinely leaves free — the claim runs into the upper right. */
+    bottom: clamp(2.5rem, 7vh, 5rem);
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+/* Below the breakpoint it is a block under the copy, which pushes nothing
+   aside because nothing sits beside it there. */
 @media (max-width: 899px) {
   .page[data-page="about"] .ab-hero__net {
     margin-top: clamp(2.5rem, 7vw, 4rem);
