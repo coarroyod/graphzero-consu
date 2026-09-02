@@ -250,12 +250,20 @@
 /* ==========================================================================
    03 · the security band's ground
 
-   The band is the page's one saturated field, and it now runs the site's
-   single orange. Flat, a field that size reads as printed ink; the texture
-   gives it a surface — fine light flecks, drawn by an SVG turbulence filter
-   rather than shipped as an image, tiled at 240px and stitched so the tile
-   seam does not show. It is blended into the colour with soft-light, so the
-   orange stays exactly #FF6A00 and the weave only modulates it.
+   The band is the page's one saturated field, and it runs the site's single
+   orange. Flat, a field that size reads as printed ink; a texture gives it a
+   surface.
+
+   That surface is now the Security page's footer weave, copied value for
+   value from assets/v3/security.css: three repeating gradients at 3px, 4px
+   and 7px, painted straight onto the fill with no blend mode, so the two
+   orange fields on the site are the same orange and the same cloth. What was
+   here before was a different thing — SVG turbulence flecks blended at
+   overlay, which read as paper grain rather than as weave.
+
+   The weave is written out here rather than shared because this file and
+   security.css belong to stylesheet families that have no file in common;
+   if a third field ever wants it, it should move to a sheet all of them load.
 
    Colour and texture only. The band's layout, its copy and its marks are
    untouched.
@@ -272,8 +280,8 @@
 
 .page[data-page="product"] #security {
   background-color: #FF6A00;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23w)' opacity='0.55'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 240px 240px;
-  background-blend-mode: overlay;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.055) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.05) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 7px);
 }
