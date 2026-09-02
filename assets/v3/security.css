@@ -1,0 +1,201 @@
+/* ==========================================================================
+   SECURITY — brought onto the About page's design system.
+
+   This page ships with the v3 stylesheet, which the Product page also uses,
+   so nothing here may touch that file. Everything below is scoped to
+   [data-page="security"] and loaded after it: same markup, same components,
+   a different surface.
+
+   What changes is the palette, the scale and the rhythm. The content, the
+   component structure and the class names are exactly as they were.
+   ========================================================================== */
+
+/* ---- the palette, from the main site ---- */
+.page[data-page="security"] {
+  --ink: #17232B;
+  --ink-muted: #59666B;
+  --ink-invert: #ffffff;
+  --accent: #D95C32;
+  --accent-strong: #C24E27;
+  --accent-ink: #ffffff;
+  --chip: rgba(23, 35, 43, 0.05);
+  --hairline: rgba(23, 35, 43, 0.16);
+  --surface-dark: #17232B;
+  --hl: #D95C32;
+  --focus: #D95C32;
+
+  --heading: var(--ink);
+  --body: var(--ink-muted);
+  --meta: var(--ink-muted);
+  --line: var(--hairline);
+  --fill: var(--chip);
+  /* Orange fails AA as text at these sizes, so anything that reads as type
+     takes the darker value — the same rule the rest of the site follows. */
+  --accent-text: var(--accent-strong);
+
+  --ground-base: #F1F4F5;
+  --ground-wash:
+    radial-gradient(90% 120% at 95% 0%, rgba(23, 35, 43, 0.10), rgba(23, 35, 43, 0) 62%),
+    radial-gradient(80% 110% at 0% 100%, rgba(23, 35, 43, 0.05), rgba(23, 35, 43, 0) 60%);
+  --surface-grey: #DDE4E5;
+}
+
+/* ---- 01 the fold ----
+
+   The page opened on a black band. It opens on the same near-white ground
+   the About fold carries instead, which is most of what made this feel like
+   a different website. The .dark class stays on the element — the markup is
+   not ours to change — so its tokens are put back to their light values
+   here, and the marks stop being inverted, because the artwork is dark ink
+   and it was only reversed to survive the black. */
+/* The fold is #security, and the stylesheet it ships with reaches it through
+   that id — .page[data-page="security"] #security — declaring a burnt-orange
+   surface and white body and meta inks. An id outranks any number of
+   classes, so a class-based override loses to it however specific it looks:
+   the ground went light while the copy underneath stayed white on it, which
+   is invisible rather than merely wrong. This matches that selector exactly
+   and, loading later, wins on order. */
+.page[data-page="security"] #security,
+.page[data-page="security"] .band--dark.dark {
+  background-color: var(--ground-base);
+  background-image: var(--ground-wash);
+  --surface-dark: var(--ground-base);
+  --heading: var(--ink);
+  --body: var(--ink-muted);
+  --meta: var(--ink-muted);
+  --line: var(--hairline);
+  --fill: var(--chip);
+  --accent-text: var(--accent-strong);
+  color: var(--ink);
+}
+.page[data-page="security"] .dark .markrow__badge { filter: none; }
+
+.page[data-page="security"] .band--dark.dark > .wrap {
+  padding-top: clamp(3.5rem, 10vh, 7rem);
+  padding-bottom: clamp(3.5rem, 9vh, 6rem);
+}
+.page[data-page="security"] .band--dark.dark .h2 {
+  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  max-width: 15ch;
+}
+.page[data-page="security"] .band--dark.dark .lead {
+  max-width: 46ch;
+  font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
+  line-height: 1.5;
+}
+
+/* The marks read as assurance, not as logos: given a rule to sit under, room
+   to breathe, and a size that keeps them level without shouting. */
+.page[data-page="security"] .markrow {
+  gap: clamp(2rem, 4vw, 3.25rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}
+.page[data-page="security"] .markrow__badge { height: clamp(3.25rem, 5vw, 4.5rem); }
+.page[data-page="security"] .markrow__note {
+  margin-top: var(--space-6);
+  font-style: normal;
+  font-size: var(--fs-small);
+  max-width: 46ch;
+}
+
+/* ---- 02-05 the four chapters ----
+
+   These are the body of the page, so they are given the room a chapter needs
+   and the figures are set at a size that orders them rather than labelling
+   them. Everything else about the component is left alone. */
+.page[data-page="security"] .sec { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+
+.page[data-page="security"] .secsplit__lead .h2 {
+  font-size: clamp(1.875rem, 3.4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.032em;
+  max-width: 17ch;
+}
+.page[data-page="security"] .secsplit__lead .lead { max-width: 40ch; }
+
+.page[data-page="security"] .numlist__item {
+  grid-template-columns: 4.5rem 1fr;
+  gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  padding-block: clamp(1.5rem, 2.6vw, 2.25rem);
+}
+.page[data-page="security"] .numlist__num {
+  font-size: clamp(1rem, 1.4vw, 1.375rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+.page[data-page="security"] .card-title {
+  font-size: clamp(1.0625rem, 0.9vw + 0.8rem, 1.25rem);
+  letter-spacing: -0.015em;
+  color: var(--heading);
+}
+.page[data-page="security"] .card-note { color: var(--body); max-width: 52ch; }
+
+/* ---- 06 / 07 the two choices ----
+
+   Rows on rules rather than filled boxes: they are options to read down, and
+   a border round each one turns a technical list into a price table. */
+.page[data-page="security"] .pickset { gap: 0; }
+.page[data-page="security"] .pick {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem) 0;
+}
+.page[data-page="security"] .pick__dot { background: var(--accent); }
+.page[data-page="security"] .note-line { color: var(--meta); }
+
+/* ---- 08 certifications ----
+
+   The marks carry this section, so they get the space. The cards keep their
+   hairline ring — the one place on the page a ring is right, because each
+   mark is a discrete claim — and lose everything else. */
+.page[data-page="security"] .card--ring {
+  background: var(--surface, #fff);
+  box-shadow: inset 0 0 0 1px var(--line);
+  border-radius: 3px;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+}
+.page[data-page="security"] .card-badge {
+  height: clamp(3rem, 4.4vw, 4rem);
+  width: auto;
+  filter: none;
+  margin-bottom: clamp(1.25rem, 2.2vw, 1.75rem);
+}
+.page[data-page="security"] .eyebrow--accent { color: var(--accent-text); }
+.page[data-page="security"] .kv__val { color: var(--heading); }
+
+/* ---- the close ----
+
+   The last thing on the page is a statement, so it is set like one rather
+   than like the paragraph it had become. */
+.page[data-page="security"] .paperwork {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--line);
+}
+.page[data-page="security"] .paperwork .h2,
+.page[data-page="security"] .paperwork .card-title {
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--heading);
+}
+.page[data-page="security"] .paperwork p { max-width: 60ch; }
+
+/* ---- motion ---- */
+.page[data-page="security"] .pick,
+.page[data-page="security"] .card--ring {
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="security"] .pick,
+  .page[data-page="security"] .card--ring { transition: none; }
+}
