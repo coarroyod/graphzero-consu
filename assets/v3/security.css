@@ -199,3 +199,277 @@
   .page[data-page="security"] .pick,
   .page[data-page="security"] .card--ring { transition: none; }
 }
+
+/* ==========================================================================
+   RHYTHM
+
+   Sections two to five ship with identical markup — .secsplit beside
+   .numlist, four times — so scrolling the page was the same picture over and
+   over. The markup is not ours to change, so each is given its own
+   composition by position. They are addressed by nth-of-type because that is
+   the only handle the markup offers; the order is fixed, and each rule below
+   names the section it belongs to.
+
+   Read down the page the sequence now goes: statement, spec table, centred
+   trio, chapter, selection rows, selection columns, certification register,
+   closing line. No two neighbours share a shape.
+   ========================================================================== */
+
+/* ---- 02 · "Your knowledge stays yours." — statement, then a wide three ----
+   The heading takes the full measure and the three sit under it in a row, so
+   the section opens rather than splits. */
+.page[data-page="security"] main > section:nth-of-type(2) .secsplit {
+  display: block;
+}
+.page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
+  max-width: 20ch;
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.038em;
+}
+.page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
+  margin-top: var(--space-6);
+  max-width: 52ch;
+}
+.page[data-page="security"] main > section:nth-of-type(2) .numlist {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(2rem, 3.4vw, 2.75rem);
+  border-top: 1px solid var(--line);
+  gap: clamp(1.75rem, 3.4vw, 3.25rem);
+}
+/* Three across only where three columns are still a readable measure. At
+   375 they came out 94px wide, which is a column of broken words. */
+@media (min-width: 760px) {
+  .page[data-page="security"] main > section:nth-of-type(2) .numlist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
+  display: block;
+  border: 0;
+  padding: 0;
+}
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+  color: var(--accent-text);
+}
+
+/* ---- 03 · "Sensitive data…" — a spec table ----
+   The heading holds still in a narrow column while four tight ruled rows run
+   past it: name on the left of the row, what it does on the right. The most
+   technical section on the page, and the only one that reads as a table. */
+@media (min-width: 900px) {
+  .page[data-page="security"] main > section:nth-of-type(3) .secsplit {
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+    gap: var(--section-sm);
+    align-items: start;
+  }
+  .page[data-page="security"] main > section:nth-of-type(3) .secsplit__lead {
+    position: sticky;
+    top: clamp(5rem, 12vh, 8rem);
+  }
+  .page[data-page="security"] main > section:nth-of-type(3) .numlist__item {
+    grid-template-columns: 3rem minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: baseline;
+    gap: var(--space-6);
+  }
+  .page[data-page="security"] main > section:nth-of-type(3) .numlist__item > div {
+    display: contents;
+  }
+}
+.page[data-page="security"] main > section:nth-of-type(3) .secsplit__lead .h2 {
+  font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+  max-width: 16ch;
+}
+.page[data-page="security"] main > section:nth-of-type(3) .numlist__item {
+  padding-block: clamp(1.25rem, 2vw, 1.75rem);
+}
+.page[data-page="security"] main > section:nth-of-type(3) .numlist__num { color: var(--meta); }
+.page[data-page="security"] main > section:nth-of-type(3) .card-note { max-width: 46ch; }
+
+/* ---- 04 · "Governance in one place." — centred, then three ruled columns ----
+   The only centred composition on the page, and the only place a vertical
+   rule is used: three columns divided rather than spaced. */
+.page[data-page="security"] main > section:nth-of-type(4) .secsplit { display: block; text-align: center; }
+.page[data-page="security"] main > section:nth-of-type(4) .secsplit__lead .h2 {
+  margin-inline: auto;
+  max-width: 18ch;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.032em;
+}
+.page[data-page="security"] main > section:nth-of-type(4) .secsplit__lead .lead {
+  margin: var(--space-6) auto 0;
+  max-width: 56ch;
+}
+.page[data-page="security"] main > section:nth-of-type(4) .numlist {
+  margin-top: clamp(2.75rem, 5vw, 4rem);
+  gap: 0;
+  text-align: left;
+}
+.page[data-page="security"] main > section:nth-of-type(4) .numlist__item { display: block; }
+/* Divided by vertical rules where they fit side by side; stacked, the rule
+   turns and runs between them instead, so the division survives the
+   breakpoint rather than disappearing. */
+@media (min-width: 760px) {
+  .page[data-page="security"] main > section:nth-of-type(4) .numlist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .page[data-page="security"] main > section:nth-of-type(4) .numlist__item {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    padding: 0 clamp(1.25rem, 2.4vw, 2.25rem);
+  }
+  .page[data-page="security"] main > section:nth-of-type(4) .numlist__item:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+@media (max-width: 759px) {
+  .page[data-page="security"] main > section:nth-of-type(4) .numlist__item {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: var(--space-6) 0 0;
+    margin-top: var(--space-6);
+  }
+  .page[data-page="security"] main > section:nth-of-type(4) .numlist__item:first-child {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+.page[data-page="security"] main > section:nth-of-type(4) .numlist__num {
+  display: block;
+  margin-bottom: var(--space-3);
+  color: var(--meta);
+}
+
+/* ---- 05 · "European, enforced." — the chapter ----
+   The largest heading below the fold, on its own line, with the four set
+   two-by-two underneath in a lot of air. */
+.page[data-page="security"] main > section:nth-of-type(5) { padding-block: clamp(4.5rem, 10vw, 8rem); }
+.page[data-page="security"] main > section:nth-of-type(5) .secsplit { display: block; }
+.page[data-page="security"] main > section:nth-of-type(5) .secsplit__lead .h2 {
+  max-width: 13ch;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  line-height: 0.99;
+  letter-spacing: -0.042em;
+}
+.page[data-page="security"] main > section:nth-of-type(5) .numlist {
+  margin-top: clamp(3rem, 5.5vw, 4.5rem);
+  gap: clamp(2rem, 3.6vw, 3.25rem) clamp(2.5rem, 5vw, 4.5rem);
+}
+@media (min-width: 760px) {
+  .page[data-page="security"] main > section:nth-of-type(5) .numlist {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.page[data-page="security"] main > section:nth-of-type(5) .numlist__item {
+  display: block;
+  border: 0;
+  padding: 0;
+}
+.page[data-page="security"] main > section:nth-of-type(5) .numlist__num {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: clamp(1.375rem, 2vw, 1.75rem);
+  color: var(--accent-text);
+}
+.page[data-page="security"] main > section:nth-of-type(5) .card-title {
+  font-size: clamp(1.125rem, 1.1vw + 0.85rem, 1.4375rem);
+}
+
+/* ---- 06 · "Pick your deployment." — selection rows ----
+   Four options read down, each on a rule, the name and what it means in
+   their own columns. A list of choices, not a set of boxes. */
+.page[data-page="security"] main > section:nth-of-type(6) .pickset { display: block; }
+.page[data-page="security"] main > section:nth-of-type(6) .pick {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: var(--space-4) var(--space-6);
+  align-items: baseline;
+}
+@media (min-width: 860px) {
+  .page[data-page="security"] main > section:nth-of-type(6) .pick {
+    grid-template-columns: 1.25rem minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: var(--section-sm);
+  }
+  .page[data-page="security"] main > section:nth-of-type(6) .pick > div { display: contents; }
+}
+
+/* ---- 07 · "Pick your inference." — selection columns ----
+   Three side by side instead of stacked, so the second choice does not
+   repeat the shape of the first. */
+.page[data-page="security"] main > section:nth-of-type(7) .pickset {
+  gap: clamp(1.75rem, 3.4vw, 3rem);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}
+.page[data-page="security"] main > section:nth-of-type(7) .pick {
+  display: block;
+  border-top: 0;
+  padding: 0;
+}
+.page[data-page="security"] main > section:nth-of-type(7) .pick__dot {
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+/* ---- 08 · certifications — a register ----
+   Each mark on its own line with its claim beside it, ruled between. The
+   logos get the room they need to read as assurance rather than as three
+   equal tiles in a grid. */
+.page[data-page="security"] main > section:nth-of-type(8) .grid-3 {
+  display: block;
+  margin-top: clamp(2.25rem, 4vw, 3.5rem);
+}
+.page[data-page="security"] main > section:nth-of-type(8) .card--ring {
+  display: grid;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+  align-items: center;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  border-top: 1px solid var(--line);
+  padding: clamp(1.75rem, 3.2vw, 2.75rem) 0;
+}
+.page[data-page="security"] main > section:nth-of-type(8) .card--ring:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+/* The component these carry is .card--tall, which sets a 15.4rem floor and
+   places the badge, title and note on rows one, two and three of a four-row
+   grid whose last row is 1fr. That is right for three equal tiles and wrong
+   for a row: the parts stacked and the spare row stretched each entry to
+   nearly 500px. The floor and the row placement are undone here so the mark
+   sits beside its claim. */
+.page[data-page="security"] main > section:nth-of-type(8) .card--ring {
+  min-height: 0;
+  grid-template-rows: auto auto;
+}
+@media (min-width: 760px) {
+  .page[data-page="security"] main > section:nth-of-type(8) .card--ring {
+    grid-template-columns: clamp(7rem, 12vw, 10rem) minmax(0, 1fr);
+    gap: var(--space-2) clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-foot { display: contents; }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-badge {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-title { grid-column: 2; grid-row: 1; }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-note  { grid-column: 2; grid-row: 2; }
+}
+/* Stacked, the same rows apply but in one column. */
+@media (max-width: 759px) {
+  .page[data-page="security"] main > section:nth-of-type(8) .card-badge { grid-row: auto; }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-title { grid-row: auto; }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-note  { grid-row: auto; }
+}
+.page[data-page="security"] main > section:nth-of-type(8) .card-badge {
+  height: clamp(3.5rem, 5.5vw, 5rem);
+  margin-bottom: 0;
+}
