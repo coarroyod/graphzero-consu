@@ -4153,7 +4153,12 @@ plainest thing in the drawing rather than the most filled. */
     column-gap: var(--space-6);
   }
   .page[data-page="about"] .ab-title { grid-column: 1 / 11; }
-  .page[data-page="about"] .ab-hero__lead { grid-column: 2 / 7; }
+  /* Column one, the same line the claim starts on — and the same line the
+     story, the index and the close all start on. Set in by a column it read
+     as pushed right and hanging off nothing; on the container edge it is
+     plainly part of the same grid, and the asymmetry comes from its width
+     against the claim rather than from an offset. */
+  .page[data-page="about"] .ab-hero__lead { grid-column: 1 / 6; }
 }
 
 /* The dominant thing on the page, and now that nothing shares its row it can
@@ -4165,6 +4170,9 @@ plainest thing in the drawing rather than the most filled. */
   letter-spacing: -0.048em;
   color: var(--heading);
 }
+/* One word in the whole fold carries the accent — the second Europe, which
+   is the turn the first line sets up. No box, no rule, no second use of it
+   anywhere on this page. */
 .page[data-page="about"] .ab-title .hl { color: var(--hl); }
 
 /* One block, not three paragraphs. The measure is narrow so it reads as a
@@ -4172,8 +4180,10 @@ plainest thing in the drawing rather than the most filled. */
    there is no rule and nothing drawn between. */
 .page[data-page="about"] .ab-hero__lead {
   display: grid;
-  gap: var(--space-3);
-  margin-top: clamp(2.25rem, 6vh, 4rem);
+  /* Even between the two secondary lines; the step under the opening one is
+     added below, so the block reads as a statement and then its footnotes. */
+  gap: var(--space-4);
+  margin-top: clamp(1.75rem, 4.6vh, 3rem);
   max-width: 34ch;
 }
 @media (min-width: 900px) {
@@ -4185,7 +4195,7 @@ plainest thing in the drawing rather than the most filled. */
    rest stay body size and body ink — secondary by type and spacing, which is
    the only thing distinguishing them. */
 .page[data-page="about"] .ab-hero__lead > .lead:first-child {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
   font-size: clamp(1.1875rem, 0.5vw + 1rem, 1.375rem);
   line-height: 1.4;
   letter-spacing: -0.011em;
