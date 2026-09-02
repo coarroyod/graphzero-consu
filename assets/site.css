@@ -3515,119 +3515,6 @@ plainest thing in the drawing rather than the most filled. */
   text-underline-offset: 0.18em;
 }
 
-/* --------------------------------------------------------------------------
-   Early Access
-
-   The page is the site's existing parts re-set for one argument: a statement
-   fold, the three modules beside the flow figure, and a single inverted band
-   that carries the ask and the closing line. Nothing new is drawn — what is
-   below is measure, air and one motion rule, not a second visual language.
-   -------------------------------------------------------------------------- */
-.page[data-page="early-access"] .ea-eyebrow { margin-bottom: calc(var(--space-2) * -1); }
-
-/* Held to a measure so the statement breaks over three lines rather than
-   running the container: at display size the break is the composition. */
-.page[data-page="early-access"] .ea-title { max-width: 19ch; }
-
-/* One sentence under the claim, held to a measure that keeps it to two lines
-   at display width. The two-paragraph grid that used to live here went with
-   the second paragraph, which is now section 02. */
-.page[data-page="early-access"] .ea-fold__lead {
-  margin-top: var(--space-6);
-  max-width: 54ch;
-  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
-}
-
-/* The way into the argument, not a call to action. The ask is seven sections
-   below and this is only how you get there. */
-.page[data-page="early-access"] .ea-fold__cue { margin-top: var(--space-8); }
-
-.page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
-
-/* The ask. The heading is one word pair on the left and everything that
-   follows is on the right, which is the same secsplit the security band uses —
-   so the two inverted blocks on the site read as one pattern. */
-.page[data-page="early-access"] .ea-partner__body { display: grid; gap: var(--space-6); }
-.page[data-page="early-access"] .ea-partner__body .lead { max-width: 52ch; }
-.page[data-page="early-access"] .ea-partner__cta { margin-top: var(--space-4); }
-.page[data-page="early-access"] .ea-partner__cta .link-underline {
-  font-size: var(--fs-lead);
-  text-underline-offset: 0.22em;
-  transition: text-underline-offset var(--dur) var(--ease);
-}
-.page[data-page="early-access"] .ea-partner__cta .link-underline:hover {
-  text-underline-offset: 0.32em;
-}
-
-/* The last word. A hairline and a section's worth of air above it, so it is
-   read as the close of the page and not as a fourth paragraph of the ask. */
-.page[data-page="early-access"] .ea-close {
-  margin-top: var(--section-lg);
-  padding-top: var(--space-12);
-  border-top: 1px solid var(--line);
-  max-width: 46ch;
-  font-size: clamp(1.375rem, 1.5vw + 0.95rem, 2rem);
-  line-height: 1.25;
-  letter-spacing: var(--tracking-h3);
-  color: var(--heading);
-  text-wrap: pretty;
-}
-
-/* Motion — a single rule, applied on entry and never again.
-
-   The resting state is only ever declared under [data-reveal-ready], which the
-   script adds; with no script nothing is hidden and the page reads exactly as
-   it does now. Under prefers-reduced-motion the script never adds it either,
-   so this block simply does not apply. */
-.page[data-page="early-access"][data-reveal-ready] [data-reveal] {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 640ms var(--ease), transform 640ms var(--ease);
-  will-change: opacity, transform;
-}
-.page[data-page="early-access"][data-reveal-ready] [data-reveal].is-in {
-  opacity: 1;
-  transform: none;
-  will-change: auto;
-}
-
-/* The failsafe's own state — set only when the script gave up waiting for a
-   renderer that never painted. Everything is simply shown, with the transition
-   out of the way so nothing has to be interpolated to get there. */
-.page[data-page="early-access"][data-reveal-ready][data-reveal-skip] [data-reveal] {
-  opacity: 1;
-  transform: none;
-  transition: none;
-  will-change: auto;
-}
-
-/* The fold carries no accent. The blue is the site's one accent and it is
-   already doing two jobs on this page — the slash in the wordmark and the
-   module titles under the pointer. Running it through half the display line as
-   well made the statement louder than it is confident, and the line reads
-   harder in plain ink. Declared rather than left implicit so a later edit does
-   not quietly put .hl back into the heading. */
-.page[data-page="early-access"] .ea-title { color: var(--heading); }
-
-/* The flow figure below the showcase breakpoint.
-
-   The slot drops the base 32rem to `min-height: 0` and takes its height from
-   the module list beside it instead. Above 900px that is right — the plate
-   finishes level with the list. Below it the showcase is one column, there is
-   no sibling left to stretch against, and the figure collapses to nothing:
-   the drawing is simply gone on a phone. So the height comes back here, and
-   the script's ResizeObserver re-fits the drawing into whatever it resolves to.
-
-   Height only, and no aspect-ratio: the two together run the wrong way round.
-   A definite height plus a ratio makes the ratio compute the *width* from it —
-   320px at 4/3 asked for a 427px box inside a 375px screen — so the width stays
-   the column's and only the height is stated here. */
-@media (max-width: 899px) {
-  .page[data-page="early-access"] .showcase__visual--flow {
-    min-height: min(20rem, 84vw);
-  }
-}
-
 /* ==========================================================================
    BRAND — graphzero: navy, slate, burnt orange.
 
@@ -3716,62 +3603,229 @@ plainest thing in the drawing rather than the most filled. */
   --wash-grey-base: #F1F4F5;
 }
 
+
 /* --------------------------------------------------------------------------
-   Early Access — section rhythm.
+   EARLY ACCESS
 
-   Eight sections on three grounds: white, the brand's Light Grey, and navy.
-   The page alternates white and grey through the argument and then holds navy
-   for the last three, so the change of ground is what says the argument is
-   over and the ask has started. That is the rhythm; nothing else marks it.
+   Six sections and one turn. The first three are the argument and sit on
+   white, then grey for the product; the last three are the partnership and
+   sit on navy, unbroken into the footer. That single change of ground is the
+   page's structural move — the reader is either being told what graphzero is
+   or being asked to build it with us, and the page never blurs the two.
+
+   The four things a design partner gets are hairline-separated rather than
+   boxed: they are four statements of the same rank, not four options to pick
+   between, and a border round each would read as a price table.
    -------------------------------------------------------------------------- */
+
+/* ---- 01 the fold ---- */
+.page[data-page="early-access"] .ea-fold { padding-block: clamp(4.5rem, 12vh, 9rem); }
+.page[data-page="early-access"] .ea-eyebrow { margin-bottom: var(--space-6); }
+.page[data-page="early-access"] .ea-title {
+  max-width: 17ch;
+  color: var(--heading);
+}
+
+/* The tension and the answer, read across rather than down. Two paragraphs
+   stacked under a display line push the fold past one screen; side by side
+   they stay in it, and the answer sits level with the problem instead of
+   below it. Stretched, because .hero__inner ranges its children left. */
+.page[data-page="early-access"] .ea-fold__copy {
+  justify-self: stretch;
+  width: 100%;
+  max-width: 62rem;
+  margin-top: var(--space-8);
+  display: grid;
+  gap: var(--space-6);
+}
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-fold__copy {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--section-sm);
+  }
+  .page[data-page="early-access"] .ea-fold__copy .lead { max-width: 42ch; }
+}
+/* Full-strength ink on the second one: it is the claim the page goes on to
+   support, and the first paragraph is the setup for it. */
+.page[data-page="early-access"] .ea-fold__answer { color: var(--heading); }
+
+.page[data-page="early-access"] .ea-cta-row {
+  margin-top: var(--space-12);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+}
+.page[data-page="early-access"] .ea-cta-row__alt { color: var(--body); }
+
+/* ---- 02 / 03 the argument ---- */
+.page[data-page="early-access"] .ea-sec { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+.page[data-page="early-access"] .ea-sec-head { padding-top: 0; }
 .page[data-page="early-access"] .ea-band-grey { background: var(--surface-grey); }
+.page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
 
-/* .band is full-bleed, so a grey section's own top padding is what separates
-   it from the white above rather than a rule. */
-.page[data-page="early-access"] .ea-band-grey > .wrap { padding-top: var(--section-sm); }
-
-/* 02 — the tension, set as a proposition rather than a paragraph. Not a
-   heading: it is the same sentence it always was, and marking it up as an h2
-   would put a second heading rank between the fold and section 03. */
-.page[data-page="early-access"] .ea-statement {
-  max-width: 24ch;
-  font-size: clamp(1.75rem, 3.2vw + 0.75rem, 3rem);
-  line-height: 1.12;
+/* ---- 04 the turn ---- */
+/* Opens the navy run, so it carries the air above; 05 and 06 continue it and
+   add none of their own at the top. */
+.page[data-page="early-access"] .ea-open__inner {
+  padding-top: clamp(4.5rem, 9vw, 8rem);
+  padding-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+.page[data-page="early-access"] .ea-open__head {
+  margin: var(--space-6) 0 0;
+  max-width: 18ch;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.04;
   letter-spacing: var(--tracking-h2);
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+  text-wrap: balance;
+}
+.page[data-page="early-access"] .ea-open__lead {
+  margin-top: var(--space-8);
+  max-width: 46ch;
+}
+
+/* ---- 05 what a design partner gets ---- */
+.page[data-page="early-access"] .ea-gets__inner {
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+.page[data-page="early-access"] .ea-gets__grid {
+  display: grid;
+  gap: var(--space-8) var(--section-sm);
+}
+@media (min-width: 760px) {
+  .page[data-page="early-access"] .ea-gets__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--section-sm) var(--section-sm);
+  }
+}
+.page[data-page="early-access"] .ea-get {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+.page[data-page="early-access"] .ea-get__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.1vw + 1rem, 1.625rem);
+  line-height: var(--lh-h3);
+  letter-spacing: -0.02em;
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+}
+.page[data-page="early-access"] .ea-get__body {
+  margin: 0;
+  max-width: 40ch;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--body);
+}
+
+/* ---- 06 the close ---- */
+.page[data-page="early-access"] .ea-closing {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
+  border-top: 1px solid var(--line);
+}
+.page[data-page="early-access"] .ea-closing__head {
+  margin: var(--space-6) 0 0;
+  max-width: 20ch;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-h3);
   color: var(--heading);
   text-wrap: pretty;
 }
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-statement { max-width: 20ch; }
+.page[data-page="early-access"] .ea-closing__turn {
+  margin: var(--space-6) 0 0;
+  max-width: 44ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--body);
 }
+.page[data-page="early-access"] .ea-closing__cta { margin: var(--space-12) 0 0; }
 
-/* 05 — the capability rows carry chips and no prose, so the right-hand column
-   no longer needs twice the width of the left. Evening the two out stops the
-   chips from stranding a third of the row empty. */
-.page[data-page="early-access"] .cap {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  align-items: start;
-}
-@media (max-width: 900px) {
-  .page[data-page="early-access"] .cap { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* 06 — the proof column. */
-.page[data-page="early-access"] .ea-proof { display: grid; gap: var(--space-6); align-content: start; }
-.page[data-page="early-access"] .ea-proof__chips { margin-top: var(--space-2); }
-
-/* 07 / 08 — the ask and the close both sit on navy and are one field, so the
-   band between them carries no padding of its own to draw a seam. */
-.page[data-page="early-access"] .ea-ask > .wrap { padding-bottom: 0; }
-.page[data-page="early-access"] .ea-close-band > .wrap { padding-top: var(--section-sm); }
-.page[data-page="early-access"] .ea-close__cta { margin-top: var(--space-12); }
-
-/* The one button on the page outside the header.
+/* The page's two buttons.
 
    .btn--accent fills with --accent, and white on the brand orange measures
    3.8:1 — under AA for a label this size. The fill resolves to the darker
-   --accent-strong instead, which clears it at 4.8:1. The brand orange is not
-   lost: it is what the fill returns to on hover, where the label is no longer
-   the thing being read. */
+   --accent-strong instead, which clears it at 4.8:1. The brand orange is
+   what it returns to on hover, where the label is no longer being read. */
 .btn--accent { background: var(--accent-strong); color: var(--accent-ink); }
 .btn--accent:hover { background: var(--accent); opacity: 1; }
+.btn--lg { padding: 1.05rem 2.25rem; font-size: var(--fs-body); }
+/* Motion — a single rule, applied on entry and never again.
+
+   The resting state is only ever declared under [data-reveal-ready], which the
+   script adds; with no script nothing is hidden and the page reads exactly as
+   it does now. Under prefers-reduced-motion the script never adds it either,
+   so this block simply does not apply. */
+.page[data-page="early-access"][data-reveal-ready] [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 640ms var(--ease), transform 640ms var(--ease);
+  will-change: opacity, transform;
+}
+.page[data-page="early-access"][data-reveal-ready] [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* The failsafe's own state — set only when the script gave up waiting for a
+   renderer that never painted. Everything is simply shown, with the transition
+   out of the way so nothing has to be interpolated to get there. */
+.page[data-page="early-access"][data-reveal-ready][data-reveal-skip] [data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+/* The fold carries no accent. The blue is the site's one accent and it is
+   already doing two jobs on this page — the slash in the wordmark and the
+   module titles under the pointer. Running it through half the display line as
+   well made the statement louder than it is confident, and the line reads
+   harder in plain ink. Declared rather than left implicit so a later edit does
+   not quietly put .hl back into the heading. */
+.page[data-page="early-access"] .ea-title { color: var(--heading); }
+
+/* The flow figure below the showcase breakpoint.
+
+   The slot drops the base 32rem to `min-height: 0` and takes its height from
+   the module list beside it instead. Above 900px that is right — the plate
+   finishes level with the list. Below it the showcase is one column, there is
+   no sibling left to stretch against, and the figure collapses to nothing:
+   the drawing is simply gone on a phone. So the height comes back here, and
+   the script's ResizeObserver re-fits the drawing into whatever it resolves to.
+
+   Height only, and no aspect-ratio: the two together run the wrong way round.
+   A definite height plus a ratio makes the ratio compute the *width* from it —
+   320px at 4/3 asked for a 427px box inside a 375px screen — so the width stays
+   the column's and only the height is stated here. */
+@media (max-width: 899px) {
+  .page[data-page="early-access"] .showcase__visual--flow {
+    min-height: min(20rem, 84vw);
+  }
+}
+
+/* The flow figure below the showcase breakpoint.
+
+   The slot drops the base 32rem to `min-height: 0` and takes its height from
+   the module list beside it instead. Above 900px that is right — the plate
+   finishes level with the list. Below it the showcase is one column, there is
+   no sibling left to stretch against, and the figure collapses to nothing:
+   the drawing is simply gone on a phone. So the height comes back here, and
+   the script's ResizeObserver re-fits the drawing into whatever it resolves to.
+
+   Height only, and no aspect-ratio: the two together run the wrong way round.
+   A definite height plus a ratio makes the ratio compute the *width* from it —
+   320px at 4/3 asked for a 427px box inside a 375px screen — so the width stays
+   the column's and only the height is stated here. */
+@media (max-width: 899px) {
+  .page[data-page="early-access"] .showcase__visual--flow {
+    min-height: min(20rem, 84vw);
+  }
+}

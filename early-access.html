@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>graphzero 2 | Early Access</title>
-<meta name="description" content="graphzero brings the knowledge your organization creates together in one place — connected, current, and available to people and AI. We are working with design partners as we bring it to market.">
-<meta property="og:title" content="graphzero 2 | Early Access">
-<meta property="og:description" content="graphzero brings the knowledge your organization creates together in one place — connected, current, and available to people and AI. We are working with design partners as we bring it to market.">
+<title>graphzero | Early Access</title>
+<meta name="description" content="graphzero brings the knowledge your people create together, keeps it current, and makes it available to your people and AI. We are building it with design partners.">
+<meta property="og:title" content="graphzero | Early Access">
+<meta property="og:description" content="graphzero brings the knowledge your people create together, keeps it current, and makes it available to your people and AI. We are building it with design partners.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=8">
+<link rel="stylesheet" href="assets/site.css?v=9">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -53,42 +53,36 @@
 
   <main id="main">
 
-    <!-- 01 — THE FOLD
-         Type only. Every other section on this page carries a drawing, and the
-         page has three of them; putting a fourth here would open on the same
-         picture the reader meets again two screens down. What the fold is for
-         is the claim, so it is the claim at display size, one sentence under
-         it, and the way into the argument. The ask is not here — it arrives in
-         section 07, once there is something to say yes to. -->
-    <section class="hero">
-      <div class="wrap hero__inner">
+    <!-- 01 — WHAT GRAPHZERO IS
+         The fold carries the claim and the two paragraphs that earn it, and
+         nothing else. No figure: the page has two drawings already and the
+         first of them is one screen down, so opening on a third would say the
+         same thing twice before the claim has landed. -->
+    <section class="hero" id="top">
+      <div class="wrap hero__inner ea-fold">
+        <p class="eyebrow ea-eyebrow" data-reveal>Early access</p>
         <h1 class="display hero__title ea-title" data-reveal>Turn what your people know into what your company knows.</h1>
-        <p class="lead ea-fold__lead" data-reveal>graphzero brings this knowledge together in one place. It keeps it connected and current, and makes it available to people and AI.</p>
-        <p class="ea-fold__cue" data-reveal><a class="link-underline" href="#system">See how it works &darr;</a></p>
+        <div class="ea-fold__copy" data-reveal>
+          <p class="lead">Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
+          <p class="lead ea-fold__answer">graphzero brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
+        </div>
+        <div class="ea-cta-row" data-reveal>
+          <a class="btn btn--accent btn--lg" href="#early-access">Become a design partner &rarr;</a>
+          <a class="link-underline ea-cta-row__alt" href="#product">See how it works &darr;</a>
+        </div>
       </div>
     </section>
 
-    <!-- 02 — THE TENSION
-         The paragraph that used to sit second in the fold, on its own ground
-         and at statement size. It is the same words; what changes is that it is
-         read as a proposition rather than skimmed as body copy. -->
-    <section class="band ea-band-grey">
-      <div class="wrap sec sec--pb">
-        <p class="ea-statement" data-reveal>Knowledge is created every day &mdash; in conversations, decisions, documents, and the work people do. But much of it remains spread across people, teams, and systems.</p>
-      </div>
-    </section>
-
-    <!-- 03 — WHERE THE KNOWLEDGE BASE SITS
+    <!-- 02 — WHY THE KNOWLEDGE BASE MATTERS
          The comparison, brought over from the Product page: one central base
-         against a direct connection per system, five outcomes each way. It is
-         the argument the page most needs to make and it makes it in a drawing
-         and fifty words, so it is the first thing shown after the claim.
+         against a connection per system, five outcomes each way. It argues the
+         case in a drawing rather than in copy, which is why nothing has been
+         written for this section.
 
-         Self-contained — no script, logos inlined, the view toggle done with a
-         radio. Its ids are page-global, which is fine at one copy per page; a
-         second copy here would need every id and every for= suffixed. -->
-    <section class="wrap sec" id="system">
-      <h2 class="h3-fixed af-head" data-reveal>One central knowledge base that is compatible with
+         Self-contained — no script, logos inlined, the toggle done with a
+         radio. Its ids are page-global; fine at one copy per page. -->
+    <section class="wrap sec ea-sec" id="why">
+      <h2 class="h3-fixed af-head">One central knowledge base that is compatible with
         <!-- One line, five names, one at a time. All five stay in the markup:
              a screen reader reads the list, which is the same claim the
              animation is making one word at a time. -->
@@ -435,14 +429,17 @@
       </div>
     </section>
 
-    <!-- 04 — THE THREE WAYS IN
-         The modules, with the flow figure they drive. Pointing at one lights
-         its own part of the drawing and everything under it, so the list and
-         the figure are one component and stay on one row. -->
-    <section class="band ea-band-grey" id="knowledge-base">
+    <!-- 03 — HOW THE PRODUCT WORKS
+         The three ways in, with the flow figure they drive: pointing at one
+         lights its own part of the drawing and everything under it.
+
+         The lead sentence this section used to carry is gone — it now reads,
+         almost word for word, as "Flexible by design" in the design-partner
+         block, and saying it in both places was the one real repetition on
+         the page. -->
+    <section class="band ea-band-grey" id="product">
       <div class="wrap sec sec--pb">
-        <h2 class="h2 sec-head" data-reveal>One knowledge base. <br class="br-wide">Different ways to use it.</h2>
-        <p class="lead sec-head__lead sec-head__lead--full" data-reveal>Start with the graphzero knowledge base. Use it with search and agents. Or connect it to the tools and workflows you already use.</p>
+        <h2 class="h2 sec-head ea-sec-head" data-reveal>One knowledge base. <br class="br-wide">Different ways to use it.</h2>
 
         <div class="showcase ea-showcase">
           <div class="showcase__text">
@@ -472,152 +469,57 @@
       </div>
     </section>
 
-    <!-- 05 — CAPABILITIES
-         The five layers from the Product page, label and claim and what each
-         is made of. The paragraph under each one is not brought over: the
-         chips are the concise version, and the prose is what made the original
-         read as a specification. Anyone who wants it has the Product page. -->
-    <section class="wrap sec" id="capabilities">
-      <h2 class="h2 sec-head" data-reveal>Technical capabilities</h2>
-      <ol class="cap-list">
-        <li class="cap">
-          <div class="cap__head">
-            <span class="eyebrow">01 &mdash; Ingestion</span>
-            <h3 class="cap__title">One graph, kept current, automatically</h3>
-          </div>
-          <div class="cap__body">
-            <span class="chip-row cap__tags">
-            <span class="chip-outline">Incremental sync</span>
-            <span class="chip-outline">Change detection</span>
-            <span class="chip-outline">Deletion propagation</span>
-            <span class="chip-outline">Permission refresh</span>
-            <span class="chip-outline">Entity resolution</span>
-            </span>
-          </div>
-        </li>
-        <li class="cap">
-          <div class="cap__head">
-            <span class="eyebrow">02 &mdash; Retrieval</span>
-            <h3 class="cap__title">Finds the whole answer, and says so</h3>
-          </div>
-          <div class="cap__body">
-            <span class="chip-row cap__tags">
-            <span class="chip-outline">Exhaustive scan</span>
-            <span class="chip-outline">Multi-hop reasoning</span>
-            <span class="chip-outline">Temporality</span>
-            <span class="chip-outline">Provenance</span>
-            <span class="chip-outline">Coverage reporting</span>
-            </span>
-          </div>
-        </li>
-        <li class="cap">
-          <div class="cap__head">
-            <span class="eyebrow">03 &mdash; Transparency</span>
-            <h3 class="cap__title">See the answer. See the evidence. See the source.</h3>
-          </div>
-          <div class="cap__body">
-            <span class="chip-row cap__tags">
-            <span class="chip-outline">Ranked source set</span>
-            <span class="chip-outline">Direct document access</span>
-            <span class="chip-outline">Passage-level citations</span>
-            <span class="chip-outline">Wiki pages</span>
-            <span class="chip-outline">Editable in place</span>
-            </span>
-          </div>
-        </li>
-        <li class="cap">
-          <div class="cap__head">
-            <span class="eyebrow">04 &mdash; Curation</span>
-            <h3 class="cap__title">Gets better because people use it</h3>
-          </div>
-          <div class="cap__body">
-            <span class="chip-row cap__tags">
-            <span class="chip-outline">Gap &amp; contradiction detection</span>
-            <span class="chip-outline">Drafted fixes</span>
-            <span class="chip-outline">Human approval</span>
-            <span class="chip-outline">Write-back to your files</span>
-            <span class="chip-outline">Org-level learning</span>
-            <span class="chip-outline">Graph inference</span>
-            </span>
-          </div>
-        </li>
-        <li class="cap">
-          <div class="cap__head">
-            <span class="eyebrow">05 &mdash; Control</span>
-            <h3 class="cap__title">Every permission, all the way down</h3>
-          </div>
-          <div class="cap__body">
-            <span class="chip-row cap__tags">
-            <span class="chip-outline">Fact-level permissions</span>
-            <span class="chip-outline">Permission propagation</span>
-            <span class="chip-outline">Sensitivity tagging</span>
-            <span class="chip-outline">Source-side rerouting</span>
-            <span class="chip-outline">Retrieval logging</span>
-            <span class="chip-outline">EU hosting or your cloud</span>
-            <span class="chip-outline">Full export</span>
-            </span>
-          </div>
-        </li>
-      </ol>
+    <!-- 04 — WHY EARLY ACCESS IS INTERESTING
+         The page turns over here. Everything below is navy and runs unbroken
+         into the footer, so the change of ground is what marks the move from
+         the product to the partnership — the one transition on the page that
+         has to be unmistakable. -->
+    <section class="band band--dark dark ea-open" id="early-access">
+      <div class="wrap sec ea-open__inner">
+        <p class="eyebrow" data-reveal>Early access</p>
+        <h2 class="ea-open__head" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
+        <p class="lead ea-open__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
+      </div>
     </section>
 
-    <!-- 06 — SOVEREIGNTY
-         The credibility beat, and the first of the three navy sections. The
-         marks are drawn from the files already in this repository. -->
-    <section class="band band--dark dark" id="security">
-      <div class="wrap sec sec--pb">
-        <div class="secsplit">
-          <div class="secsplit__lead">
-            <h2 class="h2" data-reveal>Secure by design, sovereign by default.</h2>
-            <p class="lead" data-reveal>Your knowledge stays yours. EU infrastructure, EU-hosted models, permissions at fact level, and an audit trail you can read.</p>
+    <!-- 05 — WHAT A DESIGN PARTNER GETS
+         Four of them, so a 2x2 — but hairlines rather than boxes. These are
+         four statements of the same rank, not four objects to be picked
+         between, and putting a border round each one would make them look
+         like a price table. -->
+    <section class="band band--dark dark ea-gets">
+      <div class="wrap sec ea-gets__inner">
+        <div class="ea-gets__grid">
+          <div class="ea-get" data-reveal>
+            <h3 class="ea-get__title">Early access</h3>
+            <p class="ea-get__body">Be among the first to use graphzero.</p>
           </div>
-
-          <div class="ea-proof" data-reveal>
-            <div class="markrow">
-              <img class="markrow__badge" src="assets/media/gdpr.png"
-                   alt="GDPR" width="640" height="631" loading="lazy" decoding="async">
-              <img class="markrow__badge" src="assets/media/eu-ai-act.png"
-                   alt="EU AI Act" width="640" height="631" loading="lazy" decoding="async">
-              <img class="markrow__badge" src="assets/media/iso-27001.png"
-                   alt="ISO 27001" width="557" height="640" loading="lazy" decoding="async">
-            </div>
-            <span class="chip-row ea-proof__chips">
-              <span class="chip-outline">Hosted in EU</span>
-              <span class="chip-outline">No data training</span>
-              <span class="chip-outline">Fact-level permissions</span>
-              <span class="chip-outline">Full export</span>
-            </span>
-            <p class="small markrow__note">ISO 27001 certification in progress; our security management system follows the standard today.</p>
+          <div class="ea-get" data-reveal>
+            <h3 class="ea-get__title">Direct collaboration</h3>
+            <p class="ea-get__body">Work closely with our team and give input as the product evolves.</p>
+          </div>
+          <div class="ea-get" data-reveal>
+            <h3 class="ea-get__title">A foundation for AI</h3>
+            <p class="ea-get__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
+          </div>
+          <div class="ea-get" data-reveal>
+            <h3 class="ea-get__title">Flexible by design</h3>
+            <p class="ea-get__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 07 — EARLY ACCESS
-         The ask, arriving after the argument rather than in front of it. -->
-    <section class="band band--dark dark ea-ask" id="early-access">
-      <div class="wrap sec sec--pb">
-        <div class="secsplit ea-partner">
-          <div class="secsplit__lead">
-            <h2 class="h2" data-reveal>Early access</h2>
-          </div>
-
-          <div class="ea-partner__body">
-            <p class="lead" data-reveal>We&rsquo;re working with design partners as we bring graphzero to market.</p>
-            <p class="lead" data-reveal>You&rsquo;ll get early access to the product and work directly with our team as we develop the knowledge base, integrations, search, and agents.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 08 — THE CLOSE
-         The last word and the only button on the page that is not in the
-         header. The navy runs on into the footer, so the page ends on it. -->
+    <!-- 06 — BECOME A DESIGN PARTNER
+         The close. One statement, the turn under it, and the only full-size
+         button in the body of the page. -->
     <section class="band band--dark dark ea-close-band">
-      <div class="wrap sec sec--pb">
-        <p class="ea-close" data-reveal>The amount of knowledge organizations create is growing faster than ever. The opportunity is to turn that knowledge into an organizational advantage.</p>
-        <p class="ea-close__cta" data-reveal>
-          <a class="btn btn--accent btn--wide" href="mailto:david@ascending.ai?subject=graphzero%20design%20partner">Become a design partner &rarr;</a>
+      <div class="wrap sec sec--pb ea-closing">
+        <p class="eyebrow" data-reveal>The opportunity</p>
+        <p class="ea-closing__head" data-reveal>The amount of knowledge organizations create is growing faster than ever.</p>
+        <p class="ea-closing__turn" data-reveal>The opportunity is to turn that growing body of knowledge into an organizational advantage.</p>
+        <p class="ea-closing__cta" data-reveal>
+          <a class="btn btn--accent btn--lg" href="mailto:david@ascending.ai?subject=graphzero%20design%20partner">Become a design partner &rarr;</a>
         </p>
       </div>
     </section>
@@ -636,7 +538,7 @@
 
 </div>
 
-<script src="assets/site.js?v=8" defer></script>
+<script src="assets/site.js?v=9" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>
