@@ -574,25 +574,88 @@
   font-size: clamp(1.125rem, 1.1vw + 0.85rem, 1.4375rem);
 }
 
-/* ---- 07 · "Pick your inference." — selection columns ----
-   Three side by side instead of stacked, so the second choice does not
-   repeat the shape of the first. */
+/* ---- 07 · "Pick your inference." — three infrastructure choices ------------
+
+   Three columns divided by hairlines, each opening on its own orange rule.
+   Not panels: 06 directly above is a grid of ringed boxes, and repeating that
+   shape here would make the pair of choice sections read as one thing twice.
+   The structure is the division and the rule, not a border drawn round each.
+
+   The mark each option carried was a 14px ring — decoration, and the brief
+   asks for none. The element is aria-hidden and empty, so rather than hide it
+   it becomes the accent: the same span, drawn as the 2px orange line across
+   the head of its column.
+   ------------------------------------------------------------------------- */
 .page[data-page="security"] main > section:nth-of-type(7) .pickset {
-  gap: clamp(1.75rem, 3.4vw, 3rem);
-  padding-top: clamp(1.75rem, 3vw, 2.5rem);
-  border-top: 1px solid var(--line);
+  /* The set's own hairline is dropped: the three orange rules are the top edge
+     now, and a hairline immediately above them was a second line saying the
+     same thing. The gap goes too — the dividers do that work, and a gap either
+     side of a rule reads as a wider, vaguer margin. */
+  border-top: 0;
+  padding-top: 0;
+  gap: 0;
+  margin-top: clamp(2rem, 4vw, 3.25rem);
 }
+
 .page[data-page="security"] main > section:nth-of-type(7) .pick {
   display: block;
   border-top: 0;
-  padding: 0;
+  border-left: 1px solid var(--line);
+  padding: 0 clamp(1.5rem, 2.8vw, 2.5rem);
+  /* No motion in this section. */
+  transition: none;
 }
+/* The first column sits on the container's own left edge, so the set aligns
+   with every other row on the page rather than starting one padding in. */
+.page[data-page="security"] main > section:nth-of-type(7) .pick:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+.page[data-page="security"] main > section:nth-of-type(7) .pick:last-child {
+  padding-right: 0;
+}
+
+/* The mark, redrawn as the rule. */
 .page[data-page="security"] main > section:nth-of-type(7) .pick__dot {
   display: block;
-  margin-bottom: var(--space-4);
-  /* Hollow here, filled in 06. The mark carries the difference between the two
-     choice sections where their layouts come closest. */
-  background: transparent;
+  width: 100%;
+  height: 2px;
+  margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
+  border-radius: 0;
+  box-shadow: none;
+  background: #FF6A00;
+}
+
+/* 18px to 28px, and at the weight the face actually carries — the option is
+   the thing being chosen, so it leads its column. */
+.page[data-page="security"] main > section:nth-of-type(7) .card-title {
+  font-size: clamp(1.375rem, 1.95vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--heading);
+}
+/* Secondary and readable: the muted ink at 17px, on a measure that keeps each
+   description inside its own column. */
+.page[data-page="security"] main > section:nth-of-type(7) .card-note {
+  margin-top: clamp(0.75rem, 1.4vw, 1.125rem);
+  font-size: clamp(0.9375rem, 0.55vw + 0.8rem, 1.0625rem);
+  line-height: 1.55;
+  color: var(--body);
+}
+
+/* Stacked, columns become rows: the divider moves to the top edge and the
+   inset goes, so each option still opens on its orange rule. */
+@media (max-width: 760px) {
+  .page[data-page="security"] main > section:nth-of-type(7) .pickset {
+    gap: clamp(2rem, 6vw, 2.75rem);
+  }
+  .page[data-page="security"] main > section:nth-of-type(7) .pick,
+  .page[data-page="security"] main > section:nth-of-type(7) .pick:first-child,
+  .page[data-page="security"] main > section:nth-of-type(7) .pick:last-child {
+    border-left: 0;
+    padding-inline: 0;
+  }
 }
 
 /* The three choice-and-register sections all set their heading at 56px, which
