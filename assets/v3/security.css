@@ -74,34 +74,42 @@
 .page[data-page="security"] .dark .markrow__badge { filter: none; }
 
 .page[data-page="security"] .band--dark.dark > .wrap {
-  padding-top: clamp(3.5rem, 10vh, 7rem);
-  padding-bottom: clamp(3.5rem, 9vh, 6rem);
+  padding-top: clamp(4rem, 12vh, 8.5rem);
+  padding-bottom: clamp(4rem, 11vh, 7.5rem);
 }
 
-/* ---- the page's heading, taken from Early Access ----
+/* ---- the statement ----
 
-   Not approximated: these are .ea-title's own values — clamp(2.5rem, 6vw,
-   5rem), 0.97, -0.045em, and the system's heading weight of 500, which the
-   design system holds to deliberately ("never 600/700"). Both headings on
-   this page set from this one block, so the two sections and Early Access
-   are the same typography rather than three near-misses. */
+   Still the Early Access system: the same family, the same display ramp and
+   the same tracking, read straight off the design system's own tokens rather
+   than restated as numbers. What moves is scale, weight, leading and the
+   space under it.
+
+     --fs-display      clamp(3rem, 7.2vw, 5.76rem)   92px, from 80px
+     --tracking-display -0.045em                     unchanged
+     line-height        0.93                         from 0.97
+
+   The weight is the one value that leaves the Early Access page behind. The
+   system holds headings at 500 and says so; 500 at this size read as a light
+   statement rather than a confident one, and the brief asks for the weight to
+   improve. The face carries a real 700, so this is Geist Bold rather than a
+   smeared 500 — the same exception .layer-card__role already makes. */
 .page[data-page="security"] .band--dark.dark .h2 {
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 500;
-  line-height: 0.97;
-  letter-spacing: -0.045em;
-  color: var(--heading);
+  max-width: 12ch;
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: 0.93;
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
   text-wrap: balance;
 }
-.page[data-page="security"] .band--dark.dark .h2 {
-  max-width: 15ch;
-}
+/* More air under a statement this size: 34px read as the next line of it. */
 .page[data-page="security"] .secsplit__lead {
-  gap: clamp(1.5rem, 2.4vw, 2.25rem);
+  gap: clamp(1.75rem, 3.2vw, 3rem);
 }
 .page[data-page="security"] .band--dark.dark .lead {
-  max-width: 38ch;
-  font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.3125rem);
+  max-width: 36ch;
+  font-size: clamp(1.0625rem, 0.45vw + 1rem, 1.375rem);
   font-weight: 400;
   line-height: 1.55;
   color: var(--ink-muted);
@@ -138,7 +146,7 @@
   pointer-events: none;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 760' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0' stop-color='%23FF6A00'/%3E%3Cstop offset='1' stop-color='%23F5127A'/%3E%3C/linearGradient%3E%3Cpath d='M135 -40 C 350 180 175 385 425 495 C 640 590 760 670 840 845' fill='none' stroke='url(%23g)' stroke-width='2.25' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M215 -40 C 435 195 260 410 510 520 C 715 610 820 685 900 855' fill='none' stroke='url(%23g)' stroke-width='1' stroke-opacity='0.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 760' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0' stop-color='%23FF6A00'/%3E%3Cstop offset='1' stop-color='%23F5127A'/%3E%3C/linearGradient%3E%3Cpath d='M135 -40 C 350 180 175 385 425 495 C 640 590 760 670 840 845' fill='none' stroke='url(%23g)' stroke-width='2.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M215 -40 C 435 195 260 410 510 520 C 715 610 820 685 900 855' fill='none' stroke='url(%23g)' stroke-width='1' stroke-opacity='0.42' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
 }
 
 .page[data-page="security"] .secsplit__marks .markrow {
@@ -157,7 +165,7 @@
   grid-column: 1;
   grid-row: 1;
   justify-self: start;
-  height: clamp(6.5rem, 16vw, 15rem);
+  height: clamp(6.5rem, 17.5vw, 16rem);
 }
 /* Middle size, dropped well below the first so the two do not read as a pair. */
 .page[data-page="security"] .markrow__badge:nth-of-type(2) {
@@ -166,7 +174,7 @@
   justify-self: end;
   align-self: end;
   margin-top: clamp(2.5rem, 7vw, 6rem);
-  height: clamp(5rem, 12vw, 11rem);
+  height: clamp(4.75rem, 11.5vw, 10.5rem);
 }
 /* Smallest, indented off the first's left edge. */
 .page[data-page="security"] .markrow__badge:nth-of-type(3) {
@@ -174,7 +182,7 @@
   grid-row: 2;
   justify-self: start;
   margin-left: clamp(1.5rem, 6vw, 5rem);
-  height: clamp(4rem, 9.5vw, 8.5rem);
+  height: clamp(3.5rem, 8vw, 7.5rem);
 }
 /* Out of the visual area: its own row under the marks, on the container's
    grid, at body scale — a note about a certificate, not part of the group. */
