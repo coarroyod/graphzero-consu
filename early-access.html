@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>graphzero 2 | Early Access</title>
+<meta name="description" content="graphzero brings the knowledge your organization creates together in one place — connected, current, and available to people and AI. We are working with design partners as we bring it to market.">
+<meta property="og:title" content="graphzero 2 | Early Access">
+<meta property="og:description" content="graphzero brings the knowledge your organization creates together in one place — connected, current, and available to people and AI. We are working with design partners as we bring it to market.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="assets/design-system/styles.css">
+<link rel="stylesheet" href="assets/site.css?v=7">
+<link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
+</head>
+<body data-surface="light">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page" data-page="early-access">
+
+  <!-- The wordmark is the way back to the top of the site. -->
+  <header class="site-header">
+    <div class="brand-switch" data-identity-switch>
+      <!-- Two identities under comparison, and scaffolding like the hero mark's
+           arrow: drop this wrapper, the .brand-switch rules and the identity
+           block in site.js once one is chosen, leaving the <a> where it is. -->
+      <a class="brand" href="index.html" title="/graphzero">
+        <span class="brand__slash">/</span><span class="brand__name">graphzero</span>
+      </a>
+      <button class="brand-switch__arrow" type="button" data-identity-step="1"
+              aria-label="Next identity">&rsaquo;</button>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="index.html">Product</a>
+      <a href="early-access.html" aria-current="page">Early Access</a>
+
+      <!-- Only ever seen in the sheet. The desktop bar has no room for it. -->
+      <div class="nav-cta">
+        <a class="btn btn--hero" href="mailto:david@ascending.ai?subject=graphzero%20design%20partner">Become a design partner</a>
+      </div>
+    </nav>
+
+    <div class="lang" role="group" aria-label="Language">
+      <button class="lang__opt" type="button" data-lang="en" aria-current="true">EN</button>
+      <button class="lang__opt" type="button" data-lang="de">DE</button>
+      <button class="lang__opt" type="button" data-lang="nl">NL</button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 01 — THE FOLD
+         One statement, then the two paragraphs that earn it. No figure here:
+         the drawing belongs to the section that explains the modules, and
+         putting one in the fold as well would say the same thing twice. The
+         panel behind this is the site's own painted ground, not a picture. -->
+    <section class="hero">
+      <div class="wrap hero__inner">
+        <p class="eyebrow ea-eyebrow" data-reveal>Early access</p>
+        <h1 class="display hero__title ea-title" data-reveal>Turn what your people know into what your company knows.</h1>
+        <div class="lead-group ea-fold__lead" data-reveal>
+          <p class="lead">Knowledge is created every day &mdash; in conversations, decisions, documents, and the work people do. But much of it remains spread across people, teams, and systems.</p>
+          <p class="lead">graphzero brings this knowledge together in one place. It keeps it connected and current, and makes it available to people and AI.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 — THE MODULES
+         Three ways in, read down the left, with the knowledge-graph flow beside
+         them. The figure is the same component as before: it rests still, and
+         each module lights its own part of it on hover — the reason the list
+         and the drawing sit on one row rather than in two stacked blocks. -->
+    <section class="wrap sec" id="knowledge-base">
+      <h2 class="h2 sec-head" data-reveal>One knowledge base. <br class="br-wide">Different ways to use it.</h2>
+      <p class="lead sec-head__lead sec-head__lead--full" data-reveal>Start with the graphzero knowledge base. Use it with search and agents. Or connect it to the tools and workflows you already use.</p>
+
+      <div class="showcase ea-showcase">
+        <div class="showcase__text">
+          <div class="showcase__list">
+            <div class="showcase__item" data-flow="graph" data-reveal>
+              <span class="showcase__num" aria-hidden="true">01</span>
+              <h3 class="showcase__title">Knowledge base</h3>
+              <p class="small showcase__body">One place for the knowledge your organization creates. Open to the AI tools you already use, while keeping your knowledge under your control.</p>
+            </div>
+            <div class="showcase__item" data-flow="agents" data-reveal>
+              <span class="showcase__num" aria-hidden="true">02</span>
+              <h3 class="showcase__title">Search and agents</h3>
+              <p class="small showcase__body">Make knowledge accessible through search and agents, wherever your teams work.</p>
+            </div>
+            <div class="showcase__item" data-flow="ingest" data-reveal>
+              <span class="showcase__num" aria-hidden="true">03</span>
+              <h3 class="showcase__title">Integrations and ingestion</h3>
+              <p class="small showcase__body">Connect the systems where your information already lives and bring that knowledge into graphzero.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- The knowledge-graph flow, drawn rather than photographed. Square on
+             its own 600 grid and scaled into whatever this slot is, so the
+             hairlines and type stay in ratio. -->
+        <figure class="showcase__visual showcase__visual--flow">
+          <div class="kg-flow" data-kg-flow aria-hidden="true"></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 03 — EARLY ACCESS
+         The one inverted band on the page, and the page ends on it: the black
+         runs on through the closing statement and into the footer rather than
+         dropping back to white for the last few lines. .dark re-declares the
+         semantic tokens, so everything inside follows without being restyled. -->
+    <section class="band band--dark dark" id="early-access">
+      <div class="wrap sec sec--pb">
+        <div class="secsplit ea-partner">
+          <div class="secsplit__lead">
+            <h2 class="h2" data-reveal>Early access</h2>
+          </div>
+
+          <div class="ea-partner__body">
+            <p class="lead" data-reveal>We&rsquo;re working with design partners as we bring graphzero to market.</p>
+            <p class="lead" data-reveal>You&rsquo;ll get early access to the product and work directly with our team as we develop the knowledge base, integrations, search, and agents.</p>
+            <p class="ea-partner__cta" data-reveal>
+              <a class="link-underline" href="mailto:david@ascending.ai?subject=graphzero%20design%20partner">Become a design partner &rarr;</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- The closing line. A hairline and a lot of air above it, so it reads
+             as the page's last word rather than as a fourth paragraph of the
+             block it follows. -->
+        <p class="ea-close" data-reveal>The amount of knowledge organizations create is growing faster than ever. The opportunity is to turn that knowledge into an organizational advantage.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- The dark band runs on through the outro, so the page ends on black
+       rather than dropping back to white for the last few lines. -->
+  <footer class="footer-band dark">
+    <div class="wrap site-footer">
+      <span>&copy; 2026 Ascending AI B.V. &middot; Amsterdam, NL</span>
+      <div class="chip-row">
+        <span class="chip-outline">GDPR</span>
+        <span class="chip-outline">EU AI Act</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="assets/site.js?v=7" defer></script>
+<script src="assets/kg-flow.js?v=6" defer></script>
+</body>
+</html>

@@ -130,7 +130,7 @@
 .page[data-page="knowledge-base-3"],
 .page[data-page="security"],
 .page[data-page="product"],
-.page[data-page="work-with-us"] { --hl: #0000ff; }
+.page[data-page="early-access"] { --hl: #0000ff; }
 .hl,
 .brand__slash { color: var(--hl, inherit); }
 
@@ -3398,20 +3398,20 @@ plainest thing in the drawing rather than the most filled. */
    auto-placement would put the title in the slack row and leave the empty one
    underneath — and the reference draws no corner arrow.
    -------------------------------------------------------------------------- */
-.page[data-page="work-with-us"] .strip--split .strip__title { grid-row: 2; }
-.page[data-page="work-with-us"] .strip--split .strip__body { grid-row: 3; }
-.page[data-page="work-with-us"] .strip--split .strip__panel::after { content: none; }
+.page[data-page="early-access"] .strip--split .strip__title { grid-row: 2; }
+.page[data-page="early-access"] .strip--split .strip__body { grid-row: 3; }
+.page[data-page="early-access"] .strip--split .strip__panel::after { content: none; }
 
 /* The panels are plain divs here rather than buttons, so the cursor and the
    pointer affordance the button carried come back explicitly — the hover state
    is still the whole point of the row. */
-.page[data-page="work-with-us"] .strip--split .strip__panel { cursor: default; }
+.page[data-page="early-access"] .strip--split .strip__panel { cursor: default; }
 
 /* Whatever opens a section here has nothing above it to clear — the numbered
    section labels this padding was set to hold off do not exist on this page.
    Scoped: the Main page's own section heads still clear their eyebrows. */
-.page[data-page="work-with-us"] .sec > .sec-head:first-child,
-.page[data-page="work-with-us"] .sec > .split--pt:first-child { padding-top: 0; }
+.page[data-page="early-access"] .sec > .sec-head:first-child,
+.page[data-page="early-access"] .sec > .split--pt:first-child { padding-top: 0; }
 
 /* The numeral in its own column, title and copy in the next — so the three
    numbers line up on one edge and the three titles on another, whatever length
@@ -3419,20 +3419,20 @@ plainest thing in the drawing rather than the most filled. */
    on the title's baseline rather than at the top of the block. The version this
    stylesheet already carried stacked all three in one column, which is the
    arrangement the other showcase on the site wants. */
-.page[data-page="work-with-us"] .showcase__item {
+.page[data-page="early-access"] .showcase__item {
   grid-template-columns: 2.5rem 1fr;
   column-gap: var(--space-8);
   row-gap: var(--space-3);
   align-items: baseline;
 }
-.page[data-page="work-with-us"] .showcase__num { grid-column: 1; grid-row: 1; }
-.page[data-page="work-with-us"] .showcase__title { grid-column: 2; grid-row: 1; }
-.page[data-page="work-with-us"] .showcase__body { grid-column: 2; grid-row: 2; }
+.page[data-page="early-access"] .showcase__num { grid-column: 1; grid-row: 1; }
+.page[data-page="early-access"] .showcase__title { grid-column: 2; grid-row: 1; }
+.page[data-page="early-access"] .showcase__body { grid-column: 2; grid-row: 2; }
 /* Only the numeral treatment differs from the reference: it wants tabular
    figures and no capitals. The line-height stays at the stylesheet's own
    --lh-body — the numeral sits on the title's baseline, so a shorter line box
    drops it against the title rather than leaving it where the row puts it. */
-.page[data-page="work-with-us"] .showcase__num {
+.page[data-page="early-access"] .showcase__num {
   font-variant-numeric: tabular-nums;
   text-transform: none;
 }
@@ -3449,7 +3449,7 @@ plainest thing in the drawing rather than the most filled. */
    the panel stood as a black slab with its copy invisible in a 42px hole.
    Reference: ref8-site.css:1811. */
 @media (min-width: 901px) {
-  .page[data-page="work-with-us"] .strip--split:not(:hover):not(:focus-within)
+  .page[data-page="early-access"] .strip--split:not(:hover):not(:focus-within)
     .strip__panel:first-child .strip__body { opacity: 1; }
 }
 
@@ -3460,10 +3460,10 @@ plainest thing in the drawing rather than the most filled. */
    The block this stylesheet carries went further on all three counts, which
    opened all four bodies and made the section 357px taller than the source. */
 @media (max-width: 900px) {
-  .page[data-page="work-with-us"] .strip--split { flex-direction: row; }
-  .page[data-page="work-with-us"] .strip--split .strip__body { max-height: 0; }
-  .page[data-page="work-with-us"] .strip--split .strip__panel::before { display: block; }
-  .page[data-page="work-with-us"] .strip--split .strip__panel::after { display: block; }
+  .page[data-page="early-access"] .strip--split { flex-direction: row; }
+  .page[data-page="early-access"] .strip--split .strip__body { max-height: 0; }
+  .page[data-page="early-access"] .strip--split .strip__panel::before { display: block; }
+  .page[data-page="early-access"] .strip--split .strip__panel::after { display: block; }
 }
 
 /* The knowledge-graph figure's accent. The script reads --eu-blue and this
@@ -3471,7 +3471,7 @@ plainest thing in the drawing rather than the most filled. */
    page's own #0000ff. Declared here rather than patched into the script, which
    stays exactly as the reference wrote it. This is the figure's ink, not a
    second accent for the page: nothing else reads it. */
-.page[data-page="work-with-us"] { --eu-blue: #003399; }
+.page[data-page="early-access"] { --eu-blue: #003399; }
 
 /* Below the split's breakpoint this stylesheet halves .split's gap, on the
    reasoning that a stacked split's column gap becomes a heading-to-sub-heading
@@ -3479,7 +3479,7 @@ plainest thing in the drawing rather than the most filled. */
    space-12 under its heading at every width. Scoped: the Main page's own splits
    keep the tightened gap. */
 @media (max-width: 899px) {
-  .page[data-page="work-with-us"] .split { gap: var(--space-12); }
+  .page[data-page="early-access"] .split { gap: var(--space-12); }
 }
 
 
@@ -3504,13 +3504,132 @@ plainest thing in the drawing rather than the most filled. */
    The whole item is the target, not just the title: the item is what carries
    data-flow, so the copy and the drawing respond to the same gesture.
    -------------------------------------------------------------------------- */
-.page[data-page="work-with-us"] .showcase__title {
+.page[data-page="early-access"] .showcase__title {
   transition: color var(--dur) var(--ease);
 }
-.page[data-page="work-with-us"] .showcase__item:hover .showcase__title,
-.page[data-page="work-with-us"] .showcase__item:focus-within .showcase__title {
+.page[data-page="early-access"] .showcase__item:hover .showcase__title,
+.page[data-page="early-access"] .showcase__item:focus-within .showcase__title {
   color: var(--eu-blue);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.18em;
+}
+
+/* --------------------------------------------------------------------------
+   Early Access
+
+   The page is the site's existing parts re-set for one argument: a statement
+   fold, the three modules beside the flow figure, and a single inverted band
+   that carries the ask and the closing line. Nothing new is drawn — what is
+   below is measure, air and one motion rule, not a second visual language.
+   -------------------------------------------------------------------------- */
+.page[data-page="early-access"] .ea-eyebrow { margin-bottom: calc(var(--space-2) * -1); }
+
+/* Held to a measure so the statement breaks over three lines rather than
+   running the container: at display size the break is the composition. */
+.page[data-page="early-access"] .ea-title { max-width: 19ch; }
+
+/* Two paragraphs, side by side where there is room. The first sets the problem
+   and the second answers it, so reading them across rather than down keeps the
+   fold to one screen and puts the answer level with the problem instead of
+   under it. Stretched, because .hero__inner ranges its children left. */
+.page[data-page="early-access"] .ea-fold__lead {
+  justify-self: stretch;
+  width: 100%;
+  max-width: 62rem;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+}
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-fold__lead {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--section-sm);
+  }
+  .page[data-page="early-access"] .ea-fold__lead .lead { max-width: 44ch; }
+}
+
+.page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
+
+/* The ask. The heading is one word pair on the left and everything that
+   follows is on the right, which is the same secsplit the security band uses —
+   so the two inverted blocks on the site read as one pattern. */
+.page[data-page="early-access"] .ea-partner__body { display: grid; gap: var(--space-6); }
+.page[data-page="early-access"] .ea-partner__body .lead { max-width: 52ch; }
+.page[data-page="early-access"] .ea-partner__cta { margin-top: var(--space-4); }
+.page[data-page="early-access"] .ea-partner__cta .link-underline {
+  font-size: var(--fs-lead);
+  text-underline-offset: 0.22em;
+  transition: text-underline-offset var(--dur) var(--ease);
+}
+.page[data-page="early-access"] .ea-partner__cta .link-underline:hover {
+  text-underline-offset: 0.32em;
+}
+
+/* The last word. A hairline and a section's worth of air above it, so it is
+   read as the close of the page and not as a fourth paragraph of the ask. */
+.page[data-page="early-access"] .ea-close {
+  margin-top: var(--section-lg);
+  padding-top: var(--space-12);
+  border-top: 1px solid var(--line);
+  max-width: 46ch;
+  font-size: clamp(1.375rem, 1.5vw + 0.95rem, 2rem);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-h3);
+  color: var(--heading);
+  text-wrap: pretty;
+}
+
+/* Motion — a single rule, applied on entry and never again.
+
+   The resting state is only ever declared under [data-reveal-ready], which the
+   script adds; with no script nothing is hidden and the page reads exactly as
+   it does now. Under prefers-reduced-motion the script never adds it either,
+   so this block simply does not apply. */
+.page[data-page="early-access"][data-reveal-ready] [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 640ms var(--ease), transform 640ms var(--ease);
+  will-change: opacity, transform;
+}
+.page[data-page="early-access"][data-reveal-ready] [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* The failsafe's own state — set only when the script gave up waiting for a
+   renderer that never painted. Everything is simply shown, with the transition
+   out of the way so nothing has to be interpolated to get there. */
+.page[data-page="early-access"][data-reveal-ready][data-reveal-skip] [data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+/* The fold carries no accent. The blue is the site's one accent and it is
+   already doing two jobs on this page — the slash in the wordmark and the
+   module titles under the pointer. Running it through half the display line as
+   well made the statement louder than it is confident, and the line reads
+   harder in plain ink. Declared rather than left implicit so a later edit does
+   not quietly put .hl back into the heading. */
+.page[data-page="early-access"] .ea-title { color: var(--heading); }
+
+/* The flow figure below the showcase breakpoint.
+
+   The slot drops the base 32rem to `min-height: 0` and takes its height from
+   the module list beside it instead. Above 900px that is right — the plate
+   finishes level with the list. Below it the showcase is one column, there is
+   no sibling left to stretch against, and the figure collapses to nothing:
+   the drawing is simply gone on a phone. So the height comes back here, and
+   the script's ResizeObserver re-fits the drawing into whatever it resolves to.
+
+   Height only, and no aspect-ratio: the two together run the wrong way round.
+   A definite height plus a ratio makes the ratio compute the *width* from it —
+   320px at 4/3 asked for a 427px box inside a 375px screen — so the width stays
+   the column's and only the height is stated here. */
+@media (max-width: 899px) {
+  .page[data-page="early-access"] .showcase__visual--flow {
+    min-height: min(20rem, 84vw);
+  }
 }

@@ -910,3 +910,61 @@
 
   show('0', false);
 })();
+
+/* Entry reveal — Early Access.
+
+   Progressive, in both directions: the hidden state lives behind the
+   [data-reveal-ready] flag this sets, so a page that never runs this script is
+   never left with invisible copy, and under prefers-reduced-motion the flag is
+   not set at all rather than being set and then undone.
+
+   Each element is unobserved once it has come in. This is an entry, not a
+   scroll effect — nothing should fade back out on the way up. */
+(function () {
+  'use strict';
+
+  var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (!items.length) return;
+
+  var page = document.querySelector('.page');
+  if (!page) return;
+
+  if (!('IntersectionObserver' in window) ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  page.setAttribute('data-reveal-ready', '');
+
+  /* Failsafe, and the reason the hidden state is safe to declare at all.
+     A renderer that is not painting — a tab opened in the background, a
+     collapsed preview pane — delivers neither intersection entries nor
+     animation frames, and the copy would sit at zero opacity for as long as
+     that lasts. Timers still run there, so this is what actually guarantees
+     the page is readable; the observer only decides whether it is read as an
+     entry.
+
+     The observer's first callback reports every target it was given, whether
+     or not any of them intersect, so on a page that is painting this is
+     cancelled within a frame of setup and never reaches the copy below the
+     fold. It fires only where nothing is being drawn. */
+  var failsafe = setTimeout(function () {
+    /* Hard, not animated. Adding .is-in alone would only start a transition,
+       and a transition cannot advance in the very renderer this exists for —
+       the copy would hold at zero opacity exactly as before. The flag drops
+       the transition with the hidden state, so the reveal is a style change
+       that needs no frame to land. */
+    page.setAttribute('data-reveal-skip', '');
+    items.forEach(function (n) { n.classList.add('is-in'); });
+    io.disconnect();
+  }, 2000);
+
+  var io = new IntersectionObserver(function (entries) {
+    clearTimeout(failsafe);
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
+
+  items.forEach(function (n) { io.observe(n); });
+})();
