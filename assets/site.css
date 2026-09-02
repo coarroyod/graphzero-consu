@@ -3660,8 +3660,20 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- 02 the product ---- */
 .page[data-page="early-access"] .ea-sec-head { padding-top: 0; }
-.page[data-page="early-access"] .ea-band-grey { background: var(--surface-grey); }
 .page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
+
+/* The flow figure sits on the section's own white.
+
+   The slot ships a near-white textured plate, which existed to read as a
+   panel against the grey this section used to carry. The section is white
+   now, so the plate has nothing left to separate itself from — measured, it
+   is #F8F8F8 against #FFFFFF, which is not a panel, just a faint seam around
+   the drawing. Dropping it puts the figure and the section on one ground.
+
+   `background`, not `background-image: none`: the base .showcase__visual
+   fills #ececec behind the plate, and clearing only the image would expose
+   that grey instead of the white this is for. */
+.page[data-page="early-access"] .showcase__visual--flow { background: transparent; }
 
 /* ---- 04 the turn ---- */
 /* Opens the navy run, so it carries the air above; 05 and 06 continue it and
