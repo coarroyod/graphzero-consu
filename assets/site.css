@@ -4148,16 +4148,22 @@ plainest thing in the drawing rather than the most filled. */
    carries the accent — and the only accent in the fold besides the node. */
 .page[data-page="about"] .ab-title .hl { color: var(--hl); }
 
+/* Anchored to the same left edge as the claim and dropped well below it, so
+   the fold is a large statement at the top left and a compact block at the
+   bottom left with air between them — not a heading with a paragraph tucked
+   under its chin.
+
+   The indent that used to sit here pushed the copy toward the middle of the
+   fold, which read as centred under the title rather than offset from it.
+   The offset is vertical now, and the asymmetry comes from the difference in
+   width: the claim runs about 740px, the block about 340. */
 .page[data-page="about"] .ab-hero__lead {
   display: grid;
   gap: var(--space-4);
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  max-width: 36ch;
-}
-@media (min-width: 1000px) {
-  /* The step. Set in from the claim so the two are read in sequence rather
-     than as one stack. */
-  .page[data-page="about"] .ab-hero__lead { margin-left: clamp(0rem, 5vw, 4.25rem); }
+  margin-top: clamp(2.25rem, 7vh, 5rem);
+  /* Compact on purpose — short lines are what make it read as a set block
+     against the claim rather than as running text. */
+  max-width: 32ch;
 }
 /* The first two lines are the position; the third is what graphzero does
    about it, so the eye finishes on full ink. */
