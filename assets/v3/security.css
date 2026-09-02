@@ -66,16 +66,15 @@
   color: var(--gzs-muted);
   font-variant-numeric: tabular-nums;
 }
-.page[data-page="security"] .gzs-eyebrow__bar {
+/* The mark, not a rule — the same blade pair the About page sets beside its
+   eyebrows, at the same 10x18. The swept gradient bar it replaces is gone, and
+   its keyframes with it. */
+.page[data-page="security"] .gzs-mark {
   flex: 0 0 auto;
-  width: 28px;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #FF6A00, #FF2E93, #FF6A00);
-  background-size: 200% 100%;
-  animation: gzs-sweep 7s linear infinite;
+  width: 10px;
+  height: 18px;
+  display: block;
 }
-@keyframes gzs-sweep { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
 
 /* ---- 00 · the fold ---- */
 .page[data-page="security"] .gzs-hero {
@@ -457,7 +456,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page[data-page="security"] .gzs-eyebrow__bar,
   .page[data-page="security"] .gzs-hero__net circle,
   .page[data-page="security"] .gzs-reveal,
   .page[data-page="security"] .gzs-progress { animation: none; }
