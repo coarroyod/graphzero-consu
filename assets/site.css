@@ -3529,24 +3529,18 @@ plainest thing in the drawing rather than the most filled. */
    running the container: at display size the break is the composition. */
 .page[data-page="early-access"] .ea-title { max-width: 19ch; }
 
-/* Two paragraphs, side by side where there is room. The first sets the problem
-   and the second answers it, so reading them across rather than down keeps the
-   fold to one screen and puts the answer level with the problem instead of
-   under it. Stretched, because .hero__inner ranges its children left. */
+/* One sentence under the claim, held to a measure that keeps it to two lines
+   at display width. The two-paragraph grid that used to live here went with
+   the second paragraph, which is now section 02. */
 .page[data-page="early-access"] .ea-fold__lead {
-  justify-self: stretch;
-  width: 100%;
-  max-width: 62rem;
-  gap: var(--space-6);
-  margin-top: var(--space-4);
+  margin-top: var(--space-6);
+  max-width: 54ch;
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
 }
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-fold__lead {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--section-sm);
-  }
-  .page[data-page="early-access"] .ea-fold__lead .lead { max-width: 44ch; }
-}
+
+/* The way into the argument, not a call to action. The ask is seven sections
+   below and this is only how you get there. */
+.page[data-page="early-access"] .ea-fold__cue { margin-top: var(--space-8); }
 
 .page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
 
@@ -3633,3 +3627,151 @@ plainest thing in the drawing rather than the most filled. */
     min-height: min(20rem, 84vw);
   }
 }
+
+/* ==========================================================================
+   BRAND — graphzero: navy, slate, burnt orange.
+
+   The whole identity, declared once at the semantic layer. The file above is
+   written to rule 8 of the design system — components read the semantic tokens
+   and never a raw value — so this block is all it takes to carry the palette
+   through every page, including both flow diagrams: af-flow2 maps its own
+   --af-* vars onto --ink / --ink-muted / --hairline / --surface / --accent, and
+   kg-flow.js reads --heading, --meta, --line and --eu-blue off the host at run
+   time. Nothing is recoloured component by component.
+
+   Contrast, measured rather than assumed, since the accent is the one value
+   here that cannot carry small text:
+
+     navy   #17232B on white ............ 16.0:1   headings, body
+     slate  #59666B on white ............  5.9:1   secondary text, passes AA
+     orange #D95C32 on white ............  3.8:1   FAILS AA for body text
+     orange #D95C32 on navy .............  4.2:1   FAILS AA for body text
+     white  on orange #D95C32 ...........  3.8:1   FAILS AA for small labels
+
+   So the brand orange is a fill and a mark, not an ink: it carries CTAs,
+   highlights and active states as the brand sheet asks, but never sets a
+   sentence. Where it has to behave as text — an orange link on white, or a
+   small uppercase label reversed out of an orange button — it resolves to
+   --accent-strong #C24E27, which is the same hue darkened until white clears
+   4.5:1 (4.8:1 measured). Two values for one brand colour, and the darker one
+   exists only where the lighter one would be unreadable.
+   ========================================================================== */
+:root,
+[data-surface="light"] {
+  --ink: #17232B;              /* Deep Navy — primary */
+  --ink-muted: #59666B;        /* Slate — secondary */
+  --ink-invert: #ffffff;
+  --ink-muted-invert: rgba(255, 255, 255, 0.72);
+
+  --accent: #D95C32;           /* Burnt Orange — fills, marks, active states */
+  --accent-strong: #C24E27;    /* the same hue, dark enough to be text */
+  --accent-ink: #ffffff;
+  --accent-quiet: #F9E3D8;     /* lightest orange tint from the brand sheet */
+
+  --chip: rgba(23, 35, 43, 0.05);
+  --hairline: rgba(23, 35, 43, 0.16);
+  --focus: #D95C32;
+}
+
+:root {
+  /* The dark block is navy now, not true black. */
+  --surface-dark: #17232B;
+
+  /* The alternating section ground. The brand sheet's Light Grey is the
+     surface colour, and the rhythm the page is built on is white against it. */
+  --surface-grey: #DDE4E5;
+  --surface-grey-soft: #F1F4F5;  /* the lightest grey tint, for large fields */
+}
+
+/* Accent as text resolves to the readable one. --accent-text is what every
+   component reads for an accented word, so this is the single place the
+   distinction is made rather than a rule per component. */
+.page { --accent-text: var(--accent-strong); }
+
+/* On navy the accent cannot carry text either, and the file's existing rule
+   already reverses it to white. Left as it is deliberately. */
+
+/* The wordmark slash, .hl, and the hero marks. Declared after the block near
+   the top of this file so it wins on order at equal specificity, and listed
+   with the same selectors so no page is missed. */
+.page[data-page="home"],
+.page[data-page="platform-b"],
+.page[data-page="platform-c"],
+.page[data-page="knowledge-base"],
+.page[data-page="knowledge-base-3"],
+.page[data-page="security"],
+.page[data-page="product"],
+.page[data-page="early-access"] { --hl: #D95C32; }
+
+/* The knowledge-graph figure's accent, which the script reads off the host. */
+.page[data-page="early-access"] { --eu-blue: #D95C32; }
+
+/* The painted hero ground, keyed to navy rather than to black so the wash
+   reads as a tint of the brand and not as grey over it. */
+.page {
+  --ground-base: #F1F4F5;
+  --ground-wash:
+    radial-gradient(90% 120% at 95% 0%, rgba(23, 35, 43, 0.10), rgba(23, 35, 43, 0) 62%),
+    radial-gradient(80% 110% at 0% 100%, rgba(23, 35, 43, 0.05), rgba(23, 35, 43, 0) 60%);
+  --wash-grey-base: #F1F4F5;
+}
+
+/* --------------------------------------------------------------------------
+   Early Access — section rhythm.
+
+   Eight sections on three grounds: white, the brand's Light Grey, and navy.
+   The page alternates white and grey through the argument and then holds navy
+   for the last three, so the change of ground is what says the argument is
+   over and the ask has started. That is the rhythm; nothing else marks it.
+   -------------------------------------------------------------------------- */
+.page[data-page="early-access"] .ea-band-grey { background: var(--surface-grey); }
+
+/* .band is full-bleed, so a grey section's own top padding is what separates
+   it from the white above rather than a rule. */
+.page[data-page="early-access"] .ea-band-grey > .wrap { padding-top: var(--section-sm); }
+
+/* 02 — the tension, set as a proposition rather than a paragraph. Not a
+   heading: it is the same sentence it always was, and marking it up as an h2
+   would put a second heading rank between the fold and section 03. */
+.page[data-page="early-access"] .ea-statement {
+  max-width: 24ch;
+  font-size: clamp(1.75rem, 3.2vw + 0.75rem, 3rem);
+  line-height: 1.12;
+  letter-spacing: var(--tracking-h2);
+  color: var(--heading);
+  text-wrap: pretty;
+}
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-statement { max-width: 20ch; }
+}
+
+/* 05 — the capability rows carry chips and no prose, so the right-hand column
+   no longer needs twice the width of the left. Evening the two out stops the
+   chips from stranding a third of the row empty. */
+.page[data-page="early-access"] .cap {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .page[data-page="early-access"] .cap { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 06 — the proof column. */
+.page[data-page="early-access"] .ea-proof { display: grid; gap: var(--space-6); align-content: start; }
+.page[data-page="early-access"] .ea-proof__chips { margin-top: var(--space-2); }
+
+/* 07 / 08 — the ask and the close both sit on navy and are one field, so the
+   band between them carries no padding of its own to draw a seam. */
+.page[data-page="early-access"] .ea-ask > .wrap { padding-bottom: 0; }
+.page[data-page="early-access"] .ea-close-band > .wrap { padding-top: var(--section-sm); }
+.page[data-page="early-access"] .ea-close__cta { margin-top: var(--space-12); }
+
+/* The one button on the page outside the header.
+
+   .btn--accent fills with --accent, and white on the brand orange measures
+   3.8:1 — under AA for a label this size. The fill resolves to the darker
+   --accent-strong instead, which clears it at 4.8:1. The brand orange is not
+   lost: it is what the fill returns to on hover, where the label is no longer
+   the thing being read. */
+.btn--accent { background: var(--accent-strong); color: var(--accent-ink); }
+.btn--accent:hover { background: var(--accent); opacity: 1; }
