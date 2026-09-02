@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/security.css?v=40">
+<link rel="stylesheet" href="assets/v3/security.css?v=42">
 <link rel="stylesheet" href="assets/footer.css?v=3">
 <link rel="stylesheet" href="assets/header.css?v=3">
 <link rel="icon" href="assets/graphzero-icon.png?v=1" type="image/png">
@@ -62,314 +62,176 @@
     </div>
   </header>
 
-  <main id="main">
+    <main id="main">
 
-    <!-- The page opens on the inverted band the security section carries on the
-         index; everything below it runs on white. -->
-    <section class="band band--dark dark" id="security">
-      <div class="wrap sec sec--pb">
-        <!-- One column, full measure. The marks are no longer badge artwork
-             beside the copy but three chips under it, which is what the kit
-             shows. The certification images themselves still run in full in
-             the register further down the page. -->
-        <div class="secfold">
-          <h1 class="h2 sec-head">Secure by design, sovereign by default.</h1>
-          <p class="lead">Your knowledge stays yours. EU infrastructure, EU-hosted models, permissions at fact level, and an audit trail you can read.</p>
+    <!-- Scroll progress. Scroll-driven, so it simply does not paint where the
+         timeline is unsupported rather than sitting at a wrong width. -->
+    <div class="gzs-progress" aria-hidden="true"></div>
 
-          <ul class="certrow">
-            <li class="cert">
-              <svg class="cert__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3l7 3v5.2c0 4.3-2.9 7.5-7 8.8-4.1-1.3-7-4.5-7-8.8V6l7-3z"/>
-                <path d="M9.2 12.1l2 2 3.6-3.9"/>
-              </svg>
-              <span class="cert__name">GDPR</span>
-              <span class="cert__state">compliant</span>
-            </li>
-            <li class="cert">
-              <svg class="cert__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="8.6"/>
-                <path d="M3.4 12h17.2"/>
-                <path d="M12 3.4a13 13 0 0 1 0 17.2 13 13 0 0 1 0-17.2z"/>
-              </svg>
-              <span class="cert__name">EU AI Act</span>
-              <span class="cert__state">by design</span>
-            </li>
-            <li class="cert cert--mark">
-              <svg class="cert__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V7l-4-4z"/>
-                <path d="M13.8 3.2V7.2H17.8"/>
-                <path d="M9.4 13.6l1.8 1.8 3.4-3.6"/>
-              </svg>
-              <span class="cert__name">ISO 27001</span>
-              <span class="cert__state">in progress</span>
-            </li>
+    <!-- 00 · the fold -->
+    <section class="gzs-hero" id="security">
+      <svg class="gzs-hero__net" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g stroke="rgba(23,35,43,.12)" stroke-width="1" fill="none">
+          <path d="M60 330 L 300 392 M300 392 L 560 440 M560 440 L 820 386 M820 386 L 1040 340 M1040 340 L 1170 288 M300 392 L 820 386"></path>
+        </g>
+        <g fill="rgba(23,35,43,.45)">
+          <circle class="gzs-net__a" cx="60" cy="330" r="3"></circle>
+          <circle class="gzs-net__b" cx="300" cy="392" r="3"></circle>
+          <circle class="gzs-net__b" cx="820" cy="386" r="3"></circle>
+          <circle class="gzs-net__a" cx="1040" cy="340" r="3"></circle>
+          <circle class="gzs-net__b" cx="1170" cy="288" r="3"></circle>
+        </g>
+        <circle class="gzs-net__pink" cx="560" cy="440" r="4" fill="#FF2E93"></circle>
+      </svg>
+
+      <div class="gzs-wrap">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>Security</p>
+        <h1 class="gzs-display">Secure by design, sovereign by default.</h1>
+        <p class="gzs-lead">Your knowledge stays yours. EU infrastructure, EU-hosted models, permissions at fact level, and an audit trail you can read.</p>
+
+        <ul class="gzs-badges">
+          <li class="gzs-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#17232B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z M9 12l2 2 4-4"></path></svg>
+            <span class="gzs-badge__label">GDPR</span><span class="gzs-badge__status">compliant</span>
+          </li>
+          <li class="gzs-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#17232B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z M2 12h20 M12 2a14.5 14.5 0 0 0 0 20 M12 2a14.5 14.5 0 0 1 0 20"></path></svg>
+            <span class="gzs-badge__label">EU AI Act</span><span class="gzs-badge__status">by design</span>
+          </li>
+          <li class="gzs-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FF2E93" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z M14 2v4a2 2 0 0 0 2 2h4 M9 15l2 2 4-4"></path></svg>
+            <span class="gzs-badge__label">ISO 27001</span><span class="gzs-badge__status">in progress</span>
+          </li>
+        </ul>
+
+        <p class="gzs-note">ISO 27001 certification in progress; our security management system follows the standard today.</p>
+      </div>
+    </section>
+
+    <div class="gzs-rule" aria-hidden="true"></div>
+
+    <!-- 01 · Ownership -->
+    <section class="gzs-sec" id="ownership">
+      <div class="gzs-wrap gzs-split">
+        <div>
+          <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>01 &mdash; Ownership</p>
+          <h2 class="gzs-h2">Your knowledge stays yours.</h2>
+        </div>
+        <p class="gzs-intro">The knowledge base is an asset you own, not a service you rent. No embeddings-only store, no vendor-held copy, no export project.</p>
+      </div>
+      <ul class="gzs-wrap gzs-grid gzs-grid--3">
+        <li class="gzs-card gzs-reveal"><p class="gzs-card__n">01</p><h3 class="gzs-card__title">No data training</h3><p class="gzs-card__body">Your data is never used to train models. Guaranteed in writing, in every contract.</p></li>
+        <li class="gzs-card gzs-reveal"><p class="gzs-card__n">02</p><h3 class="gzs-card__title">Full export, any time</h3><p class="gzs-card__body">The knowledge base leaves in open formats, readable by people: pages, facts and sources, not embeddings.</p></li>
+        <li class="gzs-card gzs-reveal"><p class="gzs-card__n">03</p><h3 class="gzs-card__title">Deletion propagates</h3><p class="gzs-card__body">Remove a source and everything derived from it goes too &mdash; summaries, answers, graph entries.</p></li>
+      </ul>
+    </section>
+
+    <!-- 02 · Inference control -->
+    <section class="gzs-sec" id="inference-control">
+      <div class="gzs-wrap">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>02 &mdash; Inference control</p>
+        <h2 class="gzs-h2 gzs-h2--wide">Sensitive data never reaches a model that shouldn&rsquo;t see it.</h2>
+        <p class="gzs-intro gzs-intro--under">Most AI tools send whatever they retrieve into the prompt. graphzero decides what a model may see <em>before</em> inference runs.</p>
+      </div>
+      <ul class="gzs-wrap gzs-grid gzs-grid--2">
+        <li class="gzs-card gzs-reveal">
+          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24 M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68 M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61 M2 2l20 20"></path></svg><span class="gzs-card__n">01</span></div>
+          <h3 class="gzs-card__title">Sensitive-data masking</h3><p class="gzs-card__body">Fields marked sensitive &mdash; salaries, IBANs, health data &mdash; never appear in a prompt. The system can use them to find the answer; the model never sees them.</p>
+        </li>
+        <li class="gzs-card gzs-reveal">
+          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8 M21 3v5h-5 M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16 M8 16H3v5"></path></svg><span class="gzs-card__n">02</span></div>
+          <h3 class="gzs-card__title">Sensitive-data rerouting</h3><p class="gzs-card__body">Content too sensitive for external inference is processed by an EU-hosted or self-hosted model instead. Decided per query, from how the data is tagged.</p>
+        </li>
+        <li class="gzs-card gzs-reveal">
+          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 17.4A2 2 0 0 0 2 18.8V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.2a2 2 0 0 0 1.4-.6l.8-.8a6.5 6.5 0 1 0-4-4Z M16.5 6.7a.8.8 0 1 0 1.6 0 .8.8 0 1 0-1.6 0"></path></svg><span class="gzs-card__n">03</span></div>
+          <h3 class="gzs-card__title">Permissions at fact level</h3><p class="gzs-card__body">Rights from SharePoint, Drive and your other sources hold inside graphzero. Every answer is computed against the asker&rsquo;s rights; a group channel sees only what every member may see.</p>
+        </li>
+        <li class="gzs-card gzs-reveal">
+          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z M2 12l8.6 3.91a2 2 0 0 0 1.66 0L21 12 M2 17l8.6 3.91a2 2 0 0 0 1.66 0L21 17"></path></svg><span class="gzs-card__n">04</span></div>
+          <h3 class="gzs-card__title">Derived knowledge inherits its sources</h3><p class="gzs-card__body">A summary built from three documents is visible only to someone who may open all three. Revoke one source, and the answers built on it follow.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 03 · Governance -->
+    <section class="gzs-sec" id="governance">
+      <div class="gzs-wrap">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>03 &mdash; Governance</p>
+        <h2 class="gzs-h2">Governance in one place.</h2>
+      </div>
+      <div class="gzs-wrap gzs-grid gzs-grid--2 gzs-grid--tight">
+        <div class="gzs-panel gzs-panel--muted">
+          <p class="gzs-panel__label">Without a knowledge layer</p>
+          <ul class="gzs-xlist">
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8A8E" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18 M6 6l12 12"></path></svg><span>Employees connect tools to assistants one by one, with whatever rights the OAuth screen granted.</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8A8E" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18 M6 6l12 12"></path></svg><span>Nobody can list what is connected, or to whom.</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8A8E" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18 M6 6l12 12"></path></svg><span>Data becomes accessible that shouldn&rsquo;t be &mdash; and no one notices.</span></li>
           </ul>
-
-          <p class="small secfold__note">ISO 27001 certification in progress; our security management system follows the standard today.</p>
+        </div>
+        <div class="gzs-panel">
+          <p class="gzs-panel__label gzs-panel__label--ink">With graphzero</p>
+          <ul class="gzs-clist">
+            <li><span class="gzs-tick" aria-hidden="true">&#10003;</span><div><h3 class="gzs-clist__title">One connection per source</h3><p class="gzs-clist__body">HubSpot, Salesforce, AFAS or DATEV is connected once, to graphzero by your admin &mdash; not by every employee into their assistants.</p></div></li>
+            <li><span class="gzs-tick" aria-hidden="true">&#10003;</span><div><h3 class="gzs-clist__title">Scoped centrally</h3><p class="gzs-clist__body">Which teams reach which source, read-only or read-write, is decided by the admin, applied everywhere, changed in one place.</p></div></li>
+            <li><span class="gzs-tick" aria-hidden="true">&#10003;</span><div><h3 class="gzs-clist__title">Full audit trail</h3><p class="gzs-clist__body">What was retrieved, by whom, and when. Every shared answer carries a record of what it rests on.</p></div></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="wrap sec">
-      <div class="secsplit">
-        <div class="secsplit__lead">
-          <h2 class="h2">Your knowledge stays yours.</h2>
-          <p class="lead">The knowledge base is an asset you own, not a service you rent.</p>
-        </div>
-        <ol class="numlist">
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">01</span>
-          <div>
-            <h3 class="card-title">No data training</h3>
-            <p class="card-note">Your data is never used to train models. Guaranteed in writing, in every contract.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">02</span>
-          <div>
-            <h3 class="card-title">Full export, any time</h3>
-            <p class="card-note">The knowledge base leaves in open formats, readable by people: pages, facts and sources, not embeddings.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">03</span>
-          <div>
-            <h3 class="card-title">Deletion propagates</h3>
-            <p class="card-note">When you remove a source, everything derived from it is removed as well: summaries, answers, and graph entries.</p>
-          </div>
-        </li>
-        </ol>
+    <!-- 04 · Jurisdiction -->
+    <section class="gzs-sec" id="jurisdiction">
+      <div class="gzs-wrap">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>04 &mdash; Jurisdiction</p>
+        <h2 class="gzs-h2">European, enforced.</h2>
       </div>
+      <ul class="gzs-wrap gzs-grid gzs-grid--4">
+        <li class="gzs-card gzs-card--sm gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z M2 12h20 M12 2a14.5 14.5 0 0 0 0 20 M12 2a14.5 14.5 0 0 1 0 20"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">Hosted in EU</h3><p class="gzs-card__body gzs-card__body--sm">Your knowledge base runs on European infrastructure, and EU-hosted models process your content inside the EU.</p></li>
+        <li class="gzs-card gzs-card--sm gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z M12 8v4 M12 16h.01"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">Checked at runtime</h3><p class="gzs-card__body gzs-card__body--sm">If a configured model doesn&rsquo;t meet the requirements set for your data, the pipeline stops. It fails closed, not with a warning.</p></li>
+        <li class="gzs-card gzs-card--sm gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z M14 2v4a2 2 0 0 0 2 2h4 M9 15l2 2 4-4"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">EU AI Act</h3><p class="gzs-card__body gzs-card__body--sm">You always know you are talking to AI. No emotion recognition, no ranking of people, no individual-level analytics.</p></li>
+        <li class="gzs-card gzs-card--sm gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#17232B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-12 0 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">Works-council ready</h3><p class="gzs-card__body gzs-card__body--sm">Consent per team, no individual usage statistics, and a works-agreement template aligned with German co-determination.</p></li>
+      </ul>
     </section>
 
-    <section class="wrap sec">
-      <div class="secsplit">
-        <div class="secsplit__lead">
-          <h2 class="h2">Sensitive data never reaches a model that shouldn’t see it.</h2>
-          <p class="lead">Most AI tools send whatever they retrieve into the prompt. graphzero decides what a model may see before inference runs.</p>
-        </div>
-        <ol class="numlist">
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">01</span>
-          <div>
-            <h3 class="card-title">Sensitive-data masking</h3>
-            <p class="card-note">Fields marked sensitive — salaries, IBANs, health data — never appear in a prompt. The system can use them to find the answer; the model never sees them.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">02</span>
-          <div>
-            <h3 class="card-title">Sensitive-data rerouting</h3>
-            <p class="card-note">Content too sensitive for external inference is processed by an EU-hosted or self-hosted model instead. Decided per query, from how the data is tagged.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">03</span>
-          <div>
-            <h3 class="card-title">Permissions at fact level</h3>
-            <p class="card-note">Access rights from SharePoint, Drive and your other sources hold inside graphzero. Every answer is computed against the asker’s rights, and a group channel sees only what every member may see.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">04</span>
-          <div>
-            <h3 class="card-title">Derived knowledge inherits its sources</h3>
-            <p class="card-note">A summary built from three documents is visible only to someone who may open all three. Revoke one source, and the answers built on it follow.</p>
-          </div>
-        </li>
-        </ol>
+    <!-- 05 · Deployment · 06 · Inference -->
+    <section class="gzs-sec" id="deployment">
+      <div class="gzs-wrap">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>05 &mdash; Deployment</p>
+        <h2 class="gzs-h2">Pick your deployment.</h2>
       </div>
+      <ul class="gzs-wrap gzs-grid gzs-grid--4">
+        <li class="gzs-card gzs-card--stack gzs-reveal"><h3 class="gzs-card__title gzs-card__title--md">Multi-tenant cloud</h3><p class="gzs-card__body">Our shared environment on EU infrastructure. The quickest way to start, under the same residency and access rules.</p><p class="gzs-card__foot">EU infrastructure &middot; shared</p></li>
+        <li class="gzs-card gzs-card--stack gzs-reveal"><h3 class="gzs-card__title gzs-card__title--md">Dedicated single-tenant</h3><p class="gzs-card__body">Your own isolated environment on EU infrastructure, operated by us.</p><p class="gzs-card__foot">EU infrastructure &middot; dedicated</p></li>
+        <li class="gzs-card gzs-card--stack gzs-reveal"><h3 class="gzs-card__title gzs-card__title--md">Bring your own cloud</h3><p class="gzs-card__body">Runs in your cloud account, in your region, under your controls.</p><p class="gzs-card__foot">your cloud &middot; your region</p></li>
+        <li class="gzs-card gzs-card--stack gzs-reveal"><h3 class="gzs-card__title gzs-card__title--md">On-premise</h3><p class="gzs-card__body">On request: graphzero inside your own data centre, on hardware you control.</p><p class="gzs-card__foot">your data centre</p></li>
+      </ul>
+
+      <div class="gzs-wrap gzs-sub">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>06 &mdash; Inference</p>
+        <h2 class="gzs-h2">Pick your inference.</h2>
+      </div>
+      <ul class="gzs-wrap gzs-grid gzs-grid--3 gzs-grid--near">
+        <li class="gzs-card"><h3 class="gzs-card__title gzs-card__title--md">EU-hosted models</h3><p class="gzs-card__body">Your content is processed inside the EU.</p></li>
+        <li class="gzs-card"><h3 class="gzs-card__title gzs-card__title--md">Self-hosted models</h3><p class="gzs-card__body">Open-weight models running beside the index, in whichever runtime you choose.</p></li>
+        <li class="gzs-card"><h3 class="gzs-card__title gzs-card__title--md">Your own keys</h3><p class="gzs-card__body">Inference on your existing model agreements &mdash; AI spend stays on your contract, at your negotiated terms.</p></li>
+      </ul>
+      <p class="gzs-wrap gzs-combi">Combinations are supported: routine tasks on self-hosted models, sensitive content stripped before anything external.</p>
     </section>
 
-    <section class="wrap sec">
-      <div class="secsplit">
-        <div class="secsplit__lead">
-          <h2 class="h2">Governance in one place.</h2>
-          <p class="lead">Without a knowledge layer, employees connect tools to assistants one by one, with whatever rights the OAuth screen granted. Nobody can list what is connected, and data becomes accessible that shouldn’t be.</p>
-        </div>
-        <ol class="numlist">
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">01</span>
-          <div>
-            <h3 class="card-title">One connection per source</h3>
-            <p class="card-note">HubSpot, Salesforce, AFAS or DATEV is connected once, to graphzero by your admin, not by every employee into their assistants.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">02</span>
-          <div>
-            <h3 class="card-title">Scoped centrally</h3>
-            <p class="card-note">Which teams reach which source, read-only or read-write is decided by the admin, applied everywhere, changed in one place.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">03</span>
-          <div>
-            <h3 class="card-title">Full audit trail</h3>
-            <p class="card-note">What was retrieved, by whom, and when. Every shared answer carries a record of what it rests on.</p>
-          </div>
-        </li>
-        </ol>
+    <!-- 07 · Assurance -->
+    <section class="gzs-sec gzs-sec--last" id="assurance">
+      <div class="gzs-wrap">
+        <p class="gzs-eyebrow"><span class="gzs-eyebrow__bar" aria-hidden="true"></span>07 &mdash; Assurance</p>
+        <h2 class="gzs-h2">Certifications &amp; assessments.</h2>
       </div>
-    </section>
-
-    <section class="wrap sec">
-      <div class="secsplit">
-        <div class="secsplit__lead">
-          <h2 class="h2">European, enforced.</h2>
-        </div>
-        <ol class="numlist">
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">01</span>
-          <div>
-            <h3 class="card-title">Hosted in EU</h3>
-            <p class="card-note">Your knowledge base runs on European infrastructure, and EU-hosted models process your content inside the EU.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">02</span>
-          <div>
-            <h3 class="card-title">Checked at runtime</h3>
-            <p class="card-note">If a configured model doesn’t meet the requirements set for your data, the pipeline stops. It fails closed, not with a warning.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">03</span>
-          <div>
-            <h3 class="card-title">EU AI Act</h3>
-            <p class="card-note">You always know you are talking to AI. No emotion recognition, no ranking of people, no individual-level analytics.</p>
-          </div>
-        </li>
-        <li class="numlist__item">
-          <span class="numlist__num" aria-hidden="true">04</span>
-          <div>
-            <h3 class="card-title">Works-council ready</h3>
-            <p class="card-note">Consent per team, no individual usage statistics, and a works-agreement template aligned with German co-determination requirements.</p>
-          </div>
-        </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- Two choices, made independently of each other. The dot is a mark, not a
-         control: nothing here is selectable, and the page says what each option
-         is rather than composing a sentence out of them. -->
-    <section class="wrap sec">
-      <h2 class="h2 sec-head">Pick your deployment.</h2>
-      <div class="grid-2 pickset">
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">Multi-tenant cloud</h3>
-            <p class="card-note">Our shared environment on EU infrastructure. The quickest way to start, under the same residency and access rules.</p>
-          </div>
-        </article>
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">Dedicated single-tenant cloud</h3>
-            <p class="card-note">Your own isolated environment on EU infrastructure, operated by us.</p>
-          </div>
-        </article>
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">Bring your own cloud</h3>
-            <p class="card-note">Runs in your cloud account, in your region, under your controls.</p>
-          </div>
-        </article>
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">On-premise</h3>
-            <p class="card-note">On request: graphzero inside your own data centre, on hardware you control.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="wrap sec">
-      <h2 class="h2 sec-head">Pick your inference.</h2>
-      <div class="grid-3 pickset">
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">EU-hosted models</h3>
-            <p class="card-note">Your content is processed inside the EU.</p>
-          </div>
-        </article>
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">Self-hosted models</h3>
-            <p class="card-note">Open-weight models running beside the index, in whichever runtime you choose.</p>
-          </div>
-        </article>
-        <article class="pick">
-          <span class="pick__dot" aria-hidden="true"></span>
-          <div>
-            <h3 class="card-title">Your own keys</h3>
-            <p class="card-note">Inference on your existing model agreements — AI spend stays on your contract, at your negotiated terms.</p>
-          </div>
-        </article>
-      </div>
-      <p class="small paperwork" style="padding-top:var(--space-8)">Combinations are supported: routine tasks on self-hosted models, sensitive content stripped before anything external.</p>
-    </section>
-
-    <!-- Three that have a mark of their own, and three that do not: the ones
-         without are rows rather than cards with an empty badge slot. -->
-    <section class="wrap sec sec--pb">
-      <h2 class="h2 sec-head">Certifications &amp; assessments.</h2>
-
-      <div class="grid-3" style="margin-top:var(--section-sm)">
-        <article class="card card--ring card--tall">
-          <img class="card-badge" src="assets/media/gdpr.png"
-               alt="GDPR" width="640" height="631" loading="lazy" decoding="async">
-          <div class="card-foot">
-            <h3 class="card-title">GDPR — compliant</h3>
-            <p class="card-note">DPA, sub-processor list, TOMs and transfer impact assessment available on request.</p>
-          </div>
-        </article>
-        <article class="card card--ring card--tall">
-          <img class="card-badge" src="assets/media/eu-ai-act.png"
-               alt="EU AI Act" width="640" height="631" loading="lazy" decoding="async">
-          <div class="card-foot">
-            <h3 class="card-title">EU AI Act — compliant by design</h3>
-            <p class="card-note">You always know you’re talking to AI, and nothing here ranks or profiles people.</p>
-          </div>
-        </article>
-        <article class="card card--ring card--tall">
-          <img class="card-badge" src="assets/media/iso-27001.png"
-               alt="ISO 27001" width="557" height="640" loading="lazy" decoding="async">
-          <div class="card-foot">
-            <h3 class="card-title">ISO 27001 <span class="note-line">(in progress)</span></h3>
-            <p class="card-note">Certification underway; our security management system follows the standard today.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="stack-12" style="padding-top:var(--space-12)">
-          <div class="kv kv--ring kv--tight">
-            <span class="kv__key">ISO 42001 — AI management</span>
-            <span class="kv__val">In preparation, following 27001</span>
-          </div>
-          <div class="kv kv--ring kv--tight">
-            <span class="kv__key">CASA — Google application security assessment</span>
-            <span class="kv__val">In progress, for Google Workspace connections</span>
-          </div>
-          <div class="kv kv--ring kv--tight">
-            <span class="kv__key">Independent penetration testing</span>
-            <span class="kv__val">Before each major release; summary under NDA</span>
-          </div>
-      </div>
-
-      <div class="stack-16" style="padding-top:var(--section-md)">
-        <span class="eyebrow eyebrow--accent">The paperwork, ready before you ask</span>
-        <p class="small paperwork">Data processing agreement · sub-processor list · technical and organisational measures · transfer impact assessment · works-agreement template (DE/NL) · AI disclosure documentation. Most onboardings stall on documents, not certificates — ours are drafted, current, and one email away.</p>
-      </div>
+      <ul class="gzs-wrap gzs-certs">
+        <li class="gzs-cert"><h3 class="gzs-cert__name">GDPR</h3><p class="gzs-cert__body">DPA, sub-processor list, TOMs and transfer impact assessment available on request.</p><span class="gzs-chip gzs-chip--solid">Compliant</span></li>
+        <li class="gzs-cert"><h3 class="gzs-cert__name">EU AI Act</h3><p class="gzs-cert__body">You always know you&rsquo;re talking to AI, and nothing here ranks or profiles people.</p><span class="gzs-chip gzs-chip--solid">Compliant by design</span></li>
+        <li class="gzs-cert"><h3 class="gzs-cert__name">ISO 27001</h3><p class="gzs-cert__body">Certification underway; our security management system follows the standard today.</p><span class="gzs-chip gzs-chip--pink">In progress</span></li>
+        <li class="gzs-cert"><h3 class="gzs-cert__name">ISO 42001 &mdash; AI management</h3><p class="gzs-cert__body">In preparation, following 27001.</p><span class="gzs-chip gzs-chip--quiet">In preparation</span></li>
+        <li class="gzs-cert"><h3 class="gzs-cert__name">CASA</h3><p class="gzs-cert__body">Google application security assessment, for Google Workspace connections.</p><span class="gzs-chip gzs-chip--pink">In progress</span></li>
+        <li class="gzs-cert"><h3 class="gzs-cert__name">Penetration testing</h3><p class="gzs-cert__body">Independent, before each major release; summary under NDA.</p><span class="gzs-chip gzs-chip--quiet">Per release</span></li>
+      </ul>
     </section>
 
   </main>
