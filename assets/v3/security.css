@@ -353,29 +353,34 @@
   display: block;
 }
 
-/* Larger and heavier than the fold's, which stays on the Early Access ramp.
-   106px at 1440 against that 80px, and at 700 rather than the system's 500. */
+/* The Early Access open, value for value: .ea-open__head's own measure, ramp,
+   leading, tracking and the system's 500 — not an approximation of them. That
+   pair already sets on a dark ground there, which is why its inks transfer
+   here unchanged. 46px at 1440, against the 104px this heading had taken. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
-  max-width: 14ch;
-  font-size: clamp(2.75rem, 7.4vw, 6.5rem);
-  font-weight: 700;
-  line-height: 0.93;
-  letter-spacing: -0.048em;
+  max-width: 16ch;
+  font-size: clamp(1.875rem, 3.2vw, 2.875rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
   color: #ffffff;
+  text-wrap: balance;
 }
-/* Secondary but not faint: 0.74 white on the navy is 9.7:1, well past the
-   4.5:1 body threshold, so it reads as a step down in the hierarchy rather
-   than as small print. */
+/* .ea-open__lead: the site's 18px lead on a 46ch measure, a short inset above
+   it, and 0.72 white — the dark context's own body ink. It was 23px at 0.74,
+   which is what gave it more presence than a supporting line should have.
+   0.72 white on this navy is 9.4:1, so the step down costs nothing in
+   legibility. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
-  margin-top: clamp(1.25rem, 2.2vw, 1.875rem);
-  max-width: 48ch;
-  font-size: clamp(1.125rem, 0.6vw + 0.95rem, 1.4375rem);
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.74);
+  margin-top: clamp(0.875rem, 1.2vw, 1.125rem);
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .page[data-page="security"] main > section:nth-of-type(2) .numlist {
-  margin-top: clamp(3rem, 6vw, 5rem);
+  margin-top: clamp(2.25rem, 4vw, 3.5rem);
   gap: clamp(1.25rem, 2.4vw, 2.25rem);
   padding-top: 0;
   border-top: 0;
@@ -439,7 +444,7 @@
 .page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
   display: block;
   width: fit-content;
-  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
   line-height: 1;
   color: #ffffff;
 }
