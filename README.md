@@ -6,11 +6,10 @@ Two pages:
 
 - `index.html` — the main page: the Knowledge Base 3 fold, then the Knowledge Base B
   content from "Companies that make the right architectural choices…" down.
-- `early-access.html` — the Early Access / design-partner page. Six sections and
-  one turn: the fold, the Without/With comparison, and the three modules beside
-  the knowledge-graph flow sit on white and grey; the design-partner block, what
-  a partner gets, and the close sit on navy and run unbroken into the footer.
-  The comparison is the Product page block reused.
+- `early-access.html` — the Early Access / design-partner page. Five sections and
+  one turn: the fold and the three modules beside the knowledge-graph flow sit on
+  white and grey; the design-partner block, what a partner gets, and the close sit
+  on navy and run unbroken into the footer.
 
 `?v=N` on `assets/site.css` and `assets/site.js` is cache-busting. Pages serves
 everything with `max-age=600`, so a browser can otherwise pick up new markup while

@@ -3607,11 +3607,11 @@ plainest thing in the drawing rather than the most filled. */
 /* --------------------------------------------------------------------------
    EARLY ACCESS
 
-   Six sections and one turn. The first three are the argument and sit on
-   white, then grey for the product; the last three are the partnership and
-   sit on navy, unbroken into the footer. That single change of ground is the
-   page's structural move — the reader is either being told what graphzero is
-   or being asked to build it with us, and the page never blurs the two.
+   Five sections and one turn. The fold and the product sit on white and
+   grey; the last three are the partnership and sit on navy, unbroken into
+   the footer. That single change of ground is the page's structural move —
+   the reader is either being told what graphzero is or being asked to build
+   it with us, and the page never blurs the two.
 
    The four things a design partner gets are hairline-separated rather than
    boxed: they are four statements of the same rank, not four options to pick
@@ -3658,8 +3658,7 @@ plainest thing in the drawing rather than the most filled. */
 }
 .page[data-page="early-access"] .ea-cta-row__alt { color: var(--body); }
 
-/* ---- 02 / 03 the argument ---- */
-.page[data-page="early-access"] .ea-sec { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+/* ---- 02 the product ---- */
 .page[data-page="early-access"] .ea-sec-head { padding-top: 0; }
 .page[data-page="early-access"] .ea-band-grey { background: var(--surface-grey); }
 .page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
