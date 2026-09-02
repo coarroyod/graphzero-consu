@@ -1328,3 +1328,147 @@
     if (document.hidden) stop(); else start();
   });
 })();
+
+/* About — the field in the fold.
+
+   A matrix of points thinning outward from a single node, with hairline rings
+   drawn around it. Deliberately not a map: the site already has a drawn
+   language — points, hairlines, one accent — and inventing a second one for a
+   single page would read as a different website. What it says is the same
+   thing the copy beside it does: one place, and everything ordered around it.
+
+   It settles once, outward from the node, and then holds still. There is no
+   loop after that. The other two figures on the site carry continuous
+   traffic because traffic is what they are about; nothing here is moving, so
+   nothing here moves. */
+(function () {
+  'use strict';
+
+  var canvas = document.querySelector('[data-about-field]');
+  if (!canvas) return;
+  var ctx = canvas.getContext && canvas.getContext('2d');
+  if (!ctx) return;
+
+  var NODE = { x: 0.44, y: 0.5 };   /* off centre, and left of the crop */
+  var STEP = 17;                    /* matrix pitch, CSS px */
+  var RINGS = [0.30, 0.52, 0.78, 1.06];
+
+  var C = { ink: '#17232B', line: 'rgba(23,35,43,0.16)', accent: '#D95C32' };
+  function readColours() {
+    var cs = getComputedStyle(canvas);
+    C.ink = cs.getPropertyValue('--heading').trim() || C.ink;
+    C.line = cs.getPropertyValue('--line').trim() || C.line;
+    C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
+  }
+
+  var W = 0, H = 0, NX = 0, NY = 0, REACH = 1, dots = [];
+
+  function build() {
+    NX = W * NODE.x;
+    NY = H * NODE.y;
+    /* Sized so the field fades out before the left edge, which is where the
+       type is — the falloff is what keeps them apart, not a mask. */
+    REACH = Math.max(W * 0.62, H * 0.78);
+    dots = [];
+    for (var y = STEP / 2; y < H; y += STEP) {
+      for (var x = STEP / 2; x < W; x += STEP) {
+        var d = Math.sqrt(Math.pow(x - NX, 2) + Math.pow(y - NY, 2)) / REACH;
+        if (d > 1) continue;
+        var a = Math.pow(1 - d, 1.7) * 0.55;
+        if (a < 0.035) continue;
+        dots.push({ x: x, y: y, a: a, d: d });
+      }
+    }
+  }
+
+  function resize() {
+    var box = canvas.getBoundingClientRect();
+    if (!box.width || !box.height) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = box.width; H = box.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+    return true;
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+
+    /* The rings first, so the points sit over them. */
+    ctx.strokeStyle = C.line;
+    ctx.lineWidth = 1;
+    for (var r = 0; r < RINGS.length; r++) {
+      var rr = RINGS[r] * REACH * 0.72;
+      var ra = Math.max(0, Math.min(1, (t - 0.15 - r * 0.12) / 0.5));
+      if (ra <= 0) continue;
+      ctx.globalAlpha = ra * 0.9;
+      ctx.beginPath();
+      ctx.arc(NX, NY, rr, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    /* The matrix, arriving from the node outward. */
+    ctx.fillStyle = C.ink;
+    for (var i = 0; i < dots.length; i++) {
+      var p = dots[i];
+      var local = Math.max(0, Math.min(1, (t - p.d * 0.62) / 0.38));
+      if (local <= 0) continue;
+      ctx.globalAlpha = p.a * local;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.55, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    /* The node. Last, and the only thing here that is not ink. */
+    ctx.globalAlpha = Math.min(1, t * 2);
+    ctx.fillStyle = C.accent;
+    ctx.beginPath();
+    ctx.arc(NX, NY, 5.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var raf = null, t0 = 0, done = false, ready = false, onscreen = false;
+
+  function frame(now) {
+    raf = null;
+    if (!t0) t0 = now;
+    var t = Math.min(1, (now - t0) / 1800);
+    draw(t);
+    if (t >= 1) { done = true; return; }
+    raf = requestAnimationFrame(frame);
+  }
+  function start() {
+    if (done || raf || !ready || !onscreen) return;
+    if (still) { draw(1); done = true; return; }
+    raf = requestAnimationFrame(frame);
+  }
+
+  readColours();
+  ready = resize();
+
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () {
+      if (!resize()) return;
+      ready = true;
+      /* Once it has settled a resize just redraws the finished state; there is
+         no reason to play the arrival again. */
+      if (done || still) draw(1); else start();
+    }).observe(canvas);
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onscreen = es[0].isIntersecting;
+      if (onscreen) start();
+    }, { threshold: 0 }).observe(canvas);
+  } else {
+    onscreen = true; start();
+  }
+
+  /* A tab opened in the background paints no frames, so the arrival would
+     never run and the field would stay blank. Timers still fire there. */
+  setTimeout(function () { if (!done && ready) draw(1), done = true; }, 2600);
+})();

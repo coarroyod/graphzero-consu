@@ -3588,7 +3588,8 @@ plainest thing in the drawing rather than the most filled. */
 .page[data-page="knowledge-base-3"],
 .page[data-page="security"],
 .page[data-page="product"],
-.page[data-page="early-access"] { --hl: #D95C32; }
+.page[data-page="early-access"],
+.page[data-page="about"] { --hl: #D95C32; }
 
 /* The knowledge-graph figure's accent, which the script reads off the host. */
 .page[data-page="early-access"] { --eu-blue: #D95C32; }
@@ -4025,3 +4026,148 @@ plainest thing in the drawing rather than the most filled. */
     min-height: min(20rem, 84vw);
   }
 }
+
+/* ==========================================================================
+   ABOUT
+
+   Four movements: where graphzero is from, where it came from, what it sits
+   inside, and the ask. Each one is composed differently on purpose — a field
+   beside type, then a portrait against copy, then two cards, then a statement
+   — so the page reads as a brand page rather than as four stacked blocks of
+   the same shape.
+
+   Everything here is the site's own vocabulary: .link-card, .grid-2, the
+   eyebrow, the hairline, the navy close, one accent. Nothing new is invented
+   for this page except the field in the fold, and that is the same drawn
+   language as the two figures on Early Access.
+   ========================================================================== */
+
+/* ---- 01 the fold ---- */
+.page[data-page="about"] .ab-hero {
+  position: relative;
+  overflow: hidden;
+  /* Given the height of a fold rather than the height of its paragraphs: an
+     About page opens on a position, and the position needs room around it.
+     The field takes the section's full height, so the air is also what makes
+     the drawing large. */
+  min-height: clamp(28rem, 66vh, 38rem);
+  display: grid;
+  align-content: center;
+  padding-top: clamp(3rem, 8vh, 6rem);
+  padding-bottom: clamp(3.5rem, 9vh, 6.5rem);
+}
+.page[data-page="about"] .ab-hero__copy { max-width: min(34rem, 44%); }
+@media (max-width: 999px) {
+  .page[data-page="about"] .ab-hero__copy { max-width: 34rem; }
+}
+
+.page[data-page="about"] .ab-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: var(--heading);
+  text-wrap: balance;
+}
+/* The second line is the claim the first one sets up, so it is the one that
+   carries the accent — and it is the only accent in the fold besides the node
+   the field is drawn around. */
+.page[data-page="about"] .ab-title .hl { color: var(--hl); }
+
+.page[data-page="about"] .ab-hero__lead {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  max-width: 40ch;
+}
+/* The first two lines set the position; the third is what graphzero does
+   about it, so it takes full ink and the eye finishes there. */
+.page[data-page="about"] .ab-hero__claim { color: var(--heading); }
+
+/* The field runs to the page edge rather than stopping at the gutter, so it
+   is cropped by the viewport instead of framed by a box. */
+.page[data-page="about"] .ab-hero__field {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(50%, 40rem);
+  height: 100%;
+}
+.page[data-page="about"] .ab-hero__field canvas { display: block; width: 100%; height: 100%; }
+
+/* Under 1000px there is no room for type and field side by side without them
+   meeting, so the field drops below the copy and runs the full width. */
+@media (max-width: 999px) {
+  .page[data-page="about"] .ab-hero { overflow: visible; }
+  .page[data-page="about"] .ab-hero__field {
+    position: static;
+    width: 100%;
+    height: clamp(11rem, 32vw, 16rem);
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+}
+
+/* ---- 02 the story ---- */
+.page[data-page="about"] .ab-story__row {
+  display: grid;
+  gap: var(--space-12);
+  margin-top: var(--space-8);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  /* Copy narrower than the picture: the portrait is the section's weight and
+     the words sit against it rather than balancing it. */
+  .page[data-page="about"] .ab-story__row {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: var(--section-sm);
+  }
+}
+.page[data-page="about"] .ab-story__head { max-width: 14ch; }
+.page[data-page="about"] .ab-story__lead { margin-top: var(--space-6); max-width: 42ch; }
+.page[data-page="about"] .ab-story__cue { margin: var(--space-8) 0 0; }
+
+.page[data-page="about"] .ab-story__media { margin: 0; }
+.page[data-page="about"] .ab-story__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+/* ---- 03 / 04 the ecosystem ---- */
+.page[data-page="about"] .ab-band-grey { background: var(--surface-grey); }
+.page[data-page="about"] .ab-eco { gap: var(--space-8); margin-top: var(--space-8); }
+@media (min-width: 760px) {
+  .page[data-page="about"] .ab-eco { gap: var(--section-sm); }
+}
+/* The cards sit on grey, so they take the page's white to lift off it —
+   the ring alone is not enough separation on a tinted ground. */
+.page[data-page="about"] .ab-eco .link-card { background: var(--surface); }
+.page[data-page="about"] .ab-eco .link-card__body { display: grid; gap: var(--space-4); align-content: start; }
+.page[data-page="about"] .ab-eco__cue {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--accent-text);
+}
+.page[data-page="about"] .ab-eco .link-card:hover .ab-eco__cue,
+.page[data-page="about"] .ab-eco .link-card:focus-visible .ab-eco__cue { text-decoration: underline; }
+
+/* ---- 05 the close ---- */
+.page[data-page="about"] .ab-close__inner { padding-top: clamp(3.5rem, 8vw, 6rem); }
+.page[data-page="about"] .ab-close__head {
+  margin: 0;
+  max-width: 20ch;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-h3);
+  color: var(--heading);
+  text-wrap: pretty;
+}
+.page[data-page="about"] .ab-close__turn {
+  margin: var(--space-6) 0 0;
+  max-width: 44ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--body);
+}
+.page[data-page="about"] .ab-close__cta { margin: var(--space-12) 0 0; }

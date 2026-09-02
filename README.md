@@ -2,7 +2,7 @@
 
 A static site, no build step. GitHub Pages serves `main` from the repository root.
 
-Two pages:
+Three pages:
 
 - `index.html` — the main page: the Knowledge Base 3 fold, then the Knowledge Base B
   content from "Companies that make the right architectural choices…" down.
@@ -10,6 +10,11 @@ Two pages:
   one turn: the fold and the three modules beside the knowledge-graph flow sit on
   white and grey; the design-partner block, what a partner gets, and the close sit
   on navy and run unbroken into the footer.
+- `about.html` — the About page. Four movements, each composed differently so
+  it reads as a brand page rather than four stacked blocks: the European
+  position beside a field of points running off the page edge, the origin story
+  against the founder portrait, Aithos and The Stack as two cards on grey, and
+  the navy close.
 
 `?v=N` on `assets/site.css` and `assets/site.js` is cache-busting. Pages serves
 everything with `max-age=600`, so a browser can otherwise pick up new markup while
