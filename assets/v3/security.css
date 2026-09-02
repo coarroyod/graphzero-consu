@@ -94,7 +94,13 @@
   padding-top: clamp(1.75rem, 3vw, 2.5rem);
   border-top: 1px solid var(--line);
 }
-.page[data-page="security"] .markrow__badge { height: clamp(3.25rem, 5vw, 4.5rem); }
+/* The marks are the first proof the page offers, so they are sized to be read
+   rather than noted. The row has 581px in the hero's right column and the three
+   badges together run about 2.9x their common height, so 104px of gaps leaves
+   room up to ~164px before the row wraps; 137px at 1440 keeps a margin for
+   metric variance, and the vw term scales it down with the column so the row
+   stays on one line to the point the split collapses. */
+.page[data-page="security"] .markrow__badge { height: clamp(4.75rem, 9.5vw, 8.75rem); }
 .page[data-page="security"] .markrow__note {
   margin-top: var(--space-6);
   font-style: normal;
