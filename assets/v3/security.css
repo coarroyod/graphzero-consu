@@ -221,45 +221,151 @@
    closing line. No two neighbours share a shape.
    ========================================================================== */
 
-/* ---- 02 · "Your knowledge stays yours." — statement, then a wide three ----
-   The heading takes the full measure and the three sit under it in a row, so
-   the section opens rather than splits. */
+/* ---- 02 · "Your knowledge stays yours." — a statement, then three modules --
+
+   The section opens rather than splits: the claim takes the page at full
+   width, the sentence under it, and the three guarantees sit below as navy
+   modules. The contrast lives inside the section instead of around it, which
+   is a harder edge than a tinted panel and makes this the page's first real
+   change of ground.
+
+   The modules are the site's own #17232B — --surface-dark, the same navy the
+   footer and the dark bands run. No new blue enters the page.
+
+   The composition is borrowed from enterprise module layouts rather than from
+   feature cards: the figure sits at the top of the module, the claim and its
+   note are pushed to the foot, and the space between them is left empty. That
+   emptiness is what makes a module read as substantial; filling it would make
+   it a card. -------------------------------------------------------------- */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit {
   display: block;
 }
+
+/* The claim is the largest type on the page after the fold — 92px at 1440,
+   against the 60px it set before. It is a statement, so it is set like one. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
-  max-width: 20ch;
-  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.038em;
+  max-width: 16ch;
+  font-size: clamp(2.75rem, 6.4vw, 5.75rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
 }
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
-  margin-top: var(--space-6);
-  max-width: 52ch;
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
+  max-width: 46ch;
+  /* The site's 18px reads as a caption under type this size. */
+  font-size: clamp(1.125rem, 0.6vw + 0.95rem, 1.4375rem);
+  line-height: 1.45;
 }
+
 .page[data-page="security"] main > section:nth-of-type(2) .numlist {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  padding-top: clamp(2rem, 3.4vw, 2.75rem);
-  border-top: 1px solid var(--line);
-  gap: clamp(1.75rem, 3.4vw, 3.25rem);
+  margin-top: clamp(2.75rem, 5.5vw, 4.5rem);
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+  /* The hairline this set used to sit under is gone: three navy blocks are
+     already a rule across the page. */
+  padding-top: 0;
+  border-top: 0;
 }
-/* Three across only where three columns are still a readable measure. At
-   375 they came out 94px wide, which is a column of broken words. */
-@media (min-width: 760px) {
+
+/* Three across only where a third of the container is still a readable
+   measure. Below that they stack full width and keep the navy. */
+@media (min-width: 940px) {
   .page[data-page="security"] main > section:nth-of-type(2) .numlist {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* Not equal thirds. The notes run 79, 103 and 108 characters, so the
+       columns are weighted to land the three blocks of text at about the same
+       depth — an asymmetry the content asks for rather than a decorative one. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr) minmax(0, 1.1fr);
+  }
+  .page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
+    min-height: clamp(19rem, 29vw, 26rem);
+  }
+  /* The notes run two lines, three and three. With the pair anchored to the
+     foot, that put 01's claim 21px below its neighbours' — a misalignment the
+     eye catches across three blocks on one line. A three-line floor on the
+     note squares the group heights so the three claims read on one line. */
+  .page[data-page="security"] main > section:nth-of-type(2) .card-note {
+    min-height: 4.65em;
   }
 }
+
 .page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
-  display: block;
-  border: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-dark);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  padding: clamp(1.75rem, 2.8vw, 2.75rem);
 }
+
+/* The markup wraps the claim and its note in a div, which would keep them a
+   single flex child. Unwrapping it lets the figure hold the top while the pair
+   below is pushed to the foot. */
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__item > div {
+  display: contents;
+}
+.page[data-page="security"] main > section:nth-of-type(2) .card-title {
+  margin-top: auto;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  color: #ffffff;
+  font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+}
+.page[data-page="security"] main > section:nth-of-type(2) .card-note {
+  margin-top: var(--space-3);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+}
+
+/* Large, and quiet against the navy — the accent on these modules is the rule,
+   not the figure. */
 .page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
   display: block;
-  margin-bottom: var(--space-4);
-  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
-  color: var(--accent-text);
+  width: fit-content;
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Between the two — too narrow for three columns, too wide for the stacked
+   composition, where the note's reading measure left half of each module
+   empty. The figure takes a column of its own and the claim sits beside it, so
+   a full-width module reads as a structured row rather than as a wide block
+   with text in one corner. */
+@media (min-width: 620px) and (max-width: 939px) {
+  .page[data-page="security"] main > section:nth-of-type(2) .numlist__item {
+    display: grid;
+    grid-template-columns: clamp(5rem, 13vw, 8.5rem) minmax(0, 1fr);
+    column-gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: start;
+  }
+  .page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  .page[data-page="security"] main > section:nth-of-type(2) .card-title {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .page[data-page="security"] main > section:nth-of-type(2) .card-note {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* The three are one system, varied by where the accent falls. The rule travels
+   down the module as the sequence moves from holding the data, to taking it
+   out, to erasing it: the top edge of 01, inside 02 under its figure, the foot
+   of 03. One 2px orange device, three positions — cohesive, not identical. */
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__item:nth-child(1) {
+  border-top: 2px solid var(--accent);
+}
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__item:nth-child(2) .numlist__num {
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--accent);
+}
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__item:nth-child(3) {
+  border-bottom: 2px solid var(--accent);
 }
 
 /* ---- 03 · "Sensitive data…" — a spec table ----
@@ -501,7 +607,6 @@
    ring — and no fill heavy enough to read as a card.
    ========================================================================== */
 
-.page[data-page="security"] main > section:nth-of-type(2),
 .page[data-page="security"] main > section:nth-of-type(5) {
   position: relative;
   border: 1px solid var(--line);
@@ -511,11 +616,8 @@
   margin-block: clamp(2.5rem, 5vw, 4rem);
 }
 
-/* Two different grounds, so the two modules are not the same object twice:
-   the first a warm off-white carrying a trace of the accent, the second the
-   page's own neutral panel. Both a couple of per cent off white — enough to
-   separate from the page, not enough to read as colour. */
-.page[data-page="security"] main > section:nth-of-type(2) { background: #FCF8F6; }
+/* 02 carries its contrast inside it now — three navy modules on the open page
+   — so the page's one panel ground belongs to 05 alone. */
 .page[data-page="security"] main > section:nth-of-type(5) { background: var(--ground-base); }
 
 /* The one pink on the page. A short segment at the head of the accent rule
@@ -533,12 +635,6 @@
 }
 
 /* ---- numbers, treated differently in each place they appear ---- */
-
-/* In the first module they are the accent and they open each column. */
-.page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
-  font-size: clamp(1.375rem, 2vw, 1.75rem);
-  color: var(--accent-text);
-}
 
 /* In the chapter they are large and quiet, set as editorial figures against
    the panel rather than as labels. */
