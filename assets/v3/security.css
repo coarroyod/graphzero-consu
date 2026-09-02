@@ -57,7 +57,16 @@
    and, loading later, wins on order. */
 .page[data-page="security"] #security,
 .page[data-page="security"] .band--dark.dark {
-  background-color: var(--ground-base);
+  /* A warm near-white rather than the page's grey: the accents in the wash go
+     dusty over a cool ground. */
+  background-color: #FCFAF9;
+  /* The wash the fold carries is its own — orange low and right, pink above
+     it, both anchored past the middle so they bloom around the certification
+     module and leave the copy column clean. Wide, soft stops only: this is a
+     ground, not a graphic. */
+  --ground-wash:
+    radial-gradient(54% 62% at 92% 4%, rgba(245, 18, 122, 0.34), rgba(245, 18, 122, 0) 68%),
+    radial-gradient(78% 86% at 62% 108%, rgba(217, 92, 50, 0.40), rgba(217, 92, 50, 0) 66%);
   background-image: var(--ground-wash);
   --surface-dark: var(--ground-base);
   --heading: var(--ink);
@@ -74,38 +83,103 @@
   padding-top: clamp(3.5rem, 10vh, 7rem);
   padding-bottom: clamp(3.5rem, 9vh, 6rem);
 }
+
+/* The claim carries the fold. 89px at 1440 against the 72px it set before, at
+   the family's heaviest weight and on the site's navy — the ink, not a tint of
+   it. The measure is cut to 13ch so it breaks into a block of short lines
+   rather than trailing across the column. */
 .page[data-page="security"] .band--dark.dark .h2 {
-  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
-  max-width: 15ch;
+  font-size: clamp(2.75rem, 6.2vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  max-width: 13ch;
+  color: var(--ink);
 }
+/* A step below the claim rather than a second voice beside it: the measure is
+   tightened so the sentence sets as a block under the heading's left edge. */
 .page[data-page="security"] .band--dark.dark .lead {
-  max-width: 46ch;
-  font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
-  line-height: 1.5;
+  max-width: 40ch;
+  font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.3125rem);
+  line-height: 1.52;
+  color: var(--ink-muted);
 }
 
-/* The marks read as assurance, not as logos: given a rule to sit under, room
-   to breathe, and a size that keeps them level without shouting. */
-.page[data-page="security"] .markrow {
-  gap: clamp(2rem, 4vw, 3.25rem);
-  margin-top: clamp(2rem, 4vw, 3rem);
-  padding-top: clamp(1.75rem, 3vw, 2.5rem);
-  border-top: 1px solid var(--line);
+/* ---- the certification module ----
+
+   The marks were a row of three badges under a rule. They are the first proof
+   the page offers, so they are given a module of their own: a white panel on
+   the washed ground, quartered by hairlines, one mark to a cell at nearly
+   twice the size they ran before. The note takes the fourth cell, which puts
+   the ISO caveat beside the ISO mark rather than under all three.
+
+   The rule capping it runs orange into pink — the page's two accents in the
+   one place a gradient earns its keep, and 3px of it. */
+.page[data-page="security"] .secsplit__marks {
+  position: relative;
+  padding-top: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* The hairlines are the grid's own gap over a ruled ground, so every divider
+     lands exactly on the cell edges. */
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
 }
-/* The marks are the first proof the page offers, so they are sized to be read
-   rather than noted. The row has 581px in the hero's right column and the three
-   badges together run about 2.9x their common height, so 104px of gaps leaves
-   room up to ~164px before the row wraps; 137px at 1440 keeps a margin for
-   metric variance, and the vw term scales it down with the column so the row
-   stays on one line to the point the split collapses. */
-.page[data-page="security"] .markrow__badge { height: clamp(4.75rem, 9.5vw, 8.75rem); }
+.page[data-page="security"] .secsplit__marks::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, #F5127A 100%);
+  z-index: 1;
+}
+
+/* The row wrapper steps out of the box tree so its three images become cells
+   of the module's own grid. */
+.page[data-page="security"] .secsplit__marks .markrow {
+  display: contents;
+}
+
+/* Height is the cell, padding is the breathing room, and object-fit sizes the
+   artwork inside what is left — 194px of mark at 1440, against 137px before.
+   The three sit optically level despite different aspect ratios because each
+   is contained in a cell of the same height. */
+.page[data-page="security"] .markrow__badge {
+  width: 100%;
+  height: clamp(9rem, 18.5vw, 17.5rem);
+  padding: clamp(1.25rem, 2.6vw, 2.25rem);
+  object-fit: contain;
+  background: #ffffff;
+  flex: none;
+}
 .page[data-page="security"] .markrow__note {
-  margin-top: var(--space-6);
+  margin-top: 0;
+  /* Not align-self:center — that leaves the cell part-filled and the ruled
+     ground shows through above and below as two grey bands. The cell is filled
+     and the text centred inside it. */
+  display: flex;
+  align-items: center;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  background: #ffffff;
   font-style: normal;
   font-size: var(--fs-small);
-  max-width: 46ch;
+  line-height: 1.55;
+  color: var(--meta);
+  max-width: none;
+}
+
+/* Stacked, two cells across would leave the note in a 175px column. The third
+   mark and the note each take the full width instead, so the module keeps four
+   filled cells and no empty one — an empty cell here would show the ruled
+   ground straight through. */
+@media (max-width: 899px) {
+  .page[data-page="security"] .markrow__badge:nth-of-type(3),
+  .page[data-page="security"] .markrow__note {
+    grid-column: 1 / -1;
+  }
 }
 
 /* ---- 02-05 the four chapters ----
