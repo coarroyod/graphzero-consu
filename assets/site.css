@@ -4235,9 +4235,11 @@ plainest thing in the drawing rather than the most filled. */
 }
 @media (min-width: 900px) {
   .page[data-page="about"] .ab-feature {
-    /* The story side a little wider, because it carries four things and the
-       other carries one. */
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    /* The story side clearly the wider of the two, because it carries four
+       things and the other carries one — text-led rather than an even split.
+       The height is unaffected: it comes from the min-height below, not from
+       how the copy wraps. */
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
     gap: var(--section-sm);
     align-items: stretch;
     min-height: clamp(25rem, 35vw, 31rem);
