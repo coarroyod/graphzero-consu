@@ -4209,20 +4209,20 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- 02 the story ----
 
-   One editorial feature, not a heading with a picture beside it. The copy
-   takes the left half and the portrait the right, filling it edge to edge —
-   the photograph is the section's weight now rather than an illustration of
-   it, and at roughly 576 by 450 it is nearly four times the area it had.
+   Two panels, not one card. They sit side by side with a real gap between
+   them and each carries its own hairline ring, which is how this system
+   makes a surface — the design notes say depth is the ring and never a
+   shadow, so that is what separates them from the page and from each other.
 
-   The whole feature is the link, so it answers to the pointer as one object:
-   on hover it comes forward one per cent and the portrait pushes to six
-   inside its frame, which is clipped, so the picture opens toward you while
-   the type stays where it is. Easing only — no bounce, no rotation, and
-   nothing at all under prefers-reduced-motion.
+   The left panel is capped by the accent: a 3px bar across its top edge, the
+   full width of the panel. It is structural rather than a highlight — the
+   panel is built on it — and it is the reason the label beneath it needs no
+   decoration of its own.
 
-   No ring, no shadow, no fill. The picture is the edge on one side and the
-   page is the ground on the other, which is what keeps it from reading as a
-   card. */
+   The whole thing is still one link, so both panels answer together: the
+   pair comes forward one per cent and the portrait pushes to six inside its
+   own frame, which is clipped. The gap scales with them, so the two-panel
+   reading holds all the way through the movement. */
 .page[data-page="about"] .ab-story { padding-top: clamp(4rem, 9vw, 7rem); }
 
 .page[data-page="about"] .ab-feature {
@@ -4232,64 +4232,53 @@ plainest thing in the drawing rather than the most filled. */
   color: inherit;
   text-decoration: none;
   transition: transform 420ms var(--ease);
-  will-change: transform;
 }
 @media (min-width: 900px) {
   .page[data-page="about"] .ab-feature {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2.5rem, 5vw, 4.5rem);
+    /* The story side a little wider, because it carries four things and the
+       other carries one. */
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    gap: var(--section-sm);
     align-items: stretch;
-    min-height: clamp(24rem, 33vw, 30rem);
+    min-height: clamp(25rem, 35vw, 31rem);
+  }
+}
+/* Between the breakpoints the pair stays side by side, just tighter, rather
+   than stacking the moment there is less room. */
+@media (min-width: 720px) and (max-width: 899px) {
+  .page[data-page="about"] .ab-feature {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: var(--space-8);
+    align-items: stretch;
+    min-height: 22rem;
   }
 }
 
+/* ---- the two surfaces ---- */
+.page[data-page="about"] .ab-feature__copy,
+.page[data-page="about"] .ab-feature__media {
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface);
+  transition: border-color 420ms var(--ease);
+}
+
+/* The accent caps the story panel. */
 .page[data-page="about"] .ab-feature__copy {
+  border-top: 3px solid var(--accent);
+  padding: clamp(1.75rem, 3.2vw, 3rem);
   display: grid;
   align-content: center;
   justify-items: start;
   gap: 0;
 }
 
-/* The one label on the page in the accent, and the section's only colour. */
-.page[data-page="about"] .ab-feature__label {
-  margin: 0 0 var(--space-6);
-  color: var(--accent-text);
-}
-
-.page[data-page="about"] .ab-feature__head {
-  margin: 0;
-  max-width: 14ch;
-  font-size: clamp(2.125rem, 3.8vw, 3.25rem);
-  line-height: 1.04;
-  letter-spacing: var(--tracking-h2);
-  font-weight: var(--weight-heading);
-  color: var(--heading);
-  text-wrap: balance;
-}
-.page[data-page="about"] .ab-feature__lead {
-  margin: var(--space-6) 0 0;
-  max-width: 42ch;
-  font-size: var(--fs-lead);
-  line-height: 1.45;
-  color: var(--body);
-}
-.page[data-page="about"] .ab-feature__cue {
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  font-size: var(--fs-body);
-  color: var(--accent-text);
-  text-underline-offset: 0.22em;
-}
-.page[data-page="about"] .ab-feature:hover .ab-feature__cue,
-.page[data-page="about"] .ab-feature:focus-visible .ab-feature__cue { text-decoration: underline; }
-
-/* The frame is what the zoom happens inside; without the clip the picture
-   would simply get bigger and push the layout around. */
 .page[data-page="about"] .ab-feature__media {
   overflow: hidden;
-  border-radius: 2px;
-  min-height: clamp(17rem, 42vw, 22rem);
+  min-height: clamp(16rem, 44vw, 21rem);
 }
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .page[data-page="about"] .ab-feature__media { min-height: 0; }
 }
 .page[data-page="about"] .ab-feature__media img {
@@ -4299,17 +4288,52 @@ plainest thing in the drawing rather than the most filled. */
   object-fit: cover;
   object-position: 50% 22%;
   transition: transform 620ms var(--ease);
-  will-change: transform;
 }
 
+/* ---- the type in the story panel ---- */
+.page[data-page="about"] .ab-feature__label { margin: 0 0 var(--space-6); color: var(--accent-text); }
+.page[data-page="about"] .ab-feature__head {
+  margin: 0;
+  max-width: 14ch;
+  font-size: clamp(1.875rem, 3.2vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-h2);
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+  text-wrap: balance;
+}
+.page[data-page="about"] .ab-feature__lead {
+  margin: var(--space-6) 0 0;
+  max-width: 40ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--body);
+}
+.page[data-page="about"] .ab-feature__cue {
+  margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-size: var(--fs-body);
+  color: var(--accent-text);
+  text-underline-offset: 0.22em;
+}
+
+/* ---- the pair answering as one ---- */
 .page[data-page="about"] .ab-feature:hover,
-.page[data-page="about"] .ab-feature:focus-visible { transform: scale(1.01); }
+.page[data-page="about"] .ab-feature:focus-visible { transform: scale(1.012); }
 .page[data-page="about"] .ab-feature:hover .ab-feature__media img,
 .page[data-page="about"] .ab-feature:focus-visible .ab-feature__media img { transform: scale(1.06); }
+.page[data-page="about"] .ab-feature:hover .ab-feature__copy,
+.page[data-page="about"] .ab-feature:hover .ab-feature__media,
+.page[data-page="about"] .ab-feature:focus-visible .ab-feature__copy,
+.page[data-page="about"] .ab-feature:focus-visible .ab-feature__media { border-color: var(--hairline-strong, rgba(23,35,43,0.28)); }
+.page[data-page="about"] .ab-feature:hover .ab-feature__copy { border-top-color: var(--accent); }
+.page[data-page="about"] .ab-feature:hover .ab-feature__cue,
+.page[data-page="about"] .ab-feature:focus-visible .ab-feature__cue { text-decoration: underline; }
 
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="about"] .ab-feature,
-  .page[data-page="about"] .ab-feature__media img { transition: none; }
+  .page[data-page="about"] .ab-feature__media img,
+  .page[data-page="about"] .ab-feature__copy,
+  .page[data-page="about"] .ab-feature__media { transition: none; }
   .page[data-page="about"] .ab-feature:hover,
   .page[data-page="about"] .ab-feature:focus-visible { transform: none; }
   .page[data-page="about"] .ab-feature:hover .ab-feature__media img { transform: none; }
