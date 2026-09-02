@@ -3725,99 +3725,67 @@ plainest thing in the drawing rather than the most filled. */
    that grey instead of the white this is for. */
 .page[data-page="early-access"] .showcase__visual--flow { background: transparent; }
 
-/* ---- 04 the turn ----
+/* ---- 04 the design-partner sequence ----
 
-   Opens the navy run, so it carries the air above; 05 and 06 continue it and
-   add none of their own at the top.
+   The ask and the four chapters are one composition, in one pinned block.
+   They used to be two sections stacked, which put a screen of empty navy
+   between the statement and the thing it introduces; now the heading holds
+   still at the top of the pin while the track runs beneath it, so the reader
+   never loses what the four are an answer to.
 
-   Two columns, matching the fold: the ask left, the flow figure right. The
-   ask used to run the container width with the right half empty, which made
-   the biggest statement on the page look unfinished. */
-.page[data-page="early-access"] .ea-open__inner {
-  /* Declared here, not assumed. The fold is two columns because .hero__inner
-     is already a grid; .wrap.sec is not, so without this the columns were
-     inert and the copy ran the full container with the figure beside it by
-     accident of justify-self. */
-  display: grid;
-  padding-top: clamp(4.5rem, 9vw, 8rem);
-  padding-bottom: clamp(3rem, 5vw, 5rem);
-  gap: var(--space-12);
-  align-items: center;
-}
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-open__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-    gap: var(--section-sm);
-  }
-}
-.page[data-page="early-access"] .ea-open__copy { display: grid; align-content: center; justify-items: start; }
+   The head is one row — statement left, what it means right, sharing a
+   baseline — rather than three stacked blocks. That row is most of the
+   vertical space that used to sit between the heading and chapter 01.
 
-.page[data-page="early-access"] .ea-open__head {
-  margin: var(--space-6) 0 0;
-  max-width: 15ch;
-  font-size: clamp(1.875rem, 3.4vw, 3rem);
-  line-height: 1.04;
-  letter-spacing: var(--tracking-h2);
-  font-weight: var(--weight-heading);
-  color: var(--heading);
-  text-wrap: balance;
-}
-.page[data-page="early-access"] .ea-open__lead {
-  margin-top: var(--space-8);
-  max-width: 42ch;
-}
+   The figure that stood beside the heading is gone. The horizontal run is the
+   movement here; a second animation next to it was two things doing the same
+   job and neither of them well. */
 
-.page[data-page="early-access"] .ea-open__figure {
-  margin: 0;
-  position: relative;
-  width: 100%;
-  max-width: 34rem;
-  aspect-ratio: 3 / 2;
-  justify-self: center;
-}
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-open__figure { justify-self: end; }
-}
-@media (max-width: 620px) {
-  .page[data-page="early-access"] .ea-open__figure { aspect-ratio: 5 / 3; max-width: none; }
-}
-.page[data-page="early-access"] .ea-open__figure canvas { display: block; width: 100%; height: 100%; }
-
-/* ---- 05 what a design partner gets ----
-
-   Four numbered rows running the page, not a 2x2. The grid gave these the
-   same weight as the ask above them and read as a feature table; as rows,
-   with the claim and what it means in their own columns, they sit clearly
-   below the ask and support it.
-
-   The numbers are set in the mono face at label size and left quiet. They
-   order the list; they are not the thing being read. */
-.page[data-page="early-access"] .ea-gets__inner {
-  padding-top: clamp(1rem, 2vw, 2rem);
-  padding-bottom: clamp(3.5rem, 7vw, 6rem);
-}
-/* One track, four chapters.
-
-   The four are a sequence, so they are read as one: the section pins while it
-   is passed and vertical scroll drives a horizontal track. Two large items
-   and two small ones half out of frame read as two groups that had gone
-   wrong; four identical chapters passing in order read as what they are.
-
-   The base state below is the fallback, not the enhancement: a plain stacked
-   list, hairline between each. Everything the pin needs is behind .is-pinned,
-   which only the script adds — and only when there is something to scroll and
-   the reader has not asked for reduced motion. With no JS, a narrow screen,
-   or reduced motion, this section is an ordinary list in the same order.
-
-   The inset matches the page gutter so chapter 01 starts on the container's
-   left margin and 04 finishes on its right. It is declared here from the same
-   values .wrap uses, and the script overwrites it with the measured figure so
-   the two cannot drift. */
 .page[data-page="early-access"] .ea-hscroll {
   --page-inset: max(var(--gutter), calc((100vw - var(--container)) / 2));
   position: relative;
 }
 
+/* ---- the head ---- */
+.page[data-page="early-access"] .ea-hscroll__head { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-hscroll__head {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    column-gap: var(--section-sm);
+    row-gap: var(--space-8);
+    /* Set on their last lines, so the statement and the sentence under it
+       finish together instead of starting together. */
+    align-items: end;
+  }
+  .page[data-page="early-access"] .ea-hscroll__head .eyebrow { grid-column: 1 / -1; }
+}
+.page[data-page="early-access"] .ea-open__head {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(1.875rem, 3.2vw, 2.875rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-h2);
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+  text-wrap: balance;
+}
+.page[data-page="early-access"] .ea-open__lead { margin: 0; max-width: 42ch; }
+
+/* ---- one track, four chapters ----
+
+   The four are a sequence, so they are read as one: the section pins and
+   vertical scroll drives the track through 01 to 04.
+
+   The base state below is the fallback, not the enhancement — a plain stacked
+   list, hairline between each. Everything the pin needs is behind .is-pinned,
+   which only the script adds, and only when there is something to scroll and
+   the reader has not asked for reduced motion. With no JS, a narrow screen or
+   reduced motion, this is an ordinary list in the same order.
+
+   The inset matches the page gutter so chapter 01 starts on the container's
+   left margin and 04 finishes on its right. Declared here from the values
+   .wrap uses, and overwritten by the script with the measured figure so the
+   two cannot drift. */
 .page[data-page="early-access"] .ea-hscroll__track {
   list-style: none;
   margin: 0;
@@ -3830,23 +3798,33 @@ plainest thing in the drawing rather than the most filled. */
 .page[data-page="early-access"] .ea-chapter {
   display: grid;
   align-content: start;
-  gap: var(--space-5, 1.25rem);
+  gap: var(--space-6);
   border-top: 1px solid var(--line);
-  padding-block: clamp(2rem, 4vw, 3rem);
+  padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
 }
 .page[data-page="early-access"] .ea-chapter:last-child { border-bottom: 1px solid var(--line); }
 
+/* The numbers carry the progression, so they are set at heading scale rather
+   than as labels — and the one whose turn it is takes the accent. That is the
+   only orange in the sequence, it is never on more than one chapter at a
+   time, and it is what says 01 → 02 → 03 → 04. */
 .page[data-page="early-access"] .ea-chapter__num {
   font-family: var(--font-mono);
-  font-size: var(--fs-tiny);
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
   line-height: 1;
-  letter-spacing: 0.08em;
+  letter-spacing: -0.02em;
   color: var(--meta);
   font-variant-numeric: tabular-nums;
+  transition: color 260ms var(--ease);
 }
+.page[data-page="early-access"] .ea-chapter.is-active .ea-chapter__num { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .ea-chapter__num { transition: none; }
+}
+
 .page[data-page="early-access"] .ea-chapter__title {
   margin: 0;
-  font-size: clamp(1.5rem, 2.1vw, 2.125rem);
+  font-size: clamp(1.375rem, 1.9vw, 1.875rem);
   line-height: 1.12;
   letter-spacing: -0.025em;
   font-weight: var(--weight-heading);
@@ -3854,9 +3832,9 @@ plainest thing in the drawing rather than the most filled. */
 }
 .page[data-page="early-access"] .ea-chapter__body {
   margin: 0;
-  max-width: 34ch;
-  font-size: var(--fs-lead);
-  line-height: 1.45;
+  max-width: 32ch;
+  font-size: var(--fs-body);
+  line-height: 1.5;
   color: var(--body);
 }
 
@@ -3864,39 +3842,45 @@ plainest thing in the drawing rather than the most filled. */
 .page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__sticky {
   position: sticky;
   top: 0;
-  /* svh, not vh: on a phone the browser chrome collapses as you scroll, and
-     vh would resize the pinned area mid-sequence. */
+  /* svh, not vh: on a phone the browser chrome collapses as you scroll and vh
+     would resize the pinned area mid-sequence. */
   min-height: 100svh;
   display: grid;
-  grid-template-rows: 1fr auto;
-  align-items: center;
-  padding-block: clamp(3rem, 9vh, 6rem);
+  grid-template-rows: auto auto auto;
+  /* Centred as a group, so the air is above and below the composition rather
+     than inside it. The gap between the head and chapter 01 is this row-gap
+     and nothing else. */
+  align-content: center;
+  row-gap: clamp(1.75rem, 4.5vh, 3rem);
+  padding-block: clamp(2.5rem, 7vh, 4.5rem);
 }
-/* The only thing hiding the track's overflow, so there is no scrollbar and
-   nothing to drag. */
+/* The only thing hiding the track's overflow: no scrollbar, nothing to drag. */
 .page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__viewport { overflow: hidden; }
 
 .page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__track {
   display: flex;
-  align-items: start;
+  /* Equal height, so the rules between the chapters run the full depth of the
+     track and the four read as ruled columns rather than four cards floating
+     in a row. */
+  align-items: stretch;
+  min-height: clamp(11rem, 24vh, 15rem);
   will-change: transform;
 }
 .page[data-page="early-access"] .ea-hscroll.is-pinned .ea-chapter {
   flex: 0 0 auto;
-  /* Wide enough that roughly one and a half are in frame, so the sequence has
-     somewhere to travel and each chapter has its turn at being the one being
-     read. */
-  width: clamp(16rem, 33vw, 26rem);
+  width: clamp(15rem, 30vw, 23rem);
+  align-content: start;
   border-top: 0;
   border-bottom: 0;
   border-left: 1px solid var(--line);
   padding-block: 0;
-  padding-inline: clamp(1.25rem, 2.6vw, 2.75rem);
+  padding-inline: clamp(1.25rem, 2.4vw, 2.5rem);
 }
-.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-chapter:first-child { padding-left: 0; border-left: 0; }
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-chapter:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
 
-/* Where you are in the sequence: the site's hairline, with the one accent
-   running along it. */
 .page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__rule {
   display: block;
   position: relative;
@@ -3912,9 +3896,9 @@ plainest thing in the drawing rather than the most filled. */
   transform-origin: left center;
 }
 
-/* ---- the ask, after the sequence ---- */
+/* ---- the ask, once the sequence has finished ---- */
 .page[data-page="early-access"] .ea-gets__foot {
-  padding-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-top: clamp(2.5rem, 6vw, 4rem);
   padding-bottom: clamp(3rem, 7vw, 5.5rem);
 }
 .page[data-page="early-access"] .ea-gets__cta { margin: 0; }

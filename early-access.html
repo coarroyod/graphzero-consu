@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=23">
+<link rel="stylesheet" href="assets/site.css?v=25">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -148,76 +148,56 @@
       </div>
     </section>
 
-    <!-- 03 — WHY EARLY ACCESS IS INTERESTING
-         The page turns over here. Everything below is navy and runs unbroken
-         into the footer, so the change of ground is what marks the move from
-         the product to the partnership — the one transition on the page that
-         has to be unmistakable.
+    <!-- 03 / 04 — THE DESIGN-PARTNER SEQUENCE
+         One section, one composition. The ask and the four chapters used to
+         be two sections stacked, which put a screen of empty navy between the
+         statement and the thing it introduces. They are now the same pinned
+         block: the heading holds still at the top while the track runs
+         beneath it, so the reader never loses what the four are an answer to.
 
-         Two columns, like the fold: the ask on the left, and on the right the
-         second of the page's two drawn figures. This one is the sentence
-         beside it — knowledge arriving, held in one place, answered out to
-         people and AI — with no labels on it, because the labelled version of
-         that diagram is already two screens up and this is the same idea at a
-         different altitude, not the same picture again. -->
-    <section class="band band--dark dark ea-open" id="early-access">
-      <div class="wrap sec ea-open__inner">
-        <div class="ea-open__copy">
-          <p class="eyebrow" data-reveal>Early access</p>
-          <h2 class="ea-open__head" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
-          <p class="lead ea-open__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
-        </div>
-
-        <figure class="ea-open__figure" aria-hidden="true">
-          <canvas data-flow-figure></canvas>
-        </figure>
-      </div>
-    </section>
-
-    <!-- 04 — WHAT A DESIGN PARTNER GETS
-         One track of four chapters, not a grid. The section pins while it is
-         passed and vertical scroll drives the track sideways, so the four are
-         read in sequence — which is what they are — instead of being laid out
-         two large and two small and read as two groups.
-
-         The four are identical in structure now: figure, claim, what it
-         means, and a hairline before each one. They are chapters of one
-         section, so nothing distinguishes them but their order.
-
-         The track is only pinned when there is something to pin for. If the
-         four already fit, or the reader has asked for reduced motion, the
-         script takes the height off and the CSS falls back to a plain stacked
-         list — same markup, same order, no interaction. -->
-    <section class="band band--dark dark ea-gets">
+         The figure that sat beside the heading is gone. The horizontal run is
+         the movement in this section, and a second animation next to it was
+         two things competing for the same job. -->
+    <section class="band band--dark dark ea-gets" id="early-access">
       <div class="ea-hscroll" data-hscroll>
         <div class="ea-hscroll__sticky">
+
+          <!-- Statement left, what it means right, sharing a baseline — the
+               head is one row rather than three stacked blocks, which is most
+               of the vertical space that was between it and chapter 01. -->
+          <div class="wrap ea-hscroll__head">
+            <p class="eyebrow" data-reveal>Early access</p>
+            <h2 class="ea-open__head" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
+            <p class="lead ea-open__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
+          </div>
+
           <div class="ea-hscroll__viewport">
             <ol class="ea-hscroll__track">
-          <li class="ea-chapter">
-            <span class="ea-chapter__num" aria-hidden="true">01</span>
-            <h3 class="ea-chapter__title">Early access</h3>
-            <p class="ea-chapter__body">Be among the first to use graphzero.</p>
+              <li class="ea-chapter">
+              <span class="ea-chapter__num" aria-hidden="true">01</span>
+              <h3 class="ea-chapter__title">Early access</h3>
+              <p class="ea-chapter__body">Be among the first to use graphzero.</p>
           </li>
-          <li class="ea-chapter">
-            <span class="ea-chapter__num" aria-hidden="true">02</span>
-            <h3 class="ea-chapter__title">Direct collaboration</h3>
-            <p class="ea-chapter__body">Work closely with our team and give input as the product evolves.</p>
+              <li class="ea-chapter">
+              <span class="ea-chapter__num" aria-hidden="true">02</span>
+              <h3 class="ea-chapter__title">Direct collaboration</h3>
+              <p class="ea-chapter__body">Work closely with our team and give input as the product evolves.</p>
           </li>
-          <li class="ea-chapter">
-            <span class="ea-chapter__num" aria-hidden="true">03</span>
-            <h3 class="ea-chapter__title">A foundation for AI</h3>
-            <p class="ea-chapter__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
+              <li class="ea-chapter">
+              <span class="ea-chapter__num" aria-hidden="true">03</span>
+              <h3 class="ea-chapter__title">A foundation for AI</h3>
+              <p class="ea-chapter__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
           </li>
-          <li class="ea-chapter">
-            <span class="ea-chapter__num" aria-hidden="true">04</span>
-            <h3 class="ea-chapter__title">Flexible by design</h3>
-            <p class="ea-chapter__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
+              <li class="ea-chapter">
+              <span class="ea-chapter__num" aria-hidden="true">04</span>
+              <h3 class="ea-chapter__title">Flexible by design</h3>
+              <p class="ea-chapter__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
           </li>
             </ol>
           </div>
 
-          <!-- Where you are in the sequence. A hairline like every other
-               divider on the site, with the one accent filling it. -->
+          <!-- How far through the sequence you are. The site's hairline, with
+               the one accent running along it. -->
           <div class="ea-hscroll__rule" aria-hidden="true">
             <span class="ea-hscroll__fill"></span>
           </div>
@@ -259,7 +239,7 @@
 
 </div>
 
-<script src="assets/site.js?v=23" defer></script>
+<script src="assets/site.js?v=25" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>
