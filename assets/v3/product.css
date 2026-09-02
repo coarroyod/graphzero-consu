@@ -62,6 +62,13 @@
   text-wrap: balance;
 }
 
+/* The sentence ends on the brand's pink rather than on the navy it is set in.
+   It is one glyph — the smallest place the third colour can carry, which is
+   the whole reason it is allowed here and nowhere else in the statement. */
+.page[data-page="product"] .hero-lattice__stop {
+  color: #FF2E93;
+}
+
 /* Held to six of the twelve columns, so it reads as a column of text placed
    under the statement rather than a line running the width of it. */
 .page[data-page="product"] .hero-lattice__lead {
