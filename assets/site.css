@@ -3792,19 +3792,28 @@ plainest thing in the drawing rather than the most filled. */
   position: relative;
 }
 
-/* ---- the head ---- */
-.page[data-page="early-access"] .ea-hscroll__head { display: grid; gap: var(--space-6); }
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-hscroll__head {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    column-gap: var(--section-sm);
-    row-gap: var(--space-8);
-    /* Set on their last lines, so the statement and the sentence under it
-       finish together instead of starting together. */
-    align-items: end;
-  }
-  .page[data-page="early-access"] .ea-hscroll__head .eyebrow { grid-column: 1 / -1; }
+/* ---- the head ----
+
+   Label, statement, and the sentence that qualifies it, in one column and in
+   that order. They were two columns bottom-aligned, which put the sentence
+   133px to the right of the statement and 44px lower than it — detached in
+   both directions and floating low on the right rather than belonging to the
+   heading it explains.
+
+   The rhythm is what groups them: 24 down to the statement, 17 down to the
+   sentence, then a bigger step to the track. Tight inside the introduction,
+   open after it, so the three read as one block and the sequence reads as the
+   next thing rather than as more of the same. */
+.page[data-page="early-access"] .ea-hscroll__head {
+  display: grid;
+  /* Left-ranged, so all three start on the container's own margin. The measure
+     is capped on the children and never here: this element is the .wrap, and
+     narrowing it would beat the container's width and let its auto margins
+     centre the whole introduction in the page. */
+  justify-items: start;
 }
+.page[data-page="early-access"] .ea-hscroll__head .eyebrow { margin: 0 0 var(--space-6); }
+
 .page[data-page="early-access"] .ea-open__head {
   margin: 0;
   max-width: 16ch;
@@ -3815,7 +3824,12 @@ plainest thing in the drawing rather than the most filled. */
   color: var(--heading);
   text-wrap: balance;
 }
-.page[data-page="early-access"] .ea-open__lead { margin: 0; max-width: 42ch; }
+/* Close enough to the statement to be read as part of it, and left clearly
+   secondary by size and ink rather than by distance. */
+.page[data-page="early-access"] .ea-open__lead {
+  margin: clamp(0.875rem, 1.2vw, 1.125rem) 0 0;
+  max-width: 46ch;
+}
 
 /* ---- one track, four chapters ----
 
@@ -3897,7 +3911,9 @@ plainest thing in the drawing rather than the most filled. */
      than inside it. The gap between the head and chapter 01 is this row-gap
      and nothing else. */
   align-content: center;
-  row-gap: clamp(1.75rem, 4.5vh, 3rem);
+  /* The one deliberate breath in the composition: bigger than any step
+     inside the head, so the sequence reads as the next element. */
+  row-gap: clamp(2.25rem, 5.5vh, 3.5rem);
   padding-block: clamp(2.5rem, 7vh, 4.5rem);
 }
 /* The only thing hiding the track's overflow: no scrollbar, nothing to drag. */
