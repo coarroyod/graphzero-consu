@@ -57,16 +57,10 @@
    and, loading later, wins on order. */
 .page[data-page="security"] #security,
 .page[data-page="security"] .band--dark.dark {
-  /* A warm near-white rather than the page's grey: the accents in the wash go
-     dusty over a cool ground. */
-  background-color: #FCFAF9;
-  /* The wash the fold carries is its own — orange low and right, pink above
-     it, both anchored past the middle so they bloom around the certification
-     module and leave the copy column clean. Wide, soft stops only: this is a
-     ground, not a graphic. */
-  --ground-wash:
-    radial-gradient(54% 62% at 92% 4%, rgba(245, 18, 122, 0.34), rgba(245, 18, 122, 0) 68%),
-    radial-gradient(78% 86% at 62% 108%, rgba(217, 92, 50, 0.40), rgba(217, 92, 50, 0) 66%);
+  /* White. The fold's colour is the field on its right, not a wash under the
+     whole band. */
+  background-color: #ffffff;
+  --ground-wash: none;
   background-image: var(--ground-wash);
   --surface-dark: var(--ground-base);
   --heading: var(--ink);
@@ -84,101 +78,138 @@
   padding-bottom: clamp(3.5rem, 9vh, 6rem);
 }
 
-/* The claim carries the fold. 89px at 1440 against the 72px it set before, at
-   the family's heaviest weight and on the site's navy — the ink, not a tint of
-   it. The measure is cut to 13ch so it breaks into a block of short lines
-   rather than trailing across the column. */
+/* The claim carries the fold: 95px at 1440, the family's heaviest weight, and
+   the site's navy at full strength rather than a tint of it. */
 .page[data-page="security"] .band--dark.dark .h2 {
-  font-size: clamp(2.75rem, 6.2vw, 5.5rem);
+  font-size: clamp(2.75rem, 6.6vw, 6rem);
   font-weight: 700;
-  line-height: 0.94;
+  line-height: 0.93;
   letter-spacing: -0.05em;
   max-width: 13ch;
   color: var(--ink);
 }
-/* A step below the claim rather than a second voice beside it: the measure is
-   tightened so the sentence sets as a block under the heading's left edge. */
+/* A step softer, not a second voice: the weight stays regular, the ink is the
+   muted one, and the measure is cut so it sets as a block under the claim. */
+.page[data-page="security"] .secsplit__lead {
+  gap: clamp(1.5rem, 2.4vw, 2.25rem);
+}
 .page[data-page="security"] .band--dark.dark .lead {
-  max-width: 40ch;
+  max-width: 38ch;
   font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.3125rem);
-  line-height: 1.52;
+  font-weight: 400;
+  line-height: 1.55;
   color: var(--ink-muted);
 }
 
-/* ---- the certification module ----
+/* ---- the certification field ----
 
-   The marks were a row of three badges under a rule. They are the first proof
-   the page offers, so they are given a module of their own: a white panel on
-   the washed ground, quartered by hairlines, one mark to a cell at nearly
-   twice the size they ran before. The note takes the fourth cell, which puts
-   the ISO caveat beside the ISO mark rather than under all three.
+   The page is white. The one place colour is allowed is a field on the right
+   of the fold: a rectangle whose left edge is the marks column's own edge,
+   ruled in orange and running the full height of the band before bleeding off
+   the right of the screen. A defined area with a hard edge, not a shape
+   floating in the middle of the page.
 
-   The rule capping it runs orange into pink — the page's two accents in the
-   one place a gradient earns its keep, and 3px of it. */
+   The three marks are not in a box. They sit on the field as separate objects,
+   staggered off each other's baselines so the group reads as placed rather
+   than as a row, and sized by height so they stay optically level. */
+.page[data-page="security"] #security {
+  position: relative;
+  /* The field runs past the right of the viewport; the band clips it. */
+  overflow: hidden;
+}
 .page[data-page="security"] .secsplit__marks {
   position: relative;
-  padding-top: 0;
+  padding: 0 0 0 clamp(1.5rem, 3vw, 2.75rem);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* The hairlines are the grid's own gap over a ruled ground, so every divider
-     lands exactly on the cell edges. */
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  overflow: hidden;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 2.6vw, 2.5rem);
+  row-gap: clamp(1.25rem, 2.6vw, 2.25rem);
 }
 .page[data-page="security"] .secsplit__marks::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent) 0%, #F5127A 100%);
-  z-index: 1;
+  /* Past the band's own edges in both directions, so the clip decides where it
+     ends and the field is exactly as tall as the fold. */
+  top: -100vh;
+  bottom: -100vh;
+  left: 0;
+  right: -100vw;
+  border-left: 2px solid var(--accent);
+  background:
+    radial-gradient(58% 42% at 24% 16%, rgba(245, 18, 122, 0.30), rgba(245, 18, 122, 0) 72%),
+    radial-gradient(74% 56% at 6% 88%, rgba(217, 92, 50, 0.34), rgba(217, 92, 50, 0) 70%),
+    linear-gradient(180deg, #FFF8F5 0%, #FDF1EB 100%);
 }
 
-/* The row wrapper steps out of the box tree so its three images become cells
-   of the module's own grid. */
+/* The row wrapper steps out of the box tree so the three images place
+   themselves on the field's own grid. */
 .page[data-page="security"] .secsplit__marks .markrow {
   display: contents;
 }
 
-/* Height is the cell, padding is the breathing room, and object-fit sizes the
-   artwork inside what is left — 194px of mark at 1440, against 137px before.
-   The three sit optically level despite different aspect ratios because each
-   is contained in a cell of the same height. */
+/* 216px at 1440, against the 137px they ran as a badge row. Sized by height,
+   never by width, so the three read as one size despite ISO's taller ratio. */
 .page[data-page="security"] .markrow__badge {
-  width: 100%;
-  height: clamp(9rem, 18.5vw, 17.5rem);
-  padding: clamp(1.25rem, 2.6vw, 2.25rem);
-  object-fit: contain;
-  background: #ffffff;
+  position: relative;
+  height: clamp(7.5rem, 15vw, 14rem);
+  width: auto;
+  max-width: 100%;
   flex: none;
 }
+.page[data-page="security"] .markrow__badge:nth-of-type(1) {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+}
+.page[data-page="security"] .markrow__badge:nth-of-type(2) {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  /* The stagger. Nothing sits on the same baseline as its neighbour. */
+  margin-top: clamp(1.5rem, 4.5vw, 4rem);
+}
+.page[data-page="security"] .markrow__badge:nth-of-type(3) {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  margin-left: clamp(0.75rem, 3.5vw, 3rem);
+}
 .page[data-page="security"] .markrow__note {
+  position: relative;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
   margin-top: 0;
-  /* Not align-self:center — that leaves the cell part-filled and the ruled
-     ground shows through above and below as two grey bands. The cell is filled
-     and the text centred inside it. */
-  display: flex;
-  align-items: center;
-  padding: clamp(1.5rem, 2.6vw, 2.25rem);
-  background: #ffffff;
+  padding: 0;
+  max-width: 30ch;
   font-style: normal;
   font-size: var(--fs-small);
   line-height: 1.55;
   color: var(--meta);
-  max-width: none;
 }
 
-/* Stacked, two cells across would leave the note in a 175px column. The third
-   mark and the note each take the full width instead, so the module keeps four
-   filled cells and no empty one — an empty cell here would show the ruled
-   ground straight through. */
+/* Stacked, the field runs the width of the fold rather than half of it, and
+   the marks keep their stagger inside it. */
 @media (max-width: 899px) {
-  .page[data-page="security"] .markrow__badge:nth-of-type(3),
+  .page[data-page="security"] .secsplit__marks {
+    padding: clamp(2rem, 5vw, 3rem) 0 clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem);
+  }
+  .page[data-page="security"] .secsplit__marks::before {
+    top: 0;
+    bottom: 0;
+    left: calc((100% - 100vw) / 2);
+    right: calc((100% - 100vw) / 2);
+    border-left: 0;
+    border-top: 2px solid var(--accent);
+  }
+  .page[data-page="security"] .markrow__badge:nth-of-type(2) {
+    justify-self: start;
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
   .page[data-page="security"] .markrow__note {
     grid-column: 1 / -1;
+    grid-row: 3;
+    max-width: 42ch;
   }
 }
 
@@ -317,19 +348,50 @@
 
 /* The claim is the largest type on the page after the fold — 92px at 1440,
    against the 60px it set before. It is a statement, so it is set like one. */
+/* The section reads as the fold continued rather than as a new page: the same
+   claim-left / field-right split, the same type, the same orange rule opening
+   the coloured area. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
-  max-width: 16ch;
-  font-size: clamp(2.75rem, 6.4vw, 5.75rem);
+  max-width: none;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: -0.045em;
 }
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
-  margin-top: clamp(1.25rem, 2vw, 1.75rem);
-  max-width: 46ch;
+  margin-top: 0;
   /* The site's 18px reads as a caption under type this size. */
   font-size: clamp(1.125rem, 0.6vw + 0.95rem, 1.4375rem);
-  line-height: 1.45;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+/* Claim left, sentence right — the fold's split, at the fold's proportions.
+   The heading's long line measures 661px at this size, so the columns are cut
+   1.5 : 1 to leave it clear of wrapping rather than by eye. Ends are aligned,
+   not tops: the sentence sits on the claim's last line. */
+@media (min-width: 900px) {
+  .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    column-gap: clamp(2rem, 4vw, 3rem);
+    /* Stretched, not end-aligned: the field is as tall as the claim beside it,
+       which is what separates a field from a callout box around a sentence. */
+    align-items: stretch;
+  }
+  /* The sentence takes its whole column, so the tint behind it is a field
+     running to the container edge rather than a tinted box around a sentence.
+     A quieter restatement of the fold's field, opened by the same orange rule. */
+  .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
+    max-width: none;
+    /* The sentence sits at the foot of the field, on the claim's last line. */
+    display: flex;
+    align-items: flex-end;
+    padding: clamp(1.25rem, 2.2vw, 1.75rem);
+    border-left: 2px solid var(--accent);
+    background:
+      linear-gradient(180deg, rgba(217, 92, 50, 0.08) 0%, rgba(245, 18, 122, 0.06) 100%);
+  }
 }
 
 .page[data-page="security"] main > section:nth-of-type(2) .numlist {
