@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=22">
+<link rel="stylesheet" href="assets/site.css?v=23">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -175,43 +175,56 @@
     </section>
 
     <!-- 04 — WHAT A DESIGN PARTNER GETS
-         Four full-width rows rather than a 2x2. The grid gave the four the
-         same weight as the ask above them and read as a feature table; run
-         across the page as numbered rows, with the claim and what it means in
-         separate columns, they read as the supporting detail they are.
+         One track of four chapters, not a grid. The section pins while it is
+         passed and vertical scroll drives the track sideways, so the four are
+         read in sequence — which is what they are — instead of being laid out
+         two large and two small and read as two groups.
 
-         01 and 02 are the design-partner offer itself and run the full
-         width at their own size; 03 and 04 are the reasons behind it and sit
-         together underneath, quieter. Same structure in both, different
-         scale — which is the hierarchy, rather than four equal cells.
+         The four are identical in structure now: figure, claim, what it
+         means, and a hairline before each one. They are chapters of one
+         section, so nothing distinguishes them but their order.
 
-         The numbers are decoration to a screen reader — the list element
-         already carries the order — which is how numlist does it elsewhere. -->
+         The track is only pinned when there is something to pin for. If the
+         four already fit, or the reader has asked for reduced motion, the
+         script takes the height off and the CSS falls back to a plain stacked
+         list — same markup, same order, no interaction. -->
     <section class="band band--dark dark ea-gets">
-      <div class="wrap sec ea-gets__inner">
-        <ol class="ea-list">
-          <li class="ea-item ea-item--lead" data-reveal>
-            <span class="ea-item__num" aria-hidden="true">01</span>
-            <h3 class="ea-item__title">Early access</h3>
-            <p class="ea-item__body">Be among the first to use graphzero.</p>
+      <div class="ea-hscroll" data-hscroll>
+        <div class="ea-hscroll__sticky">
+          <div class="ea-hscroll__viewport">
+            <ol class="ea-hscroll__track">
+          <li class="ea-chapter">
+            <span class="ea-chapter__num" aria-hidden="true">01</span>
+            <h3 class="ea-chapter__title">Early access</h3>
+            <p class="ea-chapter__body">Be among the first to use graphzero.</p>
           </li>
-          <li class="ea-item ea-item--lead" data-reveal>
-            <span class="ea-item__num" aria-hidden="true">02</span>
-            <h3 class="ea-item__title">Direct collaboration</h3>
-            <p class="ea-item__body">Work closely with our team and give input as the product evolves.</p>
+          <li class="ea-chapter">
+            <span class="ea-chapter__num" aria-hidden="true">02</span>
+            <h3 class="ea-chapter__title">Direct collaboration</h3>
+            <p class="ea-chapter__body">Work closely with our team and give input as the product evolves.</p>
           </li>
-          <li class="ea-item ea-item--support" data-reveal>
-            <span class="ea-item__num" aria-hidden="true">03</span>
-            <h3 class="ea-item__title">A foundation for AI</h3>
-            <p class="ea-item__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
+          <li class="ea-chapter">
+            <span class="ea-chapter__num" aria-hidden="true">03</span>
+            <h3 class="ea-chapter__title">A foundation for AI</h3>
+            <p class="ea-chapter__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
           </li>
-          <li class="ea-item ea-item--support" data-reveal>
-            <span class="ea-item__num" aria-hidden="true">04</span>
-            <h3 class="ea-item__title">Flexible by design</h3>
-            <p class="ea-item__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
+          <li class="ea-chapter">
+            <span class="ea-chapter__num" aria-hidden="true">04</span>
+            <h3 class="ea-chapter__title">Flexible by design</h3>
+            <p class="ea-chapter__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
           </li>
-        </ol>
+            </ol>
+          </div>
 
+          <!-- Where you are in the sequence. A hairline like every other
+               divider on the site, with the one accent filling it. -->
+          <div class="ea-hscroll__rule" aria-hidden="true">
+            <span class="ea-hscroll__fill"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap ea-gets__foot">
         <div class="ea-gets__cta" data-reveal>
           <a class="btn btn--accent btn--lg" href="mailto:david@ascending.ai?subject=graphzero%20design%20partner">Become a design partner &rarr;</a>
         </div>
@@ -246,7 +259,7 @@
 
 </div>
 
-<script src="assets/site.js?v=22" defer></script>
+<script src="assets/site.js?v=23" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>

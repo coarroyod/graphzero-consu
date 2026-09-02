@@ -1472,3 +1472,113 @@
      never run and the field would stay blank. Timers still fire there. */
   setTimeout(function () { if (!done && ready) draw(1), done = true; }, 2600);
 })();
+
+/* The design-partner chapters — vertical scroll, horizontal track.
+
+   The section is given enough height to hold the sequence, its inner block is
+   sticky, and where the page has scrolled through that height decides how far
+   the track has moved. Nothing is dragged and nothing scrolls horizontally:
+   the overflow is hidden and the movement is a transform, so there is no
+   scrollbar and no second scroll surface to get trapped in.
+
+   The pin is an enhancement and is treated as one. The markup and the CSS
+   default to a plain stacked list; this adds .is-pinned only when the track
+   genuinely overflows and the reader has not asked for reduced motion, and
+   takes it off again the moment either stops being true. So no JS, a narrow
+   screen, or reduce-motion all land on the same readable list rather than on
+   a broken effect.
+
+   Two details worth keeping:
+
+   · The inset is measured off a real .wrap rather than recomputed from vw, so
+     chapter 01 starts exactly on the container's left margin. A vw formula
+     disagrees with the container by the width of the scrollbar.
+   · Progress is read from the section's own top rather than from a running
+     total, so it is correct on the first frame after a resize, a reload
+     part-way down the page, or a jump via the back button. */
+(function () {
+  'use strict';
+
+  var root = document.querySelector('[data-hscroll]');
+  if (!root) return;
+  var sticky = root.querySelector('.ea-hscroll__sticky');
+  var viewport = root.querySelector('.ea-hscroll__viewport');
+  var track = root.querySelector('.ea-hscroll__track');
+  var fill = root.querySelector('.ea-hscroll__fill');
+  if (!sticky || !viewport || !track || !track.children.length) return;
+
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  var pinned = false, span = 0, ticking = false;
+
+  function unpin() {
+    pinned = false;
+    root.classList.remove('is-pinned');
+    root.style.height = '';
+    root.style.removeProperty('--page-inset');
+    track.style.transform = '';
+    if (fill) fill.style.transform = '';
+  }
+
+  function measure() {
+    if (reduce.matches) { unpin(); return; }
+
+    var wrap = document.querySelector('.page .wrap');
+    if (wrap) {
+      var inset = Math.max(0, Math.round(wrap.getBoundingClientRect().left));
+      root.style.setProperty('--page-inset', inset + 'px');
+    }
+
+    /* Lay it out pinned before measuring: the chapters are a different width
+       in the two states, so measuring the stacked one tells us nothing. */
+    root.classList.add('is-pinned');
+    root.style.height = '';
+    track.style.transform = 'translate3d(0,0,0)';
+
+    var vr = viewport.getBoundingClientRect();
+    var last = track.children[track.children.length - 1];
+    var padRight = parseFloat(getComputedStyle(track).paddingRight) || 0;
+    span = Math.round(last.getBoundingClientRect().right - vr.left + padRight - vr.width);
+
+    /* Nothing to travel — the four already fit, so pinning would hold the
+       reader still for no reason. */
+    if (!(span > 32)) { unpin(); return; }
+
+    pinned = true;
+    root.style.height = (sticky.offsetHeight + span) + 'px';
+    update();
+  }
+
+  function update() {
+    if (!pinned) return;
+    var top = root.getBoundingClientRect().top;
+    var p = span > 0 ? -top / span : 0;
+    if (p < 0) p = 0; else if (p > 1) p = 1;
+    track.style.transform = 'translate3d(' + (-(p * span)).toFixed(2) + 'px,0,0)';
+    if (fill) fill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; update(); });
+  }
+
+  var reflow = null;
+  function schedule() {
+    clearTimeout(reflow);
+    reflow = setTimeout(measure, 140);
+  }
+
+  measure();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('orientationchange', schedule);
+  if (reduce.addEventListener) reduce.addEventListener('change', measure);
+  else if (reduce.addListener) reduce.addListener(measure);
+  /* The chapters are set in a web font; when it lands their widths change. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  /* A tab opened in the background paints no frames, so the first measure can
+     run before layout has settled. Timers still fire there. */
+  setTimeout(measure, 1200);
+})();
