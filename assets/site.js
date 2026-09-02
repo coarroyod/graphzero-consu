@@ -1314,3 +1314,246 @@
      run before layout has settled. Timers still fire there. */
   setTimeout(measure, 1200);
 })();
+
+/* About — Europe as a network.
+
+   A field of dots in the shape of the landmass, nodes on the real coordinates
+   of twenty European cities, and links that draw themselves between them.
+   Amsterdam is the one node in the accent; everything else is ink and
+   hairline, at the weights the rest of this site uses.
+
+   The silhouette is a dot matrix rather than a drawn coastline. At this
+   pitch the dots quantise the boundary, so the shape reads without a
+   hand-authored outline pretending to a precision it does not have — and the
+   result is a field, which is what the page is about, rather than a map.
+
+   Positions are real: longitude and latitude through an equirectangular
+   projection, with x scaled by the cosine of the mean latitude so Europe is
+   not stretched sideways. The arrangement is therefore correct by
+   construction rather than by eye.
+
+   Canvas, like the other figures on this site. It settles once, then the
+   nodes breathe and one link at a time draws itself; under
+   prefers-reduced-motion it draws the settled state and never moves. */
+(function () {
+  'use strict';
+
+  var canvas = document.querySelector('[data-europe-net]');
+  if (!canvas) return;
+  var ctx = canvas.getContext && canvas.getContext('2d');
+  if (!ctx) return;
+
+  /* ---------- geography ---------- */
+  var LON0 = -10.5, LON1 = 30.5, LAT0 = 35, LAT1 = 63.5;
+  var KX = Math.cos(49 * Math.PI / 180);          /* mean-latitude correction */
+
+  /* Coarse landmass outlines. Deliberately rough: they are a mask for a dot
+     field, not a coastline anyone reads. */
+  var LAND = [
+    [[-9.5,38.7],[-8.8,42.0],[-9.0,43.5],[-4.0,43.6],[-1.7,43.4],[-1.1,45.8],[-2.1,47.1],
+     [-4.7,48.4],[-1.4,48.7],[0.4,49.5],[2.2,51.1],[4.3,51.6],[5.0,53.2],[7.2,53.7],
+     [8.4,55.0],[9.5,57.4],[10.7,57.6],[12.4,56.1],[14.3,55.4],[16.5,55.0],[18.6,54.6],
+     [21.0,55.5],[23.5,55.5],[26.0,56.5],[28.5,56.0],[30.0,54.0],[30.0,48.0],[29.5,45.5],
+     [28.5,44.0],[27.5,42.5],[26.5,41.0],[25.0,40.5],[23.5,38.0],[21.5,38.0],[20.0,39.5],
+     [19.3,41.5],[18.0,42.8],[16.0,43.5],[13.6,45.5],[12.4,44.5],[13.5,42.0],[15.5,40.0],
+     [17.2,40.5],[18.4,40.1],[16.5,38.9],[15.6,38.0],[15.9,40.0],[14.0,41.5],[12.0,43.8],
+     [10.2,44.0],[8.8,44.4],[7.5,43.8],[4.8,43.4],[3.0,42.5],[0.7,40.6],[-0.3,38.9],
+     [-2.2,36.8],[-5.4,36.1],[-7.0,37.0],[-8.9,37.0]],
+    [[5.2,58.4],[4.9,60.5],[6.5,62.5],[9.0,63.5],[12.0,63.9],[15.0,63.5],[17.5,62.5],
+     [19.0,60.5],[18.5,58.5],[16.5,56.4],[14.0,55.4],[12.0,55.5],[11.0,57.5],[8.0,58.2]],
+    [[-5.3,50.1],[-3.0,51.4],[-4.8,53.4],[-5.0,55.0],[-5.8,57.5],[-3.0,58.6],[-1.5,57.5],
+     [-0.2,53.7],[1.7,52.7],[0.7,51.0],[-2.5,50.6]],
+    [[-10.2,51.6],[-10.0,54.3],[-8.0,55.2],[-6.0,54.4],[-6.1,52.2],[-8.3,51.5]]
+  ];
+
+  /* name kept only so the list is readable; nothing is drawn from it */
+  var CITY = [
+    ['Amsterdam',52.37,4.90,1], ['London',51.51,-0.13,0], ['Paris',48.86,2.35,0],
+    ['Berlin',52.52,13.40,0],   ['Madrid',40.42,-3.70,0], ['Rome',41.90,12.50,0],
+    ['Warsaw',52.23,21.01,0],   ['Stockholm',59.33,18.07,0], ['Copenhagen',55.68,12.57,0],
+    ['Vienna',48.21,16.37,0],   ['Zurich',47.38,8.54,0],  ['Dublin',53.35,-6.26,0],
+    ['Lisbon',38.72,-9.14,0],   ['Prague',50.08,14.44,0], ['Oslo',59.91,10.75,0],
+    ['Milan',45.46,9.19,0],     ['Munich',48.14,11.58,0], ['Brussels',50.85,4.35,0],
+    ['Barcelona',41.39,2.17,0], ['Hamburg',53.55,9.99,0], ['Helsinki',60.17,24.94,0],
+    ['Budapest',47.50,19.04,0]
+  ];
+
+  var LINK = [[0,1],[0,3],[0,2],[0,17],[0,8],[3,6],[3,13],[2,4],[2,10],[5,15],[15,10],
+              [8,7],[7,14],[7,20],[9,21],[9,16],[16,10],[4,18],[18,15],[1,11],[12,4],
+              [6,20],[13,9],[19,8],[17,2],[0,19]];
+
+  /* ---------- projection ---------- */
+  var W = 0, H = 0, S = 1, OX = 0, OY = 0;
+  function project(lon, lat) {
+    return { x: OX + (lon - LON0) * KX * S, y: OY + (LAT1 - lat) * S };
+  }
+  function fit() {
+    var uw = (LON1 - LON0) * KX, uh = LAT1 - LAT0;
+    S = Math.min(W / uw, H / uh) * 0.98;
+    OX = (W - uw * S) / 2;
+    OY = (H - uh * S) / 2;
+  }
+
+  function inside(pt, poly) {
+    var hit = false;
+    for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      var a = poly[i], b = poly[j];
+      if ((a.y > pt.y) !== (b.y > pt.y) &&
+          pt.x < (b.x - a.x) * (pt.y - a.y) / (b.y - a.y) + a.x) hit = !hit;
+    }
+    return hit;
+  }
+
+  var dots = [], nodes = [], polys = [];
+  function build() {
+    polys = LAND.map(function (ring) {
+      return ring.map(function (p) { return project(p[0], p[1]); });
+    });
+
+    /* The matrix. Pitch is in screen pixels so the texture stays even
+       whatever size the column resolves to. */
+    var step = Math.max(7, Math.min(11, Math.round(Math.min(W, H) / 46)));
+    dots = [];
+    for (var y = step / 2; y < H; y += step) {
+      for (var x = step / 2; x < W; x += step) {
+        var pt = { x: x, y: y };
+        for (var k = 0; k < polys.length; k++) {
+          if (inside(pt, polys[k])) { dots.push({ x: x, y: y }); break; }
+        }
+      }
+    }
+
+    nodes = CITY.map(function (c, i) {
+      var p = project(c[2], c[1]);
+      return { x: p.x, y: p.y, accent: !!c[3], ph: (i * 2.399) % (Math.PI * 2) };
+    });
+  }
+
+  var C = { ink: '#17232B', line: 'rgba(23,35,43,0.16)', accent: '#D95C32' };
+  function readColours() {
+    var cs = getComputedStyle(canvas);
+    C.ink = cs.getPropertyValue('--heading').trim() || C.ink;
+    C.line = cs.getPropertyValue('--line').trim() || C.line;
+    C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
+  }
+
+  function resize() {
+    var box = canvas.getBoundingClientRect();
+    if (!box.width || !box.height) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = box.width; H = box.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    fit(); build();
+    return true;
+  }
+
+  /* ---------- drawing ---------- */
+  var ACTIVE_EVERY = 2600, DRAW_MS = 1100, HOLD_MS = 900;
+
+  function draw(t, still) {
+    ctx.clearRect(0, 0, W, H);
+
+    /* the landmass */
+    ctx.fillStyle = C.ink;
+    ctx.globalAlpha = 0.13;
+    for (var i = 0; i < dots.length; i++) {
+      ctx.beginPath();
+      ctx.arc(dots[i].x, dots[i].y, 1.15, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    /* the standing links */
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = C.line;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var l = 0; l < LINK.length; l++) {
+      var a = nodes[LINK[l][0]], b = nodes[LINK[l][1]];
+      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+    }
+    ctx.stroke();
+
+    /* one link at a time, drawing itself */
+    if (!still) {
+      var cycle = t % (ACTIVE_EVERY * LINK.length);
+      var idx = Math.floor(cycle / ACTIVE_EVERY);
+      var local = cycle - idx * ACTIVE_EVERY;
+      var na = nodes[LINK[idx][0]], nb = nodes[LINK[idx][1]];
+      var grow = Math.min(1, local / DRAW_MS);
+      var fade = local < DRAW_MS + HOLD_MS ? 1
+               : Math.max(0, 1 - (local - DRAW_MS - HOLD_MS) / 600);
+      if (fade > 0) {
+        ctx.save();
+        ctx.strokeStyle = C.accent;
+        ctx.globalAlpha = 0.55 * fade;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(na.x, na.y);
+        ctx.lineTo(na.x + (nb.x - na.x) * grow, na.y + (nb.y - na.y) * grow);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    /* the cities */
+    for (var n = 0; n < nodes.length; n++) {
+      var nd = nodes[n];
+      var pulse = still ? 0 : Math.sin(t / 1000 * 0.55 + nd.ph);
+      ctx.beginPath();
+      ctx.fillStyle = nd.accent ? C.accent : C.ink;
+      ctx.globalAlpha = nd.accent ? 1 : 0.62 + 0.14 * pulse;
+      ctx.arc(nd.x, nd.y, (nd.accent ? 3.1 : 2.05) + (nd.accent ? 0.25 : 0.18) * pulse, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    /* the one ring, around the one accent node */
+    var ams = nodes[0];
+    ctx.globalAlpha = still ? 0.35 : 0.22 + 0.16 * (0.5 + 0.5 * Math.sin(t / 1000 * 0.5));
+    ctx.strokeStyle = C.accent;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(ams.x, ams.y, still ? 8 : 7 + 2.4 * (0.5 + 0.5 * Math.sin(t / 1000 * 0.5)), 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var raf = null, t0 = 0, onscreen = true, ready = false, painted = false;
+
+  function frame(now) {
+    raf = null;
+    if (!onscreen) return;
+    if (!t0) t0 = now;
+    draw(now - t0, false);
+    painted = true;
+    raf = requestAnimationFrame(frame);
+  }
+  function start() {
+    if (!ready || !onscreen) return;
+    if (still) { draw(0, true); painted = true; return; }
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+  function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  readColours();
+  ready = resize();
+  start();
+
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () { if (resize()) { ready = true; if (still || !raf) draw(0, still); } }).observe(canvas);
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onscreen = es[0].isIntersecting;
+      if (onscreen) start(); else stop();
+    }, { threshold: 0 }).observe(canvas);
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+  /* A renderer that never paints — a backgrounded tab — produces no frames,
+     so nothing would be drawn at all. Timers still run there. */
+  setTimeout(function () { if (!painted && ready) draw(0, true); }, 1600);
+})();

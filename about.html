@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=37">
+<link rel="stylesheet" href="assets/site.css?v=38">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -69,6 +69,16 @@
             <p class="lead" data-reveal>We believe Europe should be building the systems that shape that future.</p>
             <p class="lead ab-hero__claim" data-reveal>graphzero is built in Europe for organizations that want to turn their knowledge into an advantage, without giving up control.</p>
           </div>
+
+          <!-- Europe as a network: a dot field in the shape of the landmass,
+               nodes on real city coordinates, and links that draw themselves
+               between them. It sits in the columns the copy leaves free, in
+               the row below the claim, so it never competes with it.
+               Decorative to a screen reader — the section says this in
+               words. -->
+          <figure class="ab-hero__net" aria-hidden="true">
+            <canvas data-europe-net></canvas>
+          </figure>
         </div>
       </div>
 
@@ -175,6 +185,6 @@
 
 </div>
 
-<script src="assets/site.js?v=37" defer></script>
+<script src="assets/site.js?v=38" defer></script>
 </body>
 </html>
