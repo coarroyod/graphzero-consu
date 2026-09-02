@@ -3620,112 +3620,92 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- 01 the fold ----
 
-   Not two columns any more. The type is one column held to a measure on the
-   left, and the graph is the fold's ground: it fills the painted panel,
-   weighted right and cropped by the panel edge, underneath the copy rather
-   than beside it.
+   Three bands down the page, not two columns across it.
 
-   That is what the two-column version got wrong. A square figure in its own
-   column is a picture placed next to some words — it can only ever be as big
-   as the column allows, and the space around it belongs to nothing. As a
-   layer it is the largest thing in the fold, cropped rather than framed, and
-   the empty right-hand side stops being empty.
+        eyebrow + headline        held to the container
+        ─── the network ───       full bleed, past both gutters
+        copy            ask       asymmetric, neither half the page
 
-   The fold also has a declared height, so the air above and below the copy is
-   a set amount rather than whatever the paragraphs happen to leave over. That
-   is the difference between spacious and unfinished. */
+   The previous version was type beside a picture, and no amount of resizing
+   fixes that: a drawing in the other column is always a drawing in the other
+   column. Here the graph is the rule between the two halves of the fold. It
+   is structural, so it cannot read as decoration, and it crosses the page
+   edge, so the composition stops being a grid of boxes.
 
-.page[data-page="early-access"] .ea-fold {
-  position: relative;
-  z-index: 3;
-  min-height: clamp(30rem, 70vh, 42rem);
-  align-content: center;
-  justify-items: start;
-  gap: 0;
-  padding-block: clamp(3.5rem, 8vh, 6rem);
+   The painted panel is off. It is a rounded rectangle — a card — and the band
+   has to reach past it. */
+.page[data-page="early-access"] .hero::before { content: none; }
+
+/* The fold is sized to land inside a laptop screen: the ask is the point of
+   the page and it cannot sit below the first fold. The air comes out of the
+   band and its margins rather than the type, which keeps the headline the
+   dominant element. */
+.page[data-page="early-access"] .hero {
+  padding-top: clamp(2.75rem, 7vh, 5rem);
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
 }
 
-.page[data-page="early-access"] .ea-fold__copy {
-  display: grid;
-  justify-items: start;
-  /* Short of half the container, so the graph's dense middle is never behind
-     a line of type. The measure is what keeps the two apart, not a mask. */
-  max-width: 33rem;
-}
-@media (min-width: 1180px) {
-  .page[data-page="early-access"] .ea-fold__copy { max-width: 35rem; }
-}
-
-/* The rhythm down the column: label, the claim, a clear break, the two
-   paragraphs as one block, then the close. The steps are uneven on purpose —
-   1.5 / 2.5 / 1 / 2 — so the eye reads groups rather than a list of evenly
-   spaced things. */
+/* The headline runs to the container now that nothing shares the row with
+   it, so it is set considerably larger than it was in the column. The measure
+   is what leaves the short last line and the air to the right of it — that
+   gap is the composition's, not a remainder. */
 .page[data-page="early-access"] .ea-eyebrow { margin: 0 0 var(--space-6); }
-
 .page[data-page="early-access"] .ea-title {
   margin: 0;
-  max-width: 14ch;
-  font-size: clamp(2.375rem, 3.95vw, 3.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.042em;
+  max-width: 19ch;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.97;
+  letter-spacing: -0.045em;
   color: var(--heading);
 }
-.page[data-page="early-access"] .hero .display.ea-title { font-size: clamp(2.375rem, 3.95vw, 3.75rem); }
+.page[data-page="early-access"] .hero .display.ea-title { font-size: clamp(2.5rem, 6vw, 5rem); }
 
-.page[data-page="early-access"] .ea-fold__setup {
-  margin: clamp(1.75rem, 2.4vw, 2.5rem) 0 0;
-  max-width: 44ch;
-}
-.page[data-page="early-access"] .ea-fold__answer {
-  margin: var(--space-4) 0 0;
-  max-width: 44ch;
-  color: var(--heading);
-}
-
-/* The close. The rule sits nearer the paragraph it follows than the button it
-   precedes, so it reads as the copy block finishing rather than as a line
-   drawn between two unrelated things — which is what the symmetrical gap was
-   doing. */
-.page[data-page="early-access"] .ea-cta-row {
+/* The band. Full width of the page rather than of the container, and taller
+   than the drawing needs, so the graph is cropped top and bottom and reads as
+   a slice of something that continues past it. */
+.page[data-page="early-access"] .ea-fold__band {
+  position: relative;
   width: 100%;
-  margin-top: clamp(1.75rem, 2.4vw, 2.25rem);
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--line);
+  height: clamp(8rem, 14vw, 12rem);
+  margin-block: clamp(2rem, 4.2vw, 4rem);
+}
+.page[data-page="early-access"] .ea-fold__band canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Copy and ask on one row, deliberately unequal: the copy takes what it
+   needs on a reading measure and the ask takes only its own width, so the
+   space between them changes with the viewport instead of being a fixed
+   half-and-half. Set on the last line of the copy rather than its top. */
+.page[data-page="early-access"] .ea-fold__foot {
+  display: grid;
+  gap: var(--space-12);
+}
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-fold__foot {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--section-sm);
+    align-items: end;
+  }
+}
+.page[data-page="early-access"] .ea-fold__copy {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 46ch;
+}
+.page[data-page="early-access"] .ea-fold__answer { color: var(--heading); }
+
+/* No rule above the ask any more — the band is the fold's rule, and a second
+   hairline this close to it would be one horizontal too many. */
+.page[data-page="early-access"] .ea-cta-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-6);
 }
 .page[data-page="early-access"] .ea-cta-row__alt { color: var(--body); }
-
-/* The graph layer. Inset and radius match .hero::before exactly, so it is
-   clipped to the painted panel and reads as its surface. */
-.page[data-page="early-access"] .ea-fold__graph {
-  position: absolute;
-  inset: var(--space-2);
-  z-index: 1;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  pointer-events: none;
-}
-.page[data-page="early-access"] .ea-fold__graph canvas { display: block; width: 100%; height: 100%; }
-
-/* Below the breakpoint there is no room to keep type and drawing apart, so
-   the layer becomes a block under the copy and the fold gives up its
-   declared height. */
-@media (max-width: 899px) {
-  .page[data-page="early-access"] .ea-fold {
-    min-height: 0;
-    padding-bottom: var(--space-8);
-  }
-  .page[data-page="early-access"] .ea-fold__graph {
-    position: static;
-    inset: auto;
-    height: clamp(14rem, 44vw, 20rem);
-    margin: 0 var(--gutter) clamp(2.5rem, 7vw, 4rem);
-    border-radius: var(--radius-md);
-  }
-}
 
 /* ---- 02 the product ---- */
 .page[data-page="early-access"] .ea-sec-head { padding-top: 0; }

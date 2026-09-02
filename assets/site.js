@@ -969,26 +969,28 @@
   items.forEach(function (n) { io.observe(n); });
 })();
 
-/* Hero knowledge graph — Early Access.
+/* Hero band — the knowledge graph as the fold's rule.
 
-   The fold's copy says knowledge is created everywhere, stays fragmented, and
-   is then brought together. This draws that and nothing else: the points open
-   scattered across the box and settle into four clusters joined through one
-   centre, with the edges only appearing as they arrive. The centre is the one
-   thing on the page drawn in the accent.
+   Every other division on this site is a hairline. Here the hairline is the
+   network, and it carries the argument the sentence above it makes, left to
+   right in the order the sentence makes it:
 
-   Canvas rather than SVG because the whole figure is about thirty points and
-   the lines between them — a few lines of geometry against several hundred of
-   hand-authored path data — and because the settle is a per-frame position,
-   not a keyframe.
+     left    points scattered and unjoined — fragmented across people,
+             teams and tools
+     middle  the same kind of points, now drawn together through one place
+     hub     that place, and the only orange in the fold
+     right   a small connected structure — available to people and AI
 
-   Colours are read from the page rather than declared here, so the figure
-   follows the brand block in site.css like every other component.
+   The drawing is taller than the band, so it is cropped top and bottom: a
+   window onto something larger rather than a picture with edges. Laid out in
+   band space rather than a unit square, because a wide slice is what it is.
 
-   It runs once. There is no loop after the settle beyond a drift of about a
-   pixel, which is what keeps it from looking like a screenshot; under
-   prefers-reduced-motion even that is off and the settled state is drawn on
-   the first frame. */
+   Canvas rather than SVG: forty-odd points and their edges is a few lines of
+   geometry against several hundred of path data, and the settle is a
+   per-frame position rather than a keyframe. Seeded, so the arrangement is
+   composed and not a fresh pile of points on every load. It settles once and
+   then drifts about a pixel; under prefers-reduced-motion it draws settled on
+   the first frame and never moves. Colours are read from the page. */
 (function () {
   'use strict';
 
@@ -997,8 +999,6 @@
   var ctx = canvas.getContext && canvas.getContext('2d');
   if (!ctx) return;
 
-  /* Seeded: the arrangement is composed, not a different pile of points on
-     every load. */
   function seeded(seed) {
     return function () {
       seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -1008,37 +1008,55 @@
     };
   }
   var rand = seeded(20260902);
-
   var TAU = Math.PI * 2;
-  var HUB = { x: 0.52, y: 0.5 };
-  var RINGS = 4, PER = 6;
 
-  var nodes = [{ tx: HUB.x, ty: HUB.y, r: 4.6, a: 1, hub: true }];
-  var edges = [];
-  var centres = [];
+  var HUB_X = 0.62, HUB_Y = 0.5;
+  var nodes = [], edges = [];
 
-  for (var c = 0; c < RINGS; c++) {
-    var a = -Math.PI / 2 + c * TAU / RINGS + 0.34;
-    var cx = HUB.x + Math.cos(a) * 0.295;
-    var cy = HUB.y + Math.sin(a) * 0.295;
-    var ci = nodes.length;
-    nodes.push({ tx: cx, ty: cy, r: 3.1, a: 0.8 });
-    centres.push(ci);
-    edges.push([0, ci]);
-    for (var i = 0; i < PER; i++) {
-      var aa = rand() * TAU;
-      var rr = 0.058 + rand() * 0.072;
-      nodes.push({ tx: cx + Math.cos(aa) * rr, ty: cy + Math.sin(aa) * rr * 0.94, r: 1.9, a: 0.55 });
-      edges.push([ci, nodes.length - 1]);
-    }
+  function add(x, y, r, a) { nodes.push({ tx: x, ty: y, r: r, a: a }); return nodes.length - 1; }
+
+  /* --- fragmented: no edges at all, which is the whole point of them --- */
+  var loose = [];
+  for (var i = 0; i < 16; i++) {
+    var x = 0.015 + rand() * 0.30;
+    var y = -0.14 + rand() * 1.28;
+    loose.push(add(x, y, 1.7 + rand() * 0.5, 0.34 + rand() * 0.16));
   }
-  /* Two links across, so the four read as one structure rather than four. */
-  edges.push([centres[0], centres[1]], [centres[2], centres[3]]);
 
-  /* Where each point starts: outside the eventual shape, and unrelated to it. */
+  /* --- gathering: each joins the hub, and reaches back to the nearest
+         loose point it is picking up --- */
+  var gather = [];
+  for (var g = 0; g < 8; g++) {
+    var gy = 0.06 + (g + rand() * 0.6) * (0.88 / 8);
+    var gx = 0.36 + rand() * 0.17;
+    var gi = add(gx, gy, 2.2, 0.62);
+    gather.push(gi);
+    edges.push([gi, -1, 'in']);              /* -1 stands for the hub */
+    var best = -1, bd = 1e9;
+    for (var l = 0; l < loose.length; l++) {
+      var n = nodes[loose[l]];
+      var d = Math.pow(n.tx - gx, 2) + Math.pow((n.ty - gy) * 0.4, 2);
+      if (d < bd) { bd = d; best = loose[l]; }
+    }
+    if (best >= 0) edges.push([gi, best, 'pick']);
+  }
+
+  /* --- the hub --- */
+  var HUB = add(HUB_X, HUB_Y, 6.5, 1);
+  nodes[HUB].hub = true;
+
+  /* --- resolved: joined to the hub and to each other --- */
+  var out = [];
+  for (var o = 0; o < 4; o++) {
+    var oy = 0.17 + o * 0.22 + (rand() - 0.5) * 0.06;
+    out.push(add(0.75 + rand() * 0.21, oy, 3, 0.8));
+    edges.push([out[o], -1, 'out']);
+  }
+  edges.push([out[0], out[1], 'link'], [out[2], out[3], 'link']);
+
   nodes.forEach(function (n) {
-    n.sx = -0.12 + rand() * 1.24;
-    n.sy = -0.12 + rand() * 1.24;
+    n.sx = -0.05 + rand() * 1.1;
+    n.sy = -0.3 + rand() * 1.6;
     n.ph = rand() * TAU;
     n.dr = 0.3 + rand() * 0.5;
   });
@@ -1051,7 +1069,7 @@
     C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
   }
 
-  var W = 0, H = 0, S = 0, OX = 0, OY = 0;
+  var W = 0, H = 0;
   function resize() {
     var box = canvas.getBoundingClientRect();
     if (!box.width || !box.height) return false;
@@ -1060,51 +1078,41 @@
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    /* The unit square is placed, not just scaled. On the wide panel it is
-       taller than the panel and hangs off the right edge — the panel crops
-       it, which is what makes it read as the fold's surface rather than as a
-       picture sitting in it. Sized against the height so it stays the largest
-       thing in the fold, and capped against the width so it can never reach
-       back across the type.
-
-       Stacked under the copy on a phone the slot is its own block, so there
-       it is simply centred and fits. */
-    if (W / H > 1.3) {
-      S = Math.min(H * 1.22, W * 0.72);
-      OX = W * 1.05 - S;
-      OY = (H - S) / 2;
-    } else {
-      S = Math.min(W, H) * 0.94;
-      OX = (W - S) / 2;
-      OY = (H - S) / 2;
-    }
     return true;
   }
 
-  function px(n, k, t, drift) {
-    var e = 1 - Math.pow(1 - t, 3);              /* easeOutCubic */
-    var u = n['s' + k] + (n['t' + k] - n['s' + k]) * e;
-    var o = (k === 'x' ? OX : OY);
-    var wob = drift ? Math.sin(drift * n.dr + n.ph + (k === 'y' ? 1.7 : 0)) * 1.1 : 0;
-    return o + u * S + wob;
+  function at(n, t, drift) {
+    var e = 1 - Math.pow(1 - t, 3);
+    var ux = n.sx + (n.tx - n.sx) * e;
+    var uy = n.sy + (n.ty - n.sy) * e;
+    var w = drift ? Math.sin(drift * n.dr + n.ph) * 1.1 : 0;
+    return { x: ux * W + w, y: uy * H + (drift ? Math.sin(drift * n.dr + n.ph + 1.7) * 1.1 : 0) };
   }
 
   function draw(t, drift) {
     ctx.clearRect(0, 0, W, H);
+    var pos = nodes.map(function (n) { return at(n, t, drift); });
+    var hub = pos[HUB];
 
-    /* Edges arrive late — there is nothing to connect until the points are
-       close to where they belong. */
     var ea = Math.max(0, (t - 0.42) / 0.58);
     if (ea > 0) {
-      ctx.strokeStyle = C.line;
       ctx.lineWidth = 1;
+      ctx.strokeStyle = C.line;
       ctx.globalAlpha = Math.min(1, ea);
       ctx.beginPath();
       for (var i = 0; i < edges.length; i++) {
-        var a = nodes[edges[i][0]], b = nodes[edges[i][1]];
-        ctx.moveTo(px(a, 'x', t, drift), px(a, 'y', t, drift));
-        ctx.lineTo(px(b, 'x', t, drift), px(b, 'y', t, drift));
+        var a = pos[edges[i][0]];
+        var b = edges[i][1] === -1 ? hub : pos[edges[i][1]];
+        var kind = edges[i][2];
+        ctx.moveTo(a.x, a.y);
+        if (kind === 'in' || kind === 'out') {
+          /* A fan, so the run into and out of the hub reads as one movement
+             rather than as spokes on a wheel. */
+          var mx = (a.x + b.x) / 2;
+          ctx.bezierCurveTo(mx, a.y, mx, b.y, b.x, b.y);
+        } else {
+          ctx.lineTo(b.x, b.y);
+        }
       }
       ctx.stroke();
       ctx.globalAlpha = 1;
@@ -1112,21 +1120,17 @@
 
     for (var j = 0; j < nodes.length; j++) {
       var n = nodes[j];
-      ctx.beginPath();
       ctx.fillStyle = n.hub ? C.accent : C.ink;
-      /* Scattered points sit lighter and firm up as they settle, each to its
-         own weight — the hub full, the cluster centres behind it, the leaves
-         quietest. At this size a cloud of equal dots would read as texture
-         over the type instead of as a structure behind it. */
       ctx.globalAlpha = n.a * (0.3 + 0.7 * t);
-      ctx.arc(px(n, 'x', t, drift), px(n, 'y', t, drift), n.r * (0.55 + 0.45 * t), 0, TAU);
+      ctx.beginPath();
+      ctx.arc(pos[j].x, pos[j].y, n.r * (0.6 + 0.4 * t), 0, TAU);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
   }
 
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var raf = null, t0 = 0, settled = false, onscreen = true, started = false;
+  var raf = null, t0 = 0, settled = false, onscreen = true, ready = false;
 
   function frame(now) {
     raf = null;
@@ -1134,47 +1138,37 @@
     if (!t0) t0 = now;
     var el = now - t0;
     var t = Math.min(1, el / 2200);
-    draw(t, t >= 1 ? el / 1000 : 0);
-    if (t < 1) settled = false; else settled = true;
+    settled = t >= 1;
+    draw(t, settled ? el / 1000 : 0);
     raf = requestAnimationFrame(frame);
   }
-
   function start() {
-    if (still) { draw(1, 0); return; }
-    if (raf || !onscreen || !started) return;
+    if (still || raf || !onscreen || !ready) return;
     raf = requestAnimationFrame(frame);
   }
   function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
 
-  function boot() {
-    readColours();
-    if (!resize()) return;
-    started = true;
-    if (still) draw(1, 0); else start();
-  }
+  readColours();
+  ready = resize();
+  if (ready) { if (still) draw(1, 0); else start(); }
 
   if ('ResizeObserver' in window) {
     new ResizeObserver(function () {
-      if (resize() && (still || !raf)) draw(settled || still ? 1 : 0, 0);
+      if (resize() && (still || settled)) draw(1, 0);
     }).observe(canvas);
-  } else {
-    window.addEventListener('resize', function () { if (resize()) draw(1, 0); });
   }
-
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) {
       onscreen = es[0].isIntersecting;
       if (onscreen) start(); else stop();
     }, { threshold: 0 }).observe(canvas);
   }
-
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) stop(); else start();
   });
-
-  boot();
-  /* Web fonts landing can change the slot's height; re-measure once. */
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (resize() && still) draw(1, 0); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { if (resize() && still) draw(1, 0); });
+  }
 })();
 
 /* Early Access flow figure.
