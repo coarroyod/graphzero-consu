@@ -2,10 +2,15 @@
 
 A static site, no build step. GitHub Pages serves `main` from the repository root.
 
-Three pages:
+Four pages:
 
-- `index.html` — the main page: the Knowledge Base 3 fold, then the Knowledge Base B
-  content from "Companies that make the right architectural choices…" down.
+- `index.html` and `security.html` — the Product and Security pages, imported
+  verbatim from the v3 directory of `daviddamjakob-claude/graphzero-sep-benny`.
+  Their stylesheet and scripts live under `assets/v3/` so they cannot collide
+  with the ones the other pages use; everything else they reference — the
+  design system, the media, the mark — was already here and byte-identical.
+  Only their asset paths and their nav links were changed.
+
 - `early-access.html` — the Early Access / design-partner page. Five sections and
   one turn: the fold and the three modules beside the knowledge-graph flow sit on
   white and grey; the design-partner block, what a partner gets, and the close sit
