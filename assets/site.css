@@ -4134,16 +4134,20 @@ plainest thing in the drawing rather than the most filled. */
   padding-top: clamp(4rem, 11vh, 7.5rem);
   padding-bottom: clamp(5rem, 13vh, 9rem);
 
-  /* The fold gets its own ground: the page's ground tokens, which are a near
-     white with two very faint navy radials weighted to opposite corners. It
-     is the same treatment the other heroes on this site carry, so it reads as
-     the identity rather than as decoration added here.
+  /* White, by instruction. The fold carried the page's ground tokens — the
+     #F1F4F5 grey with two very faint navy radials at opposite corners — which
+     is the treatment the other heroes on this site run.
 
-     It also does the work of the transition. The fold and the story were both
-     plain white, so the only thing between them was padding; now the chapter
-     starts where the ground stops. */
-  background-color: var(--ground-base);
-  background-image: var(--ground-wash);
+     That ground was also the transition between the fold and the story, back
+     when the story was open on the page. It is not needed for that any more:
+     the story is two bounded panels opening on an orange rule, so the chapter
+     marks its own start and the fold can end on white without the two running
+     together.
+
+     Nothing else here moves: the type, the grid, the Europe canvas, the
+     orange and the spacing are untouched. */
+  background-color: #ffffff;
+  background-image: none;
 }
 
 .page[data-page="about"] .ab-hero__copy { display: grid; }
