@@ -239,8 +239,54 @@
   box-shadow: inset 0 1px 0 rgba(23, 35, 43, .1);
   font-size: 11px;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  color: var(--gzs-muted);
+  line-height: 1.4;
+  /* The kit's own floor. "EU infrastructure · dedicated" wraps to two lines
+     where "your data centre" does not, and without it the four rules sit at
+     four different heights. */
+  min-height: 30px;
+  color: var(--gzs-quiet);
 }
+
+/* ---- 01 · the band, and the three presets the kit's data carries ----
+
+   The kit stops colouring these per-section and starts colouring them per
+   card, from three presets in its logic: `dark` (navy fill, no ring, white
+   ink, accent icon), `tint` (a 4% navy wash inside the ring) and `light`
+   (transparent). 01 also becomes a navy section rather than a white one.
+
+   Cards on a fill lose the background half of the hover — the kit leaves them
+   only the lift, since a wash over a navy card does nothing. */
+.page[data-page="security"] .gzs-sec--dark {
+  background: #17232B;
+  padding-bottom: 96px;
+}
+.page[data-page="security"] .gzs-sec--dark .gzs-eyebrow { color: rgba(255, 255, 255, .55); }
+.page[data-page="security"] .gzs-sec--dark .gzs-h2 { color: #ffffff; }
+.page[data-page="security"] .gzs-sec--dark .gzs-intro { color: rgba(255, 255, 255, .72); }
+
+.page[data-page="security"] .gzs-card--onDark {
+  background: rgba(255, 255, 255, .06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
+}
+.page[data-page="security"] .gzs-card--dark {
+  background: #17232B;
+  box-shadow: none;
+}
+.page[data-page="security"] .gzs-card--tint { background: rgba(23, 35, 43, .04); }
+
+.page[data-page="security"] .gzs-card--onDark .gzs-card__title,
+.page[data-page="security"] .gzs-card--dark .gzs-card__title { color: #ffffff; }
+.page[data-page="security"] .gzs-card--onDark .gzs-card__body,
+.page[data-page="security"] .gzs-card--dark .gzs-card__body { color: rgba(255, 255, 255, .72); }
+.page[data-page="security"] .gzs-card--onDark .gzs-card__n,
+.page[data-page="security"] .gzs-card--dark .gzs-card__n { color: rgba(255, 255, 255, .55); }
+
+.page[data-page="security"] .gzs-card--onDark:hover,
+.page[data-page="security"] .gzs-card--dark:hover,
+.page[data-page="security"] .gzs-card--tint:hover { background: inherit; transform: translateY(-2px); }
+.page[data-page="security"] .gzs-card--onDark:hover { background: rgba(255, 255, 255, .06); }
+.page[data-page="security"] .gzs-card--dark:hover { background: #17232B; }
+.page[data-page="security"] .gzs-card--tint:hover { background: rgba(23, 35, 43, .04); }
 
 /* ---- 03 · the two governance panels ---- */
 .page[data-page="security"] .gzs-panel {
@@ -303,7 +349,14 @@
 }
 
 /* ---- 07 · the certification table ---- */
+/* The kit moves the grid up to the container and drops the row box, so the
+   three columns are one track set across all six entries rather than six
+   independent ones — which is what stops the names, bodies and chips from
+   each aligning to their own row. The <li> steps out of the box tree to let
+   its three children become cells; the row hover goes with the row. */
 .page[data-page="security"] .gzs-certs {
+  display: grid;
+  grid-template-columns: 1.1fr 1.5fr 200px;
   margin: 40px auto 0;
   padding: 0;
   list-style: none;
@@ -311,20 +364,16 @@
   box-shadow: var(--gzs-ring);
   overflow: hidden;
 }
-.page[data-page="security"] .gzs-cert {
-  display: grid;
-  grid-template-columns: 1.1fr 1.5fr auto;
-  gap: 24px;
-  align-items: center;
-  padding: 22px 28px;
+.page[data-page="security"] .gzs-cert { display: contents; }
+.page[data-page="security"] .gzs-cert__name,
+.page[data-page="security"] .gzs-cert__body,
+.page[data-page="security"] .gzs-cert__cell {
   box-shadow: inset 0 -1px 0 rgba(23, 35, 43, .08);
-  transition: background 150ms cubic-bezier(.2,.6,.2,1);
 }
-.page[data-page="security"] .gzs-cert:hover { background: rgba(23, 35, 43, .03); }
-.page[data-page="security"] .gzs-cert__name { margin: 0; font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--gzs-ink); }
-.page[data-page="security"] .gzs-cert__body { margin: 0; font-size: 14px; line-height: 1.45; color: var(--gzs-muted); text-wrap: pretty; }
+.page[data-page="security"] .gzs-cert__name { margin: 0; padding: 22px 24px 22px 28px; font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--gzs-ink); }
+.page[data-page="security"] .gzs-cert__body { margin: 0; padding: 22px 24px 22px 0; font-size: 14px; line-height: 1.45; color: var(--gzs-muted); text-wrap: pretty; }
+.page[data-page="security"] .gzs-cert__cell { padding: 22px 28px 22px 0; display: flex; justify-content: flex-end; align-items: center; }
 .page[data-page="security"] .gzs-chip {
-  justify-self: end;
   white-space: nowrap;
   font-size: 12px;
   font-weight: 500;
@@ -384,8 +433,12 @@
 @media (max-width: 900px) {
   .page[data-page="security"] .gzs-split { grid-template-columns: 1fr; gap: 24px; }
   .page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .page[data-page="security"] .gzs-cert { grid-template-columns: 1fr auto; gap: 8px 20px; }
-  .page[data-page="security"] .gzs-cert__body { grid-column: 1 / -1; }
+  /* Two tracks: the name and its chip on one line, the body under both. The
+     name loses its bottom rule so one entry reads as one block. */
+  .page[data-page="security"] .gzs-certs { grid-template-columns: 1fr auto; }
+  .page[data-page="security"] .gzs-cert__name { grid-column: 1; padding: 20px 12px 6px 24px; box-shadow: none; }
+  .page[data-page="security"] .gzs-cert__cell { grid-column: 2; padding: 20px 24px 6px 0; align-items: start; box-shadow: none; }
+  .page[data-page="security"] .gzs-cert__body { grid-column: 1 / -1; padding: 0 24px 20px; }
 }
 @media (max-width: 700px) {
   .page[data-page="security"] .gzs-hero { padding: 64px 5vw 56px; }
@@ -411,4 +464,47 @@
   .page[data-page="security"] .gzs-card,
   .page[data-page="security"] .gzs-cert { transition: none; }
   .page[data-page="security"] .gzs-card:hover { transform: none; }
+}
+
+/* ==========================================================================
+   The footer, on this page only.
+
+   The kit turns it from navy to the orange, with the type in navy and a fine
+   woven texture over the fill — three repeating gradients at 3px, 4px and 7px.
+
+   Scoped to Security because that is the page that was asked for. The other
+   three pages keep the navy-on-white footer, so this one now differs from
+   them; the same block moved into assets/footer.css would take it sitewide.
+
+   The layout is ours, not the kit's: the kit's footer mockup sets its wordmark
+   at 22px where this site's is 52px, and that scale was a deliberate earlier
+   decision. Only the colour treatment is taken.
+
+   Contrast measured on the orange: the wordmark and the current nav item are
+   navy at 5.58:1, the positioning line and the other nav items 4.11:1, and the
+   legal line 3.07:1 — the kit's own alphas. The last two are under 4.5:1, so
+   the alphas are lifted rather than carried over: .78 -> .86 and .62 -> .78,
+   which is 4.72:1 and 4.11:1 and keeps the tier visibly apart.
+   ========================================================================== */
+.page[data-page="security"] .gz-footer {
+  background-color: #FF6A00;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.055) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.05) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 7px);
+  color: #17232B;
+}
+.page[data-page="security"] .gz-footer__mark { color: #17232B; }
+/* The slash is orange on white; on the orange it would disappear, so the
+   wordmark goes solid navy — which is what the kit's footer mark does. */
+.page[data-page="security"] .gz-footer__slash { color: #17232B; }
+.page[data-page="security"] .gz-footer__line { color: rgba(23, 35, 43, .86); }
+.page[data-page="security"] .gz-footer__nav a { color: rgba(23, 35, 43, .86); }
+.page[data-page="security"] .gz-footer__nav a:hover,
+.page[data-page="security"] .gz-footer__nav a:focus-visible,
+.page[data-page="security"] .gz-footer__nav a[aria-current="page"] { color: #17232B; }
+.page[data-page="security"] .gz-footer__sep { color: rgba(23, 35, 43, .45); }
+.page[data-page="security"] .gz-footer__legal {
+  border-top-color: rgba(23, 35, 43, .2);
+  color: rgba(23, 35, 43, .78);
 }
