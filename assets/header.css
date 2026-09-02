@@ -1,0 +1,71 @@
+/* ==========================================================================
+   The site header — light ground, and out of the way going down.
+
+   One sheet and one script, loaded by all four pages, for the same reason the
+   footer has its own: the two stylesheet families share no file, and a header
+   defined in each would have to be written twice and would drift.
+
+   Only the ground and the behaviour change here. Height, padding, layout, gap,
+   the wordmark, the navigation, the call to action and the language set are
+   the page stylesheets' own and are not touched — --header-h in particular,
+   which the Product page's lattice reads to pull itself up under the bar.
+   ========================================================================== */
+
+.page .site-header {
+  /* Was a solid var(--page). Now a translucent ground with the page blurred
+     through it, so the bar reads as sitting on the page rather than as a panel
+     laid over it. */
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(1.8) blur(14px);
+  backdrop-filter: saturate(1.8) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition:
+    transform 340ms cubic-bezier(0.2, 0.6, 0.2, 1),
+    background-color 240ms ease,
+    border-color 240ms ease,
+    backdrop-filter 240ms ease;
+  will-change: transform;
+}
+
+/* At rest against the top of the page the bar carries nothing at all — no
+   ground, no rule. On the Product page that lets the lattice run up under the
+   wordmark, which is what the hero was composed for. */
+.page .site-header[data-hdr="top"] {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+
+/* Once the page has moved under it, the ground and a hairline come in. */
+.page .site-header[data-hdr="pinned"] {
+  border-bottom-color: rgba(23, 35, 43, 0.07);
+}
+
+/* Going down, it leaves. position: sticky keeps its space in flow, so the
+   page does not jump when it goes or comes back. */
+.page .site-header[data-hdr="hidden"] {
+  transform: translateY(-100%);
+}
+
+/* With the mobile sheet open the bar stays put and goes near-opaque: the sheet
+   starts below it, so a transparent bar would put the wordmark over whatever
+   the page is showing behind. */
+.page .site-header[data-nav-open="true"] {
+  transform: none;
+  background: rgba(255, 255, 255, 0.96);
+  -webkit-backdrop-filter: saturate(1.8) blur(14px);
+  backdrop-filter: saturate(1.8) blur(14px);
+}
+
+/* A bar that comes and goes is motion. Anyone who has asked for less of it
+   keeps the header where it is — the ground still changes, since that is a
+   colour and not movement. */
+@media (prefers-reduced-motion: reduce) {
+  .page .site-header {
+    transition: background-color 240ms ease, border-color 240ms ease;
+  }
+  .page .site-header[data-hdr="hidden"] {
+    transform: none;
+  }
+}
