@@ -1,0 +1,347 @@
+/* ==========================================================================
+   About — implemented from GraphZero About Page.dc.html
+
+   Read out of the Claude Design project; sizes, colours, radii and insets are
+   the kit's own values. Same design system as the rest of the site, same
+   navy/orange/pink, so nothing needed reconciling.
+
+   Two things the kit does that this does not:
+
+   1. Its <europe-flow> loads D3 from unpkg.com at runtime — ~280KB of library
+      to run one Mercator projection over 18 fixed points. The projection is
+      deterministic, so it is precomputed and the network ships as a static
+      SVG: identical geometry, no third-party request. That also matters on
+      this page in particular, whose argument is that nothing leaves Europe.
+      The projection was checked against the map — Lisbon westernmost,
+      Bucharest easternmost, Stockholm northernmost, Athens southernmost,
+      Amsterdam left of and above Berlin and Paris.
+
+   2. It ships no media query at all. The breakpoints at the foot are ours.
+   ========================================================================== */
+
+.page[data-page="about"] {
+  --gza-ink: #17232B;
+  --gza-muted: #59666B;
+  --gza-quiet: #7E8A8E;
+  --gza-hair: rgba(23, 35, 43, .12);
+  --gza-ring: inset 0 0 0 1px rgba(23, 35, 43, .16);
+}
+
+.page[data-page="about"] .gza-wrap { max-width: 1152px; margin-inline: auto; }
+
+/* ---- the blade mark, at the three sizes the kit uses it ---- */
+.page[data-page="about"] .gza-mark { flex: 0 0 auto; width: 10px; height: 18px; display: block; }
+.page[data-page="about"] .gza-eyebrow--mono .gza-mark { width: 11px; height: 20px; }
+.page[data-page="about"] .gza-close__item .gza-mark { width: 14px; height: 25px; margin-top: 10px; }
+
+.page[data-page="about"] .gza-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gza-muted);
+}
+.page[data-page="about"] .gza-eyebrow--mono {
+  letter-spacing: .12em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.page[data-page="about"] .gza-eyebrow--invert { color: rgba(255, 255, 255, .55); }
+
+/* ---- 00 · the fold ---- */
+.page[data-page="about"] .gza-hero {
+  padding: 88px 5vw 96px;
+  max-width: 1300px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: none;
+}
+.page[data-page="about"] .gza-hero__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.page[data-page="about"] .gza-display {
+  margin: 28px 0 0;
+  max-width: 13ch;
+  font-size: clamp(3.5rem, 6.6vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  color: var(--gza-ink);
+}
+.page[data-page="about"] .gza-display__accent { color: #FF6A00; }
+.page[data-page="about"] .gza-display__stop { color: #FF2E93; }
+.page[data-page="about"] .gza-statements {
+  margin-top: 46px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 42ch;
+}
+.page[data-page="about"] .gza-statements p {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.24;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: var(--gza-ink);
+  text-wrap: pretty;
+}
+/* The kit lets the figure spill past its column on both sides. */
+.page[data-page="about"] .gza-hero__figure {
+  width: 122%;
+  margin-left: -11%;
+  max-width: 760px;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page[data-page="about"] .gza-flow { display: block; overflow: visible; }
+@keyframes gza-flow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -420; } }
+.page[data-page="about"] .gza-packet { animation-name: gza-flow; animation-timing-function: linear; animation-iteration-count: infinite; }
+.page[data-page="about"] .gza-hero__claim {
+  margin: 56px 0 0;
+  padding-top: 30px;
+  max-width: 104ch;
+  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .14);
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--gza-muted);
+  text-wrap: pretty;
+}
+
+/* ---- 01 · the story, on the navy ---- */
+.page[data-page="about"] .gza-story {
+  background: #17232B;
+  padding: 88px 5vw 96px;
+}
+.page[data-page="about"] .gza-story__grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 64px;
+  align-items: start;
+  margin-top: 40px;
+}
+.page[data-page="about"] .gza-portrait {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
+  height: 420px;
+}
+.page[data-page="about"] .gza-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page[data-page="about"] .gza-portrait__caption {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, .72);
+}
+.page[data-page="about"] .gza-story__body {
+  padding-left: 56px;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, .16);
+}
+.page[data-page="about"] .gza-h2 {
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(2.2rem, 3.6vw, 3.75rem);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  color: #ffffff;
+}
+.page[data-page="about"] .gza-story__lead {
+  margin: 28px 0 0;
+  max-width: 48ch;
+  font-size: 20px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, .72);
+  text-wrap: pretty;
+}
+.page[data-page="about"] .gza-story__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 36px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .4);
+  transition: box-shadow 150ms cubic-bezier(.2,.6,.2,1);
+}
+.page[data-page="about"] .gza-story__link:hover,
+.page[data-page="about"] .gza-story__link:focus-visible { box-shadow: inset 0 -1px 0 #FF6A00; color: #ffffff; }
+.page[data-page="about"] .gza-story__note {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, .55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---- 02 · the ecosystem ---- */
+.page[data-page="about"] .gza-eco { padding: 88px 5vw 96px; }
+.page[data-page="about"] .gza-eco__head { display: flex; align-items: baseline; gap: 24px; }
+.page[data-page="about"] .gza-eco__head .gza-eyebrow { white-space: nowrap; }
+.page[data-page="about"] .gza-eco__rule { flex: 1; height: 1px; background: var(--gza-hair); }
+.page[data-page="about"] .gza-eco__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 36px auto 0;
+  padding: 0;
+  list-style: none;
+}
+.page[data-page="about"] .gza-eco__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--gza-ring);
+  color: var(--gza-ink);
+  text-decoration: none;
+  transition: transform 250ms cubic-bezier(.2,.6,.2,1), background 150ms cubic-bezier(.2,.6,.2,1);
+}
+.page[data-page="about"] .gza-eco__card:hover,
+.page[data-page="about"] .gza-eco__card:focus-visible {
+  transform: translateY(-2px);
+  background: rgba(23, 35, 43, .04);
+  color: var(--gza-ink);
+}
+.page[data-page="about"] .gza-eco__shot { display: block; width: 100%; height: 220px; background: #ececec; }
+.page[data-page="about"] .gza-eco__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* The Aithos artwork is a wordmark on a flat ground rather than a photograph.
+   Covered, it is cropped top and bottom and reads as an empty panel; contained,
+   it sits whole on its own ground. The Stack's is a photograph and stays
+   covered. */
+.page[data-page="about"] .gza-eco__shot--mark { background: #EDECE8; }
+.page[data-page="about"] .gza-eco__shot--mark img { object-fit: contain; padding: 26px; box-sizing: border-box; }
+.page[data-page="about"] .gza-eco__body { display: flex; flex-direction: column; flex: 1; padding: 30px 34px 34px; }
+.page[data-page="about"] .gza-eco__n { display: flex; align-items: center; gap: 12px; font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--gza-muted); font-variant-numeric: tabular-nums; }
+.page[data-page="about"] .gza-eco__hair { flex: 1; height: 1px; background: var(--gza-hair); }
+.page[data-page="about"] .gza-eco__title { display: block; margin-top: 18px; max-width: 26ch; font-size: 22px; line-height: 1.18; letter-spacing: -0.025em; font-weight: 500; }
+.page[data-page="about"] .gza-eco__text { display: block; margin-top: 12px; max-width: 52ch; font-size: 15px; line-height: 1.5; color: var(--gza-muted); text-wrap: pretty; }
+.page[data-page="about"] .gza-eco__foot { margin-top: auto; padding-top: 26px; display: flex; flex-direction: column; gap: 6px; }
+.page[data-page="about"] .gza-eco__cta { font-size: 15px; font-weight: 500; white-space: nowrap; }
+.page[data-page="about"] .gza-eco__host { font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--gza-muted); white-space: nowrap; }
+
+/* ---- 03 · the close, on a woven white ---- */
+.page[data-page="about"] .gza-close {
+  background-color: #FFFFFF;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
+  padding: 96px 5vw 0;
+}
+.page[data-page="about"] .gza-close__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.page[data-page="about"] .gza-close__item { display: flex; gap: 18px; align-items: flex-start; }
+.page[data-page="about"] .gza-close__item p {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  color: var(--gza-ink);
+  text-wrap: balance;
+}
+.page[data-page="about"] .gza-close__cta { margin: 44px auto 0; padding-bottom: 28px; }
+.page[data-page="about"] .gza-pill {
+  display: inline-flex;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: 999px;
+  background: #17232B;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 150ms cubic-bezier(.2,.6,.2,1), opacity 150ms;
+}
+.page[data-page="about"] .gza-pill:hover,
+.page[data-page="about"] .gza-pill:focus-visible { transform: translateY(-1px); opacity: .9; color: #ffffff; }
+
+/* ---- the footer, orange and woven, on this page ----
+   The kit sets every line here in solid #17232B rather than the alphas the
+   Security page's footer uses, which measures 5.58:1 throughout. Scoped to
+   About; the two orange footers therefore differ slightly in ink. */
+.page[data-page="about"] .gz-footer {
+  background-color: #FF6A00;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.09) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgba(23,35,43,.05) 0 1px, transparent 1px 5px);
+  color: #17232B;
+}
+.page[data-page="about"] .gz-footer__mark,
+.page[data-page="about"] .gz-footer__slash,
+.page[data-page="about"] .gz-footer__line,
+.page[data-page="about"] .gz-footer__nav a,
+.page[data-page="about"] .gz-footer__legal { color: #17232B; }
+.page[data-page="about"] .gz-footer__sep { color: rgba(23, 35, 43, .45); }
+.page[data-page="about"] .gz-footer__legal { border-top-color: rgba(23, 35, 43, .2); }
+
+/* ---- scroll-driven, gated ---- */
+.page[data-page="about"] .gza-progress { display: none; }
+@supports (animation-timeline: scroll(root block)) {
+  .page[data-page="about"] .gza-progress {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 60;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, #FF6A00, #FF2E93);
+    animation: gza-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes gza-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@supports (animation-timeline: view()) {
+  .page[data-page="about"] .gza-reveal {
+    animation: gza-reveal both cubic-bezier(.2,.6,.2,1);
+    animation-timeline: view();
+    animation-range: entry 4% cover 26%;
+  }
+}
+@keyframes gza-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ---- responsive ---- */
+@media (max-width: 1000px) {
+  .page[data-page="about"] .gza-hero__grid { grid-template-columns: 1fr; gap: 40px; }
+  .page[data-page="about"] .gza-hero__figure { width: 100%; margin-left: 0; }
+  .page[data-page="about"] .gza-story__grid { grid-template-columns: 1fr; gap: 36px; }
+  .page[data-page="about"] .gza-story__body { padding-left: 0; box-shadow: none; }
+  .page[data-page="about"] .gza-eco__grid { grid-template-columns: 1fr; }
+  .page[data-page="about"] .gza-close__grid { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 700px) {
+  .page[data-page="about"] .gza-hero { padding: 56px 5vw 64px; }
+  .page[data-page="about"] .gza-story,
+  .page[data-page="about"] .gza-eco { padding: 64px 5vw 72px; }
+  .page[data-page="about"] .gza-close { padding-top: 64px; }
+  .page[data-page="about"] .gza-statements p { font-size: 21px; }
+  .page[data-page="about"] .gza-story__lead { font-size: 18px; }
+  .page[data-page="about"] .gza-eco__body { padding: 24px 24px 28px; }
+  .page[data-page="about"] .gza-hero__claim { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="about"] .gza-packet,
+  .page[data-page="about"] .gza-reveal,
+  .page[data-page="about"] .gza-progress { animation: none; }
+  .page[data-page="about"] .gza-eco__card,
+  .page[data-page="about"] .gza-pill,
+  .page[data-page="about"] .gza-story__link { transition: none; }
+  .page[data-page="about"] .gza-eco__card:hover,
+  .page[data-page="about"] .gza-pill:hover { transform: none; }
+}

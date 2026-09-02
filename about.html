@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="assets/site.css?v=45">
 <link rel="stylesheet" href="assets/footer.css?v=3">
 <link rel="stylesheet" href="assets/header.css?v=3">
+<link rel="stylesheet" href="assets/about.css?v=3">
 <link rel="icon" href="assets/graphzero-favicon.png?v=1" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=1">
 </head>
@@ -57,125 +58,96 @@
     </div>
   </header>
 
-  <main id="main">
+    <main id="main">
 
-    <!-- 01 — EUROPEAN POSITIONING
-         Type left on a narrow measure, and a field to the right that runs off
-         the page edge rather than sitting in a box. The second line of the
-         claim is the only orange in the fold apart from the node the field is
-         drawn around. -->
-    <section class="ab-hero" id="top">
-      <div class="wrap ab-hero__inner">
-        <div class="ab-hero__copy">
-          <h1 class="display ab-title" data-reveal>Made in Europe.<br>For <span class="hl">Europe.</span></h1>
-          <div class="ab-hero__lead">
-            <p class="lead" data-reveal>AI is changing how organizations work.</p>
-            <p class="lead" data-reveal>We believe Europe should be building the systems that shape that future.</p>
-            <p class="lead ab-hero__claim" data-reveal>graphzero is built in Europe for organizations that want to turn their knowledge into an advantage, without giving up control.</p>
+    <div class="gza-progress" aria-hidden="true"></div>
+
+    <!-- 00 · the fold -->
+    <section class="gza-hero" id="top">
+      <div class="gza-hero__grid">
+        <div class="gza-hero__copy">
+          <p class="gza-eyebrow gza-eyebrow--mono"><svg class="gza-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg>About</p>
+          <h1 class="gza-display">Made in Europe.<br><span class="gza-display__accent">For Europe<span class="gza-display__stop">.</span></span></h1>
+          <div class="gza-statements">
+            <p>AI is changing how organizations work.</p>
+            <p>We believe Europe should be building the systems that shape that future.</p>
           </div>
-
-          <!-- Europe as a network: a dot field in the shape of the landmass,
-               nodes on real city coordinates, and links that draw themselves
-               between them. It sits in the columns the copy leaves free, in
-               the row below the claim, so it never competes with it.
-               Decorative to a screen reader — the section says this in
-               words. -->
-          <figure class="ab-hero__net" aria-hidden="true">
-            <canvas data-europe-net></canvas>
-          </figure>
         </div>
+        <div class="gza-hero__figure"><svg class="gza-flow" viewBox="0 0 560 460" width="100%" height="auto" aria-hidden="true"><g fill="none" stroke="#FF6A00" stroke-opacity="0.16" stroke-width="1"><path d="M224.4 166.7 Q205.6 195.0 196.6 227.8"></path><path d="M317.1 164.9 Q261.9 206.0 196.6 227.8"></path><path d="M224.4 166.7 Q162.3 254.6 130.6 357.5"></path><path d="M317.1 164.9 Q239.3 276.1 130.6 357.5"></path><path d="M224.4 166.7 Q252.3 257.9 307.3 335.8"></path><path d="M317.1 164.9 Q325.8 251.2 307.3 335.8"></path><path d="M224.4 166.7 Q311.9 182.5 399.9 170.3"></path><path d="M317.1 164.9 Q358.9 161.0 399.9 170.3"></path><path d="M224.4 166.7 Q306.6 110.9 367.2 32.3"></path><path d="M317.1 164.9 Q331.5 94.6 367.2 32.3"></path><path d="M224.4 166.7 Q164.7 148.8 102.3 150.5"></path><path d="M317.1 164.9 Q208.5 174.9 102.3 150.5"></path><path d="M224.4 166.7 Q281.3 212.6 349.8 238.5"></path><path d="M317.1 164.9 Q339.3 199.1 349.8 238.5"></path><path d="M224.4 166.7 Q130.9 261.9 71.8 381.6"></path><path d="M317.1 164.9 Q211.8 292.9 71.8 381.6"></path><path d="M224.4 166.7 Q308.9 295.4 429.4 391.3"></path><path d="M317.1 164.9 Q391.3 269.1 429.4 391.3"></path><path d="M224.4 166.7 Q271.3 142.8 308.3 105.4"></path><path d="M317.1 164.9 Q307.9 135.9 308.3 105.4"></path><path d="M224.4 166.7 Q219.2 179.8 218.4 193.9"></path><path d="M317.1 164.9 Q270.1 187.3 218.4 193.9"></path><path d="M224.4 166.7 Q273.0 195.0 328.0 206.8"></path><path d="M317.1 164.9 Q325.9 185.0 328.0 206.8"></path><path d="M224.4 166.7 Q294.6 220.6 378.1 249.8"></path><path d="M317.1 164.9 Q354.4 202.5 378.1 249.8"></path><path d="M224.4 166.7 Q329.4 251.1 455.5 298.5"></path><path d="M317.1 164.9 Q397.0 220.6 455.5 298.5"></path><path d="M224.4 166.7 Q335.8 141.0 433.7 81.8"></path><path d="M317.1 164.9 Q368.7 114.0 433.7 81.8"></path><path d="M224.4 166.7 Q237.2 212.2 263.6 251.4"></path><path d="M317.1 164.9 Q297.3 212.5 263.6 251.4"></path><path d="M224.4 166.7 Q270.9 173.2 317.1 164.9"></path></g><g fill="none" stroke="#FF6A00" stroke-width="1.6" stroke-linecap="round"><path class="gza-packet" d="M224.4 166.7 Q205.6 195.0 196.6 227.8" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:0.00s"></path><path class="gza-packet" d="M317.1 164.9 Q261.9 206.0 196.6 227.8" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:0.35s"></path><path class="gza-packet" d="M224.4 166.7 Q162.3 254.6 130.6 357.5" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:0.70s"></path><path class="gza-packet" d="M317.1 164.9 Q239.3 276.1 130.6 357.5" stroke-dasharray="7 413" style="animation-duration:5.1s;animation-delay:1.05s"></path><path class="gza-packet" d="M224.4 166.7 Q252.3 257.9 307.3 335.8" stroke-dasharray="7 413" style="animation-duration:5.8s;animation-delay:1.40s"></path><path class="gza-packet" d="M317.1 164.9 Q325.8 251.2 307.3 335.8" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:1.75s"></path><path class="gza-packet" d="M224.4 166.7 Q311.9 182.5 399.9 170.3" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:2.10s"></path><path class="gza-packet" d="M317.1 164.9 Q358.9 161.0 399.9 170.3" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:0.00s"></path><path class="gza-packet" d="M224.4 166.7 Q306.6 110.9 367.2 32.3" stroke-dasharray="7 413" style="animation-duration:5.1s;animation-delay:0.35s"></path><path class="gza-packet" d="M317.1 164.9 Q331.5 94.6 367.2 32.3" stroke-dasharray="7 413" style="animation-duration:5.8s;animation-delay:0.70s"></path><path class="gza-packet" d="M224.4 166.7 Q164.7 148.8 102.3 150.5" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:1.05s"></path><path class="gza-packet" d="M317.1 164.9 Q208.5 174.9 102.3 150.5" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:1.40s"></path><path class="gza-packet" d="M224.4 166.7 Q281.3 212.6 349.8 238.5" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:1.75s"></path><path class="gza-packet" d="M317.1 164.9 Q339.3 199.1 349.8 238.5" stroke-dasharray="7 413" style="animation-duration:5.1s;animation-delay:2.10s"></path><path class="gza-packet" d="M224.4 166.7 Q130.9 261.9 71.8 381.6" stroke-dasharray="7 413" style="animation-duration:5.8s;animation-delay:0.00s"></path><path class="gza-packet" d="M317.1 164.9 Q211.8 292.9 71.8 381.6" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:0.35s"></path><path class="gza-packet" d="M224.4 166.7 Q308.9 295.4 429.4 391.3" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:0.70s"></path><path class="gza-packet" d="M317.1 164.9 Q391.3 269.1 429.4 391.3" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:1.05s"></path><path class="gza-packet" d="M224.4 166.7 Q271.3 142.8 308.3 105.4" stroke-dasharray="7 413" style="animation-duration:5.1s;animation-delay:1.40s"></path><path class="gza-packet" d="M317.1 164.9 Q307.9 135.9 308.3 105.4" stroke-dasharray="7 413" style="animation-duration:5.8s;animation-delay:1.75s"></path><path class="gza-packet" d="M224.4 166.7 Q219.2 179.8 218.4 193.9" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:2.10s"></path><path class="gza-packet" d="M317.1 164.9 Q270.1 187.3 218.4 193.9" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:0.00s"></path><path class="gza-packet" d="M224.4 166.7 Q273.0 195.0 328.0 206.8" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:0.35s"></path><path class="gza-packet" d="M317.1 164.9 Q325.9 185.0 328.0 206.8" stroke-dasharray="7 413" style="animation-duration:5.1s;animation-delay:0.70s"></path><path class="gza-packet" d="M224.4 166.7 Q294.6 220.6 378.1 249.8" stroke-dasharray="7 413" style="animation-duration:5.8s;animation-delay:1.05s"></path><path class="gza-packet" d="M317.1 164.9 Q354.4 202.5 378.1 249.8" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:1.40s"></path><path class="gza-packet" d="M224.4 166.7 Q329.4 251.1 455.5 298.5" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:1.75s"></path><path class="gza-packet" d="M317.1 164.9 Q397.0 220.6 455.5 298.5" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:2.10s"></path><path class="gza-packet" d="M224.4 166.7 Q335.8 141.0 433.7 81.8" stroke-dasharray="7 413" style="animation-duration:5.1s;animation-delay:0.00s"></path><path class="gza-packet" d="M317.1 164.9 Q368.7 114.0 433.7 81.8" stroke-dasharray="7 413" style="animation-duration:5.8s;animation-delay:0.35s"></path><path class="gza-packet" d="M224.4 166.7 Q237.2 212.2 263.6 251.4" stroke-dasharray="7 413" style="animation-duration:3.0s;animation-delay:0.70s"></path><path class="gza-packet" d="M317.1 164.9 Q297.3 212.5 263.6 251.4" stroke-dasharray="7 413" style="animation-duration:3.7s;animation-delay:1.05s"></path><path class="gza-packet" d="M224.4 166.7 Q270.9 173.2 317.1 164.9" stroke-dasharray="7 413" style="animation-duration:4.4s;animation-delay:1.40s"></path></g><circle cx="196.6" cy="227.8" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="130.6" cy="357.5" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="307.3" cy="335.8" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="399.9" cy="170.3" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="367.2" cy="32.3" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="102.3" cy="150.5" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="349.8" cy="238.5" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="71.8" cy="381.6" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="429.4" cy="391.3" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="308.3" cy="105.4" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="218.4" cy="193.9" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="328.0" cy="206.8" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="378.1" cy="249.8" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="455.5" cy="298.5" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="433.7" cy="81.8" r="2.6" fill="#17232B" opacity="0.55"></circle><circle cx="263.6" cy="251.4" r="2.6" fill="#17232B" opacity="0.55"></circle><g><circle cx="224.4" cy="166.7" r="5.4" fill="#FF6A00"></circle><text x="209.4" y="153.7" text-anchor="end" font-size="11" letter-spacing="1.2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#17232B">AMSTERDAM</text></g><g><circle cx="317.1" cy="164.9" r="5.4" fill="#FF2E93"></circle><text x="332.1" y="151.9" text-anchor="start" font-size="11" letter-spacing="1.2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#17232B">BERLIN</text></g></svg></div>
       </div>
-
+      <p class="gza-hero__claim">graphzero is built in Europe for organizations that want to turn their knowledge into an advantage, without giving up control.</p>
     </section>
 
-    <!-- 02 — THE STORY
-         One editorial feature rather than a heading with a picture beside it:
-         the copy fills the left half, the portrait the right, and the whole
-         thing is the link — so the card answers to the pointer as one object
-         and clicking anywhere on it opens the article.
-
-         The cue is a span, not a nested anchor, because the feature around it
-         is already the anchor. Same words, same destination. -->
-    <section class="wrap sec ab-story" id="story">
-      <a class="ab-feature" href="https://fd.nl/tech-en-innovatie/1598537/als-onze-kinderen-opgroeien-met-kunstmatige-intelligentie-wil-je-meer-controle-over-de-modellen" target="_blank" rel="noopener" data-reveal>
-        <div class="ab-feature__copy">
-          <p class="eyebrow ab-feature__label">The story</p>
-          <h2 class="ab-feature__head">From Ascending AI to graphzero</h2>
-          <p class="ab-feature__lead">Founder &amp; CEO Lennard Zwart on why greater AI capability demands greater control &mdash; and the thinking behind graphzero.</p>
-          <span class="ab-feature__cue">Read the story in Het Financieele Dagblad &rarr;<span class="vh"> Opens fd.nl in a new tab</span></span>
-        </div>
-
-        <div class="ab-feature__media">
-          <img src="assets/media/founder-lennard-1200.jpg"
-               srcset="assets/media/founder-lennard-600.jpg 600w,
-                       assets/media/founder-lennard-1200.jpg 1200w"
-               sizes="(min-width: 900px) 50vw, 100vw"
-               alt="Lennard Zwart, founder and CEO of graphzero"
-               width="1200" height="800" loading="lazy" decoding="async">
-        </div>
-      </a>
-    </section>
-
-    <!-- 03 / 04 — THE ECOSYSTEM
-         Research first, then Amsterdam — and read as one list rather than two
-         cards side by side. Numbered rows on a shared rule: the number orders
-         them, the hairline joins them, and the picture sits at the end of the
-         row instead of under a block of copy in a box. Two entries of one
-         system, not two objects to choose between. -->
-    <section class="band ab-band-grey" id="ecosystem">
-      <div class="wrap sec sec--pb">
-        <p class="eyebrow" data-reveal>The graphzero ecosystem</p>
-
-        <div class="ab-eco">
-          <a class="ab-eco__item" href="https://aithos.org/" target="_blank" rel="noopener" data-reveal>
-            <span class="ab-eco__num" aria-hidden="true">01</span>
-            <div class="ab-eco__text">
-              <h2 class="ab-eco__title">Research on autonomy and pluralism in AI</h2>
-              <p class="ab-eco__body">graphzero is part of the Aithos ecosystem, which researches how increasingly autonomous AI systems can remain pluralistic, controllable, and aligned with human interests.</p>
-              <span class="ab-eco__cue">Explore Aithos &rarr;</span>
-              <span class="vh">Opens aithos.org in a new tab</span>
+    <!-- 01 · the story -->
+    <section class="gza-story" id="story">
+      <div class="gza-wrap">
+        <p class="gza-eyebrow gza-eyebrow--invert"><svg class="gza-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF6A00"></path></svg>The story</p>
+        <div class="gza-story__grid">
+          <div>
+            <div class="gza-portrait">
+              <img src="assets/media/founder-lennard-1200.jpg"
+                   srcset="assets/media/founder-lennard-600.jpg 600w, assets/media/founder-lennard-1200.jpg 1200w"
+                   sizes="(max-width: 1000px) 92vw, 380px"
+                   alt="Lennard Zwart, founder and CEO of graphzero" width="1200" height="800" loading="lazy" decoding="async">
             </div>
-            <div class="ab-eco__media">
-              <img src="assets/media/eco-aithos-1200.jpg"
-                   srcset="assets/media/eco-aithos-600.jpg 600w,
-                           assets/media/eco-aithos-1200.jpg 1200w"
-                   sizes="(min-width: 900px) 32vw, 100vw"
-                   alt="" width="1200" height="800" loading="lazy" decoding="async">
-            </div>
-          </a>
-
-          <a class="ab-eco__item" href="https://thestack.ai/" target="_blank" rel="noopener" data-reveal>
-            <span class="ab-eco__num" aria-hidden="true">02</span>
-            <div class="ab-eco__text">
-              <h2 class="ab-eco__title">Building within Amsterdam&rsquo;s AI ecosystem</h2>
-              <p class="ab-eco__body">graphzero is part of The Stack, Amsterdam&rsquo;s AI hub bringing together AI companies, researchers, and organizations working to build the next generation of AI.</p>
-              <span class="ab-eco__cue">Explore The Stack &rarr;</span>
-              <span class="vh">Opens thestack.ai in a new tab</span>
-            </div>
-            <div class="ab-eco__media">
-              <img src="assets/media/eco-hub-1200.jpg"
-                   srcset="assets/media/eco-hub-600.jpg 600w,
-                           assets/media/eco-hub-1200.jpg 1200w"
-                   sizes="(min-width: 900px) 32vw, 100vw"
-                   alt="" width="1200" height="800" loading="lazy" decoding="async">
-            </div>
-          </a>
+            <p class="gza-portrait__caption">Lennard Zwart, founder and CEO of graphzero</p>
+          </div>
+          <div class="gza-story__body">
+            <h2 class="gza-h2">From Ascending AI to graphzero</h2>
+            <p class="gza-story__lead">Founder &amp; CEO Lennard Zwart on why greater AI capability demands greater control &mdash; and the thinking behind graphzero.</p>
+            <a class="gza-story__link" href="https://fd.nl/tech-en-innovatie/1598537/als-onze-kinderen-opgroeien-met-kunstmatige-intelligentie-wil-je-meer-controle-over-de-modellen" target="_blank" rel="noopener">Read the story in Het Financieele Dagblad &rarr;</a>
+            <p class="gza-story__note">Opens fd.nl in a new tab</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 05 — THE CLOSE
-         Navy, because on this site navy is where the page asks for
-         something. The statement is the one the Early Access page closes on,
-         so the two pages end on the same sentence rather than on two
-         different versions of it. -->
-    <section class="band band--dark dark ab-close">
-      <div class="wrap sec sec--pb ab-close__inner">
-        <p class="ab-close__head" data-reveal>The amount of knowledge organizations create is growing faster than ever.</p>
-        <p class="ab-close__turn" data-reveal>The opportunity is to turn that growing body of knowledge into an organizational advantage.</p>
-        <p class="ab-close__cta" data-reveal>
-          <a class="btn btn--accent btn--lg" href="early-access.html">Become a design partner &rarr;</a>
-        </p>
+    <!-- 02 · the ecosystem -->
+    <section class="gza-eco" id="ecosystem">
+      <div class="gza-wrap gza-eco__head">
+        <p class="gza-eyebrow"><svg class="gza-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF6A00"></path></svg>The graphzero ecosystem</p>
+        <span class="gza-eco__rule" aria-hidden="true"></span>
+      </div>
+      <ul class="gza-wrap gza-eco__grid">
+        <li>
+          <a class="gza-eco__card gza-reveal" href="https://aithos.org/" target="_blank" rel="noopener">
+            <span class="gza-eco__shot gza-eco__shot--mark"><img src="assets/media/eco-aithos-1200.jpg"
+                     srcset="assets/media/eco-aithos-600.jpg 600w, assets/media/eco-aithos-1200.jpg 1200w"
+                     sizes="(max-width: 1000px) 92vw, 564px"
+                     alt="" width="1200" height="800" loading="lazy" decoding="async"></span>
+            <span class="gza-eco__body">
+              <span class="gza-eco__n"><span>01</span><span class="gza-eco__hair" aria-hidden="true"></span></span>
+              <span class="gza-eco__title">Research on autonomy and pluralism in AI</span>
+              <span class="gza-eco__text">graphzero is part of the Aithos ecosystem, which researches how increasingly autonomous AI systems can remain pluralistic, controllable, and aligned with human interests.</span>
+              <span class="gza-eco__foot"><span class="gza-eco__cta">Explore Aithos &rarr;</span><span class="gza-eco__host">opens aithos.org in a new tab</span></span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="gza-eco__card gza-reveal" href="https://thestack.ai/" target="_blank" rel="noopener">
+            <span class="gza-eco__shot"><img src="assets/media/eco-hub-1200.jpg"
+                     srcset="assets/media/eco-hub-600.jpg 600w, assets/media/eco-hub-1200.jpg 1200w"
+                     sizes="(max-width: 1000px) 92vw, 564px"
+                     alt="" width="1200" height="800" loading="lazy" decoding="async"></span>
+            <span class="gza-eco__body">
+              <span class="gza-eco__n"><span>02</span><span class="gza-eco__hair" aria-hidden="true"></span></span>
+              <span class="gza-eco__title">Building within Amsterdam&rsquo;s AI ecosystem</span>
+              <span class="gza-eco__text">graphzero is part of The Stack, Amsterdam&rsquo;s AI hub bringing together AI companies, researchers, and organizations working to build the next generation of AI.</span>
+              <span class="gza-eco__foot"><span class="gza-eco__cta">Explore The Stack &rarr;</span><span class="gza-eco__host">opens thestack.ai in a new tab</span></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 03 · the close -->
+    <section class="gza-close">
+      <div class="gza-wrap gza-close__grid">
+        <div class="gza-close__item"><svg class="gza-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg><p>The amount of knowledge organizations create is growing faster than ever.</p></div>
+        <div class="gza-close__item"><svg class="gza-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg><p>The opportunity is to turn that growing body of knowledge into an organizational advantage.</p></div>
+      </div>
+      <div class="gza-wrap gza-close__cta">
+        <a class="gza-pill" href="early-access.html">Become a design partner &rarr;</a>
       </div>
     </section>
 
