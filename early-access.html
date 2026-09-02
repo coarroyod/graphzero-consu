@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=17">
+<link rel="stylesheet" href="assets/site.css?v=18">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -59,12 +59,12 @@
          first of them is one screen down, so opening on a third would say the
          same thing twice before the claim has landed. -->
     <section class="hero" id="top">
-      <div class="wrap hero__inner ea-fold">
 
-        <!-- One column, one hierarchy: label, claim, the setup, the answer,
-             and the CTA closing it off above a rule. The two paragraphs sat
-             in their own two-column block before, which read as a second
-             thought under the headline rather than as part of it. -->
+      <!-- One column of type, held to a measure, vertically centred in a fold
+           of declared height. The height is the point: the air above and below
+           the copy is a set amount rather than whatever the paragraphs happen
+           to leave over. -->
+      <div class="wrap hero__inner ea-fold">
         <div class="ea-fold__copy">
           <p class="eyebrow ea-eyebrow" data-reveal>Early access</p>
           <h1 class="display ea-title" data-reveal>Turn what your people know into what your company knows.</h1>
@@ -75,21 +75,26 @@
             <a class="link-underline ea-cta-row__alt" href="#product">See how it works &darr;</a>
           </div>
         </div>
+      </div>
 
-        <!-- The knowledge graph. The design system names this as its one
-             exception to flatness — "the knowledge-graph point cloud, which
-             sits on white behind the hero type" — and it is what the fold
-             was missing: the copy says knowledge is fragmented and then
-             brought together, and until now nothing showed it.
+      <!-- The knowledge graph, and the fold's ground rather than a picture
+           beside it. The design system asks for exactly this — "the
+           knowledge-graph point cloud, which sits on white behind the hero
+           type" — so it fills the painted panel, weighted to the right of it
+           and cropped by its edge, instead of sitting in a box of its own in
+           the second column. Cropping is what stops it reading as a placed
+           graphic: it continues past the panel.
 
-             Drawn on canvas rather than authored as SVG: the whole figure is
-             thirty-odd points and the edges between them, which is a few
-             lines of geometry and would be several hundred of path data.
-             Decorative to a screen reader — the sentence beside it is the
-             accessible version of the same idea. -->
-        <figure class="ea-fold__figure" aria-hidden="true">
-          <canvas data-graph-hero></canvas>
-        </figure>
+           Between the panel (z-index 0) and the copy (3), so the type always
+           wins. Below the breakpoint it stops being a layer and becomes a
+           block under the copy, because type over a drawing on a phone is a
+           legibility problem and there is no room to keep them apart.
+
+           Canvas rather than SVG: thirty-odd points and their edges is a few
+           lines of geometry against several hundred of path data. Decorative
+           to a screen reader — the sentence above it says the same thing. -->
+      <div class="ea-fold__graph" aria-hidden="true">
+        <canvas data-graph-hero></canvas>
       </div>
     </section>
 
@@ -231,7 +236,7 @@
 
 </div>
 
-<script src="assets/site.js?v=17" defer></script>
+<script src="assets/site.js?v=18" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>

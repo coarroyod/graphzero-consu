@@ -3620,79 +3620,76 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- 01 the fold ----
 
-   A composition, not a stack. Copy left, the knowledge graph right, the two
-   weighted so neither wins: the type column is the wider of the two, and the
-   graph is given a square it fills rather than a leftover gap.
+   Not two columns any more. The type is one column held to a measure on the
+   left, and the graph is the fold's ground: it fills the painted panel,
+   weighted right and cropped by the panel edge, underneath the copy rather
+   than beside it.
 
-   What this fixes, in order: the headline came in at the landing fold's own
-   display size and, ranged left across the full container, it was the only
-   thing on the first screen; the two paragraphs sat in a separate two-column
-   block under it and read as a footnote; the CTA floated below all of it with
-   nothing tying it to the composition; and the right half was empty. */
+   That is what the two-column version got wrong. A square figure in its own
+   column is a picture placed next to some words — it can only ever be as big
+   as the column allows, and the space around it belongs to nothing. As a
+   layer it is the largest thing in the fold, cropped rather than framed, and
+   the empty right-hand side stops being empty.
+
+   The fold also has a declared height, so the air above and below the copy is
+   a set amount rather than whatever the paragraphs happen to leave over. That
+   is the difference between spacious and unfinished. */
+
 .page[data-page="early-access"] .ea-fold {
-  padding-block: clamp(3rem, 7vh, 5.5rem);
-  gap: var(--space-12);
-  align-items: center;
-  justify-items: stretch;
-}
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-fold {
-    /* The type column leads. A 1:1 split made the graph argue with the
-       headline for the fold; at 1.08:0.92 it accompanies it. */
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    gap: var(--section-sm);
-    padding-block: clamp(3.5rem, 8vh, 6.5rem);
-  }
+  position: relative;
+  z-index: 3;
+  min-height: clamp(30rem, 70vh, 42rem);
+  align-content: center;
+  justify-items: start;
+  gap: 0;
+  padding-block: clamp(3.5rem, 8vh, 6rem);
 }
 
 .page[data-page="early-access"] .ea-fold__copy {
   display: grid;
-  align-content: center;
   justify-items: start;
-  max-width: 36rem;
+  /* Short of half the container, so the graph's dense middle is never behind
+     a line of type. The measure is what keeps the two apart, not a mask. */
+  max-width: 33rem;
+}
+@media (min-width: 1180px) {
+  .page[data-page="early-access"] .ea-fold__copy { max-width: 35rem; }
 }
 
+/* The rhythm down the column: label, the claim, a clear break, the two
+   paragraphs as one block, then the close. The steps are uneven on purpose —
+   1.5 / 2.5 / 1 / 2 — so the eye reads groups rather than a list of evenly
+   spaced things. */
 .page[data-page="early-access"] .ea-eyebrow { margin: 0 0 var(--space-6); }
 
-/* Still oversized, and no longer the whole fold. The landing display size is
-   set against the full container width; this one lives in a column a little
-   over half of it, so the same value ran the headline to the bottom of the
-   screen on its own.
-
-   The measure is what holds the shape. At 14ch it breaks two and two —
-   "Turn what your / people know / into what your / company knows." — which is
-   the sentence's own parallel falling on the line breaks. Widening it to
-   force three lines breaks that pairing and makes the headline dominant
-   again, which is the thing this was fixing. */
 .page[data-page="early-access"] .ea-title {
   margin: 0;
   max-width: 14ch;
   font-size: clamp(2.375rem, 3.95vw, 3.75rem);
-  line-height: 1.0;
+  line-height: 1.02;
   letter-spacing: -0.042em;
   color: var(--heading);
 }
 .page[data-page="early-access"] .hero .display.ea-title { font-size: clamp(2.375rem, 3.95vw, 3.75rem); }
 
-/* The setup and the answer are one block under the claim, not a separate
-   layout: close together, on one measure, the answer carrying full ink so
-   the eye lands on it last. */
 .page[data-page="early-access"] .ea-fold__setup {
-  margin: var(--space-8) 0 0;
-  max-width: 46ch;
+  margin: clamp(1.75rem, 2.4vw, 2.5rem) 0 0;
+  max-width: 44ch;
 }
 .page[data-page="early-access"] .ea-fold__answer {
   margin: var(--space-4) 0 0;
-  max-width: 46ch;
+  max-width: 44ch;
   color: var(--heading);
 }
 
-/* Closed off by a rule that runs the copy column, so the CTA is the bottom
-   edge of the block rather than something resting under it. */
+/* The close. The rule sits nearer the paragraph it follows than the button it
+   precedes, so it reads as the copy block finishing rather than as a line
+   drawn between two unrelated things — which is what the symmetrical gap was
+   doing. */
 .page[data-page="early-access"] .ea-cta-row {
   width: 100%;
-  margin-top: var(--space-8);
-  padding-top: var(--space-8);
+  margin-top: clamp(1.75rem, 2.4vw, 2.25rem);
+  padding-top: var(--space-6);
   border-top: 1px solid var(--line);
   display: flex;
   flex-wrap: wrap;
@@ -3701,28 +3698,33 @@ plainest thing in the drawing rather than the most filled. */
 }
 .page[data-page="early-access"] .ea-cta-row__alt { color: var(--body); }
 
-/* The graph's box. Square, because the drawing is laid out in a unit square
-   and a letterbox would flatten the clusters against each other. */
-.page[data-page="early-access"] .ea-fold__figure {
-  margin: 0;
-  position: relative;
-  width: 100%;
-  max-width: 34rem;
-  aspect-ratio: 1 / 1;
-  justify-self: center;
+/* The graph layer. Inset and radius match .hero::before exactly, so it is
+   clipped to the painted panel and reads as its surface. */
+.page[data-page="early-access"] .ea-fold__graph {
+  position: absolute;
+  inset: var(--space-2);
+  z-index: 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  pointer-events: none;
 }
-@media (min-width: 900px) {
-  .page[data-page="early-access"] .ea-fold__figure { justify-self: end; }
-}
-/* Shorter on a phone: at full square it pushes the CTA off the first screen,
-   and the drawing reads perfectly well in a wider box. */
-@media (max-width: 620px) {
-  .page[data-page="early-access"] .ea-fold__figure { aspect-ratio: 5 / 4; max-width: none; }
-}
-.page[data-page="early-access"] .ea-fold__figure canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+.page[data-page="early-access"] .ea-fold__graph canvas { display: block; width: 100%; height: 100%; }
+
+/* Below the breakpoint there is no room to keep type and drawing apart, so
+   the layer becomes a block under the copy and the fold gives up its
+   declared height. */
+@media (max-width: 899px) {
+  .page[data-page="early-access"] .ea-fold {
+    min-height: 0;
+    padding-bottom: var(--space-8);
+  }
+  .page[data-page="early-access"] .ea-fold__graph {
+    position: static;
+    inset: auto;
+    height: clamp(14rem, 44vw, 20rem);
+    margin: 0 var(--gutter) clamp(2.5rem, 7vw, 4rem);
+    border-radius: var(--radius-md);
+  }
 }
 
 /* ---- 02 the product ---- */

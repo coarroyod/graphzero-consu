@@ -1013,7 +1013,7 @@
   var HUB = { x: 0.52, y: 0.5 };
   var RINGS = 4, PER = 6;
 
-  var nodes = [{ tx: HUB.x, ty: HUB.y, r: 4.6, hub: true }];
+  var nodes = [{ tx: HUB.x, ty: HUB.y, r: 4.6, a: 1, hub: true }];
   var edges = [];
   var centres = [];
 
@@ -1022,13 +1022,13 @@
     var cx = HUB.x + Math.cos(a) * 0.295;
     var cy = HUB.y + Math.sin(a) * 0.295;
     var ci = nodes.length;
-    nodes.push({ tx: cx, ty: cy, r: 3.1 });
+    nodes.push({ tx: cx, ty: cy, r: 3.1, a: 0.8 });
     centres.push(ci);
     edges.push([0, ci]);
     for (var i = 0; i < PER; i++) {
       var aa = rand() * TAU;
       var rr = 0.058 + rand() * 0.072;
-      nodes.push({ tx: cx + Math.cos(aa) * rr, ty: cy + Math.sin(aa) * rr * 0.94, r: 1.9 });
+      nodes.push({ tx: cx + Math.cos(aa) * rr, ty: cy + Math.sin(aa) * rr * 0.94, r: 1.9, a: 0.55 });
       edges.push([ci, nodes.length - 1]);
     }
   }
@@ -1051,7 +1051,7 @@
     C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
   }
 
-  var W = 0, H = 0, S = 0, PAD = 0;
+  var W = 0, H = 0, S = 0, OX = 0, OY = 0;
   function resize() {
     var box = canvas.getBoundingClientRect();
     if (!box.width || !box.height) return false;
@@ -1060,17 +1060,32 @@
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    /* The unit square is mapped into the shorter side and centred, so the
-       clusters keep their spacing whatever shape the slot is. */
-    PAD = 0.06;
-    S = Math.min(W, H) * (1 - PAD * 2);
+
+    /* The unit square is placed, not just scaled. On the wide panel it is
+       taller than the panel and hangs off the right edge — the panel crops
+       it, which is what makes it read as the fold's surface rather than as a
+       picture sitting in it. Sized against the height so it stays the largest
+       thing in the fold, and capped against the width so it can never reach
+       back across the type.
+
+       Stacked under the copy on a phone the slot is its own block, so there
+       it is simply centred and fits. */
+    if (W / H > 1.3) {
+      S = Math.min(H * 1.22, W * 0.72);
+      OX = W * 1.05 - S;
+      OY = (H - S) / 2;
+    } else {
+      S = Math.min(W, H) * 0.94;
+      OX = (W - S) / 2;
+      OY = (H - S) / 2;
+    }
     return true;
   }
 
   function px(n, k, t, drift) {
     var e = 1 - Math.pow(1 - t, 3);              /* easeOutCubic */
     var u = n['s' + k] + (n['t' + k] - n['s' + k]) * e;
-    var o = (k === 'x' ? (W - S) / 2 : (H - S) / 2);
+    var o = (k === 'x' ? OX : OY);
     var wob = drift ? Math.sin(drift * n.dr + n.ph + (k === 'y' ? 1.7 : 0)) * 1.1 : 0;
     return o + u * S + wob;
   }
@@ -1099,8 +1114,11 @@
       var n = nodes[j];
       ctx.beginPath();
       ctx.fillStyle = n.hub ? C.accent : C.ink;
-      /* Scattered points sit lighter; they firm up as they settle. */
-      ctx.globalAlpha = n.hub ? Math.min(1, 0.25 + t) : 0.34 + 0.66 * t;
+      /* Scattered points sit lighter and firm up as they settle, each to its
+         own weight — the hub full, the cluster centres behind it, the leaves
+         quietest. At this size a cloud of equal dots would read as texture
+         over the type instead of as a structure behind it. */
+      ctx.globalAlpha = n.a * (0.3 + 0.7 * t);
       ctx.arc(px(n, 'x', t, drift), px(n, 'y', t, drift), n.r * (0.55 + 0.45 * t), 0, TAU);
       ctx.fill();
     }
