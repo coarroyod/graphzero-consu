@@ -3621,6 +3621,503 @@ plainest thing in the drawing rather than the most filled. */
 
 /* ---- 01 the fold ----
 
+   Three bands down the page, not two columns across it.
+
+        eyebrow + headline        held to the container
+        ─── the network ───       full bleed, past both gutters
+        copy            ask       asymmetric, neither half the page
+
+   The previous version was type beside a picture, and no amount of resizing
+   fixes that: a drawing in the other column is always a drawing in the other
+   column. Here the graph is the rule between the two halves of the fold. It
+   is structural, so it cannot read as decoration, and it crosses the page
+   edge, so the composition stops being a grid of boxes.
+
+   The painted panel is off. It is a rounded rectangle — a card — and the band
+   has to reach past it. */
+.page[data-page="early-access"] .hero::before { content: none; }
+
+/* The fold is sized to land inside a laptop screen: the ask is the point of
+   the page and it cannot sit below the first fold. The air comes out of the
+   band and its margins rather than the type, which keeps the headline the
+   dominant element. */
+.page[data-page="early-access"] .hero {
+  padding-top: clamp(2.75rem, 7vh, 5rem);
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
+}
+
+/* The headline runs to the container now that nothing shares the row with
+   it, so it is set considerably larger than it was in the column. The measure
+   is what leaves the short last line and the air to the right of it — that
+   gap is the composition's, not a remainder. */
+.page[data-page="early-access"] .ea-eyebrow { margin: 0 0 var(--space-6); }
+.page[data-page="early-access"] .ea-title {
+  margin: 0;
+  max-width: 19ch;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.97;
+  letter-spacing: -0.045em;
+  color: var(--heading);
+}
+.page[data-page="early-access"] .hero .display.ea-title { font-size: clamp(2.5rem, 6vw, 5rem); }
+
+/* The band. Full width of the page rather than of the container, and taller
+   than the drawing needs, so the graph is cropped top and bottom and reads as
+   a slice of something that continues past it. */
+.page[data-page="early-access"] .ea-fold__band {
+  position: relative;
+  width: 100%;
+  /* Trimmed to pay for the larger first paragraph. The copy grew by about
+     sixty pixels when it took its proper size, and the ask has to stay inside
+     the first screen — so the height comes off the band, which has it to
+     spare, rather than off the type, which is the point of the fold. */
+  height: clamp(7.5rem, 13vw, 11rem);
+  margin-block: clamp(1.75rem, 3.2vw, 3rem);
+}
+.page[data-page="early-access"] .ea-fold__band canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Copy and ask on one row, deliberately unequal: the copy takes what it
+   needs on a reading measure and the ask takes only its own width, so the
+   space between them changes with the viewport instead of being a fixed
+   half-and-half. Set on the last line of the copy rather than its top. */
+.page[data-page="early-access"] .ea-fold__foot {
+  display: grid;
+  gap: var(--space-12);
+}
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-fold__foot {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--section-sm);
+    align-items: end;
+  }
+}
+/* The two paragraphs under the fold are not the same thing said twice: the
+   first is the problem and the second is the answer to it, and until now they
+   were the same size, a line apart, with the answer carrying the darker ink —
+   which read as one flat block with the emphasis in the wrong half.
+
+   One measure for both, so their edges line up and the block reads as
+   deliberately placed rather than as body text that happened to land there.
+   Everything separating them is type: size, ink, and the space between. No
+   label, no rule, no second colour. */
+.page[data-page="early-access"] .ea-fold__copy {
+  display: grid;
+  /* Wide enough for a comfortable line at the larger size, short enough that
+     the first paragraph breaks over four lines rather than running the
+     column. */
+  max-width: 30rem;
+  /* Twice what it was. At a line's distance the two read as one paragraph
+     broken in half; at this distance the second is clearly a response. */
+  gap: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+/* The problem. The primary supporting text, and the thing the headline hands
+   off to — so it takes full ink and sits a step above body size. */
+.page[data-page="early-access"] .ea-fold__setup {
+  font-size: clamp(1.1875rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.42;
+  letter-spacing: -0.011em;
+  color: var(--heading);
+  max-width: none;
+}
+
+/* The answer. Secondary, not quiet: a step down in size and back to the body
+   ink, with the space above doing the work of separating it. */
+.page[data-page="early-access"] .ea-fold__answer {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--body);
+  max-width: none;
+}
+
+/* The one word in the sentence that is the subject of it. Full ink and the
+   system's single heading weight — the same emphasis a heading uses, at body
+   size. Not the accent: orange measures 3.8:1 on this ground and cannot
+   carry text this small, and a coloured word here would be louder than the
+   sentence it sits in. */
+.page[data-page="early-access"] .ea-fold__mark {
+  color: var(--heading);
+  font-weight: var(--weight-heading);
+}
+
+/* No rule above the ask any more — the band is the fold's rule, and a second
+   hairline this close to it would be one horizontal too many. */
+.page[data-page="early-access"] .ea-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+}
+.page[data-page="early-access"] .ea-cta-row__alt { color: var(--body); }
+
+/* ---- 02 the product ---- */
+.page[data-page="early-access"] .ea-sec-head { padding-top: 0; }
+.page[data-page="early-access"] .ea-showcase { margin-top: var(--section-sm); }
+
+/* The flow figure sits on the section's own white.
+
+   The slot ships a near-white textured plate, which existed to read as a
+   panel against the grey this section used to carry. The section is white
+   now, so the plate has nothing left to separate itself from — measured, it
+   is #F8F8F8 against #FFFFFF, which is not a panel, just a faint seam around
+   the drawing. Dropping it puts the figure and the section on one ground.
+
+   `background`, not `background-image: none`: the base .showcase__visual
+   fills #ececec behind the plate, and clearing only the image would expose
+   that grey instead of the white this is for. */
+.page[data-page="early-access"] .showcase__visual--flow { background: transparent; }
+
+/* ---- 04 the design-partner sequence ----
+
+   The ask and the four chapters are one composition, in one pinned block.
+   They used to be two sections stacked, which put a screen of empty navy
+   between the statement and the thing it introduces; now the heading holds
+   still at the top of the pin while the track runs beneath it, so the reader
+   never loses what the four are an answer to.
+
+   The head is one row — statement left, what it means right, sharing a
+   baseline — rather than three stacked blocks. That row is most of the
+   vertical space that used to sit between the heading and chapter 01.
+
+   The figure that stood beside the heading is gone. The horizontal run is the
+   movement here; a second animation next to it was two things doing the same
+   job and neither of them well. */
+
+.page[data-page="early-access"] .ea-hscroll {
+  --page-inset: max(var(--gutter), calc((100vw - var(--container)) / 2));
+  position: relative;
+}
+
+/* ---- the head ----
+
+   Label, statement, and the sentence that qualifies it, in one column and in
+   that order. They were two columns bottom-aligned, which put the sentence
+   133px to the right of the statement and 44px lower than it — detached in
+   both directions and floating low on the right rather than belonging to the
+   heading it explains.
+
+   The rhythm is what groups them: 24 down to the statement, 17 down to the
+   sentence, then a bigger step to the track. Tight inside the introduction,
+   open after it, so the three read as one block and the sequence reads as the
+   next thing rather than as more of the same. */
+.page[data-page="early-access"] .ea-hscroll__head {
+  display: grid;
+  /* Left-ranged, so all three start on the container's own margin. The measure
+     is capped on the children and never here: this element is the .wrap, and
+     narrowing it would beat the container's width and let its auto margins
+     centre the whole introduction in the page. */
+  justify-items: start;
+}
+.page[data-page="early-access"] .ea-hscroll__head .eyebrow { margin: 0 0 var(--space-6); }
+
+.page[data-page="early-access"] .ea-open__head {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(1.875rem, 3.2vw, 2.875rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-h2);
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+  text-wrap: balance;
+}
+/* Close enough to the statement to be read as part of it, and left clearly
+   secondary by size and ink rather than by distance. */
+.page[data-page="early-access"] .ea-open__lead {
+  margin: clamp(0.875rem, 1.2vw, 1.125rem) 0 0;
+  max-width: 46ch;
+}
+
+/* ---- one track, four chapters ----
+
+   The four are a sequence, so they are read as one: the section pins and
+   vertical scroll drives the track through 01 to 04.
+
+   The base state below is the fallback, not the enhancement — a plain stacked
+   list, hairline between each. Everything the pin needs is behind .is-pinned,
+   which only the script adds, and only when there is something to scroll and
+   the reader has not asked for reduced motion. With no JS, a narrow screen or
+   reduced motion, this is an ordinary list in the same order.
+
+   The inset matches the page gutter so chapter 01 starts on the container's
+   left margin and 04 finishes on its right. Declared here from the values
+   .wrap uses, and overwritten by the script with the measured figure so the
+   two cannot drift. */
+.page[data-page="early-access"] .ea-hscroll__track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-inline: var(--page-inset);
+  display: grid;
+}
+.page[data-page="early-access"] .ea-hscroll__rule { display: none; }
+
+.page[data-page="early-access"] .ea-chapter {
+  display: grid;
+  align-content: start;
+  gap: var(--space-6);
+  border-top: 1px solid var(--line);
+  padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+.page[data-page="early-access"] .ea-chapter:last-child { border-bottom: 1px solid var(--line); }
+
+/* The numbers carry the progression, so they are set at heading scale rather
+   than as labels — and the one whose turn it is takes the accent. That is the
+   only orange in the sequence, it is never on more than one chapter at a
+   time, and it is what says 01 → 02 → 03 → 04. */
+.page[data-page="early-access"] .ea-chapter__num {
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+  transition: color 260ms var(--ease);
+}
+.page[data-page="early-access"] .ea-chapter.is-active .ea-chapter__num { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .ea-chapter__num { transition: none; }
+}
+
+.page[data-page="early-access"] .ea-chapter__title {
+  margin: 0;
+  font-size: clamp(1.375rem, 1.9vw, 1.875rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+}
+.page[data-page="early-access"] .ea-chapter__body {
+  margin: 0;
+  max-width: 32ch;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--body);
+}
+
+/* ---- pinned ---- */
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__sticky {
+  position: sticky;
+  top: 0;
+  /* svh, not vh: on a phone the browser chrome collapses as you scroll and vh
+     would resize the pinned area mid-sequence. */
+  /* Short of a full screen on purpose. Centred in 100svh the composition left
+     189px of empty navy under the progress rule, and that void plus the
+     foot's own padding was what put the ask a quarter of a screen away from
+     the end of the sequence. A min-height, so it still grows if the
+     introduction needs more room. */
+  min-height: 84svh;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  /* Centred as a group, so the air is above and below the composition rather
+     than inside it. The gap between the head and chapter 01 is this row-gap
+     and nothing else. */
+  align-content: center;
+  /* The one deliberate breath in the composition: bigger than any step
+     inside the head, so the sequence reads as the next element. */
+  row-gap: clamp(2.25rem, 5.5vh, 3.5rem);
+  /* Asymmetric: the air belongs above the introduction, not under the rule
+     that closes the sequence. */
+  padding-top: clamp(2.25rem, 6vh, 4rem);
+  padding-bottom: clamp(1.25rem, 2.5vh, 2rem);
+}
+/* The only thing hiding the track's overflow: no scrollbar, nothing to drag. */
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__viewport { overflow: hidden; }
+
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__track {
+  display: flex;
+  /* Equal height, so the rules between the chapters run the full depth of the
+     track and the four read as ruled columns rather than four cards floating
+     in a row. */
+  align-items: stretch;
+  min-height: clamp(11rem, 24vh, 15rem);
+  will-change: transform;
+}
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-chapter {
+  flex: 0 0 auto;
+  width: clamp(15rem, 30vw, 23rem);
+  align-content: start;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 1px solid var(--line);
+  padding-block: 0;
+  padding-inline: clamp(1.25rem, 2.4vw, 2.5rem);
+}
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-chapter:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.page[data-page="early-access"] .ea-hscroll.is-pinned .ea-hscroll__rule {
+  display: block;
+  position: relative;
+  height: 1px;
+  margin-inline: var(--page-inset);
+  background: var(--line);
+}
+.page[data-page="early-access"] .ea-hscroll__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ---- the ask, once the sequence has finished ---- */
+/* The ask is the end of the sequence, not a separate element after it — so
+   it follows closely. Still a clear step, just not the quarter-screen the
+   centred pin used to leave. */
+.page[data-page="early-access"] .ea-gets__foot {
+  padding-top: clamp(1.75rem, 2.8vw, 2.5rem);
+  padding-bottom: clamp(3rem, 7vw, 5.5rem);
+}
+.page[data-page="early-access"] .ea-gets__cta { margin: 0; }
+
+/* ---- 06 the close ----
+
+   Centred, narrow and still. The section above it is the one place on the
+   page that moves, and this is the counterweight to it — so the composition
+   is the opposite in every respect: no track, no accent, no button, one
+   column on the page's own axis.
+
+   Centring is done on the children rather than by narrowing this element: it
+   carries .wrap, and a max-width here would beat the container and take the
+   hairline above it down to the width of the text. */
+.page[data-page="early-access"] .ea-closing {
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.page[data-page="early-access"] .ea-closing .eyebrow { margin: 0; }
+
+/* The statement. The largest thing in the section and the only full-ink
+   type in it. */
+.page[data-page="early-access"] .ea-closing__head {
+  margin: var(--space-6) auto 0;
+  max-width: 22ch;
+  font-size: clamp(1.875rem, 3.6vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-h3);
+  color: var(--heading);
+  text-wrap: balance;
+}
+
+/* What the statement means. A clear step down — body ink and a third of the
+   size — and set on a wider measure so it reads as a paragraph under a
+   headline rather than as a second headline. */
+.page[data-page="early-access"] .ea-closing__turn {
+  margin: clamp(1.25rem, 2vw, 1.75rem) auto 0;
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--body);
+  text-wrap: pretty;
+}
+
+/* The page's two buttons.
+
+   .btn--accent fills with --accent, and white on the brand orange measures
+   3.8:1 — under AA for a label this size. The fill resolves to the darker
+   --accent-strong instead, which clears it at 4.8:1. The brand orange is
+   what it returns to on hover, where the label is no longer being read. */
+.btn--accent { background: var(--accent-strong); color: var(--accent-ink); }
+.btn--accent:hover { background: var(--accent); opacity: 1; }
+.btn--lg { padding: 1.05rem 2.25rem; font-size: var(--fs-body); }
+/* Motion — a single rule, applied on entry and never again.
+
+   The resting state is only ever declared under [data-reveal-ready], which the
+   script adds; with no script nothing is hidden and the page reads exactly as
+   it does now. Under prefers-reduced-motion the script never adds it either,
+   so this block simply does not apply. */
+.page[data-page="early-access"][data-reveal-ready] [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 640ms var(--ease), transform 640ms var(--ease);
+  will-change: opacity, transform;
+}
+.page[data-page="early-access"][data-reveal-ready] [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* The failsafe's own state — set only when the script gave up waiting for a
+   renderer that never painted. Everything is simply shown, with the transition
+   out of the way so nothing has to be interpolated to get there. */
+.page[data-page="early-access"][data-reveal-ready][data-reveal-skip] [data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+/* The fold carries no accent. The blue is the site's one accent and it is
+   already doing two jobs on this page — the slash in the wordmark and the
+   module titles under the pointer. Running it through half the display line as
+   well made the statement louder than it is confident, and the line reads
+   harder in plain ink. Declared rather than left implicit so a later edit does
+   not quietly put .hl back into the heading. */
+.page[data-page="early-access"] .ea-title { color: var(--heading); }
+
+/* The flow figure below the showcase breakpoint.
+
+   The slot drops the base 32rem to `min-height: 0` and takes its height from
+   the module list beside it instead. Above 900px that is right — the plate
+   finishes level with the list. Below it the showcase is one column, there is
+   no sibling left to stretch against, and the figure collapses to nothing:
+   the drawing is simply gone on a phone. So the height comes back here, and
+   the script's ResizeObserver re-fits the drawing into whatever it resolves to.
+
+   Height only, and no aspect-ratio: the two together run the wrong way round.
+   A definite height plus a ratio makes the ratio compute the *width* from it —
+   320px at 4/3 asked for a 427px box inside a 375px screen — so the width stays
+   the column's and only the height is stated here. */
+@media (max-width: 899px) {
+  .page[data-page="early-access"] .showcase__visual--flow {
+    min-height: min(20rem, 84vw);
+  }
+}
+
+/* The flow figure below the showcase breakpoint.
+
+   The slot drops the base 32rem to `min-height: 0` and takes its height from
+   the module list beside it instead. Above 900px that is right — the plate
+   finishes level with the list. Below it the showcase is one column, there is
+   no sibling left to stretch against, and the figure collapses to nothing:
+   the drawing is simply gone on a phone. So the height comes back here, and
+   the script's ResizeObserver re-fits the drawing into whatever it resolves to.
+
+   Height only, and no aspect-ratio: the two together run the wrong way round.
+   A definite height plus a ratio makes the ratio compute the *width* from it —
+   320px at 4/3 asked for a 427px box inside a 375px screen — so the width stays
+   the column's and only the height is stated here. */
+@media (max-width: 899px) {
+  .page[data-page="early-access"] .showcase__visual--flow {
+    min-height: min(20rem, 84vw);
+  }
+}
+
+/* ==========================================================================
+   ABOUT
+
+   Four movements: where graphzero is from, where it came from, what it sits
+   inside, and the ask. Each one is composed differently on purpose — a field
+   beside type, then a portrait against copy, then two cards, then a statement
+   — so the page reads as a brand page rather than as four stacked blocks of
+   the same shape.
+
+   Everything here is the site's own vocabulary: .link-card, .grid-2, the
+   eyebrow, the hairline, the navy close, one accent. Nothing new is invented
+   for this page except the field in the fold, and that is the same drawn
+   language as the two figures on Early Access.
+   ========================================================================== */
+
+/* ---- 01 the fold ----
+
    The headline is the anchor and the supporting lines hang beneath it, set in
    by two columns of the page's own grid. That indent is the composition: not
    a second column off to the side, which read as two unrelated blocks, and
