@@ -52,6 +52,14 @@
 .page[data-page="product"] .hero-lattice__title {
   grid-column: 1 / 11;
   max-width: none;
+  /* Inter Tight rather than the page's Geist. It is the same grotesque
+     species, drawn narrower and with the sidebearings pulled in, which is
+     what a 100px statement wants and what Geist — drawn to stay legible at
+     interface sizes — deliberately does not do. Geist stays behind it, so a
+     blocked webfont falls back to the face the rest of the page is set in
+     rather than to the system stack. */
+  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: clamp(2.75rem, 7.2vw, 6.25rem);
   font-weight: 700;
   line-height: 0.93;
@@ -73,6 +81,9 @@
    under the statement rather than a line running the width of it. */
 .page[data-page="product"] .hero-lattice__lead {
   grid-column: 1 / 7;
+  /* Set with the statement it sits under, so the fold reads as one voice. */
+  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Helvetica, Arial, sans-serif;
   margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
   margin-inline: 0;
   max-width: none;
