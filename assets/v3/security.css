@@ -78,18 +78,25 @@
   padding-bottom: clamp(3.5rem, 9vh, 6rem);
 }
 
-/* The claim carries the fold: 95px at 1440, the family's heaviest weight, and
-   the site's navy at full strength rather than a tint of it. */
-.page[data-page="security"] .band--dark.dark .h2 {
-  font-size: clamp(2.75rem, 6.6vw, 6rem);
-  font-weight: 700;
-  line-height: 0.93;
-  letter-spacing: -0.05em;
-  max-width: 13ch;
-  color: var(--ink);
+/* ---- the page's heading, taken from Early Access ----
+
+   Not approximated: these are .ea-title's own values — clamp(2.5rem, 6vw,
+   5rem), 0.97, -0.045em, and the system's heading weight of 500, which the
+   design system holds to deliberately ("never 600/700"). Both headings on
+   this page set from this one block, so the two sections and Early Access
+   are the same typography rather than three near-misses. */
+.page[data-page="security"] .band--dark.dark .h2,
+.page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 500;
+  line-height: 0.97;
+  letter-spacing: -0.045em;
+  color: var(--heading);
+  text-wrap: balance;
 }
-/* A step softer, not a second voice: the weight stays regular, the ink is the
-   muted one, and the measure is cut so it sets as a block under the claim. */
+.page[data-page="security"] .band--dark.dark .h2 {
+  max-width: 15ch;
+}
 .page[data-page="security"] .secsplit__lead {
   gap: clamp(1.5rem, 2.4vw, 2.25rem);
 }
@@ -101,115 +108,98 @@
   color: var(--ink-muted);
 }
 
-/* ---- the certification field ----
+/* ---- the marks, floating ----
 
-   The page is white. The one place colour is allowed is a field on the right
-   of the fold: a rectangle whose left edge is the marks column's own edge,
-   ruled in orange and running the full height of the band before bleeding off
-   the right of the screen. A defined area with a hard edge, not a shape
-   floating in the middle of the page.
+   No panel and no field. The page is white on both sides; the only colour is
+   a thin line drawn down the right, and the three marks sit on it at three
+   different sizes — 230px, 173px, 136px — so the group has a hierarchy rather
+   than being a row of equals. Their positions are offset from each other in
+   both axes: nothing shares an edge with its neighbour.
 
-   The three marks are not in a box. They sit on the field as separate objects,
-   staggered off each other's baselines so the group reads as placed rather
-   than as a row, and sized by height so they stay optically level. */
+   The line is an SVG stroked with a gradient from the orange into the pink,
+   set as a background so no markup changes. non-scaling-stroke keeps it a
+   hairline whatever the column does to the box. */
 .page[data-page="security"] #security {
   position: relative;
-  /* The field runs past the right of the viewport; the band clips it. */
   overflow: hidden;
 }
 .page[data-page="security"] .secsplit__marks {
   position: relative;
-  padding: 0 0 0 clamp(1.5rem, 3vw, 2.75rem);
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(1.25rem, 2.6vw, 2.5rem);
-  row-gap: clamp(1.25rem, 2.6vw, 2.25rem);
+  column-gap: clamp(1rem, 2vw, 2rem);
+  row-gap: clamp(1.5rem, 3vw, 2.75rem);
 }
 .page[data-page="security"] .secsplit__marks::before {
   content: "";
   position: absolute;
-  /* Past the band's own edges in both directions, so the clip decides where it
-     ends and the field is exactly as tall as the fold. */
-  top: -100vh;
-  bottom: -100vh;
-  left: 0;
-  right: -100vw;
-  border-left: 2px solid var(--accent);
-  background:
-    radial-gradient(58% 42% at 24% 16%, rgba(245, 18, 122, 0.30), rgba(245, 18, 122, 0) 72%),
-    radial-gradient(74% 56% at 6% 88%, rgba(217, 92, 50, 0.34), rgba(217, 92, 50, 0) 70%),
-    linear-gradient(180deg, #FFF8F5 0%, #FDF1EB 100%);
+  inset: -14% -30% -14% -4%;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 760' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0' stop-color='%23D95C32'/%3E%3Cstop offset='1' stop-color='%23F5127A'/%3E%3C/linearGradient%3E%3Cpath d='M135 -40 C 350 180 175 385 425 495 C 640 590 760 670 840 845' fill='none' stroke='url(%23g)' stroke-width='2.25' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M215 -40 C 435 195 260 410 510 520 C 715 610 820 685 900 855' fill='none' stroke='url(%23g)' stroke-width='1' stroke-opacity='0.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
 }
 
-/* The row wrapper steps out of the box tree so the three images place
-   themselves on the field's own grid. */
 .page[data-page="security"] .secsplit__marks .markrow {
   display: contents;
 }
 
-/* 216px at 1440, against the 137px they ran as a badge row. Sized by height,
-   never by width, so the three read as one size despite ISO's taller ratio. */
 .page[data-page="security"] .markrow__badge {
   position: relative;
-  height: clamp(7.5rem, 15vw, 14rem);
+  z-index: 1;
   width: auto;
   max-width: 100%;
   flex: none;
 }
+/* Largest, and the one that sets the group's top line. */
 .page[data-page="security"] .markrow__badge:nth-of-type(1) {
   grid-column: 1;
   grid-row: 1;
   justify-self: start;
+  height: clamp(6.5rem, 16vw, 15rem);
 }
+/* Middle size, dropped well below the first so the two do not read as a pair. */
 .page[data-page="security"] .markrow__badge:nth-of-type(2) {
   grid-column: 2;
   grid-row: 1;
   justify-self: end;
-  /* The stagger. Nothing sits on the same baseline as its neighbour. */
-  margin-top: clamp(1.5rem, 4.5vw, 4rem);
+  align-self: end;
+  margin-top: clamp(2.5rem, 7vw, 6rem);
+  height: clamp(5rem, 12vw, 11rem);
 }
+/* Smallest, indented off the first's left edge. */
 .page[data-page="security"] .markrow__badge:nth-of-type(3) {
   grid-column: 1;
   grid-row: 2;
   justify-self: start;
-  margin-left: clamp(0.75rem, 3.5vw, 3rem);
+  margin-left: clamp(1.5rem, 6vw, 5rem);
+  height: clamp(4rem, 9.5vw, 8.5rem);
 }
+/* Out of the visual area: its own row under the marks, on the container's
+   grid, at body scale — a note about a certificate, not part of the group. */
 .page[data-page="security"] .markrow__note {
   position: relative;
-  grid-column: 2;
-  grid-row: 2;
-  align-self: end;
-  margin-top: 0;
+  z-index: 1;
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: clamp(1.75rem, 3.5vw, 3rem);
   padding: 0;
-  max-width: 30ch;
+  max-width: 46ch;
   font-style: normal;
   font-size: var(--fs-small);
   line-height: 1.55;
   color: var(--meta);
 }
 
-/* Stacked, the field runs the width of the fold rather than half of it, and
-   the marks keep their stagger inside it. */
 @media (max-width: 899px) {
-  .page[data-page="security"] .secsplit__marks {
-    padding: clamp(2rem, 5vw, 3rem) 0 clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem);
-  }
   .page[data-page="security"] .secsplit__marks::before {
-    top: 0;
-    bottom: 0;
-    left: calc((100% - 100vw) / 2);
-    right: calc((100% - 100vw) / 2);
-    border-left: 0;
-    border-top: 2px solid var(--accent);
+    inset: -6% -10% -6% -4%;
   }
   .page[data-page="security"] .markrow__badge:nth-of-type(2) {
     justify-self: start;
-    margin-top: clamp(1rem, 3vw, 2rem);
-  }
-  .page[data-page="security"] .markrow__note {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    max-width: 42ch;
+    margin-top: clamp(1.5rem, 4vw, 3rem);
   }
 }
 
@@ -346,17 +336,11 @@
   display: block;
 }
 
-/* The claim is the largest type on the page after the fold — 92px at 1440,
-   against the 60px it set before. It is a statement, so it is set like one. */
-/* The section reads as the fold continued rather than as a new page: the same
-   claim-left / field-right split, the same type, the same orange rule opening
-   the coloured area. */
+/* Size, weight, leading and tracking come from the shared Early Access block
+   above — this rule only lifts the measure so the column governs the break.
+   Anything set here would win on order and quietly break that. */
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .h2 {
   max-width: none;
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  font-weight: 700;
-  line-height: 0.96;
-  letter-spacing: -0.045em;
 }
 .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
   margin-top: 0;
@@ -370,27 +354,21 @@
    The heading's long line measures 661px at this size, so the columns are cut
    1.5 : 1 to leave it clear of wrapping rather than by eye. Ends are aligned,
    not tops: the sentence sits on the claim's last line. */
+/* Claim left, sentence right, on the container's own grid. The heading's long
+   line measures 661px at this size, so the columns are cut 1.5 : 1 to leave it
+   clear of wrapping rather than by eye. The sentence is set on the claim's
+   last line — placement and alignment carry it, not a panel behind it. The
+   page's only colour is the fold's line, so nothing is tinted here. */
 @media (min-width: 900px) {
   .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead {
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     column-gap: clamp(2rem, 4vw, 3rem);
-    /* Stretched, not end-aligned: the field is as tall as the claim beside it,
-       which is what separates a field from a callout box around a sentence. */
-    align-items: stretch;
+    align-items: end;
   }
-  /* The sentence takes its whole column, so the tint behind it is a field
-     running to the container edge rather than a tinted box around a sentence.
-     A quieter restatement of the fold's field, opened by the same orange rule. */
   .page[data-page="security"] main > section:nth-of-type(2) .secsplit__lead .lead {
     max-width: none;
-    /* The sentence sits at the foot of the field, on the claim's last line. */
-    display: flex;
-    align-items: flex-end;
-    padding: clamp(1.25rem, 2.2vw, 1.75rem);
-    border-left: 2px solid var(--accent);
-    background:
-      linear-gradient(180deg, rgba(217, 92, 50, 0.08) 0%, rgba(245, 18, 122, 0.06) 100%);
+    padding-bottom: 0.4em;
   }
 }
 
