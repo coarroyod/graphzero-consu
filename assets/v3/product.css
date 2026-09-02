@@ -1,0 +1,209 @@
+/* ==========================================================================
+   Product page — the fold and the two layer modules.
+
+   Scoped overrides, loaded after v3/site.css. Nothing here reaches any other
+   page, and inside this page nothing here reaches any section but the two
+   named below: the lattice fold, and #layers.
+
+   The lattice canvas is untouched. .hero-lattice__stage, its fade and its
+   reduced-motion fallback are not referenced in this file — only the type
+   that rides on top of it moves.
+   ========================================================================== */
+
+/* ---- the palette, for these two sections only ----
+
+   This page never took the brand values: its ink is pure #000000 and its
+   muted grey #565656, where the rest of the site runs the navy #17232B and
+   the slate #59666B. The two sections in scope take the brand palette; the
+   rest of the page keeps what it had, because it is not in scope. */
+.page[data-page="product"] .hero-lattice,
+.page[data-page="product"] #layers {
+  --ink: #17232B;
+  --ink-muted: #59666B;
+  --accent: #D95C32;
+  /* Orange fails AA as body text, so anything reading as type takes the
+     darker value — the same split the rest of the site follows. */
+  --accent-text: #C24E27;
+  --hl: #D95C32;
+  --heading: var(--ink);
+  --body: var(--ink-muted);
+  --meta: var(--ink-muted);
+  --hairline: rgba(23, 35, 43, 0.16);
+  --line: var(--hairline);
+}
+
+/* ==========================================================================
+   01 · the fold
+
+   The statement was centred and held to the same 60px the second hero runs,
+   deliberately, so the page would not open on two competing ranks. That is
+   the trade being reversed: this is the page's main statement, so it takes
+   the grid's left edge and roughly twice the size, and the hero below it
+   becomes the second rank rather than its equal.
+   ========================================================================== */
+.page[data-page="product"] .hero-lattice__inner {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-6);
+  justify-items: stretch;
+  text-align: left;
+}
+
+.page[data-page="product"] .hero-lattice__title {
+  grid-column: 1 / 11;
+  max-width: none;
+  font-size: clamp(2.75rem, 7.2vw, 6.25rem);
+  font-weight: 700;
+  line-height: 0.93;
+  letter-spacing: -0.045em;
+  color: var(--heading);
+  /* Balanced lines even out a three-line statement into a block; the break is
+     left to the measure. */
+  text-wrap: balance;
+}
+
+/* Held to six of the twelve columns, so it reads as a column of text placed
+   under the statement rather than a line running the width of it. */
+.page[data-page="product"] .hero-lattice__lead {
+  grid-column: 1 / 7;
+  margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
+  margin-inline: 0;
+  max-width: none;
+  font-size: clamp(1.0625rem, 0.45vw + 0.95rem, 1.3125rem);
+  line-height: 1.55;
+  color: var(--body);
+}
+
+@media (max-width: 900px) {
+  .page[data-page="product"] .hero-lattice__title,
+  .page[data-page="product"] .hero-lattice__lead {
+    grid-column: 1 / -1;
+  }
+  /* Full width here is the column, not the measure: at 860 that ran the
+     sentence to 774px, about 95 characters a line. The body measure caps it. */
+  .page[data-page="product"] .hero-lattice__lead {
+    max-width: var(--measure-body);
+  }
+}
+
+/* ==========================================================================
+   02 · #layers — the two modules
+
+   Two cards of the same weight became two modules with a hierarchy. The name
+   of each layer was set as a 12px uppercase eyebrow above an 18px line; the
+   two are swapped, so the name is the module's heading and the line under it
+   is its descriptor. No text changed — only which of them is the large one.
+
+   Order is set on the flex column so the rule falls under the pair rather
+   than between them; it is a decorative <hr>, so nothing readable is
+   reordered.
+   ========================================================================== */
+.page[data-page="product"] #layers .sec-head {
+  font-size: clamp(1.625rem, 2.6vw, 2.625rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.028em;
+}
+
+.page[data-page="product"] #layers .layer-grid {
+  /* Not halves. The first module carries eight entries against the second's
+     five, so it takes the wider column and the pair lands closer to the same
+     depth — and the knowledge base leading is the point the section makes. */
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  /* Each module ends where its entries end. Stretched to a common height, the
+     five-entry module carried 180px of empty panel under its last rule, which
+     reads as something missing rather than as space. Their tops align, which
+     is what holds the pair together. */
+  align-items: start;
+}
+
+.page[data-page="product"] #layers .layer-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  /* 24px of radius reads as a soft card; 4px reads as a panel. */
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  box-shadow: none;
+  background: #FBF6F2;
+}
+/* The second module is the layer people touch, and it is marked in the pink
+   rather than the orange — the palette's rare value, used once on the page. */
+.page[data-page="product"] #layers .layer-card + .layer-card {
+  border-top-color: #F5127A;
+  background: #ffffff;
+}
+
+/* ---- the name, now the module's heading ---- */
+.page[data-page="product"] #layers .eyebrow {
+  order: 1;
+  font-size: clamp(1.5rem, 2.2vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: var(--heading);
+}
+.page[data-page="product"] #layers .layer-card__role {
+  order: 2;
+  margin: var(--space-3) 0 0;
+  font-size: clamp(1rem, 0.6vw + 0.85rem, 1.1875rem);
+  color: var(--body);
+}
+.page[data-page="product"] #layers .layer-card__role .hl {
+  font-weight: 700;
+  color: var(--accent-text);
+}
+.page[data-page="product"] #layers .layer-card .rule {
+  order: 3;
+  margin: clamp(1.5rem, 2.6vw, 2.125rem) 0 0;
+  height: 1px;
+  border: 0;
+  background: var(--line);
+}
+
+/* ---- the entries, as a ruled register ----
+   Each entry's title takes its own line and the site's ink; the sentence
+   under it stays at body weight and the muted value. Ruled between rather
+   than boxed, so eight of them read as a list and not as eight small cards. */
+.page[data-page="product"] #layers .layer-list {
+  order: 4;
+  gap: 0;
+}
+.page[data-page="product"] #layers .layer-list li {
+  margin-inline: 0;
+  padding: clamp(0.8125rem, 1.3vw, 1.0625rem) 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--body);
+  /* The rows carried a hover wash and a transition. The brief for this pass
+     is that these two modules hold no motion, and a full-bleed wash on a
+     ruled row reads as a selection state besides. Both are dropped here. */
+  background: none;
+  transition: none;
+}
+.page[data-page="product"] #layers .layer-list li:hover,
+.page[data-page="product"] #layers .layer-list li:focus-within {
+  background: none;
+}
+.page[data-page="product"] #layers .layer-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.page[data-page="product"] #layers .layer-list li strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+@media (max-width: 900px) {
+  .page[data-page="product"] #layers .layer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
