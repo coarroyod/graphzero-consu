@@ -3742,17 +3742,37 @@ plainest thing in the drawing rather than the most filled. */
    that grey instead of the white this is for. */
 .page[data-page="early-access"] .showcase__visual--flow { background: transparent; }
 
-/* ---- 04 the turn ---- */
-/* Opens the navy run, so it carries the air above; 05 and 06 continue it and
-   add none of their own at the top. */
+/* ---- 04 the turn ----
+
+   Opens the navy run, so it carries the air above; 05 and 06 continue it and
+   add none of their own at the top.
+
+   Two columns, matching the fold: the ask left, the flow figure right. The
+   ask used to run the container width with the right half empty, which made
+   the biggest statement on the page look unfinished. */
 .page[data-page="early-access"] .ea-open__inner {
+  /* Declared here, not assumed. The fold is two columns because .hero__inner
+     is already a grid; .wrap.sec is not, so without this the columns were
+     inert and the copy ran the full container with the figure beside it by
+     accident of justify-self. */
+  display: grid;
   padding-top: clamp(4.5rem, 9vw, 8rem);
-  padding-bottom: clamp(2.5rem, 4vw, 4rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+  gap: var(--space-12);
+  align-items: center;
 }
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-open__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    gap: var(--section-sm);
+  }
+}
+.page[data-page="early-access"] .ea-open__copy { display: grid; align-content: center; justify-items: start; }
+
 .page[data-page="early-access"] .ea-open__head {
   margin: var(--space-6) 0 0;
-  max-width: 18ch;
-  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  max-width: 15ch;
+  font-size: clamp(1.875rem, 3.4vw, 3rem);
   line-height: 1.04;
   letter-spacing: var(--tracking-h2);
   font-weight: var(--weight-heading);
@@ -3761,46 +3781,90 @@ plainest thing in the drawing rather than the most filled. */
 }
 .page[data-page="early-access"] .ea-open__lead {
   margin-top: var(--space-8);
-  max-width: 46ch;
+  max-width: 42ch;
 }
 
-/* ---- 05 what a design partner gets ---- */
+.page[data-page="early-access"] .ea-open__figure {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  aspect-ratio: 3 / 2;
+  justify-self: center;
+}
+@media (min-width: 900px) {
+  .page[data-page="early-access"] .ea-open__figure { justify-self: end; }
+}
+@media (max-width: 620px) {
+  .page[data-page="early-access"] .ea-open__figure { aspect-ratio: 5 / 3; max-width: none; }
+}
+.page[data-page="early-access"] .ea-open__figure canvas { display: block; width: 100%; height: 100%; }
+
+/* ---- 05 what a design partner gets ----
+
+   Four numbered rows running the page, not a 2x2. The grid gave these the
+   same weight as the ask above them and read as a feature table; as rows,
+   with the claim and what it means in their own columns, they sit clearly
+   below the ask and support it.
+
+   The numbers are set in the mono face at label size and left quiet. They
+   order the list; they are not the thing being read. */
 .page[data-page="early-access"] .ea-gets__inner {
-  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-top: clamp(1rem, 2vw, 2rem);
   padding-bottom: clamp(3.5rem, 7vw, 6rem);
 }
-.page[data-page="early-access"] .ea-gets__grid {
+.page[data-page="early-access"] .ea-list { list-style: none; margin: 0; padding: 0; }
+
+.page[data-page="early-access"] .ea-item {
   display: grid;
-  gap: var(--space-8) var(--section-sm);
-}
-@media (min-width: 760px) {
-  .page[data-page="early-access"] .ea-gets__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--section-sm) var(--section-sm);
-  }
-}
-.page[data-page="early-access"] .ea-get {
-  display: grid;
-  gap: var(--space-3);
-  align-content: start;
-  padding-top: var(--space-6);
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: var(--space-2) var(--space-6);
+  padding: var(--space-8) 0;
   border-top: 1px solid var(--line);
 }
-.page[data-page="early-access"] .ea-get__title {
+.page[data-page="early-access"] .ea-item:last-child { border-bottom: 1px solid var(--line); }
+
+@media (min-width: 860px) {
+  .page[data-page="early-access"] .ea-item {
+    grid-template-columns: 4.5rem minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--section-sm);
+    align-items: baseline;
+    padding-block: var(--space-12);
+  }
+}
+
+.page[data-page="early-access"] .ea-item__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-tiny);
+  line-height: 1.6;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+.page[data-page="early-access"] .ea-item__title {
   margin: 0;
-  font-size: clamp(1.25rem, 1.1vw + 1rem, 1.625rem);
+  font-size: clamp(1.25rem, 0.9vw + 1rem, 1.5rem);
   line-height: var(--lh-h3);
   letter-spacing: -0.02em;
   font-weight: var(--weight-heading);
   color: var(--heading);
 }
-.page[data-page="early-access"] .ea-get__body {
+.page[data-page="early-access"] .ea-item__body {
   margin: 0;
-  max-width: 40ch;
+  max-width: 46ch;
   font-size: var(--fs-body);
   line-height: 1.5;
   color: var(--body);
 }
+/* On a phone the three columns become two, and the body drops under the
+   title rather than beside it — so it clears the number column. */
+@media (max-width: 859px) {
+  .page[data-page="early-access"] .ea-item__title,
+  .page[data-page="early-access"] .ea-item__body { grid-column: 2; }
+}
+
+/* The section closes on the ask. Orange lands here and on the figure's hub,
+   and nowhere else in this run. */
+.page[data-page="early-access"] .ea-gets__cta { margin-top: var(--section-sm); }
 
 /* ---- 06 the close ---- */
 .page[data-page="early-access"] .ea-closing {

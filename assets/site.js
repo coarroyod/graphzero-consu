@@ -1158,3 +1158,161 @@
   /* Web fonts landing can change the slot's height; re-measure once. */
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (resize() && still) draw(1, 0); });
 })();
+
+/* Early Access flow figure.
+
+   Knowledge arriving from many places, held in one, answered out to people
+   and AI. The labelled version of this is the kg-flow diagram two screens up;
+   this is the same idea with the labels taken off, because the section it
+   sits in is the ask, not the explanation — the drawing is there to give the
+   statement something to stand next to.
+
+   Only the traffic moves. The lines, the sources and the endpoints are drawn
+   once and stay put; what animates is the dots running along them, which is
+   the one thing in the figure that means anything by moving. The hub is the
+   accent, and it and the button below are the only orange in the navy run. */
+(function () {
+  'use strict';
+
+  var canvas = document.querySelector('[data-flow-figure]');
+  if (!canvas) return;
+  var ctx = canvas.getContext && canvas.getContext('2d');
+  if (!ctx) return;
+
+  var HUB = { x: 0.45, y: 0.5 };
+  var IN_Y = [0.13, 0.24, 0.37, 0.63, 0.76, 0.87];
+  var OUT_Y = [0.28, 0.5, 0.72];
+
+  /* Cubic control points chosen as a share of the run, so the fan keeps its
+     shape when the slot changes width instead of kinking. */
+  var inflow = IN_Y.map(function (y) {
+    return [{ x: 0.04, y: y }, { x: 0.20, y: y }, { x: 0.30, y: HUB.y }, HUB];
+  });
+  var outflow = OUT_Y.map(function (y) {
+    return [HUB, { x: 0.62, y: HUB.y }, { x: 0.74, y: y }, { x: 0.94, y: y }];
+  });
+
+  function bez(p, c) {
+    var m = 1 - p;
+    return {
+      x: m*m*m*c[0].x + 3*m*m*p*c[1].x + 3*m*p*p*c[2].x + p*p*p*c[3].x,
+      y: m*m*m*c[0].y + 3*m*m*p*c[1].y + 3*m*p*p*c[2].y + p*p*p*c[3].y
+    };
+  }
+
+  var C = { line: 'rgba(255,255,255,0.16)', ink: '#ffffff', meta: 'rgba(255,255,255,0.55)', accent: '#D95C32' };
+  function readColours() {
+    var cs = getComputedStyle(canvas);
+    C.line = cs.getPropertyValue('--line').trim() || C.line;
+    C.ink = cs.getPropertyValue('--heading').trim() || C.ink;
+    C.meta = cs.getPropertyValue('--meta').trim() || C.meta;
+    C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
+  }
+
+  var W = 0, H = 0;
+  function resize() {
+    var box = canvas.getBoundingClientRect();
+    if (!box.width || !box.height) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = box.width; H = box.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return true;
+  }
+
+  function X(u) { return u * W; }
+  function Y(u) { return u * H; }
+
+  function path(c) {
+    ctx.beginPath();
+    ctx.moveTo(X(c[0].x), Y(c[0].y));
+    ctx.bezierCurveTo(X(c[1].x), Y(c[1].y), X(c[2].x), Y(c[2].y), X(c[3].x), Y(c[3].y));
+    ctx.stroke();
+  }
+
+  function draw(phase) {
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = C.line;
+    inflow.forEach(path);
+    outflow.forEach(path);
+
+    /* Where knowledge comes from: quiet, and only marked. */
+    ctx.fillStyle = C.meta;
+    IN_Y.forEach(function (y) {
+      ctx.beginPath();
+      ctx.arc(X(0.04), Y(y), 2.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Who it answers to: outlined, so they read as destinations rather than
+       as more sources. */
+    ctx.strokeStyle = C.line;
+    OUT_Y.forEach(function (y) {
+      ctx.beginPath();
+      ctx.arc(X(0.94), Y(y), 5.5, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+
+    /* The traffic. Staggered, so the six are never in step. */
+    ctx.fillStyle = C.ink;
+    inflow.forEach(function (c, i) {
+      var p = (phase * 0.17 + i * 0.16) % 1;
+      var at = bez(p, c);
+      ctx.globalAlpha = Math.sin(Math.PI * p);
+      ctx.beginPath();
+      ctx.arc(X(at.x), Y(at.y), 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    outflow.forEach(function (c, i) {
+      var p = (phase * 0.2 + i * 0.31 + 0.5) % 1;
+      var at = bez(p, c);
+      ctx.globalAlpha = Math.sin(Math.PI * p);
+      ctx.beginPath();
+      ctx.arc(X(at.x), Y(at.y), 2.4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+
+    /* The knowledge base. Drawn last so nothing runs over it. */
+    ctx.fillStyle = C.accent;
+    ctx.beginPath();
+    ctx.arc(X(HUB.x), Y(HUB.y), 7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var raf = null, t0 = 0, onscreen = true, ready = false;
+
+  function frame(now) {
+    raf = null;
+    if (!onscreen) return;
+    if (!t0) t0 = now;
+    draw((now - t0) / 1000);
+    raf = requestAnimationFrame(frame);
+  }
+  function start() {
+    if (still || raf || !onscreen || !ready) return;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  readColours();
+  ready = resize();
+  if (ready) { if (still) draw(1.4); else start(); }
+
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () { if (resize()) { ready = true; if (still) draw(1.4); } }).observe(canvas);
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onscreen = es[0].isIntersecting;
+      if (onscreen) start(); else stop();
+    }, { threshold: 0 }).observe(canvas);
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+})();

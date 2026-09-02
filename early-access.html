@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=13">
+<link rel="stylesheet" href="assets/site.css?v=15">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -137,39 +137,63 @@
          The page turns over here. Everything below is navy and runs unbroken
          into the footer, so the change of ground is what marks the move from
          the product to the partnership — the one transition on the page that
-         has to be unmistakable. -->
+         has to be unmistakable.
+
+         Two columns, like the fold: the ask on the left, and on the right the
+         second of the page's two drawn figures. This one is the sentence
+         beside it — knowledge arriving, held in one place, answered out to
+         people and AI — with no labels on it, because the labelled version of
+         that diagram is already two screens up and this is the same idea at a
+         different altitude, not the same picture again. -->
     <section class="band band--dark dark ea-open" id="early-access">
       <div class="wrap sec ea-open__inner">
-        <p class="eyebrow" data-reveal>Early access</p>
-        <h2 class="ea-open__head" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
-        <p class="lead ea-open__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
+        <div class="ea-open__copy">
+          <p class="eyebrow" data-reveal>Early access</p>
+          <h2 class="ea-open__head" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
+          <p class="lead ea-open__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
+        </div>
+
+        <figure class="ea-open__figure" aria-hidden="true">
+          <canvas data-flow-figure></canvas>
+        </figure>
       </div>
     </section>
 
     <!-- 04 — WHAT A DESIGN PARTNER GETS
-         Four of them, so a 2x2 — but hairlines rather than boxes. These are
-         four statements of the same rank, not four objects to be picked
-         between, and putting a border round each one would make them look
-         like a price table. -->
+         Four full-width rows rather than a 2x2. The grid gave the four the
+         same weight as the ask above them and read as a feature table; run
+         across the page as numbered rows, with the claim and what it means in
+         separate columns, they read as the supporting detail they are.
+
+         The numbers are decoration to a screen reader — the list element
+         already carries the order — which is how numlist does it elsewhere. -->
     <section class="band band--dark dark ea-gets">
       <div class="wrap sec ea-gets__inner">
-        <div class="ea-gets__grid">
-          <div class="ea-get" data-reveal>
-            <h3 class="ea-get__title">Early access</h3>
-            <p class="ea-get__body">Be among the first to use graphzero.</p>
-          </div>
-          <div class="ea-get" data-reveal>
-            <h3 class="ea-get__title">Direct collaboration</h3>
-            <p class="ea-get__body">Work closely with our team and give input as the product evolves.</p>
-          </div>
-          <div class="ea-get" data-reveal>
-            <h3 class="ea-get__title">A foundation for AI</h3>
-            <p class="ea-get__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
-          </div>
-          <div class="ea-get" data-reveal>
-            <h3 class="ea-get__title">Flexible by design</h3>
-            <p class="ea-get__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
-          </div>
+        <ol class="ea-list">
+          <li class="ea-item" data-reveal>
+            <span class="ea-item__num" aria-hidden="true">01</span>
+            <h3 class="ea-item__title">Early access</h3>
+            <p class="ea-item__body">Be among the first to use graphzero.</p>
+          </li>
+          <li class="ea-item" data-reveal>
+            <span class="ea-item__num" aria-hidden="true">02</span>
+            <h3 class="ea-item__title">Direct collaboration</h3>
+            <p class="ea-item__body">Work closely with our team and give input as the product evolves.</p>
+          </li>
+          <li class="ea-item" data-reveal>
+            <span class="ea-item__num" aria-hidden="true">03</span>
+            <h3 class="ea-item__title">A foundation for AI</h3>
+            <p class="ea-item__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
+          </li>
+          <li class="ea-item" data-reveal>
+            <span class="ea-item__num" aria-hidden="true">04</span>
+            <h3 class="ea-item__title">Flexible by design</h3>
+            <p class="ea-item__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
+          </li>
+        </ol>
+
+        <div class="ea-gets__cta" data-reveal>
+          <a class="btn btn--accent btn--lg" href="mailto:david@ascending.ai?subject=graphzero%20design%20partner">Become a design partner &rarr;</a>
         </div>
       </div>
     </section>
@@ -202,7 +226,7 @@
 
 </div>
 
-<script src="assets/site.js?v=13" defer></script>
+<script src="assets/site.js?v=15" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>
