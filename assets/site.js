@@ -968,3 +968,193 @@
 
   items.forEach(function (n) { io.observe(n); });
 })();
+
+/* Hero knowledge graph — Early Access.
+
+   The fold's copy says knowledge is created everywhere, stays fragmented, and
+   is then brought together. This draws that and nothing else: the points open
+   scattered across the box and settle into four clusters joined through one
+   centre, with the edges only appearing as they arrive. The centre is the one
+   thing on the page drawn in the accent.
+
+   Canvas rather than SVG because the whole figure is about thirty points and
+   the lines between them — a few lines of geometry against several hundred of
+   hand-authored path data — and because the settle is a per-frame position,
+   not a keyframe.
+
+   Colours are read from the page rather than declared here, so the figure
+   follows the brand block in site.css like every other component.
+
+   It runs once. There is no loop after the settle beyond a drift of about a
+   pixel, which is what keeps it from looking like a screenshot; under
+   prefers-reduced-motion even that is off and the settled state is drawn on
+   the first frame. */
+(function () {
+  'use strict';
+
+  var canvas = document.querySelector('[data-graph-hero]');
+  if (!canvas) return;
+  var ctx = canvas.getContext && canvas.getContext('2d');
+  if (!ctx) return;
+
+  /* Seeded: the arrangement is composed, not a different pile of points on
+     every load. */
+  function seeded(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var rand = seeded(20260902);
+
+  var TAU = Math.PI * 2;
+  var HUB = { x: 0.52, y: 0.5 };
+  var RINGS = 4, PER = 6;
+
+  var nodes = [{ tx: HUB.x, ty: HUB.y, r: 4.6, hub: true }];
+  var edges = [];
+  var centres = [];
+
+  for (var c = 0; c < RINGS; c++) {
+    var a = -Math.PI / 2 + c * TAU / RINGS + 0.34;
+    var cx = HUB.x + Math.cos(a) * 0.295;
+    var cy = HUB.y + Math.sin(a) * 0.295;
+    var ci = nodes.length;
+    nodes.push({ tx: cx, ty: cy, r: 3.1 });
+    centres.push(ci);
+    edges.push([0, ci]);
+    for (var i = 0; i < PER; i++) {
+      var aa = rand() * TAU;
+      var rr = 0.058 + rand() * 0.072;
+      nodes.push({ tx: cx + Math.cos(aa) * rr, ty: cy + Math.sin(aa) * rr * 0.94, r: 1.9 });
+      edges.push([ci, nodes.length - 1]);
+    }
+  }
+  /* Two links across, so the four read as one structure rather than four. */
+  edges.push([centres[0], centres[1]], [centres[2], centres[3]]);
+
+  /* Where each point starts: outside the eventual shape, and unrelated to it. */
+  nodes.forEach(function (n) {
+    n.sx = -0.12 + rand() * 1.24;
+    n.sy = -0.12 + rand() * 1.24;
+    n.ph = rand() * TAU;
+    n.dr = 0.3 + rand() * 0.5;
+  });
+
+  var C = { ink: '#17232B', line: 'rgba(23,35,43,0.16)', accent: '#D95C32' };
+  function readColours() {
+    var cs = getComputedStyle(canvas);
+    C.ink = cs.getPropertyValue('--heading').trim() || C.ink;
+    C.line = cs.getPropertyValue('--line').trim() || C.line;
+    C.accent = cs.getPropertyValue('--accent').trim() || C.accent;
+  }
+
+  var W = 0, H = 0, S = 0, PAD = 0;
+  function resize() {
+    var box = canvas.getBoundingClientRect();
+    if (!box.width || !box.height) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = box.width; H = box.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    /* The unit square is mapped into the shorter side and centred, so the
+       clusters keep their spacing whatever shape the slot is. */
+    PAD = 0.06;
+    S = Math.min(W, H) * (1 - PAD * 2);
+    return true;
+  }
+
+  function px(n, k, t, drift) {
+    var e = 1 - Math.pow(1 - t, 3);              /* easeOutCubic */
+    var u = n['s' + k] + (n['t' + k] - n['s' + k]) * e;
+    var o = (k === 'x' ? (W - S) / 2 : (H - S) / 2);
+    var wob = drift ? Math.sin(drift * n.dr + n.ph + (k === 'y' ? 1.7 : 0)) * 1.1 : 0;
+    return o + u * S + wob;
+  }
+
+  function draw(t, drift) {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Edges arrive late — there is nothing to connect until the points are
+       close to where they belong. */
+    var ea = Math.max(0, (t - 0.42) / 0.58);
+    if (ea > 0) {
+      ctx.strokeStyle = C.line;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = Math.min(1, ea);
+      ctx.beginPath();
+      for (var i = 0; i < edges.length; i++) {
+        var a = nodes[edges[i][0]], b = nodes[edges[i][1]];
+        ctx.moveTo(px(a, 'x', t, drift), px(a, 'y', t, drift));
+        ctx.lineTo(px(b, 'x', t, drift), px(b, 'y', t, drift));
+      }
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    for (var j = 0; j < nodes.length; j++) {
+      var n = nodes[j];
+      ctx.beginPath();
+      ctx.fillStyle = n.hub ? C.accent : C.ink;
+      /* Scattered points sit lighter; they firm up as they settle. */
+      ctx.globalAlpha = n.hub ? Math.min(1, 0.25 + t) : 0.34 + 0.66 * t;
+      ctx.arc(px(n, 'x', t, drift), px(n, 'y', t, drift), n.r * (0.55 + 0.45 * t), 0, TAU);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var raf = null, t0 = 0, settled = false, onscreen = true, started = false;
+
+  function frame(now) {
+    raf = null;
+    if (!onscreen) return;
+    if (!t0) t0 = now;
+    var el = now - t0;
+    var t = Math.min(1, el / 2200);
+    draw(t, t >= 1 ? el / 1000 : 0);
+    if (t < 1) settled = false; else settled = true;
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (still) { draw(1, 0); return; }
+    if (raf || !onscreen || !started) return;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  function boot() {
+    readColours();
+    if (!resize()) return;
+    started = true;
+    if (still) draw(1, 0); else start();
+  }
+
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () {
+      if (resize() && (still || !raf)) draw(settled || still ? 1 : 0, 0);
+    }).observe(canvas);
+  } else {
+    window.addEventListener('resize', function () { if (resize()) draw(1, 0); });
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onscreen = es[0].isIntersecting;
+      if (onscreen) start(); else stop();
+    }, { threshold: 0 }).observe(canvas);
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  boot();
+  /* Web fonts landing can change the slot's height; re-measure once. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (resize() && still) draw(1, 0); });
+})();

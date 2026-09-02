@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=11">
+<link rel="stylesheet" href="assets/site.css?v=13">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -60,16 +60,36 @@
          same thing twice before the claim has landed. -->
     <section class="hero" id="top">
       <div class="wrap hero__inner ea-fold">
-        <p class="eyebrow ea-eyebrow" data-reveal>Early access</p>
-        <h1 class="display hero__title ea-title" data-reveal>Turn what your people know into what your company knows.</h1>
-        <div class="ea-fold__copy" data-reveal>
-          <p class="lead">Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
-          <p class="lead ea-fold__answer">graphzero brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
+
+        <!-- One column, one hierarchy: label, claim, the setup, the answer,
+             and the CTA closing it off above a rule. The two paragraphs sat
+             in their own two-column block before, which read as a second
+             thought under the headline rather than as part of it. -->
+        <div class="ea-fold__copy">
+          <p class="eyebrow ea-eyebrow" data-reveal>Early access</p>
+          <h1 class="display ea-title" data-reveal>Turn what your people know into what your company knows.</h1>
+          <p class="lead ea-fold__setup" data-reveal>Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
+          <p class="lead ea-fold__answer" data-reveal>graphzero brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
+          <div class="ea-cta-row" data-reveal>
+            <a class="btn btn--accent btn--lg" href="#early-access">Become a design partner &rarr;</a>
+            <a class="link-underline ea-cta-row__alt" href="#product">See how it works &darr;</a>
+          </div>
         </div>
-        <div class="ea-cta-row" data-reveal>
-          <a class="btn btn--accent btn--lg" href="#early-access">Become a design partner &rarr;</a>
-          <a class="link-underline ea-cta-row__alt" href="#product">See how it works &darr;</a>
-        </div>
+
+        <!-- The knowledge graph. The design system names this as its one
+             exception to flatness — "the knowledge-graph point cloud, which
+             sits on white behind the hero type" — and it is what the fold
+             was missing: the copy says knowledge is fragmented and then
+             brought together, and until now nothing showed it.
+
+             Drawn on canvas rather than authored as SVG: the whole figure is
+             thirty-odd points and the edges between them, which is a few
+             lines of geometry and would be several hundred of path data.
+             Decorative to a screen reader — the sentence beside it is the
+             accessible version of the same idea. -->
+        <figure class="ea-fold__figure" aria-hidden="true">
+          <canvas data-graph-hero></canvas>
+        </figure>
       </div>
     </section>
 
@@ -182,7 +202,7 @@
 
 </div>
 
-<script src="assets/site.js?v=11" defer></script>
+<script src="assets/site.js?v=13" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>
