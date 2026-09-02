@@ -381,24 +381,6 @@
   font-size: clamp(1.125rem, 1.1vw + 0.85rem, 1.4375rem);
 }
 
-/* ---- 06 · "Pick your deployment." — selection rows ----
-   Four options read down, each on a rule, the name and what it means in
-   their own columns. A list of choices, not a set of boxes. */
-.page[data-page="security"] main > section:nth-of-type(6) .pickset { display: block; }
-.page[data-page="security"] main > section:nth-of-type(6) .pick {
-  display: grid;
-  grid-template-columns: 1.25rem minmax(0, 1fr);
-  gap: var(--space-4) var(--space-6);
-  align-items: baseline;
-}
-@media (min-width: 860px) {
-  .page[data-page="security"] main > section:nth-of-type(6) .pick {
-    grid-template-columns: 1.25rem minmax(0, 0.7fr) minmax(0, 1.3fr);
-    gap: var(--section-sm);
-  }
-  .page[data-page="security"] main > section:nth-of-type(6) .pick > div { display: contents; }
-}
-
 /* ---- 07 · "Pick your inference." — selection columns ----
    Three side by side instead of stacked, so the second choice does not
    repeat the shape of the first. */
@@ -415,6 +397,16 @@
 .page[data-page="security"] main > section:nth-of-type(7) .pick__dot {
   display: block;
   margin-bottom: var(--space-4);
+  /* Hollow here, filled in 06. The mark carries the difference between the two
+     choice sections where their layouts come closest. */
+  background: transparent;
+}
+
+/* The three choice-and-register sections all set their heading at 56px, which
+   made the tail of the page read flat. The register is the trust anchor, so it
+   takes the larger step and the run is broken. */
+.page[data-page="security"] main > section:nth-of-type(8) .sec-head {
+  font-size: clamp(2.5rem, 4.6vw, 4.5rem);
 }
 
 /* ---- 08 · certifications — a register ----
@@ -449,19 +441,29 @@
   grid-template-rows: auto auto;
 }
 @media (min-width: 760px) {
+  /* Three columns, not two. Stacking the claim over its note left the right
+     half of every entry empty, which reads as an unfinished row rather than a
+     record. The note takes a column of its own and the entry spans the
+     container. */
   .page[data-page="security"] main > section:nth-of-type(8) .card--ring {
-    grid-template-columns: clamp(7rem, 12vw, 10rem) minmax(0, 1fr);
+    grid-template-columns:
+      clamp(8rem, 13vw, 11rem)
+      minmax(0, 0.85fr)
+      minmax(0, 1.5fr);
     gap: var(--space-2) clamp(2rem, 4vw, 3.5rem);
     align-items: center;
   }
   .page[data-page="security"] main > section:nth-of-type(8) .card-foot { display: contents; }
   .page[data-page="security"] main > section:nth-of-type(8) .card-badge {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     align-self: center;
   }
   .page[data-page="security"] main > section:nth-of-type(8) .card-title { grid-column: 2; grid-row: 1; }
-  .page[data-page="security"] main > section:nth-of-type(8) .card-note  { grid-column: 2; grid-row: 2; }
+  .page[data-page="security"] main > section:nth-of-type(8) .card-note  {
+    grid-column: 3; grid-row: 1;
+    max-width: none;
+  }
 }
 /* Stacked, the same rows apply but in one column. */
 @media (max-width: 759px) {
@@ -470,6 +472,146 @@
   .page[data-page="security"] main > section:nth-of-type(8) .card-note  { grid-row: auto; }
 }
 .page[data-page="security"] main > section:nth-of-type(8) .card-badge {
-  height: clamp(3.5rem, 5.5vw, 5rem);
+  height: clamp(4rem, 6.5vw, 6.25rem);
+  width: auto;
   margin-bottom: 0;
+}
+
+/* ==========================================================================
+   MODULES AND SURFACE
+
+   Some chapters are contained and some breathe against the page. Scrolling
+   the sequence now alternates:
+
+     open statement · contained module · open spec table · open centred trio
+     · contained chapter · contained options · open comparison · open register
+
+   Never two contained in a row, never four open in a row. The container is
+   the argument for the section it holds, not a default.
+
+   The boxes are the About page's story panel in another setting: a hairline
+   ring, a 3px radius, an accent rule capping the top, and enough padding
+   that the type never touches an edge. No shadow — depth on this site is the
+   ring — and no fill heavy enough to read as a card.
+   ========================================================================== */
+
+.page[data-page="security"] main > section:nth-of-type(2),
+.page[data-page="security"] main > section:nth-of-type(5) {
+  position: relative;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 3px;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  margin-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Two different grounds, so the two modules are not the same object twice:
+   the first a warm off-white carrying a trace of the accent, the second the
+   page's own neutral panel. Both a couple of per cent off white — enough to
+   separate from the page, not enough to read as colour. */
+.page[data-page="security"] main > section:nth-of-type(2) { background: #FCF8F6; }
+.page[data-page="security"] main > section:nth-of-type(5) { background: var(--ground-base); }
+
+/* The one pink on the page. A short segment at the head of the accent rule
+   on the European module — a signal you find rather than one you are shown.
+   It appears once and nowhere else. */
+.page[data-page="security"] main > section:nth-of-type(5)::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -1px;
+  width: clamp(3rem, 7vw, 5.5rem);
+  height: 3px;
+  background: #F5127A;
+  border-radius: 3px 0 0 0;
+}
+
+/* ---- numbers, treated differently in each place they appear ---- */
+
+/* In the first module they are the accent and they open each column. */
+.page[data-page="security"] main > section:nth-of-type(2) .numlist__num {
+  font-size: clamp(1.375rem, 2vw, 1.75rem);
+  color: var(--accent-text);
+}
+
+/* In the chapter they are large and quiet, set as editorial figures against
+   the panel rather than as labels. */
+.page[data-page="security"] main > section:nth-of-type(5) .numlist__num {
+  font-size: clamp(2rem, 3.4vw, 2.875rem);
+  line-height: 1;
+  color: var(--heading);
+  opacity: 0.3;
+  margin-bottom: var(--space-3);
+}
+
+/* ---- 06 · deployment — contained options ----
+   Four panels in a grid rather than four rows on rules: this is the one
+   place on the page where things are meant to be compared side by side, and
+   a bounded area per option is what makes them comparable. */
+.page[data-page="security"] main > section:nth-of-type(6) .pickset {
+  display: grid;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  margin-top: clamp(2rem, 3.6vw, 3rem);
+}
+@media (min-width: 861px) {
+  .page[data-page="security"] main > section:nth-of-type(6) .pickset {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.page[data-page="security"] main > section:nth-of-type(6) .pick {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  transition: border-color 300ms var(--ease), background-color 300ms var(--ease);
+}
+.page[data-page="security"] main > section:nth-of-type(6) .pick:hover {
+  border-color: rgba(217, 92, 50, 0.45);
+  background: #FDFAF9;
+}
+.page[data-page="security"] main > section:nth-of-type(6) .pick__dot {
+  background: var(--accent);
+  box-shadow: none;
+}
+
+/* ---- 07 · inference — open comparison ----
+   Left open on purpose, directly after four contained ones, so the pair of
+   choice sections do not read as the same module twice. */
+
+/* ---- 08 · the register ----
+   Kept open. The marks are the section, so they get an accent rule above the
+   set and room around each one; nothing is boxed, because a box around a
+   certification reads as a badge rather than as a record. */
+.page[data-page="security"] main > section:nth-of-type(8) .grid-3 {
+  border-top: 2px solid var(--accent);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+.page[data-page="security"] main > section:nth-of-type(8) .card--ring:first-of-type { border-top: 0; }
+.page[data-page="security"] main > section:nth-of-type(8) .card--ring {
+  transition: background-color 300ms var(--ease);
+}
+.page[data-page="security"] main > section:nth-of-type(8) .card--ring:hover { background: #FCFAF9; }
+
+/* ---- the close ----
+   The last statement gets the accent rule the modules carry, so the page
+   ends on the same structural device it has been using throughout. */
+.page[data-page="security"] main > section:nth-of-type(8) > .stack-16 {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  border-top: 2px solid var(--accent);
+  /* The markup carries an inline padding-top of --section-md, which no
+     selector can outrank. Content is fixed here, so the override is the only
+     way to keep the eyebrow from floating 80px under its own rule. */
+  padding-top: clamp(1.75rem, 3vw, 2.5rem) !important;
+}
+/* The general .paperwork treatment gives the line its own hairline and a
+   large inset — right for the note that sits mid-flow in 07, redundant under
+   the accent rule that now opens this block. */
+.page[data-page="security"] main > section:nth-of-type(8) > .stack-16 .paperwork {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  max-width: 62ch;
+  /* Set as the closing statement it is, rather than as fine print. */
+  font-size: clamp(1rem, 0.45vw + 0.86rem, 1.1875rem);
+  line-height: 1.55;
+  color: var(--heading);
 }
