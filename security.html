@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/security.css?v=38">
+<link rel="stylesheet" href="assets/v3/security.css?v=40">
 <link rel="stylesheet" href="assets/footer.css?v=3">
 <link rel="stylesheet" href="assets/header.css?v=3">
 <link rel="icon" href="assets/graphzero-icon.png?v=1" type="image/png">
@@ -68,29 +68,47 @@
          index; everything below it runs on white. -->
     <section class="band band--dark dark" id="security">
       <div class="wrap sec sec--pb">
-        <!-- Copy on the left, marks on the right, on the site's own .secsplit —
-             the same split the work-with-us band runs. It collapses to one
-             column under 900px on its own, so the marks fall under the sentence
-             on a phone rather than being squeezed beside it. -->
-        <div class="secsplit">
-          <div class="secsplit__lead">
-            <h1 class="h2 sec-head">Secure by design, sovereign by default.</h1>
-            <p class="lead">Your knowledge stays yours. EU infrastructure, EU-hosted models, permissions at fact level, and an audit trail you can read.</p>
-          </div>
+        <!-- One column, full measure. The marks are no longer badge artwork
+             beside the copy but three chips under it, which is what the kit
+             shows. The certification images themselves still run in full in
+             the register further down the page. -->
+        <div class="secfold">
+          <h1 class="h2 sec-head">Secure by design, sovereign by default.</h1>
+          <p class="lead">Your knowledge stays yours. EU infrastructure, EU-hosted models, permissions at fact level, and an audit trail you can read.</p>
 
-          <!-- Not lazy: unlike on work-with-us this row is above the fold, and
-               deferring it would pop the marks in after the band had painted. -->
-          <div class="secsplit__marks">
-            <div class="markrow">
-              <img class="markrow__badge" src="assets/media/gdpr.png"
-                   alt="GDPR" width="640" height="631" decoding="async">
-              <img class="markrow__badge" src="assets/media/eu-ai-act.png"
-                   alt="EU AI Act" width="640" height="631" decoding="async">
-              <img class="markrow__badge" src="assets/media/iso-27001.png"
-                   alt="ISO 27001" width="557" height="640" decoding="async">
-            </div>
-            <p class="small markrow__note">ISO 27001 certification in progress; our security management system follows the standard today.</p>
-          </div>
+          <ul class="certrow">
+            <li class="cert">
+              <svg class="cert__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l7 3v5.2c0 4.3-2.9 7.5-7 8.8-4.1-1.3-7-4.5-7-8.8V6l7-3z"/>
+                <path d="M9.2 12.1l2 2 3.6-3.9"/>
+              </svg>
+              <span class="cert__name">GDPR</span>
+              <span class="cert__state">compliant</span>
+            </li>
+            <li class="cert">
+              <svg class="cert__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8.6"/>
+                <path d="M3.4 12h17.2"/>
+                <path d="M12 3.4a13 13 0 0 1 0 17.2 13 13 0 0 1 0-17.2z"/>
+              </svg>
+              <span class="cert__name">EU AI Act</span>
+              <span class="cert__state">by design</span>
+            </li>
+            <li class="cert cert--mark">
+              <svg class="cert__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V7l-4-4z"/>
+                <path d="M13.8 3.2V7.2H17.8"/>
+                <path d="M9.4 13.6l1.8 1.8 3.4-3.6"/>
+              </svg>
+              <span class="cert__name">ISO 27001</span>
+              <span class="cert__state">in progress</span>
+            </li>
+          </ul>
+
+          <p class="small secfold__note">ISO 27001 certification in progress; our security management system follows the standard today.</p>
         </div>
       </div>
     </section>

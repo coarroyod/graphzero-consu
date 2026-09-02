@@ -71,121 +71,114 @@
   --accent-text: var(--accent-strong);
   color: var(--ink);
 }
-.page[data-page="security"] .dark .markrow__badge { filter: none; }
 
 .page[data-page="security"] .band--dark.dark > .wrap {
   padding-top: clamp(4rem, 12vh, 8.5rem);
   padding-bottom: clamp(4rem, 11vh, 7.5rem);
 }
 
-/* ---- the statement ----
+/* ---- 01 · the fold, from the website kit -----------------------------------
 
-   .ea-title's own values, so the fold is the Early Access hero's typography
-   rather than something near it: clamp(2.5rem, 6vw, 5rem), 0.97, -0.045em,
-   and the system's heading weight of 500, which the design system holds to
-   deliberately ("never 600/700 in this system").
-   ------------------------------------------------------------------------- */
-.page[data-page="security"] .band--dark.dark .h2 {
-  max-width: 13ch;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 500;
-  line-height: 0.97;
-  letter-spacing: -0.045em;
-  color: var(--ink);
-  text-wrap: balance;
-}
-.page[data-page="security"] .secsplit__lead {
-  gap: clamp(1.5rem, 2.6vw, 2.25rem);
-}
-.page[data-page="security"] .band--dark.dark .lead {
-  max-width: 36ch;
-  font-size: clamp(1.0625rem, 0.45vw + 1rem, 1.3125rem);
-  font-weight: 400;
-  line-height: 1.55;
-  color: var(--ink-muted);
-}
+   One column at the container's full measure: statement, sentence, three
+   certification chips, then the note. The eyebrow the reference carries above
+   the statement is deliberately absent — it was asked to be dropped.
 
-/* ---- the marks ----
-
-   One row, three of them, all the same height, on white. No field, no ring,
-   no drawn line: the previous fold had a two-stroke gradient sweep behind
-   them and three different sizes, and both are gone. The marks are the
-   picture.
-
-   Sized by height rather than width so they read as one size despite ISO's
-   taller ratio — by width, the two round marks would sit visibly larger than
-   it. At 1440 the three come to 517px of artwork and 80px of gap inside a
-   632px column, which is what sets the height: 178px, with room left over
-   rather than filled to the edge.
+   What left: the two-column split, the three badge images, and the drawn
+   sweep behind them. The certification artwork still runs in full in the
+   register at the foot of the page; here the marks are chips.
    ------------------------------------------------------------------------- */
 .page[data-page="security"] #security {
   position: relative;
+  /* The network sits behind everything. Its viewBox is the section's own
+     measured ratio — 1440x779 — so cover neither crops it nor stretches the
+     nodes out of round, and the pink one lands just past the end of the
+     statement's first line rather than on top of a letter. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 779'%3E%3Cg fill='none' stroke='%2317232B' stroke-opacity='0.13' stroke-width='1'%3E%3Cpath d='M0 174 L248 126 L880 205 L1087 683'/%3E%3Cpath d='M248 126 L119 551 L1087 683'/%3E%3Cpath d='M1026 166 L1433 258 L1087 683'/%3E%3Cpath d='M1026 166 L880 205'/%3E%3C/g%3E%3Cg fill='%2317232B' fill-opacity='0.42'%3E%3Ccircle cx='248' cy='126' r='4.5'/%3E%3Ccircle cx='1026' cy='166' r='4.5'/%3E%3Ccircle cx='1433' cy='258' r='4.5'/%3E%3Ccircle cx='119' cy='551' r='4.5'/%3E%3Ccircle cx='1087' cy='683' r='4.5'/%3E%3C/g%3E%3Ccircle cx='880' cy='205' r='5.5' fill='%23FF2E93'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-
-/* The split is re-cut for this fold alone. At the site's 0.9 : 1 the marks
-   had 581px, which caps three equal marks at about 165px; 0.82 : 1.1 gives
-   them 632px and the statement still sets its longest line, "by default.",
-   inside the 471px left to it. */
-@media (min-width: 900px) {
-  .page[data-page="security"] #security .secsplit {
-    grid-template-columns: 0.82fr 1.1fr;
-    align-items: center;
-  }
-}
-
-.page[data-page="security"] .secsplit__marks {
-  padding-top: 0;
-  display: grid;
-  gap: clamp(2rem, 4vw, 3.25rem);
-  justify-items: start;
-}
-
-.page[data-page="security"] .secsplit__marks .markrow {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: clamp(0.875rem, 2.8vw, 2.75rem);
-  margin-top: 0;
-  padding-top: 0;
-  border-top: 0;
-}
-
-.page[data-page="security"] .markrow__badge {
-  height: clamp(6rem, 12.4vw, 11.5rem);
-  width: auto;
-  max-width: 100%;
-  flex: none;
-}
-
-/* The one orange in the fold, and the only rule: a short mark setting the
-   note apart from the row above it. Structural — it says the sentence belongs
-   to the marks — rather than decoration. */
-.page[data-page="security"] .markrow__note {
+.page[data-page="security"] #security > .wrap {
   position: relative;
-  margin-top: 0;
-  padding-top: clamp(1.25rem, 2.2vw, 1.75rem);
-  max-width: 44ch;
-  font-style: normal;
-  font-size: var(--fs-small);
-  line-height: 1.55;
+  padding-top: clamp(4rem, 12vh, 8.5rem);
+  padding-bottom: clamp(4rem, 11vh, 7.5rem);
+}
+
+/* ---- the statement ----
+   The kit sets it in two lines across the full measure, which is what the
+   size is chosen against: "sovereign by default." is the long line at 21
+   characters and clears 1152 at 95px. Navy, as asked. */
+.page[data-page="security"] .band--dark.dark .h2 {
+  max-width: 20ch;
+  font-size: clamp(2.5rem, 6.6vw, 6rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.page[data-page="security"] .band--dark.dark .lead {
+  margin-top: clamp(1.75rem, 3.4vw, 3rem);
+  max-width: 42ch;
+  font-size: clamp(1.0625rem, 0.85vw + 0.85rem, 1.5rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+/* ---- the chips ----
+   Pills on the page's own ground, hairline-ringed, the name in the ink and the
+   state in the mono face — the reference's own pairing. */
+.page[data-page="security"] .certrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.625rem, 1.2vw, 1rem);
+  margin: clamp(2.25rem, 4.4vw, 3.75rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.page[data-page="security"] .cert {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.5rem, 0.9vw, 0.75rem);
+  padding: clamp(0.6875rem, 1.1vw, 0.9375rem) clamp(1rem, 1.7vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+}
+.page[data-page="security"] .cert__icon {
+  width: clamp(1.0625rem, 1.4vw, 1.25rem);
+  height: clamp(1.0625rem, 1.4vw, 1.25rem);
+  flex: none;
+  color: var(--ink);
+}
+/* The one pink in the fold besides the network's single node. */
+.page[data-page="security"] .cert--mark .cert__icon { color: #FF2E93; }
+.page[data-page="security"] .cert__name {
+  font-weight: 500;
+  font-size: clamp(0.9375rem, 0.5vw + 0.8rem, 1.0625rem);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.page[data-page="security"] .cert__state {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8125rem, 0.4vw + 0.72rem, 0.9375rem);
+  color: var(--meta);
+  white-space: nowrap;
+}
+
+.page[data-page="security"] .secfold__note {
+  margin: clamp(1.25rem, 2.2vw, 1.875rem) 0 0;
+  max-width: 52ch;
+  font-size: clamp(0.9375rem, 0.4vw + 0.85rem, 1.0625rem);
+  line-height: 1.5;
   color: var(--meta);
 }
-.page[data-page="security"] .markrow__note::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3.5rem;
-  height: 2px;
-  background: #FF6A00;
-}
 
-/* Stacked, the row still holds: three marks across a full-width column have
-   more room than they had beside the copy, so only the ceiling comes down. */
-@media (max-width: 899px) {
-  .page[data-page="security"] .secsplit__marks {
-    justify-items: stretch;
-  }
+/* Stacked, the chips run down rather than wrapping mid-row, so each keeps its
+   name and state on one line. */
+@media (max-width: 560px) {
+  .page[data-page="security"] .certrow { flex-direction: column; align-items: flex-start; }
 }
 
 /* ---- 02-05 the four chapters ----
