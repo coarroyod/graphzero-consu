@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=15">
+<link rel="stylesheet" href="assets/site.css?v=17">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -165,27 +165,32 @@
          across the page as numbered rows, with the claim and what it means in
          separate columns, they read as the supporting detail they are.
 
+         01 and 02 are the design-partner offer itself and run the full
+         width at their own size; 03 and 04 are the reasons behind it and sit
+         together underneath, quieter. Same structure in both, different
+         scale — which is the hierarchy, rather than four equal cells.
+
          The numbers are decoration to a screen reader — the list element
          already carries the order — which is how numlist does it elsewhere. -->
     <section class="band band--dark dark ea-gets">
       <div class="wrap sec ea-gets__inner">
         <ol class="ea-list">
-          <li class="ea-item" data-reveal>
+          <li class="ea-item ea-item--lead" data-reveal>
             <span class="ea-item__num" aria-hidden="true">01</span>
             <h3 class="ea-item__title">Early access</h3>
             <p class="ea-item__body">Be among the first to use graphzero.</p>
           </li>
-          <li class="ea-item" data-reveal>
+          <li class="ea-item ea-item--lead" data-reveal>
             <span class="ea-item__num" aria-hidden="true">02</span>
             <h3 class="ea-item__title">Direct collaboration</h3>
             <p class="ea-item__body">Work closely with our team and give input as the product evolves.</p>
           </li>
-          <li class="ea-item" data-reveal>
+          <li class="ea-item ea-item--support" data-reveal>
             <span class="ea-item__num" aria-hidden="true">03</span>
             <h3 class="ea-item__title">A foundation for AI</h3>
             <p class="ea-item__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
           </li>
-          <li class="ea-item" data-reveal>
+          <li class="ea-item ea-item--support" data-reveal>
             <span class="ea-item__num" aria-hidden="true">04</span>
             <h3 class="ea-item__title">Flexible by design</h3>
             <p class="ea-item__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
@@ -226,7 +231,7 @@
 
 </div>
 
-<script src="assets/site.js?v=15" defer></script>
+<script src="assets/site.js?v=17" defer></script>
 <script src="assets/kg-flow.js?v=6" defer></script>
 </body>
 </html>

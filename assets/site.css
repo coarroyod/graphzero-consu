@@ -3813,58 +3813,130 @@ plainest thing in the drawing rather than the most filled. */
   padding-top: clamp(1rem, 2vw, 2rem);
   padding-bottom: clamp(3.5rem, 7vw, 6rem);
 }
-.page[data-page="early-access"] .ea-list { list-style: none; margin: 0; padding: 0; }
+/* Two tiers, not four cells.
+
+   01 and 02 are the offer — early access, and working with the team — so
+   they run the full width at their own size. 03 and 04 are why the offer is
+   worth taking, so they sit together underneath at roughly two thirds the
+   scale. The structure inside a row is identical in both tiers; only the size
+   and the air around it change, which is what makes it read as hierarchy
+   rather than as two different components.
+
+   The scale runs 48 / 34 / 21 at 1440 — heading, offer, reason — so each tier
+   is clearly subordinate to the one above without any of them getting small.
+   The middle step is set from the viewport rather than fixed, so it holds
+   that relationship as the column narrows instead of only at one width. */
+.page[data-page="early-access"] .ea-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 860px) {
+  .page[data-page="early-access"] .ea-list {
+    grid-template-columns: 1fr 1fr;
+    /* No column gap: the two supporting rows carry their own inner padding
+       instead, so their top rules meet in the middle and the divider above
+       them runs unbroken across the page like the ones above it. */
+    column-gap: 0;
+  }
+  .page[data-page="early-access"] .ea-item--lead { grid-column: 1 / -1; }
+}
 
 .page[data-page="early-access"] .ea-item {
   display: grid;
-  grid-template-columns: 2.75rem minmax(0, 1fr);
-  gap: var(--space-2) var(--space-6);
-  padding: var(--space-8) 0;
   border-top: 1px solid var(--line);
+  align-content: start;
 }
-.page[data-page="early-access"] .ea-item:last-child { border-bottom: 1px solid var(--line); }
+.page[data-page="early-access"] .ea-item__num {
+  grid-column: 1; grid-row: 1;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--meta);
+  line-height: 1;
+}
+.page[data-page="early-access"] .ea-item__title { grid-column: 2; grid-row: 1; margin: 0; }
+.page[data-page="early-access"] .ea-item__body  { grid-column: 2; grid-row: 2; margin: 0; }
 
+/* ---- the offer ---- */
+.page[data-page="early-access"] .ea-item--lead {
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--space-4) var(--space-6);
+  padding-block: clamp(2.25rem, 3.6vw, 3.25rem);
+}
 @media (min-width: 860px) {
-  .page[data-page="early-access"] .ea-item {
-    grid-template-columns: 4.5rem minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: var(--section-sm);
-    align-items: baseline;
-    padding-block: var(--space-12);
+  .page[data-page="early-access"] .ea-item--lead {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: var(--space-4) var(--space-8);
   }
 }
-
-.page[data-page="early-access"] .ea-item__num {
-  font-family: var(--font-mono);
-  font-size: var(--fs-tiny);
-  line-height: 1.6;
-  color: var(--meta);
-  font-variant-numeric: tabular-nums;
+.page[data-page="early-access"] .ea-item--lead .ea-item__num {
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  /* Optically aligned to the cap height of the title beside it rather than to
+     its line box, which sits the figure a few pixels high. */
+  padding-top: 0.35em;
 }
-.page[data-page="early-access"] .ea-item__title {
-  margin: 0;
-  font-size: clamp(1.25rem, 0.9vw + 1rem, 1.5rem);
-  line-height: var(--lh-h3);
-  letter-spacing: -0.02em;
+.page[data-page="early-access"] .ea-item--lead .ea-item__title {
+  font-size: clamp(1.625rem, 2.4vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.028em;
   font-weight: var(--weight-heading);
   color: var(--heading);
 }
-.page[data-page="early-access"] .ea-item__body {
-  margin: 0;
-  max-width: 46ch;
+.page[data-page="early-access"] .ea-item--lead .ea-item__body {
+  max-width: 44ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--body);
+}
+
+/* ---- the reasons ---- */
+/* The air above this pair is what separates the tiers; there is no second
+   device doing it. */
+.page[data-page="early-access"] .ea-item--support {
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--space-3) var(--space-6);
+  padding-top: clamp(2.75rem, 4.5vw, 4rem);
+  padding-bottom: clamp(2.25rem, 3.6vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 860px) {
+  /* The inner padding that replaces the column gap. */
+  .page[data-page="early-access"] .ea-item--support:first-of-type { padding-right: var(--section-sm); }
+  .page[data-page="early-access"] .ea-item--support:last-of-type  { padding-left: var(--section-sm); }
+}
+.page[data-page="early-access"] .ea-item--support .ea-item__num {
+  font-size: var(--fs-tiny);
+  padding-top: 0.5em;
+}
+.page[data-page="early-access"] .ea-item--support .ea-item__title {
+  font-size: clamp(1.125rem, 0.7vw + 0.9rem, 1.3125rem);
+  line-height: var(--lh-h3);
+  letter-spacing: -0.015em;
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+}
+.page[data-page="early-access"] .ea-item--support .ea-item__body {
+  max-width: 42ch;
   font-size: var(--fs-body);
   line-height: 1.5;
   color: var(--body);
 }
-/* On a phone the three columns become two, and the body drops under the
-   title rather than beside it — so it clears the number column. */
-@media (max-width: 859px) {
-  .page[data-page="early-access"] .ea-item__title,
-  .page[data-page="early-access"] .ea-item__body { grid-column: 2; }
-}
 
-/* The section closes on the ask. Orange lands here and on the figure's hub,
-   and nowhere else in this run. */
-.page[data-page="early-access"] .ea-gets__cta { margin-top: var(--section-sm); }
+/* The section ends on the ask. It sits below the rule that closes the list,
+   indented to the column the four titles start in, so it reads as the last
+   line of the sequence rather than as a button parked under it. Orange lands
+   here and on the hub of the figure above, and nowhere else in the navy. */
+.page[data-page="early-access"] .ea-gets__cta {
+  margin-top: clamp(2.75rem, 4.5vw, 4rem);
+  /* The number column plus the gap after it — the inset has to clear both to
+     land under the titles rather than under the figures. */
+  padding-left: calc(3.25rem + var(--space-6));
+}
+@media (min-width: 860px) {
+  .page[data-page="early-access"] .ea-gets__cta { padding-left: calc(5.5rem + var(--space-8)); }
+}
 
 /* ---- 06 the close ---- */
 .page[data-page="early-access"] .ea-closing {
