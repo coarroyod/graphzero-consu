@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=30">
+<link rel="stylesheet" href="assets/site.css?v=31">
 <link rel="icon" href="assets/graphzero-mark.svg?v=6" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -106,44 +106,48 @@
     </section>
 
     <!-- 03 / 04 — THE ECOSYSTEM
-         Research first, then Amsterdam. Two cards rather than three, so each
-         gets the room a section would — the existing .link-card, so these
-         behave exactly like the ones the site already ships. -->
+         Research first, then Amsterdam — and read as one list rather than two
+         cards side by side. Numbered rows on a shared rule: the number orders
+         them, the hairline joins them, and the picture sits at the end of the
+         row instead of under a block of copy in a box. Two entries of one
+         system, not two objects to choose between. -->
     <section class="band ab-band-grey" id="ecosystem">
       <div class="wrap sec sec--pb">
         <p class="eyebrow" data-reveal>The graphzero ecosystem</p>
 
-        <div class="grid-2 ab-eco">
-          <a class="link-card" href="https://aithos.org/" target="_blank" rel="noopener" data-reveal>
-            <span class="link-card__body">
-              <h2 class="h4-card">Research on autonomy and pluralism in AI</h2>
-              <p class="small">graphzero is part of the Aithos ecosystem, which researches how increasingly autonomous AI systems can remain pluralistic, controllable, and aligned with human interests.</p>
+        <div class="ab-eco">
+          <a class="ab-eco__item" href="https://aithos.org/" target="_blank" rel="noopener" data-reveal>
+            <span class="ab-eco__num" aria-hidden="true">01</span>
+            <div class="ab-eco__text">
+              <h2 class="ab-eco__title">Research on autonomy and pluralism in AI</h2>
+              <p class="ab-eco__body">graphzero is part of the Aithos ecosystem, which researches how increasingly autonomous AI systems can remain pluralistic, controllable, and aligned with human interests.</p>
               <span class="ab-eco__cue">Explore Aithos &rarr;</span>
               <span class="vh">Opens aithos.org in a new tab</span>
-            </span>
-            <span class="link-card__media">
+            </div>
+            <div class="ab-eco__media">
               <img src="assets/media/eco-aithos-1200.jpg"
                    srcset="assets/media/eco-aithos-600.jpg 600w,
                            assets/media/eco-aithos-1200.jpg 1200w"
-                   sizes="(min-width: 760px) 46vw, 100vw"
+                   sizes="(min-width: 900px) 32vw, 100vw"
                    alt="" width="1200" height="800" loading="lazy" decoding="async">
-            </span>
+            </div>
           </a>
 
-          <a class="link-card" href="https://thestack.ai/" target="_blank" rel="noopener" data-reveal>
-            <span class="link-card__body">
-              <h2 class="h4-card">Building within Amsterdam&rsquo;s AI ecosystem</h2>
-              <p class="small">graphzero is part of The Stack, Amsterdam&rsquo;s AI hub bringing together AI companies, researchers, and organizations working to build the next generation of AI.</p>
+          <a class="ab-eco__item" href="https://thestack.ai/" target="_blank" rel="noopener" data-reveal>
+            <span class="ab-eco__num" aria-hidden="true">02</span>
+            <div class="ab-eco__text">
+              <h2 class="ab-eco__title">Building within Amsterdam&rsquo;s AI ecosystem</h2>
+              <p class="ab-eco__body">graphzero is part of The Stack, Amsterdam&rsquo;s AI hub bringing together AI companies, researchers, and organizations working to build the next generation of AI.</p>
               <span class="ab-eco__cue">Explore The Stack &rarr;</span>
               <span class="vh">Opens thestack.ai in a new tab</span>
-            </span>
-            <span class="link-card__media">
+            </div>
+            <div class="ab-eco__media">
               <img src="assets/media/eco-hub-1200.jpg"
                    srcset="assets/media/eco-hub-600.jpg 600w,
                            assets/media/eco-hub-1200.jpg 1200w"
-                   sizes="(min-width: 760px) 46vw, 100vw"
+                   sizes="(min-width: 900px) 32vw, 100vw"
                    alt="" width="1200" height="800" loading="lazy" decoding="async">
-            </span>
+            </div>
           </a>
         </div>
       </div>
@@ -178,6 +182,6 @@
 
 </div>
 
-<script src="assets/site.js?v=30" defer></script>
+<script src="assets/site.js?v=31" defer></script>
 </body>
 </html>

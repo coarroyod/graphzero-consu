@@ -4116,61 +4116,65 @@ plainest thing in the drawing rather than the most filled. */
    language as the two figures on Early Access.
    ========================================================================== */
 
-/* ---- 01 the fold ---- */
+/* ---- 01 the fold ----
+
+   Two steps, not one column. The claim ranges left off the container margin;
+   the three lines under it are inset, so the fold reads as a statement with a
+   note set against it rather than as a heading with body text beneath. The
+   indent is the whole composition — no rule, no box, no second graphic. */
 .page[data-page="about"] .ab-hero {
   position: relative;
   overflow: hidden;
-  /* Given the height of a fold rather than the height of its paragraphs: an
-     About page opens on a position, and the position needs room around it.
-     The field takes the section's full height, so the air is also what makes
-     the drawing large. */
   min-height: clamp(28rem, 66vh, 38rem);
   display: grid;
   align-content: center;
   padding-top: clamp(3rem, 8vh, 6rem);
   padding-bottom: clamp(3.5rem, 9vh, 6.5rem);
 }
-.page[data-page="about"] .ab-hero__copy { max-width: min(34rem, 44%); }
+/* Wider than the note it carries, so the claim can take its size. */
+.page[data-page="about"] .ab-hero__copy { max-width: min(40rem, 52%); }
 @media (max-width: 999px) {
   .page[data-page="about"] .ab-hero__copy { max-width: 34rem; }
 }
 
 .page[data-page="about"] .ab-title {
   margin: 0;
-  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
-  line-height: 0.98;
+  font-size: clamp(2.625rem, 5.6vw, 5rem);
+  line-height: 0.96;
   letter-spacing: -0.045em;
   color: var(--heading);
-  text-wrap: balance;
 }
-/* The second line is the claim the first one sets up, so it is the one that
-   carries the accent — and it is the only accent in the fold besides the node
-   the field is drawn around. */
+/* The second line is the turn the first one sets up, so it is the one that
+   carries the accent — and the only accent in the fold besides the node. */
 .page[data-page="about"] .ab-title .hl { color: var(--hl); }
 
 .page[data-page="about"] .ab-hero__lead {
   display: grid;
   gap: var(--space-4);
   margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  max-width: 40ch;
+  max-width: 36ch;
 }
-/* The first two lines set the position; the third is what graphzero does
-   about it, so it takes full ink and the eye finishes there. */
+@media (min-width: 1000px) {
+  /* The step. Set in from the claim so the two are read in sequence rather
+     than as one stack. */
+  .page[data-page="about"] .ab-hero__lead { margin-left: clamp(0rem, 5vw, 4.25rem); }
+}
+/* The first two lines are the position; the third is what graphzero does
+   about it, so the eye finishes on full ink. */
 .page[data-page="about"] .ab-hero__claim { color: var(--heading); }
 
-/* The field runs to the page edge rather than stopping at the gutter, so it
-   is cropped by the viewport instead of framed by a box. */
+/* Runs to the page edge rather than stopping at the gutter, so it is cropped
+   by the viewport instead of framed by a box. Narrowed to give the claim the
+   width its size needs. */
 .page[data-page="about"] .ab-hero__field {
   position: absolute;
   top: 0;
   right: 0;
-  width: min(50%, 40rem);
+  width: min(44%, 34rem);
   height: 100%;
 }
 .page[data-page="about"] .ab-hero__field canvas { display: block; width: 100%; height: 100%; }
 
-/* Under 1000px there is no room for type and field side by side without them
-   meeting, so the field drops below the copy and runs the full width. */
 @media (max-width: 999px) {
   .page[data-page="about"] .ab-hero { overflow: visible; }
   .page[data-page="about"] .ab-hero__field {
@@ -4181,7 +4185,12 @@ plainest thing in the drawing rather than the most filled. */
   }
 }
 
-/* ---- 02 the story ---- */
+/* ---- 02 the story ----
+
+   A profile, so it is composed as one: the copy wide and low, the portrait
+   narrow and tall beside it. The picture was a 3:2 landscape the width of the
+   column, which is a press photo dropped next to some text; cropped upright
+   and given the narrower column it becomes the subject of the section. */
 .page[data-page="about"] .ab-story__row {
   display: grid;
   gap: var(--space-12);
@@ -4189,15 +4198,13 @@ plainest thing in the drawing rather than the most filled. */
   align-items: center;
 }
 @media (min-width: 900px) {
-  /* Copy narrower than the picture: the portrait is the section's weight and
-     the words sit against it rather than balancing it. */
   .page[data-page="about"] .ab-story__row {
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.68fr);
     gap: var(--section-sm);
   }
 }
 .page[data-page="about"] .ab-story__head { max-width: 14ch; }
-.page[data-page="about"] .ab-story__lead { margin-top: var(--space-6); max-width: 42ch; }
+.page[data-page="about"] .ab-story__lead { margin-top: var(--space-6); max-width: 44ch; }
 .page[data-page="about"] .ab-story__cue { margin: var(--space-8) 0 0; }
 
 .page[data-page="about"] .ab-story__media { margin: 0; }
@@ -4205,43 +4212,126 @@ plainest thing in the drawing rather than the most filled. */
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--radius-md);
+  /* Upright, and cropped high so the crop falls below the head rather than
+     through it. A small radius: this is a photograph in a page, not a card. */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border-radius: 4px;
+}
+@media (max-width: 899px) {
+  .page[data-page="about"] .ab-story__media img { aspect-ratio: 4 / 3; object-position: 50% 26%; }
 }
 
-/* ---- 03 / 04 the ecosystem ---- */
+/* ---- 03 / 04 the ecosystem ----
+
+   Two entries of one system, so they are one list: numbered, on a shared
+   rule, the picture at the end of the row. As cards they were two objects
+   side by side with a border round each, which reads as a choice between
+   them — and a border round a thing is the one gesture this site never
+   makes. */
 .page[data-page="about"] .ab-band-grey { background: var(--surface-grey); }
-.page[data-page="about"] .ab-eco { gap: var(--space-8); margin-top: var(--space-8); }
-@media (min-width: 760px) {
-  .page[data-page="about"] .ab-eco { gap: var(--section-sm); }
+.page[data-page="about"] .ab-eco { display: grid; margin-top: var(--space-8); }
+
+.page[data-page="about"] .ab-eco__item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--space-4) var(--space-6);
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
 }
-/* The cards sit on grey, so they take the page's white to lift off it —
-   the ring alone is not enough separation on a tinted ground. */
-.page[data-page="about"] .ab-eco .link-card { background: var(--surface); }
-.page[data-page="about"] .ab-eco .link-card__body { display: grid; gap: var(--space-4); align-content: start; }
+.page[data-page="about"] .ab-eco__item:last-child { border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) {
+  .page[data-page="about"] .ab-eco__item {
+    grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, 0.62fr);
+    column-gap: var(--section-sm);
+    align-items: start;
+  }
+}
+/* On a phone the copy and the picture clear the number column. */
+@media (max-width: 899px) {
+  .page[data-page="about"] .ab-eco__text,
+  .page[data-page="about"] .ab-eco__media { grid-column: 2; }
+}
+
+.page[data-page="about"] .ab-eco__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-tiny);
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+.page[data-page="about"] .ab-eco__text { display: grid; gap: var(--space-4); align-content: start; }
+.page[data-page="about"] .ab-eco__title {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.375rem, 1.8vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  font-weight: var(--weight-heading);
+  color: var(--heading);
+}
+.page[data-page="about"] .ab-eco__body {
+  margin: 0;
+  max-width: 48ch;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--body);
+}
 .page[data-page="about"] .ab-eco__cue {
-  margin-top: var(--space-2);
   font-size: var(--fs-small);
   color: var(--accent-text);
 }
-.page[data-page="about"] .ab-eco .link-card:hover .ab-eco__cue,
-.page[data-page="about"] .ab-eco .link-card:focus-visible .ab-eco__cue { text-decoration: underline; }
+.page[data-page="about"] .ab-eco__item:hover .ab-eco__title,
+.page[data-page="about"] .ab-eco__item:focus-visible .ab-eco__title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+.page[data-page="about"] .ab-eco__item:hover .ab-eco__cue,
+.page[data-page="about"] .ab-eco__item:focus-visible .ab-eco__cue { text-decoration: underline; }
 
-/* ---- 05 the close ---- */
-.page[data-page="about"] .ab-close__inner { padding-top: clamp(3.5rem, 8vw, 6rem); }
+.page[data-page="about"] .ab-eco__media { margin: 0; }
+.page[data-page="about"] .ab-eco__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* ---- 05 the close ----
+
+   Centred, narrow and still, after three sections that all range left. The
+   change of alignment is what marks it as the conclusion rather than a
+   fourth section.
+
+   Centring is done on the children: this element carries .wrap, and a
+   max-width here would beat the container width and centre the block by
+   shrinking it. */
+.page[data-page="about"] .ab-close__inner {
+  padding-top: clamp(3.5rem, 8vw, 6rem);
+  text-align: center;
+}
 .page[data-page="about"] .ab-close__head {
-  margin: 0;
-  max-width: 20ch;
-  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  margin: 0 auto;
+  max-width: 22ch;
+  font-size: clamp(1.875rem, 3.6vw, 3rem);
   line-height: 1.1;
   letter-spacing: var(--tracking-h3);
   color: var(--heading);
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 .page[data-page="about"] .ab-close__turn {
-  margin: var(--space-6) 0 0;
-  max-width: 44ch;
+  margin: clamp(1.25rem, 2vw, 1.75rem) auto 0;
+  max-width: 52ch;
   font-size: var(--fs-lead);
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--body);
+  text-wrap: pretty;
 }
-.page[data-page="about"] .ab-close__cta { margin: var(--space-12) 0 0; }
+.page[data-page="about"] .ab-close__cta { margin: clamp(2.25rem, 4vw, 3rem) 0 0; }
