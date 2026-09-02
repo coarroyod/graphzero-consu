@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=2">
 <link rel="stylesheet" href="assets/v3/product.css?v=7">
+<link rel="stylesheet" href="assets/footer.css?v=2">
 <link rel="icon" href="assets/graphzero-mark.svg?v=11" type="image/svg+xml">
 </head>
 <body data-surface="light">
@@ -905,13 +906,22 @@
 
   <!-- The dark band runs on through the outro, so the page ends on black
        rather than dropping back to white for the last few lines. -->
-  <footer class="footer-band dark">
-    <div class="wrap site-footer">
-      <span>&copy; 2026 Ascending AI B.V. &middot; Amsterdam, NL</span>
-      <div class="chip-row">
-        <span class="chip-outline">GDPR</span>
-        <span class="chip-outline">EU AI Act</span>
+  <footer class="gz-footer">
+    <div class="wrap gz-footer__inner">
+      <div class="gz-footer__brand">
+        <span class="gz-footer__mark"><span class="gz-footer__slash">/</span>graphzero</span>
+        <p class="gz-footer__line">European infrastructure for sovereign enterprise AI.</p>
       </div>
+      <nav class="gz-footer__nav" aria-label="Footer">
+          <a href="index.html" aria-current="page">Product</a>
+          <span class="gz-footer__sep" aria-hidden="true">&middot;</span>
+          <a href="early-access.html">Early Access</a>
+          <span class="gz-footer__sep" aria-hidden="true">&middot;</span>
+          <a href="security.html">Security</a>
+          <span class="gz-footer__sep" aria-hidden="true">&middot;</span>
+          <a href="about.html">About</a>
+      </nav>
+      <p class="gz-footer__legal">&copy; 2026 graphzero &middot; Made in Europe</p>
     </div>
   </footer>
 

@@ -1,0 +1,97 @@
+/* ==========================================================================
+   The site footer.
+
+   One sheet, loaded last by all four pages. The two page stylesheets are
+   siblings that do not share a file, so a footer defined in either would have
+   to be written twice and would drift; defined here it is one definition.
+
+   The element no longer carries .footer-band.dark, so nothing in this file is
+   fighting an override — the dark band's tokens simply do not apply any more.
+   Values are literal rather than tokenised for the same reason: the two
+   stylesheet families resolve --ink and --ink-muted to different colours
+   (#000000/#565656 on the v3 pages, the brand navy and slate on the others),
+   and the footer should be one thing on every page.
+   ========================================================================== */
+.gz-footer {
+  background: #ffffff;
+  color: #17232B;
+  padding-block: clamp(3.5rem, 7vw, 6rem) clamp(2rem, 3.5vw, 3rem);
+}
+
+.gz-footer__inner {
+  display: grid;
+  gap: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+/* Brand block left, navigation right, the legal line under both on the
+   container's own grid. Aligned to the top rather than the baseline: the
+   wordmark is three times the navigation's size, and a shared baseline would
+   drop the links to the foot of a 52px line for no reason. */
+@media (min-width: 760px) {
+  .gz-footer__inner {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  .gz-footer__nav { justify-self: end; }
+  .gz-footer__legal { grid-column: 1 / -1; }
+}
+
+.gz-footer__mark {
+  display: block;
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #17232B;
+}
+/* The whole of the orange in the footer: the wordmark's slash, exactly as the
+   header carries it. */
+.gz-footer__slash { color: #FF6A00; }
+
+.gz-footer__line {
+  margin: clamp(0.875rem, 1.6vw, 1.25rem) 0 0;
+  max-width: 34ch;
+  font-size: clamp(0.9375rem, 0.45vw + 0.82rem, 1.0625rem);
+  line-height: 1.5;
+  color: #59666B;
+  /* At this measure the sentence broke with "AI." alone on the second line.
+     Balanced, it splits evenly instead of leaving an orphan. */
+  text-wrap: balance;
+}
+
+.gz-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-size: clamp(0.875rem, 0.35vw + 0.8rem, 0.9375rem);
+  line-height: 1.4;
+}
+.gz-footer__nav a {
+  color: #59666B;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+.gz-footer__nav a:hover,
+.gz-footer__nav a:focus-visible { color: #17232B; }
+.gz-footer__nav a[aria-current="page"] { color: #17232B; }
+
+/* A separate element rather than a pseudo on the link, so the separator is not
+   inside anyone's click target, and aria-hidden so it is not read out. */
+.gz-footer__sep {
+  margin-inline: clamp(0.55rem, 1.1vw, 0.9rem);
+  color: rgba(23, 35, 43, 0.28);
+}
+
+/* The one rule in the footer. */
+.gz-footer__legal {
+  margin: 0;
+  padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  border-top: 1px solid rgba(23, 35, 43, 0.10);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #59666B;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gz-footer__nav a { transition: none; }
+}
