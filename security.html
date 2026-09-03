@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@500&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/security.css?v=58">
+<link rel="stylesheet" href="assets/v3/security.css?v=59">
 <link rel="stylesheet" href="assets/footer.css?v=10">
 <link rel="stylesheet" href="assets/header.css?v=5">
 <link rel="stylesheet" href="assets/mobile.css?v=4">
@@ -228,18 +228,49 @@
       </div>
     </section>
 
-    <!-- 04 · Jurisdiction -->
+    <!-- 04 · Jurisdiction — the same split the three sections above run:
+         heading on the left, the four points as a numbered list on the right. -->
     <section class="gzs-sec" id="jurisdiction">
-      <div class="gzs-wrap">
-        <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><defs><linearGradient id="gzs-g5" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="gzs-g5-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#gzs-g5-c)" fill="url(#gzs-g5)"></rect></svg>04 &mdash; Jurisdiction</p>
-        <h2 class="gzs-h2">European, enforced.</h2>
+      <div class="gzs-wrap secsplit">
+        <div class="secsplit__lead">
+          <div>
+            <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><defs><linearGradient id="gzs-g5" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="gzs-g5-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#gzs-g5-c)" fill="url(#gzs-g5)"></rect></svg>04 &mdash; Jurisdiction</p>
+            <h2 class="gzs-h2">European, enforced.</h2>
+          </div>
+        </div>
+        <div>
+          <ol class="numlist">
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">01</span>
+          <div>
+            <h3 class="card-title">Hosted in EU</h3>
+            <p class="card-note">Your knowledge base runs on European infrastructure, and EU-hosted models process your content inside the EU.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">02</span>
+          <div>
+            <h3 class="card-title">Checked at runtime</h3>
+            <p class="card-note">If a configured model doesn&rsquo;t meet the requirements set for your data, the pipeline stops. It fails closed, not with a warning.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">03</span>
+          <div>
+            <h3 class="card-title">EU AI Act</h3>
+            <p class="card-note">You always know you are talking to AI. No emotion recognition, no ranking of people, no individual-level analytics.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">04</span>
+          <div>
+            <h3 class="card-title">Works-council ready</h3>
+            <p class="card-note">Consent per team, no individual usage statistics, and a works-agreement template aligned with German co-determination.</p>
+          </div>
+        </li>
+          </ol>
+        </div>
       </div>
-      <ul class="gzs-wrap gzs-grid gzs-grid--4">
-        <li class="gzs-card gzs-card--sm gzs-card--tint gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z M2 12h20 M12 2a14.5 14.5 0 0 0 0 20 M12 2a14.5 14.5 0 0 1 0 20"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">Hosted in EU</h3><p class="gzs-card__body gzs-card__body--sm">Your knowledge base runs on European infrastructure, and EU-hosted models process your content inside the EU.</p></li>
-        <li class="gzs-card gzs-card--sm gzs-card--tint gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z M12 8v4 M12 16h.01"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">Checked at runtime</h3><p class="gzs-card__body gzs-card__body--sm">If a configured model doesn&rsquo;t meet the requirements set for your data, the pipeline stops. It fails closed, not with a warning.</p></li>
-        <li class="gzs-card gzs-card--sm gzs-card--tint gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z M14 2v4a2 2 0 0 0 2 2h4 M9 15l2 2 4-4"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">EU AI Act</h3><p class="gzs-card__body gzs-card__body--sm">You always know you are talking to AI. No emotion recognition, no ranking of people, no individual-level analytics.</p></li>
-        <li class="gzs-card gzs-card--sm gzs-card--tint gzs-reveal"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-12 0 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path></svg><h3 class="gzs-card__title gzs-card__title--sm">Works-council ready</h3><p class="gzs-card__body gzs-card__body--sm">Consent per team, no individual usage statistics, and a works-agreement template aligned with German co-determination.</p></li>
-      </ul>
     </section>
 
     <!-- 05 · Deployment · 06 · Inference -->

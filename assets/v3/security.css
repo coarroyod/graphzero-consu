@@ -289,6 +289,9 @@
 .page[data-page="security"] #deployment .gzs-card:hover,
 .page[data-page="security"] #deployment .gzs-card:focus-within {
   box-shadow: inset 0 0 0 1px #FF6A00;
+  /* The orange ring is the whole signal here; the grey wash the other cards
+     take on hover stays off these. Lift and easing are unchanged. */
+  background: transparent;
 }
 
 /* ---- 07 · certifications and assessments ----
