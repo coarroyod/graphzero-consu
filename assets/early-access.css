@@ -1,37 +1,42 @@
 /* ==========================================================================
-   Early Access — the fold.
+   Early Access — everything but the Product section.
 
-   Implements `Early Access Hero 16b.dc.html`. Its own sheet rather than more
-   of site.css: that file is shared with About and already carries this page's
-   older fold, which this replaces outright.
+   Implements `Early Access Revised.dc.html`. Its own sheet rather than more of
+   site.css: that file is shared with About and still carries this page's older
+   fold and its pinned horizontal track, which this replaces. Those rules are
+   left where they are — they are all scoped to this page and match nothing on
+   it any more — except the ones the Product section still uses, which is why
+   they were not pulled out.
 
-   The composition is one column standing on the graph. The graph is not a new
-   drawing — it is the canvas the page already had, the same points, the same
-   seed and the same hub at 62 percent, moved out of its band and behind the
-   type. Its colours are read off the element by assets/site.js, so the file's
-   ink, line and accent are set here as custom properties rather than in the
-   script.
+   The Product section (`#product`) is not touched by this sheet at all.
    ========================================================================== */
 
+/* The fold is a 1300px box with 5vw of its own padding, so its content runs
+   1156 wide. The navy band and the close are full-bleed sections with the same
+   5vw, so their inner column has to be that 1156 to land on the same left edge
+   — at 1440 the difference was 70px, which reads as two different pages. */
+.page[data-page="early-access"] .gzea-wrap {
+  max-width: 1156px;
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   01 · the fold
+   ========================================================================== */
 .page[data-page="early-access"] .gzea-fold {
-  /* The file's face, and the one the Product fold now uses. The rest of this
-     page stays on Geist. */
-  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  /* Tall enough that the two numbered paragraphs sit at the bottom of a
-     screen rather than wherever the copy happens to end. */
-  min-height: 640px;
+  min-height: 660px;
   display: flex;
   flex-direction: column;
   max-width: 1300px;
   margin-inline: auto;
-  padding: 56px 5vw 48px;
+  padding: 60px 5vw 48px;
 }
 
-/* Everything but the graph stands in front of it. */
 .page[data-page="early-access"] .gzea-fold > :not(.gzea-fold__graph) {
   position: relative;
   z-index: 1;
@@ -44,11 +49,11 @@
   --heading: #7E8A8E;
   --line: rgba(23, 35, 43, 0.09);
   --accent: #FF6A00;
-  /* 0deg runs bottom to top, so the drawing is gone across the bottom 44% and
-     whole above 68%. It leaves before the hairline, which is what keeps the
-     two paragraphs off it — no type is ever read through the graph. */
-  -webkit-mask-image: linear-gradient(0deg, transparent 0 44%, #000 68%);
-  mask-image: linear-gradient(0deg, transparent 0 44%, #000 68%);
+  /* 0deg runs bottom to top: the drawing is gone across the bottom 46% and
+     whole above 70%. It leaves before the hairline, so no type is ever read
+     through it. */
+  -webkit-mask-image: linear-gradient(0deg, transparent 0 46%, #000 70%);
+  mask-image: linear-gradient(0deg, transparent 0 46%, #000 70%);
 }
 .page[data-page="early-access"] .gzea-fold__graph canvas {
   display: block;
@@ -62,30 +67,31 @@
   align-items: center;
   gap: 12px;
   margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 12px;
   line-height: 1.4;
-  letter-spacing: .08em;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: #59666B;
 }
 /* The blade pair, not a rule — the same mark the Security and About eyebrows
-   carry, at the same 10x18 they use. The file draws a 26x2 gradient bar here;
-   the site had already settled on the mark everywhere else, and one page
-   opening on a different device would be the odd one out. */
+   carry. 11x20 here, the size the file draws it beside a mono eyebrow. */
 .page[data-page="early-access"] .gzea-mark {
   flex: 0 0 auto;
   display: block;
-  width: 10px;
-  height: 18px;
+  width: 11px;
+  height: 20px;
 }
+.page[data-page="early-access"] .gzea-mark--lg { width: 14px; height: 25px; margin-top: 6px; }
+.page[data-page="early-access"] .gzea-eyebrow--dark { color: rgba(255, 255, 255, .55); }
 
 /* ---- the claim ---- */
 .page[data-page="early-access"] .gzea-title {
-  margin: 22px 0 0;
-  max-width: 24ch;
-  font-size: clamp(2.8rem, 5.6vw, 4.4rem);
-  line-height: 0.9;
-  letter-spacing: -0.05em;
+  margin: 24px 0 0;
+  max-width: 22ch;
+  font-size: clamp(3rem, 6.2vw, 5rem);
+  line-height: 0.88;
+  letter-spacing: -0.052em;
   font-weight: 500;
   color: #17232B;
   text-wrap: balance;
@@ -94,10 +100,11 @@
 /* ---- the two asks ---- */
 .page[data-page="early-access"] .gzea-cta {
   display: flex;
-  gap: 14px;
-  margin-top: 28px;
-  /* The file sets nowrap on a 1300px artboard. Two pills at 15px do not fit
-     one line on a phone, and nowrap would run them off the edge. */
+  align-items: center;
+  gap: 26px;
+  margin-top: 32px;
+  /* The file sets nowrap on a 1300px artboard. Two of these do not fit one
+     phone line, so they wrap. */
   flex-wrap: wrap;
 }
 .page[data-page="early-access"] .gzea-btn {
@@ -105,15 +112,16 @@
   align-items: center;
   flex: 0 0 auto;
   white-space: nowrap;
-  padding: 13px 24px;
-  border-radius: 999px;
   font-size: 15px;
   font-weight: 500;
   transition: transform 150ms cubic-bezier(.2, .6, .2, 1),
               background 150ms cubic-bezier(.2, .6, .2, 1),
+              box-shadow 150ms cubic-bezier(.2, .6, .2, 1),
               opacity 150ms cubic-bezier(.2, .6, .2, 1);
 }
 .page[data-page="early-access"] .gzea-btn--solid {
+  padding: 14px 26px;
+  border-radius: 999px;
   background: #17232B;
   color: #ffffff;
 }
@@ -124,57 +132,228 @@
   transform: translateY(-1px);
   opacity: .9;
 }
-.page[data-page="early-access"] .gzea-btn--ghost {
+/* The second ask stops being a pill: two of them side by side read as two
+   equal choices, and only one of them is the ask. A rule under the words. */
+.page[data-page="early-access"] .gzea-btn--quiet {
+  padding-bottom: 3px;
   color: #17232B;
-  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .28);
+  box-shadow: inset 0 -1px 0 rgba(23, 35, 43, .28);
 }
-.page[data-page="early-access"] .gzea-btn--ghost:hover,
-.page[data-page="early-access"] .gzea-btn--ghost:focus-visible {
+.page[data-page="early-access"] .gzea-btn--quiet:hover,
+.page[data-page="early-access"] .gzea-btn--quiet:focus-visible {
+  color: #17232B;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 #FF6A00;
+}
+/* On the navy the filled pill inverts. */
+.page[data-page="early-access"] .gzea-btn--onDark {
+  margin-top: 44px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #17232B;
+}
+.page[data-page="early-access"] .gzea-btn--onDark:hover,
+.page[data-page="early-access"] .gzea-btn--onDark:focus-visible {
   color: #17232B;
   text-decoration: none;
   transform: translateY(-1px);
-  background: rgba(23, 35, 43, .04);
+  opacity: .9;
 }
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="early-access"] .gzea-btn:hover,
   .page[data-page="early-access"] .gzea-btn:focus-visible { transform: none; }
 }
 
-/* ---- the two paragraphs, numbered, at the foot ---- */
+/* ---- the three claims, in mono ---- */
+.page[data-page="early-access"] .gzea-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: #59666B;
+}
+/* The separators are drawn rather than set as list items, so a screen reader
+   reads three claims and not three claims and two middots. */
+.page[data-page="early-access"] .gzea-meta li + li::before {
+  content: "·";
+  margin-right: 18px;
+  color: #FF6A00;
+}
+
+/* ---- the two paragraphs at the foot ---- */
 .page[data-page="early-access"] .gzea-notes {
   margin-top: auto;
-  padding-top: 26px;
+  padding-top: 28px;
   box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr) 28px minmax(0, 1fr);
-  gap: 14px 20px;
-}
-/* The file's #7E8A8E is 3.55:1 on white, which 11px text does not pass at.
-   Same hue, held to 4.54:1 — the value the Product ledger's ordinals use. */
-.page[data-page="early-access"] .gzea-notes__n {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 11px;
-  line-height: 1.55;
-  letter-spacing: .1em;
-  color: #6D787C;
-  font-variant-numeric: tabular-nums;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 56px;
 }
 .page[data-page="early-access"] .gzea-notes__p {
   margin: 0;
-  max-width: 46ch;
+  max-width: 48ch;
   font-size: 15px;
   line-height: 1.55;
   color: #59666B;
   text-wrap: pretty;
 }
 
-/* ---- responsive; the file has none ---- */
+/* Closes the fold, the width of the screen. */
+.page[data-page="early-access"] .gzea-rule {
+  height: 1px;
+  background: rgba(23, 35, 43, .12);
+}
+
+/* ==========================================================================
+   03 · what a design partner gets — on the navy
+   ========================================================================== */
+.page[data-page="early-access"] .gzea-gets {
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: #17232B;
+  padding: 88px 5vw 96px;
+}
+.page[data-page="early-access"] .gzea-gets__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 22px;
+  align-items: start;
+}
+.page[data-page="early-access"] .gzea-gets__title {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  color: #ffffff;
+  text-wrap: balance;
+}
+.page[data-page="early-access"] .gzea-gets__lead {
+  margin: 6px 0 0;
+  max-width: 48ch;
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, .72);
+  text-wrap: pretty;
+}
+.page[data-page="early-access"] .gzea-gets__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 56px;
+  margin-top: 52px;
+}
+.page[data-page="early-access"] .gzea-get {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 18px;
+  padding: 24px 0;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .14);
+}
+.page[data-page="early-access"] .gzea-get__n {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding-top: 4px;
+  color: rgba(255, 255, 255, .55);
+  font-variant-numeric: tabular-nums;
+}
+.page[data-page="early-access"] .gzea-get__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.page[data-page="early-access"] .gzea-get__body {
+  margin: 6px 0 0;
+  max-width: 48ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .72);
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   04 · the close — the woven white, and the accumulation
+   ========================================================================== */
+.page[data-page="early-access"] .gzea-close {
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background-color: #FFFFFF;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
+  padding: 64px 5vw 72px;
+}
+/* The file puts max-width: 30ch on this flex box. ch resolves against the box's
+   own font-size, which is the inherited 16px, not the 30px the statement is set
+   in — so the measure came out at about 240px and the claim ran to five lines
+   in a column narrower than one of its own words is long. The 30ch goes on the
+   paragraph, where it resolves against the statement's own size and sets each
+   of the two in three lines. */
+.page[data-page="early-access"] .gzea-close__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.page[data-page="early-access"] .gzea-close__item--payoff {
+  width: max-content;
+  margin-left: auto;
+}
+.page[data-page="early-access"] .gzea-close__item p {
+  margin: 0;
+  max-width: 30ch;
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.032em;
+  font-weight: 500;
+  color: #17232B;
+  text-wrap: balance;
+}
+/* preserveAspectRatio="none": the figure spans whatever gap the two statements
+   leave rather than keeping a fixed shape. */
+.page[data-page="early-access"] .gzea-accum {
+  display: block;
+  width: 100%;
+  height: 132px;
+  overflow: visible;
+}
+
+/* ==========================================================================
+   responsive — the file has none
+   ========================================================================== */
 @media (max-width: 900px) {
-  /* Two 46ch paragraphs will not sit side by side under 900. One pair a row,
-     the number still beside its own paragraph. */
-  .page[data-page="early-access"] .gzea-notes {
-    grid-template-columns: 28px minmax(0, 1fr);
+  /* Two 48ch paragraphs do not sit side by side under 900. */
+  .page[data-page="early-access"] .gzea-notes,
+  .page[data-page="early-access"] .gzea-gets__head,
+  .page[data-page="early-access"] .gzea-gets__grid {
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
+  }
+  .page[data-page="early-access"] .gzea-gets__grid { gap: 0; }
+  /* Stacked, the payoff is no longer the right-hand half of a pair. */
+  .page[data-page="early-access"] .gzea-close__item--payoff { width: auto; margin-left: 0; }
+}
+@media (max-width: 760px) {
+  /* Held to the viewBox's own ratio, so the nodes do not flatten into
+     ellipses on a short, narrow figure — and clear of the claim's last line. */
+  .page[data-page="early-access"] .gzea-accum {
+    height: auto;
+    aspect-ratio: 1152 / 300;
+    margin-top: 10px;
   }
 }
 @media (max-width: 700px) {
@@ -182,7 +361,9 @@
     min-height: 0;
     padding: 40px 5vw 44px;
   }
-  /* Without a floor on the height there is no free space for margin-top: auto
+  /* With no floor on the height there is no free space for margin-top: auto
      to spend, so the hairline needs its own distance from the asks. */
   .page[data-page="early-access"] .gzea-notes { margin-top: 48px; }
+  .page[data-page="early-access"] .gzea-gets,
+  .page[data-page="early-access"] .gzea-close { padding-left: 5vw; padding-right: 5vw; }
 }

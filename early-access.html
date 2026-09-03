@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/site.css?v=46">
 <link rel="stylesheet" href="assets/footer.css?v=6">
 <link rel="stylesheet" href="assets/header.css?v=4">
-<link rel="stylesheet" href="assets/early-access.css?v=2">
+<link rel="stylesheet" href="assets/early-access.css?v=6">
 <link rel="icon" href="assets/graphzero-favicon.png?v=1" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=1">
 </head>
@@ -87,16 +87,25 @@
 
       <div class="gzea-cta" data-reveal>
         <a class="gzea-btn gzea-btn--solid" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
-        <a class="gzea-btn gzea-btn--ghost" href="#product">See how it works &darr;</a>
+        <a class="gzea-btn gzea-btn--quiet" href="#product">See how it works &darr;</a>
       </div>
 
+      <!-- The claims the fold can make in three words each. Mono, so they read
+           as facts against the sentence above them rather than as more copy. -->
+      <ul class="gzea-meta" data-reveal>
+        <li>EU-hosted</li>
+        <li>fact-level permissions</li>
+        <li>full export, any time</li>
+      </ul>
+
       <div class="gzea-notes" data-reveal>
-        <span class="gzea-notes__n" aria-hidden="true">01</span>
         <p class="gzea-notes__p">Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
-        <span class="gzea-notes__n" aria-hidden="true">02</span>
         <p class="gzea-notes__p">graphzero brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
       </div>
     </section>
+
+    <!-- Closes the fold, the width of the screen. -->
+    <div class="gzea-rule" aria-hidden="true"></div>
 
     <!-- 02 — HOW THE PRODUCT WORKS
          The three ways in, with the flow figure they drive: pointing at one
@@ -148,56 +157,51 @@
          The figure that sat beside the heading is gone. The horizontal run is
          the movement in this section, and a second animation next to it was
          two things competing for the same job. -->
-    <section class="band band--dark dark ea-gets" id="early-access">
-      <div class="ea-hscroll" data-hscroll>
-        <div class="ea-hscroll__sticky">
+    <!-- 03 — WHAT A DESIGN PARTNER GETS
+         The four points were a horizontally scrolling track pinned to the
+         viewport. They are a ruled register in two columns now: the same four
+         in the same order, all four readable at once, and nothing that moves. -->
+    <section class="gzea-gets" id="early-access">
+      <div class="gzea-wrap">
+        <p class="gzea-eyebrow gzea-eyebrow--dark" data-reveal><svg class="gzea-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg>Early access</p>
 
-          <!-- Statement left, what it means right, sharing a baseline — the
-               head is one row rather than three stacked blocks, which is most
-               of the vertical space that was between it and chapter 01. -->
-          <div class="wrap ea-hscroll__head">
-            <p class="eyebrow" data-reveal>Early access</p>
-            <h2 class="ea-open__head" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
-            <p class="lead ea-open__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
-          </div>
+        <div class="gzea-gets__head">
+          <h2 class="gzea-gets__title" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
+          <p class="gzea-gets__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
+        </div>
 
-          <div class="ea-hscroll__viewport">
-            <ol class="ea-hscroll__track">
-              <li class="ea-chapter">
-              <span class="ea-chapter__num" aria-hidden="true">01</span>
-              <h3 class="ea-chapter__title">Early access</h3>
-              <p class="ea-chapter__body">Be among the first to use graphzero.</p>
-          </li>
-              <li class="ea-chapter">
-              <span class="ea-chapter__num" aria-hidden="true">02</span>
-              <h3 class="ea-chapter__title">Direct collaboration</h3>
-              <p class="ea-chapter__body">Work closely with our team and give input as the product evolves.</p>
-          </li>
-              <li class="ea-chapter">
-              <span class="ea-chapter__num" aria-hidden="true">03</span>
-              <h3 class="ea-chapter__title">A foundation for AI</h3>
-              <p class="ea-chapter__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
-          </li>
-              <li class="ea-chapter">
-              <span class="ea-chapter__num" aria-hidden="true">04</span>
-              <h3 class="ea-chapter__title">Flexible by design</h3>
-              <p class="ea-chapter__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
-          </li>
-            </ol>
-          </div>
-
-          <!-- How far through the sequence you are. The site's hairline, with
-               the one accent running along it. -->
-          <div class="ea-hscroll__rule" aria-hidden="true">
-            <span class="ea-hscroll__fill"></span>
+        <div class="gzea-gets__grid" data-reveal>
+        <div class="gzea-get">
+          <span class="gzea-get__n" aria-hidden="true">01</span>
+          <div>
+            <h3 class="gzea-get__title">Early access</h3>
+            <p class="gzea-get__body">Be among the first to use graphzero.</p>
           </div>
         </div>
-      </div>
-
-      <div class="wrap ea-gets__foot">
-        <div class="ea-gets__cta" data-reveal>
-          <a class="btn btn--accent btn--lg" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
+        <div class="gzea-get">
+          <span class="gzea-get__n" aria-hidden="true">02</span>
+          <div>
+            <h3 class="gzea-get__title">Direct collaboration</h3>
+            <p class="gzea-get__body">Work closely with our team and give input as the product evolves.</p>
+          </div>
         </div>
+        <div class="gzea-get">
+          <span class="gzea-get__n" aria-hidden="true">03</span>
+          <div>
+            <h3 class="gzea-get__title">A foundation for AI</h3>
+            <p class="gzea-get__body">Give your people and AI access to the knowledge your organization creates, with the right controls around sensitive information.</p>
+          </div>
+        </div>
+        <div class="gzea-get">
+          <span class="gzea-get__n" aria-hidden="true">04</span>
+          <div>
+            <h3 class="gzea-get__title">Flexible by design</h3>
+            <p class="gzea-get__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
+          </div>
+        </div>
+        </div>
+
+        <a class="gzea-btn gzea-btn--onDark" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
       </div>
     </section>
 
@@ -208,11 +212,87 @@
          No button here. The page asks once, at the end of the sequence the
          ask belongs to; repeating it a screen later made the closing
          statement a second pitch instead of a conclusion. -->
-    <section class="band band--dark dark ea-close-band">
-      <div class="wrap sec sec--pb ea-closing">
-        <p class="eyebrow" data-reveal>The opportunity</p>
-        <p class="ea-closing__head" data-reveal>The amount of knowledge organizations create is growing faster than ever.</p>
-        <p class="ea-closing__turn" data-reveal>The opportunity is to turn that growing body of knowledge into an organizational advantage.</p>
+    <!-- 04 — THE CLOSE
+         Off the navy and onto the woven white the About page closes on, with
+         the same accumulation running between the two statements: the claim
+         opens left, the thread gathers as it crosses, the payoff lands right.
+         The figure is the same geometry, written out flat. -->
+    <section class="gzea-close">
+      <div class="gzea-wrap">
+        <div class="gzea-close__item gzea-close__item--open"><svg class="gzea-mark gzea-mark--lg" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg><p>The amount of knowledge organizations create is growing faster than ever.</p></div>
+        <svg class="gzea-accum" viewBox="0 0 1152 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M22.0 4.0 L57.9 6.4 L87.1 9.1 L114.3 12.2 L140.2 15.5 L165.2 19.1 L189.5 23.0 L213.2 27.1 L236.5 31.5 L259.3 36.2 L281.8 41.1 L304.0 46.2 L325.9 51.7 L347.6 57.3 L369.0 63.3 L390.2 69.4 L411.3 75.9 L432.1 82.5 L452.8 89.4 L473.3 96.5 L493.6 103.9 L513.8 111.5 L533.9 119.4 L553.8 127.5 L573.7 135.8 L593.4 144.3 L613.0 153.1 L632.5 162.1 L651.9 171.4 L671.2 180.8 L690.4 190.6 L709.5 200.5 L728.5 210.6 L747.5 221.0 L766.3 231.6 L785.1 242.5 L803.8 253.5 L822.5 264.8 L841.1 276.3 L859.6 288.0 L878.0 300.0" fill="none" stroke="rgba(23,35,43,.22)" stroke-width="1"></path>
+      <g stroke="rgba(23,35,43,.1)" stroke-width="1" fill="none">
+        <line x1="161.0" y1="12.0" x2="174.0" y2="26.6"></line>
+        <line x1="174.0" y1="26.6" x2="225.3" y2="17.6"></line>
+        <line x1="225.3" y1="17.6" x2="239.1" y2="44.1"></line>
+        <line x1="239.1" y1="44.1" x2="275.9" y2="36.8"></line>
+        <line x1="275.9" y1="36.8" x2="307.1" y2="40.1"></line>
+        <line x1="307.1" y1="40.1" x2="335.2" y2="56.5"></line>
+        <line x1="335.2" y1="56.5" x2="344.4" y2="55.0"></line>
+        <line x1="344.4" y1="55.0" x2="369.6" y2="50.4"></line>
+        <line x1="369.6" y1="50.4" x2="403.9" y2="77.8"></line>
+        <line x1="403.9" y1="77.8" x2="388.3" y2="93.4"></line>
+        <line x1="403.9" y1="77.8" x2="455.3" y2="78.3"></line>
+        <line x1="455.3" y1="78.3" x2="456.7" y2="88.2"></line>
+        <line x1="456.7" y1="88.2" x2="487.7" y2="92.6"></line>
+        <line x1="487.7" y1="92.6" x2="483.9" y2="105.2"></line>
+        <line x1="483.9" y1="105.2" x2="519.8" y2="116.7"></line>
+        <line x1="519.8" y1="116.7" x2="553.6" y2="124.4"></line>
+        <line x1="553.6" y1="124.4" x2="557.1" y2="149.2"></line>
+        <line x1="557.1" y1="149.2" x2="590.1" y2="146.2"></line>
+        <line x1="590.1" y1="146.2" x2="613.4" y2="136.3"></line>
+        <line x1="613.4" y1="136.3" x2="674.0" y2="178.0"></line>
+        <line x1="674.0" y1="178.0" x2="695.7" y2="186.7"></line>
+        <line x1="695.7" y1="186.7" x2="695.5" y2="174.9"></line>
+        <line x1="695.5" y1="174.9" x2="709.5" y2="172.1"></line>
+        <line x1="695.7" y1="186.7" x2="712.4" y2="189.3"></line>
+        <line x1="712.4" y1="189.3" x2="777.3" y2="210.4"></line>
+        <line x1="777.3" y1="210.4" x2="753.5" y2="214.7"></line>
+        <line x1="777.3" y1="210.4" x2="815.4" y2="228.4"></line>
+        <line x1="815.4" y1="228.4" x2="823.4" y2="251.0"></line>
+        <line x1="823.4" y1="251.0" x2="844.5" y2="270.0"></line>
+        <line x1="844.5" y1="270.0" x2="860.2" y2="263.8"></line>
+        <line x1="860.2" y1="263.8" x2="878.0" y2="268.0"></line>
+      </g>
+      <g>
+        <circle cx="105.7" cy="4.8" r="1.74" fill="#17232B" opacity="0.34"></circle>
+        <circle cx="120.8" cy="17.2" r="1.81" fill="#17232B" opacity="0.36"></circle>
+        <circle cx="161.0" cy="12.0" r="1.88" fill="#17232B" opacity="0.38"></circle>
+        <circle cx="174.0" cy="26.6" r="1.95" fill="#17232B" opacity="0.39"></circle>
+        <circle cx="225.3" cy="17.6" r="2.02" fill="#17232B" opacity="0.41"></circle>
+        <circle cx="239.1" cy="44.1" r="2.09" fill="#17232B" opacity="0.43"></circle>
+        <circle cx="275.9" cy="36.8" r="2.15" fill="#17232B" opacity="0.45"></circle>
+        <circle cx="307.1" cy="40.1" r="2.22" fill="#17232B" opacity="0.47"></circle>
+        <circle cx="335.2" cy="56.5" r="2.29" fill="#17232B" opacity="0.49"></circle>
+        <circle cx="344.4" cy="55.0" r="2.36" fill="#17232B" opacity="0.51"></circle>
+        <circle cx="369.6" cy="50.4" r="2.43" fill="#17232B" opacity="0.52"></circle>
+        <circle cx="403.9" cy="77.8" r="2.50" fill="#17232B" opacity="0.54"></circle>
+        <circle cx="388.3" cy="93.4" r="2.56" fill="#17232B" opacity="0.56"></circle>
+        <circle cx="455.3" cy="78.3" r="2.63" fill="#17232B" opacity="0.58"></circle>
+        <circle cx="456.7" cy="88.2" r="2.70" fill="#17232B" opacity="0.60"></circle>
+        <circle cx="487.7" cy="92.6" r="2.77" fill="#17232B" opacity="0.62"></circle>
+        <circle cx="483.9" cy="105.2" r="2.84" fill="#17232B" opacity="0.64"></circle>
+        <circle cx="519.8" cy="116.7" r="2.91" fill="#17232B" opacity="0.65"></circle>
+        <circle cx="553.6" cy="124.4" r="2.97" fill="#FF6A00" opacity="0.67"></circle>
+        <circle cx="557.1" cy="149.2" r="3.04" fill="#FF6A00" opacity="0.69"></circle>
+        <circle cx="590.1" cy="146.2" r="3.11" fill="#FF6A00" opacity="0.71"></circle>
+        <circle cx="613.4" cy="136.3" r="3.18" fill="#FF6A00" opacity="0.73"></circle>
+        <circle cx="674.0" cy="178.0" r="3.25" fill="#FF6A00" opacity="0.75"></circle>
+        <circle cx="695.7" cy="186.7" r="3.32" fill="#FF6A00" opacity="0.76"></circle>
+        <circle cx="695.5" cy="174.9" r="3.38" fill="#FF6A00" opacity="0.78"></circle>
+        <circle cx="709.5" cy="172.1" r="3.45" fill="#FF6A00" opacity="0.80"></circle>
+        <circle cx="712.4" cy="189.3" r="3.52" fill="#FF6A00" opacity="0.82"></circle>
+        <circle cx="777.3" cy="210.4" r="3.59" fill="#FF6A00" opacity="0.84"></circle>
+        <circle cx="753.5" cy="214.7" r="3.66" fill="#FF6A00" opacity="0.86"></circle>
+        <circle cx="815.4" cy="228.4" r="3.73" fill="#FF6A00" opacity="0.88"></circle>
+        <circle cx="823.4" cy="251.0" r="3.79" fill="#FF6A00" opacity="0.89"></circle>
+        <circle cx="844.5" cy="270.0" r="3.86" fill="#FF2E93" opacity="0.91"></circle>
+        <circle cx="860.2" cy="263.8" r="3.93" fill="#FF2E93" opacity="0.93"></circle>
+        <circle cx="878.0" cy="268.0" r="4.00" fill="#FF2E93" opacity="0.95"></circle>
+      </g>
+        </svg>
+        <div class="gzea-close__item gzea-close__item--payoff"><svg class="gzea-mark gzea-mark--lg" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg><p>The opportunity is to turn that growing body of knowledge into an organizational advantage.</p></div>
       </div>
     </section>
 
