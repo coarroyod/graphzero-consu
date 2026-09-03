@@ -66,27 +66,33 @@
 }
 .page[data-page="about"] .gza-display {
   margin: 28px 0 0;
+  /* The Early Access hero's setting exactly, so the two folds share one
+     display type. */
   max-width: 13ch;
-  font-size: clamp(3.5rem, 6.6vw, 6rem);
-  line-height: 0.9;
-  letter-spacing: -0.05em;
+  font-size: clamp(3rem, 6.2vw, 5rem);
+  line-height: 0.88;
+  letter-spacing: -0.052em;
   font-weight: 500;
   color: var(--gza-ink);
 }
 .page[data-page="about"] .gza-display__accent { color: #FF6A00; }
 .page[data-page="about"] .gza-display__stop { color: #FF2E93; }
+/* A rule above them and a step down in size: the pair reads as a note under
+   the headline rather than as a second headline after it. */
 .page[data-page="about"] .gza-statements {
-  margin-top: 46px;
+  margin-top: 38px;
+  padding-top: 28px;
+  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  max-width: 42ch;
+  gap: 16px;
+  max-width: 44ch;
 }
 .page[data-page="about"] .gza-statements p {
   margin: 0;
-  font-size: 26px;
-  line-height: 1.24;
-  letter-spacing: -0.025em;
+  font-size: 24px;
+  line-height: 1.22;
+  letter-spacing: -0.028em;
   font-weight: 500;
   color: var(--gza-ink);
   text-wrap: pretty;
@@ -109,7 +115,9 @@
   margin: 56px 0 0;
   padding-top: 30px;
   max-width: 104ch;
-  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .14);
+  /* The same weight as the rule above the statements, so the fold reads as
+     three banded tiers rather than two rules of different strength. */
+  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
   font-size: 19px;
   line-height: 1.5;
   color: var(--gza-muted);
