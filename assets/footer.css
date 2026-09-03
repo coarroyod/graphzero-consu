@@ -153,8 +153,10 @@
 .page[data-page="security"] .gz-footer__legal,
 .page[data-page="about"] .gz-footer__legal { color: #17232B; }
 
-/* On the orange the pair would half disappear — the orange blade into the
-   ground behind it — so both go solid, which is what the slash did here. */
+/* On the orange the gradient would half disappear — its orange end into the
+   ground behind it — so the pair goes solid, which is what the slash did here.
+   A CSS fill beats the presentation attribute, so the same markup serves all
+   four pages and only Product's white footer shows the gradient. */
 .page[data-page="early-access"] .gz-footer__blade,
 .page[data-page="security"] .gz-footer__blade,
 .page[data-page="about"] .gz-footer__blade { fill: #17232B; }
