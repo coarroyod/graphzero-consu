@@ -95,3 +95,75 @@
 @media (prefers-reduced-motion: reduce) {
   .gz-footer__nav a { transition: none; }
 }
+
+/* ==========================================================================
+   The orange ground — Early Access, Security and About
+
+   Three pages carry the footer on the brand orange rather than on white. It
+   was written twice before, in security.css and about.css, and the two copies
+   had already drifted: Security ran a three-thread weave and held its type at
+   alphas, About ran four threads and set every line solid. Early Access wanted
+   "the same footer as Security and About", which was not one thing. It is now:
+   one block here, About's version, and the two copies are gone.
+
+   The weave is the design file's — four repeating gradients at 3px, 4px, 7px
+   and 5px on the diagonal. Product carries the same cloth on white, in its
+   own sheet, since it is the one page that keeps the white ground.
+
+   Contrast on the orange: solid #17232B is 5.58:1, which is where every line
+   of type sits. Security's old alphas put its positioning line and nav at
+   4.72:1 and its legal line at 4.11:1; solid is the better of the two and it
+   is what About already shipped.
+   ========================================================================== */
+.page[data-page="early-access"] .gz-footer,
+.page[data-page="security"] .gz-footer,
+.page[data-page="about"] .gz-footer {
+  background-color: #FF6A00;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.09) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgba(23,35,43,.05) 0 1px, transparent 1px 5px);
+  color: #17232B;
+}
+
+/* The slash is the orange on white; on the orange it would disappear, so the
+   wordmark goes solid — which is what the design file's own footer mark does. */
+.page[data-page="early-access"] .gz-footer__mark,
+.page[data-page="security"] .gz-footer__mark,
+.page[data-page="about"] .gz-footer__mark,
+.page[data-page="early-access"] .gz-footer__slash,
+.page[data-page="security"] .gz-footer__slash,
+.page[data-page="about"] .gz-footer__slash,
+.page[data-page="early-access"] .gz-footer__line,
+.page[data-page="security"] .gz-footer__line,
+.page[data-page="about"] .gz-footer__line,
+.page[data-page="early-access"] .gz-footer__nav a,
+.page[data-page="security"] .gz-footer__nav a,
+.page[data-page="about"] .gz-footer__nav a,
+.page[data-page="early-access"] .gz-footer__legal,
+.page[data-page="security"] .gz-footer__legal,
+.page[data-page="about"] .gz-footer__legal { color: #17232B; }
+
+/* With every line at the same solid navy, the white footer's hover — a link
+   darkening to ink — has nothing left to do, and these links would answer the
+   pointer with nothing at all. The design file's footer has no hover because
+   its nav items are drawn as labels; ours are real links, so they keep an
+   affordance. A rule, not a colour. */
+.page[data-page="early-access"] .gz-footer__nav a:hover,
+.page[data-page="security"] .gz-footer__nav a:hover,
+.page[data-page="about"] .gz-footer__nav a:hover,
+.page[data-page="early-access"] .gz-footer__nav a:focus-visible,
+.page[data-page="security"] .gz-footer__nav a:focus-visible,
+.page[data-page="about"] .gz-footer__nav a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page[data-page="early-access"] .gz-footer__sep,
+.page[data-page="security"] .gz-footer__sep,
+.page[data-page="about"] .gz-footer__sep { color: rgba(23, 35, 43, .45); }
+
+.page[data-page="early-access"] .gz-footer__legal,
+.page[data-page="security"] .gz-footer__legal,
+.page[data-page="about"] .gz-footer__legal { border-top-color: rgba(23, 35, 43, .2); }

@@ -254,16 +254,16 @@
    orange. Flat, a field that size reads as printed ink; a texture gives it a
    surface.
 
-   That surface is now the Security page's footer weave, copied value for
-   value from assets/v3/security.css: three repeating gradients at 3px, 4px
-   and 7px, painted straight onto the fill with no blend mode, so the two
-   orange fields on the site are the same orange and the same cloth. What was
+   That surface is the orange footers' weave, copied value for value from
+   assets/footer.css: four repeating gradients at 3px, 4px, 7px and 5px on the
+   diagonal, painted straight onto the fill with no blend mode, so every
+   orange field on the site is the same orange and the same cloth. What was
    here before was a different thing — SVG turbulence flecks blended at
    overlay, which read as paper grain rather than as weave.
 
-   The weave is written out here rather than shared because this file and
-   security.css belong to stylesheet families that have no file in common;
-   if a third field ever wants it, it should move to a sheet all of them load.
+   It follows the footers rather than leading them: when the three orange
+   footers were unified this band was moved with them, so "the same ground as
+   the Security footer" stayed true.
 
    Colour and texture only. The band's layout, its copy and its marks are
    untouched.
@@ -281,9 +281,10 @@
 .page[data-page="product"] #security {
   background-color: #FF6A00;
   background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.055) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.05) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 7px);
+    repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.09) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgba(23,35,43,.05) 0 1px, transparent 1px 5px);
 }
 
 /* ==========================================================================

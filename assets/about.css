@@ -281,26 +281,6 @@
 .page[data-page="about"] .gza-pill:hover,
 .page[data-page="about"] .gza-pill:focus-visible { transform: translateY(-1px); opacity: .9; color: #ffffff; }
 
-/* ---- the footer, orange and woven, on this page ----
-   The kit sets every line here in solid #17232B rather than the alphas the
-   Security page's footer uses, which measures 5.58:1 throughout. Scoped to
-   About; the two orange footers therefore differ slightly in ink. */
-.page[data-page="about"] .gz-footer {
-  background-color: #FF6A00;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.09) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(45deg, rgba(23,35,43,.05) 0 1px, transparent 1px 5px);
-  color: #17232B;
-}
-.page[data-page="about"] .gz-footer__mark,
-.page[data-page="about"] .gz-footer__slash,
-.page[data-page="about"] .gz-footer__line,
-.page[data-page="about"] .gz-footer__nav a,
-.page[data-page="about"] .gz-footer__legal { color: #17232B; }
-.page[data-page="about"] .gz-footer__sep { color: rgba(23, 35, 43, .45); }
-.page[data-page="about"] .gz-footer__legal { border-top-color: rgba(23, 35, 43, .2); }
 
 /* ---- scroll-driven, gated ---- */
 .page[data-page="about"] .gza-progress { display: none; }
