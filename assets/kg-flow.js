@@ -107,9 +107,6 @@
      that it never goes to 600 or 700. Asking for 700 would get a synthesised
      bold — heavier, but smeared, and off the system. */
   var LABEL = 'font-weight:500;font-size:12px';
-  /* The mark, at the centre of the figure and again in its own assistant tile.
-     One figure, so one size — set here rather than twice. */
-  var MARK = 'font-weight:500;font-size:26px';
   var SVGNS = 'http://www.w3.org/2000/svg';
 
   function el(tag, css, text) {
@@ -118,6 +115,41 @@
     if (text != null) n.textContent = text;
     return n;
   }
+  /* graphzero's own mark, drawn rather than typed. It was a "/" in the accent
+     beside a "g"; it is the blade pair now, in the orange-to-pink gradient the
+     lockup uses, with the "g" still type beside it. Each instance needs its own
+     gradient id, so they are counted. */
+  var markSeq = 0;
+  function gzMark(fontPx) {
+    var wrap = el('span',
+      'display:inline-flex;align-items:center;font-weight:500;font-size:' + fontPx +
+      'px;letter-spacing:-0.04em;line-height:1;');
+    var id = 'kgf-mark-' + (markSeq++);
+    var h = Math.round(fontPx * 1.18);
+    var blade = svg('svg', {
+      viewBox: '14 0 36 64',
+      width: Math.round(h * 0.5625),
+      height: h,
+      'aria-hidden': 'true',
+      focusable: 'false',
+      style: 'display:block;flex:0 0 auto'
+    });
+    var defs = svg('defs', {});
+    var grad = svg('linearGradient', { id: id, x1: '0.15', y1: '0', x2: '0.35', y2: '1' });
+    var s0 = svg('stop', { offset: '0', 'stop-color': '#FF6A00' });
+    var s1 = svg('stop', { offset: '1', 'stop-color': '#FF2E93' });
+    grad.appendChild(s0); grad.appendChild(s1); defs.appendChild(grad);
+    blade.appendChild(defs);
+    var d = 'M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z';
+    blade.appendChild(svg('path', { d: d, transform: 'rotate(20 32 32)', fill: 'url(#' + id + ')' }));
+    blade.appendChild(svg('path', { d: d, transform: 'rotate(200 32 32)', fill: 'url(#' + id + ')' }));
+    wrap.appendChild(blade);
+    /* The same tuck the lockup uses: the letter starts inside the mark's right
+       sidebearing rather than after its box. */
+    wrap.appendChild(el('span', 'color:' + C.ink + ';margin-left:-0.045em', 'g'));
+    return wrap;
+  }
+
   function svg(tag, attrs) {
     var n = document.createElementNS(SVGNS, tag);
     for (var k in attrs) n.setAttribute(k, attrs[k]);
@@ -182,10 +214,7 @@
   var plate = el('div',
     'width:62px;height:62px;border-radius:16px;box-shadow:inset 0 0 0 1px ' + C.line +
     ';display:flex;align-items:center;justify-content:center;');
-  var glyph = el('span', MARK + ';letter-spacing:-0.05em;line-height:1;');
-  glyph.appendChild(el('span', 'color:' + C.accent, '/'));
-  glyph.appendChild(el('span', 'color:' + C.ink, 'g'));
-  plate.appendChild(glyph);
+  plate.appendChild(gzMark(26));
   kb.appendChild(plate);
   stage.appendChild(kb);
 
@@ -204,10 +233,7 @@
       ';display:grid;place-items:center;overflow:hidden');
 
     if (a.mark) {
-      var g = el('span', MARK + ';letter-spacing:-0.04em;line-height:1;');
-      g.appendChild(el('span', 'color:' + C.accent, '/'));
-      g.appendChild(el('span', 'color:' + C.ink, 'g'));
-      tile.appendChild(g);
+      tile.appendChild(gzMark(26));
     } else {
       var img = document.createElement('img');
       img.src = LOGO_DIR + a.logo;
