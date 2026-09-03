@@ -296,7 +296,15 @@
    Three cards with their artwork for the schemes that have a mark, a table
    for the three that do not. Container is the page's 1152, not the file's
    1200, so the section keeps the left edge every section above it has. */
+/* The sections above share their spacing by leaning on the next one's top
+   padding, which was fine while every ground was white. With a woven ground
+   here, that put the texture flush against the last line of 06. The 88px the
+   eyebrow sits below that line is split now: 48 of it white, on 06's own
+   foot, and 40 inside the texture. The eyebrow does not move; the texture
+   starts 48px later. */
+.page[data-page="security"] #deployment { padding-bottom: 48px; }
 .page[data-page="security"] .gzs-assure {
+  padding-top: 40px;
   background-color: #FFFFFF;
   background-image:
     repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
