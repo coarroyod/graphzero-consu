@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/product.css?v=20">
+<link rel="stylesheet" href="assets/v3/product.css?v=21">
 <link rel="stylesheet" href="assets/footer.css?v=7">
 <link rel="stylesheet" href="assets/header.css?v=4">
 <link rel="icon" href="assets/graphzero-favicon.png?v=1" type="image/png">
@@ -212,128 +212,43 @@
     </section>
 
     <section class="wrap sec" id="layers">
-      <h2 class="h2 sec-head gzl-head">Companies that make the right architectural choices get the full productivity benefits of AI &mdash; while keeping their knowledge governed, protected, and sovereign.</h2>
+      <h2 class="h2 sec-head" style="max-width:44ch">Companies that make the right architectural choices can unlock the full productivity potential of AI while ensuring their knowledge remains governed, protected, and sovereign.</h2>
 
-      <!-- The two modules, rebuilt as one ledger: each layer is a column with a
-           tinted marker, a name and a descriptor at its head, and its capabilities
-           ruled beneath as a numbered register. The knowledge base still leads —
-           it is what makes what people touch trustworthy, and it runs the pair the
-           same left to right as the diagrams above and below. Ordered lists, so the
-           count a screen reader announces is the count on the page; the drawn
-           numerals are the same ordinals and are hidden from it. -->
-      <div class="gzl-grid">
-        <article class="gzl-col">
-          <header class="gzl-col__head">
-            <span class="gzl-col__tint" aria-hidden="true"></span>
-            <div class="gzl-col__id">
-              <h3 class="gzl-col__name">Knowledge Base</h3>
-              <p class="gzl-col__sub">What makes it trustworthy.</p>
-            </div>
-          </header>
-          <ol class="gzl-list">
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">01</span>
-              <div>
-                <p class="gzl-row__title">Universal integration.</p>
-                <p class="gzl-row__text">Connects to every system that holds company knowledge — including tools like AFAS and DATEV that have no off-the-shelf MCP.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">02</span>
-              <div>
-                <p class="gzl-row__title">Full control, current and compounding.</p>
-                <p class="gzl-row__text">You own everything — the knowledge you start with, and everything the AI compounds on top of it — never the vendor.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">03</span>
-              <div>
-                <p class="gzl-row__title">EU data residency.</p>
-                <p class="gzl-row__text">Stays in Europe, on European-owned infrastructure — no US-owned dependency anywhere in the chain.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">04</span>
-              <div>
-                <p class="gzl-row__title">Fact-level permissions.</p>
-                <p class="gzl-row__text">Governs access down to the individual fact, so the AI assistant can act freely without ever exposing what a user shouldn’t see.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">05</span>
-              <div>
-                <p class="gzl-row__title">Sensitive-data masking.</p>
-                <p class="gzl-row__text">Blocks sensitive information such as IBANs from ever reaching the LLM.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">06</span>
-              <div>
-                <p class="gzl-row__title">Continuous maintenance.</p>
-                <p class="gzl-row__text">Actively checks for outdated information and inconsistencies, keeping the source of truth accurate over time.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">07</span>
-              <div>
-                <p class="gzl-row__title">Multi-hop reasoning support.</p>
-                <p class="gzl-row__text">Structures knowledge so complex, inferential questions get real answers — not just simple lookups.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">08</span>
-              <div>
-                <p class="gzl-row__title">Full audit trail.</p>
-                <p class="gzl-row__text">Logs what was retrieved, by whom, and when — protection and accountability built into every answer.</p>
-              </div>
-            </li>
-          </ol>
+      <!-- Two columns because the point is that these are two layers, not one
+           list. The knowledge base leads: it is what makes what people touch
+           trustworthy, and putting it first runs the pair the same left to
+           right as the diagrams above and below, where the sources feed the
+           knowledge base and the knowledge base feeds the assistant. Swapped
+           in the markup rather than with grid order, so the reading order a
+           screen reader gets is the reading order on screen. -->
+      <div class="layer-grid">
+        <article class="layer-card">
+          <span class="eyebrow">Knowledge Base</span>
+          <hr class="rule">
+          <p class="layer-card__role">What makes it <span class="hl">trustworthy</span>.</p>
+          <ul class="layer-list">
+          <li><strong>Universal integration.</strong> Connects to every system that holds company knowledge — including tools like AFAS and DATEV that have no off-the-shelf MCP.</li>
+          <li><strong>Full control, current and compounding.</strong> You own everything — the knowledge you start with, and everything the AI compounds on top of it — never the vendor.</li>
+          <li><strong>EU data residency.</strong> Stays in Europe, on European-owned infrastructure — no US-owned dependency anywhere in the chain.</li>
+          <li><strong>Fact-level permissions.</strong> Governs access down to the individual fact, so the AI assistant can act freely without ever exposing what a user shouldn’t see.</li>
+          <li><strong>Sensitive-data masking.</strong> Blocks sensitive information such as IBANs from ever reaching the LLM.</li>
+          <li><strong>Continuous maintenance.</strong> Actively checks for outdated information and inconsistencies, keeping the source of truth accurate over time.</li>
+          <li><strong>Multi-hop reasoning support.</strong> Structures knowledge so complex, inferential questions get real answers — not just simple lookups.</li>
+          <li><strong>Full audit trail.</strong> Logs what was retrieved, by whom, and when — protection and accountability built into every answer.</li>
+          </ul>
         </article>
-        <article class="gzl-col">
-          <header class="gzl-col__head">
-            <span class="gzl-col__tint" aria-hidden="true"></span>
-            <div class="gzl-col__id">
-              <h3 class="gzl-col__name">AI Assistant</h3>
-              <p class="gzl-col__sub">What teams use.</p>
-            </div>
-          </header>
-          <ol class="gzl-list">
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">01</span>
-              <div>
-                <p class="gzl-row__title">Natural-language interface.</p>
-                <p class="gzl-row__text">Makes the knowledge base accessible through simple conversation — no query language required.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">02</span>
-              <div>
-                <p class="gzl-row__title">Advanced agentic capabilities.</p>
-                <p class="gzl-row__text">Executes tasks and workflows across the knowledge base — agents propose, people approve.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">03</span>
-              <div>
-                <p class="gzl-row__title">Web access for external information.</p>
-                <p class="gzl-row__text">Reaches beyond company knowledge for public or external context — no need to switch tools to search elsewhere.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">04</span>
-              <div>
-                <p class="gzl-row__title">Persistent context and memory.</p>
-                <p class="gzl-row__text">Carries context forward across a conversation and related chats within a project, so answers stay coherent without repeating yourself.</p>
-              </div>
-            </li>
-            <li class="gzl-row">
-              <span class="gzl-row__n" aria-hidden="true">05</span>
-              <div>
-                <p class="gzl-row__title">Meets you where you work.</p>
-                <p class="gzl-row__text">Available through the web, Slack, and Microsoft Teams — no context-switching to a separate tool.</p>
-              </div>
-            </li>
-          </ol>
+
+        <article class="layer-card">
+          <span class="eyebrow">AI Assistant</span>
+          <hr class="rule">
+          <p class="layer-card__role">What teams use.</p>
+          <ul class="layer-list">
+          <li><strong>Natural-language interface.</strong> Makes the knowledge base accessible through simple conversation — no query language required.</li>
+          <li><strong>Advanced agentic capabilities.</strong> Executes tasks and workflows across the knowledge base — agents propose, people approve.</li>
+          <li><strong>Web access for external information.</strong> Reaches beyond company knowledge for public or external context — no need to switch tools to search elsewhere.</li>
+          <li><strong>Persistent context and memory.</strong> Carries context forward across a conversation and related chats within a project, so answers stay coherent without repeating yourself.</li>
+          <li><strong>Meets you where you work.</strong> Available through the web, Slack, and Microsoft Teams — no context-switching to a separate tool.</li>
+          </ul>
         </article>
       </div>
     </section>
