@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>graphzero | /team</title>
+<!-- Unlisted, not private: nothing links here and search engines are asked to
+     stay out, but anyone with the address can open it. -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" href="../assets/graphzero-favicon.png?v=1" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@400;500;700&amp;family=DM+Sans:wght@400;500&amp;display=swap">
+<style>
+  /* Implements Team Brand Page.dc.html. Self-contained: this page loads none of
+     the site's sheets, so nothing here can leak out and nothing can leak in. */
+  :root {
+    --ink: #17232B; --slate: #59666B; --quiet: #7E8A8E;
+    --orange: #FF6A00; --pink: #FF2E93;
+    --line: rgba(23,35,43,.12); --ring: rgba(23,35,43,.16);
+    --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: "Geist", "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, p { margin: 0; }
+  .wrap { max-width: 1200px; margin-inline: auto; }
+
+  /* ---- the bar ---- */
+  .bar { position: sticky; top: 0; z-index: 50; height: 68px; display: flex; align-items: center; gap: 20px; padding: 0 5vw; background: rgba(255,255,255,.94); box-shadow: inset 0 -1px 0 var(--line); }
+  .lockup { display: flex; align-items: center; }
+  .lockup__mark { width: 16px; height: 28px; display: block; flex: 0 0 auto; }
+  .lockup__word { font-family: "DM Sans", sans-serif; font-size: 23px; line-height: .8; letter-spacing: -.045em; font-weight: 500; margin-left: -1px; }
+  .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--slate); padding: 5px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--ring); white-space: nowrap; }
+  .bar__nav { margin-left: auto; display: flex; gap: 22px; font-size: 14px; color: var(--slate); }
+  .bar__nav a:hover, .bar__nav a:focus-visible { color: var(--ink); }
+
+  /* ---- the fold ---- */
+  .fold { padding: 92px 5vw 84px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: center; }
+  .fold h1 { font-size: clamp(3rem, 6.4vw, 5.4rem); line-height: .88; letter-spacing: -.052em; font-weight: 500; max-width: 20ch; text-wrap: balance; }
+  .fold__mark { width: 180px; height: 320px; display: block; justify-self: center; }
+  .rule { height: 1px; background: var(--line); }
+
+  /* ---- sections ---- */
+  .sec { padding: 88px 5vw 96px; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--slate); }
+  .eyebrow__mark { width: 11px; height: 20px; flex: 0 0 auto; display: block; }
+  .sec h2 { font-size: clamp(2rem, 3.4vw, 2.9rem); line-height: 1; letter-spacing: -.04em; font-weight: 500; margin-top: 20px; max-width: 24ch; text-wrap: balance; }
+  .dark { background: var(--ink); color: #fff; }
+  .dark .eyebrow { color: rgba(255,255,255,.55); }
+
+  /* the name */
+  .name { padding-top: 84px; padding-bottom: 88px; }
+  .name__grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; margin-top: 40px; }
+  .name__claim { font-size: clamp(1.6rem, 2.5vw, 2.4rem); line-height: 1.1; letter-spacing: -.04em; font-weight: 500; max-width: 20ch; text-wrap: balance; }
+  .name__text { font-size: 17px; line-height: 1.6; color: var(--slate); max-width: 56ch; text-wrap: pretty; }
+  .name__text + .name__text { margin-top: 16px; }
+
+  /* the mark */
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 20px; margin-top: 44px; }
+  .step__plate { height: 220px; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--ring); display: flex; align-items: center; justify-content: center; }
+  .step__svg { width: 63px; height: 112px; display: block; }
+  .step__n { font-family: var(--mono); font-size: 11px; color: var(--quiet); margin-top: 16px; font-variant-numeric: tabular-nums; }
+  .step__title { font-size: 19px; font-weight: 500; letter-spacing: -.025em; margin-top: 8px; }
+  .step__body { font-size: 15px; line-height: 1.55; color: var(--slate); margin-top: 8px; text-wrap: pretty; }
+
+  /* colour */
+  .colour { margin-top: 56px; }
+  .swatches { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; margin-top: 44px; }
+  .swatch { border-radius: 16px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+  .swatch__chip { height: 168px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.3); }
+  .swatch__body { padding: 24px 26px 28px; }
+  .swatch__name { font-size: 20px; font-weight: 500; letter-spacing: -.025em; color: #fff; }
+  .swatch__hex { font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,.55); margin-top: 6px; }
+  .swatch__text { font-size: 15px; line-height: 1.55; color: rgba(255,255,255,.72); margin-top: 14px; text-wrap: pretty; }
+  .swatch__use { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-top: 16px; padding-top: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,.16); }
+
+  /* type */
+  .types { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; align-items: stretch; }
+  .type { padding: 36px 38px 40px; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--ring); display: flex; flex-direction: column; }
+  .type--dark { background: var(--ink); box-shadow: none; color: #fff; }
+  .type__label { display: flex; align-items: baseline; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--slate); }
+  .type__label strong { font-weight: 500; color: var(--ink); }
+  .type--dark .type__label { color: rgba(255,255,255,.66); } .type--dark .type__label strong { color: #fff; }
+  .type__sample { font-size: 56px; line-height: .9; letter-spacing: -.05em; font-weight: 500; margin-top: 22px; }
+  .type__sample--mono { font-family: var(--mono); font-size: 24px; letter-spacing: .02em; line-height: 1.2; }
+  .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; font-family: var(--mono); font-size: 11px; color: var(--slate); }
+  .chips span { padding: 4px 9px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--ring); }
+  .type--dark .chips { color: rgba(255,255,255,.66); } .type--dark .chips span { box-shadow: inset 0 0 0 1px rgba(255,255,255,.28); }
+  .type__note { font-size: 15px; line-height: 1.6; color: var(--slate); margin-top: auto; padding-top: 24px; max-width: 46ch; text-wrap: pretty; }
+  .type--dark .type__note { color: rgba(255,255,255,.72); }
+
+  /* files */
+  .files { background-color: #fff; background-image:
+      repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px); }
+  .file-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; margin-top: 44px; }
+  .file { display: block; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 1px var(--ring); transition: transform 150ms cubic-bezier(.2,.6,.2,1); }
+  .file:hover, .file:focus-visible { transform: translateY(-2px); }
+  .file__plate { height: 150px; display: flex; align-items: center; justify-content: center; padding: 0 28px; }
+  .file__plate--dark { background: var(--ink); }
+  .file__plate img { max-width: 100%; max-height: 84px; width: auto; height: auto; display: block; }
+  .file__meta { padding: 20px 24px 24px; box-shadow: inset 0 1px 0 rgba(23,35,43,.1); }
+  .file__name { font-size: 16px; font-weight: 500; }
+  .file__use { font-family: var(--mono); font-size: 11.5px; line-height: 1.5; letter-spacing: .04em; color: var(--slate); margin-top: 6px; }
+
+  /* foot */
+  .foot { background-color: var(--orange); background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(23,35,43,.09) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(45deg, rgba(23,35,43,.05) 0 1px, transparent 1px 5px); padding: 0 5vw; color: var(--ink); }
+  .foot__inner { padding: 44px 0 52px; display: flex; flex-wrap: wrap; gap: 28px; align-items: baseline; justify-content: space-between; }
+  .foot .lockup__mark { width: 15px; height: 27px; }
+  .foot .lockup__word { font-size: 21px; }
+  .foot__line { font-size: 14px; margin-top: 12px; }
+  .foot__meta { font-family: var(--mono); font-size: 13px; }
+
+  /* ---- motion, gated ---- */
+  @supports (animation-timeline: view()) {
+    .reveal { animation: reveal both cubic-bezier(.2,.6,.2,1); animation-timeline: view(); animation-range: entry 4% cover 24%; }
+  }
+  @keyframes reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { animation: none; }
+    .file, .file:hover { transition: none; transform: none; }
+  }
+
+  /* ---- responsive; the file has none ---- */
+  @media (max-width: 1000px) {
+    .steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .file-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .bar__nav { display: none; }
+  }
+  @media (max-width: 860px) {
+    .fold { grid-template-columns: 1fr; gap: 40px; padding: 64px 5vw 56px; }
+    .fold__mark { width: 120px; height: 213px; justify-self: start; }
+    .name__grid, .swatches, .types { grid-template-columns: 1fr; }
+    .sec, .name { padding-top: 64px; padding-bottom: 72px; }
+    .type__sample { font-size: 44px; }
+  }
+  @media (max-width: 560px) {
+    .steps, .file-grid { grid-template-columns: 1fr; }
+    .tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <a class="lockup" href="./" aria-label="graphzero"><svg class="lockup__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="nav" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="nav-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#nav-c)" fill="url(#nav)"></rect></svg><span class="lockup__word">graphzero</span></a>
+    <span class="tag">/team &middot; internal</span>
+    <nav class="bar__nav" aria-label="On this page">
+      <a href="#linden">The name</a><a href="#mark">The mark</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#files">Files</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap fold">
+      <h1>A slash, a linden, and back again.</h1>
+      <svg class="fold__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="hero" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="hero-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#hero-c)" fill="url(#hero)"></rect></svg>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="wrap sec name" id="linden">
+      <p class="eyebrow"><svg class="eyebrow__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="e1" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="e1-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#e1-c)" fill="url(#e1)"></rect></svg>The name before the name</p>
+      <h2>Where the leaf comes from.</h2>
+      <div class="name__grid">
+        <p class="name__claim">We nearly called it Linden.</p>
+        <div>
+          <p class="name__text">For centuries, villages across Germany and the Netherlands kept a linden tree at their centre. People gathered under it, news was passed on, disputes were heard and judgments were given. They called it the <em>Gerichtslinde</em>, the court linden, and some of them are still standing after five hundred years. There was no archive and no filing system. There was one place everyone knew to go, where what the village knew was shared out loud and stayed alive because people kept using it.</p>
+          <p class="name__text">That is close to what we are building, a thousand years early. We did not keep the name, but we kept the leaf.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="wrap sec" id="mark">
+      <p class="eyebrow"><svg class="eyebrow__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="e2" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="e2-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#e2-c)" fill="url(#e2)"></rect></svg>01 &middot; Where the mark comes from</p>
+      <h2 style="max-width:26ch">How we got to this mark.</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step__plate"><svg class="step__svg" viewBox="14 0 36 64" aria-hidden="true"><path d="M40 8 L24 56" fill="none" stroke="#17232B" stroke-width="7" stroke-linecap="round"></path></svg></div>
+          <div class="step__n">01</div>
+          <h3 class="step__title">It started as a slash</h3>
+          <p class="step__body">A forward slash. The character that gives information structure, creates paths, and helps us find things. That felt right for a knowledge company. But / is a character anyone can type, so it was never really ours.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step__plate"><svg class="step__svg" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path></svg></div>
+          <div class="step__n">02</div>
+          <h3 class="step__title">Then a linden leaf</h3>
+          <p class="step__body">While thinking about Ascending&rsquo;s AI for a human future, we came to the linden tree. The leaf comes from that story.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step__plate"><svg class="step__svg" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg></div>
+          <div class="step__n">03</div>
+          <h3 class="step__title">Two leaves, meeting</h3>
+          <p class="step__body">One leaf is just a logo. Two of them, rotated and overlapping at the waist, show a relationship: your knowledge and the model, meeting in the middle.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step__plate"><svg class="step__svg" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="s4" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="s4-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#s4-c)" fill="url(#s4)"></rect></svg></div>
+          <div class="step__n">04</div>
+          <h3 class="step__title">And the slash came back</h3>
+          <p class="step__body">At the angle of the original slash, the two leaves read as one stroke. Nothing was thrown away. It all ended up in the same shape.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec dark colour" id="colour">
+      <div class="wrap">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="e3" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="e3-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#e3-c)" fill="url(#e3)"></rect></svg>02 &middot; Colour, and why</p>
+        <h2>Two colours come with a history. One starts here.</h2>
+        <div class="swatches">
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#FF6A00"></div>
+          <div class="swatch__body">
+            <h3 class="swatch__name">Orange</h3>
+            <div class="swatch__hex">#FF6A00</div>
+            <p class="swatch__text">The Dutch orange. We are built in Amsterdam, and this is the colour the country signs its name with. It is also the colour software uses for something that is live: a running process, an active state, energy.</p>
+            <div class="swatch__use">Accent &middot; mark &middot; rules &middot; one action per view</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#17232B"></div>
+          <div class="swatch__body">
+            <h3 class="swatch__name">Navy</h3>
+            <div class="swatch__hex">#17232B</div>
+            <p class="swatch__text">European institutional blue, pulled down until it is almost ink. It is what infrastructure looks like: sober, permanent, the colour of paperwork that has to hold up. Everything serious we say is set in it.</p>
+            <div class="swatch__use">Ink &middot; dark bands &middot; the default</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#FF2E93"></div>
+          <div class="swatch__body">
+            <h3 class="swatch__name">Pink</h3>
+            <div class="swatch__hex">#FF2E93</div>
+            <p class="swatch__text">This one is not inherited from anywhere. It is the surprise, and it says we are building something new rather than reissuing enterprise software. It shows up exactly where we want your eye and nowhere else.</p>
+            <div class="swatch__use">Counter-accent &middot; once per screen</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap sec" id="type">
+      <p class="eyebrow"><svg class="eyebrow__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="e4" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="e4-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#e4-c)" fill="url(#e4)"></rect></svg>03 &middot; Type</p>
+      <h2>Tight headlines. Mono for anything measured.</h2>
+      <div class="types">
+        <div class="type">
+          <div class="type__label"><strong>Geist</strong><span>Medium 500 &middot; Inter Tight fallback</span></div>
+          <div class="type__sample">Sovereign by default.</div>
+          <div class="chips"><span>&minus;0.05em</span><span>line-height 0.9</span></div>
+          <p class="type__note">Headlines run at weight 500 with &minus;0.045 to &minus;0.052em tracking and line height under 1. That tight tracking is a big part of the identity. Set it loose and the type reads like everyone else.</p>
+        </div>
+        <div class="type type--dark">
+          <div class="type__label"><strong>System mono</strong><span>no webfont</span></div>
+          <div class="type__sample type__sample--mono">01 &middot; EU-hosted &middot; 4.6:1</div>
+          <div class="chips"><span>11&ndash;13px</span><span>tracking .04&ndash;.16em</span></div>
+          <p class="type__note">Numbers, eyebrows, statuses and contrast ratios all go mono at 11 to 13px with wide tracking. It is what makes the pages read as engineering rather than marketing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec files" id="files">
+      <div class="wrap">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="14 0 36 64" aria-hidden="true" focusable="false"><defs><linearGradient id="e5" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="e5-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#e5-c)" fill="url(#e5)"></rect></svg>04 &middot; The files</p>
+        <h2 style="max-width:22ch">Take what you need.</h2>
+        <div class="file-grid">
+        <a class="file" href="brand/graphzero-logo-primary.png" download>
+          <div class="file__plate file__plate--light"><img src="brand/graphzero-logo-primary.png" alt="Primary logo" width="2012" height="780" loading="lazy" decoding="async"></div>
+          <div class="file__meta">
+            <div class="file__name">Primary logo</div>
+            <div class="file__use">Default, on white</div>
+          </div>
+        </a>
+        <a class="file" href="brand/graphzero-logo-white.png" download>
+          <div class="file__plate file__plate--dark"><img src="brand/graphzero-logo-white.png" alt="White logo" width="1740" height="540" loading="lazy" decoding="async"></div>
+          <div class="file__meta">
+            <div class="file__name">White logo</div>
+            <div class="file__use">On navy, orange, photos</div>
+          </div>
+        </a>
+        <a class="file" href="brand/graphzero-compact-gradient.png" download>
+          <div class="file__plate file__plate--light"><img src="brand/graphzero-compact-gradient.png" alt="Compact lockup" width="612" height="684" loading="lazy" decoding="async"></div>
+          <div class="file__meta">
+            <div class="file__name">Compact lockup</div>
+            <div class="file__use">Narrow spaces, avatars</div>
+          </div>
+        </a>
+        <a class="file" href="brand/graphzero-icon-gradient.svg" download>
+          <div class="file__plate file__plate--light"><img src="brand/graphzero-icon-gradient.svg" alt="Icon, gradient" width="360" height="640" loading="lazy" decoding="async"></div>
+          <div class="file__meta">
+            <div class="file__name">Icon, gradient</div>
+            <div class="file__use">App icon, favicon, avatar</div>
+          </div>
+        </a>
+        <a class="file" href="brand/graphzero-icon-duotone.svg" download>
+          <div class="file__plate file__plate--light"><img src="brand/graphzero-icon-duotone.svg" alt="Icon, duotone" width="360" height="640" loading="lazy" decoding="async"></div>
+          <div class="file__meta">
+            <div class="file__name">Icon, duotone</div>
+            <div class="file__use">Print, flat reproduction</div>
+          </div>
+        </a>
+        <a class="file" href="brand/graphzero-icon-white.svg" download>
+          <div class="file__plate file__plate--dark"><img src="brand/graphzero-icon-white.svg" alt="Icon, white" width="360" height="640" loading="lazy" decoding="async"></div>
+          <div class="file__meta">
+            <div class="file__name">Icon, white</div>
+            <div class="file__use">On any dark ground</div>
+          </div>
+        </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <div>
+        <div class="lockup"><svg class="lockup__mark" viewBox="14 0 36 64" aria-hidden="true"><g fill="#17232B"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></g></svg><span class="lockup__word">graphzero</span></div>
+        <div class="foot__line">Internal.</div>
+      </div>
+      <div class="foot__meta">/team &middot; brand &middot; v1</div>
+    </div>
+  </footer>
+
+</body>
+</html>
