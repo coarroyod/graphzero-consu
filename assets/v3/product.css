@@ -348,3 +348,21 @@
     repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
     repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
 }
+
+/* ==========================================================================
+   05 · #context-layer — the painted panel goes
+
+   The section sat on its own plate: an absolutely positioned ::before inset by
+   space-2, filled with the ground wash and rounded at radius-lg. Nothing else
+   on this page is a rounded box that size, so it read as a card the rest of
+   the page is not made of — and its tint made the one section that is not
+   white look like a different surface.
+
+   content: none rather than a white fill and a zero radius: with the plate
+   gone the section simply stands on the page's own white, and there is no
+   painted box left to disagree with anything. The same line the Early Access
+   fold already uses for the same reason.
+
+   Layout, copy and the figure inside are untouched.
+   ========================================================================== */
+.page[data-page="product"] #context-layer::before { content: none; }
