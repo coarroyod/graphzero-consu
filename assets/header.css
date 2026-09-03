@@ -36,16 +36,10 @@
   border-bottom-color: transparent;
 }
 
-/* Once the page has moved under it, the ground and a hairline come in — and
-   stay. The bar used to leave on the way down and come back on the way up;
-   now it holds at the top of the viewport in both directions. The script
-   still tells the two states apart, so nothing else had to change: the
-   "hidden" state simply looks like the pinned one. position: sticky keeps
-   the bar's space in flow, so it never covers the page's own first line. */
-.page .site-header[data-hdr="pinned"],
-.page .site-header[data-hdr="hidden"] {
-  border-bottom-color: rgba(23, 35, 43, 0.12);
-}
+/* Once the page has moved under it, the translucent ground comes in — and
+   nothing else. There is no hairline under the bar in either scrolled state:
+   the pinned and the (formerly) hidden states are both the base ground, so the
+   bar holds at the top of the viewport with only its colour changing. */
 
 /* With the mobile sheet open the bar stays put and goes near-opaque: the sheet
    starts below it, so a transparent bar would put the wordmark over whatever
