@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Mobile only.
+
+   Every rule in this sheet lives inside a max-width query, and the widest of
+   them is 760px. Nothing here can reach the desktop layout — that is the point
+   of the file: the phone gets its own fixes and the wide view is untouched.
+
+   Loaded last on all four pages, after every page stylesheet, so it can settle
+   what those sheets leave small or cut off without raising specificity wars.
+   ========================================================================== */
+
+@media (max-width: 760px) {
+
+  /* ---- the Product page's flow diagram ----
+
+     1100 units wide with 11.5-unit labels. Fitted to a phone it renders at
+     3.7px, so the sheet already gave it a horizontal scroller at 860px — but
+     860 puts the labels at 9px, and what the screen showed first was the nine
+     source tiles with their lines running off into nothing: the knowledge base
+     and the assistant, which are the point of the drawing, were off to the
+     right with nothing saying so.
+
+     At its own 1100 the labels are back at their full 11.5px and each of the
+     three parts is about one screen wide, so swiping through it reads the same
+     left to right as the diagram argues. The scroller goes full-bleed to use
+     the whole screen rather than the text column, and its right edge fades, so
+     it is visibly a pane with more in it. */
+  .page[data-page="product"] #context-layer .hero__figure {
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  }
+  .page[data-page="product"] #context-layer .hero__figure > svg {
+    min-width: 1100px;
+  }
+
+  /* ---- the About hero's map ----
+
+     Its two city names are 11 units in a 560-unit box. Fitted to a phone that
+     box is 351px, so they landed at 6.9px on screen — the smallest type
+     anywhere on the site. 18 units puts them back at 11.3. The map itself is
+     decorative and unchanged; only the two labels grow. */
+  .page[data-page="about"] .gza-flow text {
+    font-size: 18px;
+    letter-spacing: 1.6px;
+  }
+
+  /* ---- the Security cards' foot line ----
+     11px is under the 12 the rest of the site's small type holds to. */
+  .page[data-page="security"] .gzs-card__foot {
+    font-size: 12px;
+  }
+
+  /* ---- the accumulation figures ----
+     preserveAspectRatio="none" with overflow visible let the field paint a few
+     pixels past its own box, which on a 390 screen is a stray mark against the
+     gutter. It is a decorative thread; it stays inside. */
+  .page[data-page="early-access"] .gzea-accum,
+  .page[data-page="about"] .gza-accum {
+    overflow: hidden;
+  }
+
+  /* ---- targets ----
+     The footer's four links and the inline "full picture" links sit on an
+     18-20px line, under the 24px minimum a finger wants. The padding is
+     vertical only and the links are inline-block, so nothing reflows around
+     them. */
+  .gz-footer__nav a {
+    display: inline-block;
+    padding-block: 4px;
+  }
+  .page .link-underline {
+    display: inline-block;
+    padding-block: 4px;
+  }
+}
