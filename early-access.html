@@ -10,11 +10,12 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@400;500&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
-<link rel="stylesheet" href="assets/site.css?v=45">
+<link rel="stylesheet" href="assets/site.css?v=46">
 <link rel="stylesheet" href="assets/footer.css?v=4">
 <link rel="stylesheet" href="assets/header.css?v=4">
+<link rel="stylesheet" href="assets/early-access.css?v=1">
 <link rel="icon" href="assets/graphzero-favicon.png?v=1" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=1">
 </head>
@@ -66,52 +67,34 @@
          nothing else. No figure: the page has two drawings already and the
          first of them is one screen down, so opening on a third would say the
          same thing twice before the claim has landed. -->
-    <section class="hero" id="top">
+    <!-- 01 — WHAT GRAPHZERO IS
+         The fold now reads as one column over the graph rather than as type,
+         then a band, then copy. The drawing is the ground the claim sits on:
+         the page's own canvas, same points and same seed, moved behind the
+         type and masked away before it reaches the foot so nothing is read
+         through it. The two paragraphs that earn the claim are numbered and
+         set at the bottom of the fold, under a hairline.
 
-      <!-- The fold reads down, not across. Type, then the band, then the
-           copy and the ask — so the drawing is a member of the composition
-           rather than something standing beside it.
-
-           The painted panel is off for this page: it is a rounded rectangle,
-           which is a card, and the band has to cross the page edge to work. -->
-      <div class="wrap ea-fold__head">
-        <p class="eyebrow ea-eyebrow" data-reveal>Early access</p>
-        <h1 class="display ea-title" data-reveal>Turn what your people know into what your company knows.</h1>
-      </div>
-
-      <!-- The band.
-
-           Every other division on this site is a hairline. Here the hairline
-           is the network: a slice through the graph, full bleed past both
-           gutters, cropped top and bottom so it reads as a window onto
-           something larger rather than a picture with edges.
-
-           It carries the argument left to right, in the order the sentence
-           above it makes: points scattered and unjoined on the left, drawn
-           together through the hub, resolved into a connected structure on
-           the right. The hub is the only orange in the fold and it sits at
-           62% across — off centre, where the eye is already travelling.
-
-           Canvas, not SVG: forty-odd points and their edges is a few lines of
-           geometry against several hundred of path data, and the settle is a
-           per-frame position rather than a keyframe. Decorative to a screen
-           reader; the paragraphs below say the same thing. -->
-      <div class="ea-fold__band" aria-hidden="true">
+         Decorative to a screen reader; the paragraphs say what it says. -->
+    <section class="gzea-fold" id="top">
+      <div class="gzea-fold__graph" aria-hidden="true">
         <canvas data-graph-hero></canvas>
       </div>
 
-      <!-- Copy left on a narrow measure, the ask right and set on the last
-           line of it. Neither column is half the page, and the space between
-           them is the composition's, not left over. -->
-      <div class="wrap ea-fold__foot">
-        <div class="ea-fold__copy">
-          <p class="lead ea-fold__setup" data-reveal>Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
-          <p class="lead ea-fold__answer" data-reveal><span class="ea-fold__mark">graphzero</span> brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
-        </div>
-        <div class="ea-cta-row" data-reveal>
-            <a class="btn btn--accent btn--lg" href="#early-access">Become a design partner &rarr;</a>
-            <a class="link-underline ea-cta-row__alt" href="#product">See how it works &darr;</a>
-          </div>
+      <p class="gzea-eyebrow" data-reveal><span class="gzea-eyebrow__bar" aria-hidden="true"></span>Early access</p>
+
+      <h1 class="gzea-title" data-reveal>Turn what your people know into what your company knows.</h1>
+
+      <div class="gzea-cta" data-reveal>
+        <a class="gzea-btn gzea-btn--solid" href="#early-access">Become a design partner &rarr;</a>
+        <a class="gzea-btn gzea-btn--ghost" href="#product">See how it works &darr;</a>
+      </div>
+
+      <div class="gzea-notes" data-reveal>
+        <span class="gzea-notes__n" aria-hidden="true">01</span>
+        <p class="gzea-notes__p">Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
+        <span class="gzea-notes__n" aria-hidden="true">02</span>
+        <p class="gzea-notes__p">graphzero brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
       </div>
     </section>
 

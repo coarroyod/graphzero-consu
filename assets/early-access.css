@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Early Access — the fold.
+
+   Implements `Early Access Hero 16b.dc.html`. Its own sheet rather than more
+   of site.css: that file is shared with About and already carries this page's
+   older fold, which this replaces outright.
+
+   The composition is one column standing on the graph. The graph is not a new
+   drawing — it is the canvas the page already had, the same points, the same
+   seed and the same hub at 62 percent, moved out of its band and behind the
+   type. Its colours are read off the element by assets/site.js, so the file's
+   ink, line and accent are set here as custom properties rather than in the
+   script.
+   ========================================================================== */
+
+.page[data-page="early-access"] .gzea-fold {
+  /* The file's face, and the one the Product fold now uses. The rest of this
+     page stays on Geist. */
+  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Helvetica, Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* Tall enough that the two numbered paragraphs sit at the bottom of a
+     screen rather than wherever the copy happens to end. */
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1300px;
+  margin-inline: auto;
+  padding: 56px 5vw 48px;
+}
+
+/* Everything but the graph stands in front of it. */
+.page[data-page="early-access"] .gzea-fold > :not(.gzea-fold__graph) {
+  position: relative;
+  z-index: 1;
+}
+
+.page[data-page="early-access"] .gzea-fold__graph {
+  position: absolute;
+  inset: 0;
+  /* Read by the hero script off the canvas's computed style. */
+  --heading: #7E8A8E;
+  --line: rgba(23, 35, 43, 0.09);
+  --accent: #FF6A00;
+  /* 0deg runs bottom to top, so the drawing is gone across the bottom 44% and
+     whole above 68%. It leaves before the hairline, which is what keeps the
+     two paragraphs off it — no type is ever read through the graph. */
+  -webkit-mask-image: linear-gradient(0deg, transparent 0 44%, #000 68%);
+  mask-image: linear-gradient(0deg, transparent 0 44%, #000 68%);
+}
+.page[data-page="early-access"] .gzea-fold__graph canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- the eyebrow ---- */
+.page[data-page="early-access"] .gzea-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #59666B;
+}
+.page[data-page="early-access"] .gzea-eyebrow__bar {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 2px;
+  background: linear-gradient(90deg, #FF6A00, #FF2E93);
+}
+
+/* ---- the claim ---- */
+.page[data-page="early-access"] .gzea-title {
+  margin: 22px 0 0;
+  max-width: 24ch;
+  font-size: clamp(2.8rem, 5.6vw, 4.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  color: #17232B;
+  text-wrap: balance;
+}
+
+/* ---- the two asks ---- */
+.page[data-page="early-access"] .gzea-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  /* The file sets nowrap on a 1300px artboard. Two pills at 15px do not fit
+     one line on a phone, and nowrap would run them off the edge. */
+  flex-wrap: wrap;
+}
+.page[data-page="early-access"] .gzea-btn {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: transform 150ms cubic-bezier(.2, .6, .2, 1),
+              background 150ms cubic-bezier(.2, .6, .2, 1),
+              opacity 150ms cubic-bezier(.2, .6, .2, 1);
+}
+.page[data-page="early-access"] .gzea-btn--solid {
+  background: #17232B;
+  color: #ffffff;
+}
+.page[data-page="early-access"] .gzea-btn--solid:hover,
+.page[data-page="early-access"] .gzea-btn--solid:focus-visible {
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  opacity: .9;
+}
+.page[data-page="early-access"] .gzea-btn--ghost {
+  color: #17232B;
+  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .28);
+}
+.page[data-page="early-access"] .gzea-btn--ghost:hover,
+.page[data-page="early-access"] .gzea-btn--ghost:focus-visible {
+  color: #17232B;
+  text-decoration: none;
+  transform: translateY(-1px);
+  background: rgba(23, 35, 43, .04);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .gzea-btn:hover,
+  .page[data-page="early-access"] .gzea-btn:focus-visible { transform: none; }
+}
+
+/* ---- the two paragraphs, numbered, at the foot ---- */
+.page[data-page="early-access"] .gzea-notes {
+  margin-top: auto;
+  padding-top: 26px;
+  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 28px minmax(0, 1fr);
+  gap: 14px 20px;
+}
+/* The file's #7E8A8E is 3.55:1 on white, which 11px text does not pass at.
+   Same hue, held to 4.54:1 — the value the Product ledger's ordinals use. */
+.page[data-page="early-access"] .gzea-notes__n {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.55;
+  letter-spacing: .1em;
+  color: #6D787C;
+  font-variant-numeric: tabular-nums;
+}
+.page[data-page="early-access"] .gzea-notes__p {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #59666B;
+  text-wrap: pretty;
+}
+
+/* ---- responsive; the file has none ---- */
+@media (max-width: 900px) {
+  /* Two 46ch paragraphs will not sit side by side under 900. One pair a row,
+     the number still beside its own paragraph. */
+  .page[data-page="early-access"] .gzea-notes {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .page[data-page="early-access"] .gzea-fold {
+    min-height: 0;
+    padding: 40px 5vw 44px;
+  }
+  /* Without a floor on the height there is no free space for margin-top: auto
+     to spend, so the hairline needs its own distance from the asks. */
+  .page[data-page="early-access"] .gzea-notes { margin-top: 48px; }
+}
