@@ -89,18 +89,35 @@
    holding it alone. */
 .page[data-page="security"] .gzs-hero {
   padding: 84px 5vw 88px;
+  /* The white fold is the whole first screen — the navy band under it should
+     not show until you scroll. svh rather than vh so a phone's collapsing
+     address bar cannot make the fold taller than the screen it is measured
+     against; vh first for anything that does not know svh. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .page[data-page="security"] .gzs-hero__grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 64px;
+  /* The file's 1.15fr/1fr, widened. At the larger heading size the claim broke
+     over four lines in a 582px column; 630 sets it in two, and the marks still
+     have 446 against the 400 they need. */
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 56px;
   align-items: center;
 }
 
 .page[data-page="security"] .gzs-display {
   margin: 22px 0 0;
-  max-width: 19ch;
-  font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+  /* The column is the measure now — a ch cap on top of it only made the break
+     worse. */
+  max-width: none;
+  /* Up from the file's clamp(2.4rem, 4.4vw, 3.4rem). At 54px against the About
+     fold's 95px this read as the smaller page. 72 is the largest size that
+     still sets this sentence in two lines; 80 broke it into three. */
+  font-size: clamp(3rem, 5.2vw, 4.5rem);
   line-height: 0.94;
   letter-spacing: -0.048em;
   font-weight: 500;
@@ -110,7 +127,7 @@
 .page[data-page="security"] .gzs-lead {
   margin: 24px 0 0;
   max-width: 48ch;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.5;
   color: var(--gzs-muted);
   text-wrap: pretty;
@@ -130,7 +147,7 @@
   display: block;
   flex: 0 1 auto;
   min-width: 0;
-  height: 104px;
+  height: 120px;
   width: auto;
   object-fit: contain;
 }
@@ -143,22 +160,12 @@
   padding-top: 20px;
   max-width: 48ch;
   box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--gzs-muted);
   text-wrap: pretty;
 }
 
-/* Closes the fold, full width rather than on the container — the sections
-   below open on their own space and had nothing marking where this one ends. */
-.page[data-page="security"] .gzs-hero__rule {
-  height: 1px;
-  background: rgba(23, 35, 43, .12);
-  /* The file draws this outside the padded container, so it runs the width of
-     the screen rather than the width of the copy. Pulled back out through the
-     section's own 5vw; .page clips overflow-x, so it cannot make a scrollbar. */
-  margin-inline: -5vw;
-}
 
 /* ---- section heads ---- */
 .page[data-page="security"] .gzs-h2 {
@@ -474,8 +481,8 @@
   .page[data-page="security"] .gzs-card,
   .page[data-page="security"] .gzs-card--sm { padding: 24px 24px 28px; }
   .page[data-page="security"] .gzs-cert { padding: 20px 22px; }
-  .page[data-page="security"] .gzs-marks { gap: 18px; }
-  .page[data-page="security"] .gzs-marks__img { height: 78px; }
+  .page[data-page="security"] .gzs-marks { gap: 16px; }
+  .page[data-page="security"] .gzs-marks__img { height: 88px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
