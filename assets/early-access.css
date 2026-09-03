@@ -397,24 +397,26 @@
    on a road seen from above. Opacity rather than size: a node is three to eight
    pixels, and a size change that small either reads as nothing or as a jolt.
    The whole thing stops under prefers-reduced-motion. */
+@keyframes gzea-send {
+  0%        { stroke-dashoffset: 12;   opacity: .8; }
+  40%       { stroke-dashoffset: -100; opacity: .8; }
+  40.01%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+.page[data-page="early-access"] .gzea-link {
+  animation-name: gzea-send;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
 @keyframes gzea-breathe {
   0%, 100% { opacity: var(--o); }
   50%      { opacity: min(1, calc(var(--o) + 0.34)); }
-}
-@keyframes gzea-travel {
-  from { stroke-dashoffset: 1010; }
-  to   { stroke-dashoffset: 0; }
 }
 .page[data-page="early-access"] .gzea-node {
   animation-name: gzea-breathe;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
-.page[data-page="early-access"] .gzea-glint {
-  opacity: .7;
-  animation: gzea-travel 13s linear infinite;
-}
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="early-access"] .gzea-node { animation: none; opacity: var(--o); }
-  .page[data-page="early-access"] .gzea-glint { display: none; }
-}
+  .page[data-page="early-access"] .gzea-link { display: none; }
+  }

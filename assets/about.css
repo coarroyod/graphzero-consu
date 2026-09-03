@@ -373,24 +373,26 @@
    on a road seen from above. Opacity rather than size: a node is three to eight
    pixels, and a size change that small either reads as nothing or as a jolt.
    The whole thing stops under prefers-reduced-motion. */
+@keyframes gza-send {
+  0%        { stroke-dashoffset: 12;   opacity: .8; }
+  40%       { stroke-dashoffset: -100; opacity: .8; }
+  40.01%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+.page[data-page="about"] .gza-link {
+  animation-name: gza-send;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
 @keyframes gza-breathe {
   0%, 100% { opacity: var(--o); }
   50%      { opacity: min(1, calc(var(--o) + 0.34)); }
-}
-@keyframes gza-travel {
-  from { stroke-dashoffset: 1010; }
-  to   { stroke-dashoffset: 0; }
 }
 .page[data-page="about"] .gza-node {
   animation-name: gza-breathe;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
-.page[data-page="about"] .gza-glint {
-  opacity: .7;
-  animation: gza-travel 13s linear infinite;
-}
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="about"] .gza-node { animation: none; opacity: var(--o); }
-  .page[data-page="about"] .gza-glint { display: none; }
-}
+  .page[data-page="about"] .gza-link { display: none; }
+  }
