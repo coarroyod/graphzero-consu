@@ -68,11 +68,15 @@
   text-transform: uppercase;
   color: #59666B;
 }
-.page[data-page="early-access"] .gzea-eyebrow__bar {
+/* The blade pair, not a rule — the same mark the Security and About eyebrows
+   carry, at the same 10x18 they use. The file draws a 26x2 gradient bar here;
+   the site had already settled on the mark everywhere else, and one page
+   opening on a different device would be the odd one out. */
+.page[data-page="early-access"] .gzea-mark {
   flex: 0 0 auto;
-  width: 26px;
-  height: 2px;
-  background: linear-gradient(90deg, #FF6A00, #FF2E93);
+  display: block;
+  width: 10px;
+  height: 18px;
 }
 
 /* ---- the claim ---- */
