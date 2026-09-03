@@ -37,9 +37,9 @@
    01 · the fold
 
    Centred over the lattice, and it arrives smaller than it ends. The type
-   holds at 86% until the page starts moving and reaches full size over the
-   first 30vh of scroll, so the statement opens quietly on the graph behind it
-   and grows into the page as you go.
+   opens at 75% and passes full size on its way to 110% over the first 36vh of
+   scroll, so the statement starts quiet on the graph behind it and is at its
+   largest by the time you leave it.
 
    Scale rather than font-size: font-size would relayout and re-break the
    headline on every frame — the line "enterprise AI." would jump between two
@@ -88,9 +88,25 @@
   color: var(--body);
 }
 
+/* The two ends are properties rather than literals so the phone can hold a
+   narrower range without a second set of keyframes. */
+.page[data-page="product"] .hero-lattice__inner {
+  --fold-from: 0.75;
+  --fold-to: 1.1;
+}
+/* At 391 the lead runs the full column, and 1.1 would push it 39px wider than
+   the screen. .page clips rather than scrolls, so that would be a trimmed
+   sentence, not a scrollbar. The phone grows over a shorter distance. */
+@media (max-width: 760px) {
+  .page[data-page="product"] .hero-lattice__inner {
+    --fold-from: 0.78;
+    --fold-to: 1.03;
+  }
+}
+
 @keyframes gz-fold-grow {
-  from { transform: scale(0.86); }
-  to   { transform: scale(1); }
+  from { transform: scale(var(--fold-from)); }
+  to   { transform: scale(var(--fold-to)); }
 }
 
 /* Gated: a browser without scroll-driven animations gets the fold at full
@@ -101,7 +117,7 @@
     transform-origin: 50% 0;
     animation: gz-fold-grow linear both;
     animation-timeline: scroll(root block);
-    animation-range: 0 30vh;
+    animation-range: 0 36vh;
   }
 
   /* Type that changes size as the page moves is motion. Anyone who has asked
