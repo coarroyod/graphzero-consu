@@ -387,3 +387,29 @@
   letter-spacing: -0.03em;
   color: var(--heading, #17232B);
 }
+
+/* ---- the thread, breathing ----
+   Five of the thirty-four nodes swell to about twice their size and settle
+   back, each on its own clock, so the field reads as something happening
+   rather than a drawing. Scale rather than r: transform on an SVG element is
+   animatable everywhere, and transform-box: fill-box keeps each dot growing
+   about its own centre rather than the figure's origin. The five are spread
+   down the run — two navy, two orange, one pink — and their delays and
+   lengths are all different, so no two ever peak together. */
+@keyframes gzea-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(2.1); }
+}
+.page[data-page="early-access"] .gzea-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gzea-pulse 2.8s ease-in-out infinite;
+}
+.page[data-page="early-access"] .gzea-pulse--1 { animation-delay: 0s;    animation-duration: 2.6s; }
+.page[data-page="early-access"] .gzea-pulse--2 { animation-delay: 1.1s;  animation-duration: 3.1s; }
+.page[data-page="early-access"] .gzea-pulse--3 { animation-delay: 0.5s;  animation-duration: 2.9s; }
+.page[data-page="early-access"] .gzea-pulse--4 { animation-delay: 1.9s;  animation-duration: 2.7s; }
+.page[data-page="early-access"] .gzea-pulse--5 { animation-delay: 0.8s;  animation-duration: 3.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .gzea-pulse { animation: none; }
+}

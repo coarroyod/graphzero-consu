@@ -363,3 +363,29 @@
   .page[data-page="about"] .gza-eco__card:hover,
   .page[data-page="about"] .gza-pill:hover { transform: none; }
 }
+
+/* ---- the thread, breathing ----
+   Five of the thirty-four nodes swell to about twice their size and settle
+   back, each on its own clock, so the field reads as something happening
+   rather than a drawing. Scale rather than r: transform on an SVG element is
+   animatable everywhere, and transform-box: fill-box keeps each dot growing
+   about its own centre rather than the figure's origin. The five are spread
+   down the run — two navy, two orange, one pink — and their delays and
+   lengths are all different, so no two ever peak together. */
+@keyframes gza-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(2.1); }
+}
+.page[data-page="about"] .gza-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gza-pulse 2.8s ease-in-out infinite;
+}
+.page[data-page="about"] .gza-pulse--1 { animation-delay: 0s;    animation-duration: 2.6s; }
+.page[data-page="about"] .gza-pulse--2 { animation-delay: 1.1s;  animation-duration: 3.1s; }
+.page[data-page="about"] .gza-pulse--3 { animation-delay: 0.5s;  animation-duration: 2.9s; }
+.page[data-page="about"] .gza-pulse--4 { animation-delay: 1.9s;  animation-duration: 2.7s; }
+.page[data-page="about"] .gza-pulse--5 { animation-delay: 0.8s;  animation-duration: 3.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="about"] .gza-pulse { animation: none; }
+}
