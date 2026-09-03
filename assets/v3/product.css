@@ -51,22 +51,27 @@
 
 /* The 12-column grid and the left alignment that were here are gone: the base
    sheet already centres this fold, so removing the override is the change. */
+/* Type per index-hero-27c-spec.md. The weight is the whole of it: 700 down to
+   400, with the tracking pulled to -0.05em and the size taken up rather than
+   down, and the measure narrowed until the sentence stacks in three short
+   lines instead of two wide ones.
+
+   The measure is 7.4em, not the file's 860px. Measured here, this sentence in
+   Inter Tight 400 at -0.05em runs 1199px on one line at 89.6px, and 860px of
+   measure sets it in two — 492 and 675 — not three. Three starts at 660px,
+   which is 7.4em at that size. In em rather than pixels so the break holds at
+   every step of the clamp instead of only at the top of it. Inter Tight is the
+   file's face; Geist stays behind Schibsted
+   Grotesk in the chain, so a blocked webfont lands on the face the rest of the
+   page is set in rather than on the system stack. */
 .page[data-page="product"] .hero-lattice__title {
-  /* Held to a measure. Left-aligned it ran the full column; centred, a line
-     that long leaves the second line stranded under it. */
-  max-width: 18ch;
-  /* Inter Tight rather than the page's Geist. It is the same grotesque
-     species, drawn narrower and with the sidebearings pulled in, which is
-     what a large statement wants and what Geist — drawn to stay legible at
-     interface sizes — deliberately does not do. Geist stays behind it, so a
-     blocked webfont falls back to the face the rest of the page is set in
-     rather than to the system stack. */
-  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: clamp(2.75rem, 7.2vw, 6.25rem);
-  font-weight: 700;
-  line-height: 0.93;
-  letter-spacing: -0.045em;
+  max-width: 7.4em;
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: clamp(3.4rem, 6.4vw, 5.6rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
   color: var(--heading);
   text-wrap: balance;
 }
@@ -80,12 +85,19 @@
 
 .page[data-page="product"] .hero-lattice__lead {
   /* Set with the statement it sits under, so the fold reads as one voice. */
-  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Helvetica, Arial, sans-serif;
-  margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
-  font-size: clamp(1.0625rem, 0.45vw + 0.95rem, 1.3125rem);
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin-top: 32px;
+  max-width: 52ch;
+  font-size: 19px;
+  font-weight: 400;
   line-height: 1.55;
   color: var(--body);
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .page[data-page="product"] .hero-lattice__lead { font-size: 17px; }
 }
 
 /* The two ends are properties rather than literals so the phone can hold a
