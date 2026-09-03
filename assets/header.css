@@ -36,15 +36,15 @@
   border-bottom-color: transparent;
 }
 
-/* Once the page has moved under it, the ground and a hairline come in. */
-.page .site-header[data-hdr="pinned"] {
-  border-bottom-color: rgba(23, 35, 43, 0.12);
-}
-
-/* Going down, it leaves. position: sticky keeps its space in flow, so the
-   page does not jump when it goes or comes back. */
+/* Once the page has moved under it, the ground and a hairline come in — and
+   stay. The bar used to leave on the way down and come back on the way up;
+   now it holds at the top of the viewport in both directions. The script
+   still tells the two states apart, so nothing else had to change: the
+   "hidden" state simply looks like the pinned one. position: sticky keeps
+   the bar's space in flow, so it never covers the page's own first line. */
+.page .site-header[data-hdr="pinned"],
 .page .site-header[data-hdr="hidden"] {
-  transform: translateY(-100%);
+  border-bottom-color: rgba(23, 35, 43, 0.12);
 }
 
 /* With the mobile sheet open the bar stays put and goes near-opaque: the sheet
@@ -63,15 +63,11 @@
   backdrop-filter: none;
 }
 
-/* A bar that comes and goes is motion. Anyone who has asked for less of it
-   keeps the header where it is — the ground still changes, since that is a
-   colour and not movement. */
+/* The ground still changes colour on scroll; under reduced motion that is
+   all that moves, without a transition. */
 @media (prefers-reduced-motion: reduce) {
   .page .site-header {
     transition: background-color 240ms ease, border-color 240ms ease;
-  }
-  .page .site-header[data-hdr="hidden"] {
-    transform: none;
   }
 }
 
