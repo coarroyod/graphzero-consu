@@ -367,3 +367,23 @@
   .page[data-page="early-access"] .gzea-gets,
   .page[data-page="early-access"] .gzea-close { padding-left: 5vw; padding-right: 5vw; }
 }
+
+/* ---- the inline lockup ----
+
+   The one place in the fold's copy where the name is set as the mark and the
+   word rather than as more of the sentence. Navy against the paragraph's
+   slate, which is the whole point of it; the size is the paragraph's own and
+   is not set here. The mark is decorative, so the name is read once. */
+.page[data-page="early-access"] .gz-inline__mark {
+  display: inline-block;
+  width: 9px;
+  height: 16px;
+  vertical-align: -1px;
+  margin-right: 2px;
+}
+.page[data-page="early-access"] .gz-inline__word {
+  font-family: "DM Sans", var(--font-sans), sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--heading, #17232B);
+}
