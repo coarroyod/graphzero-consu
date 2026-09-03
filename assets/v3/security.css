@@ -134,37 +134,41 @@
   text-wrap: pretty;
 }
 
-/* ---- the marks ---- */
+/* ---- the marks ----
+   A legend: the three marks at 72px with one mono status word under each,
+   the group right-aligned in the hero's right column. The sentence that
+   qualified the ISO mark is gone from here; the certifications table further
+   down carries it. */
 .page[data-page="security"] .gzs-hero__proof { justify-self: end; }
 .page[data-page="security"] .gzs-marks {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.page[data-page="security"] .gzs-marks__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 /* Sized by height so the three sit on one optical line whatever their
-   proportions — two are near-square and the ISO mark is portrait. They may
-   shrink if the column does; contain keeps them from distorting when they do. */
+   proportions — two are near-square and the ISO mark is portrait. */
 .page[data-page="security"] .gzs-marks__img {
   display: block;
-  flex: 0 1 auto;
-  min-width: 0;
-  height: 120px;
+  height: 72px;
   width: auto;
-  object-fit: contain;
 }
-/* The note is the one line that qualifies the marks above it, so it sits
-   under a rule of its own rather than floating after them. The file's #59666B
-   rather than this page's --gzs-quiet, which is 3.55:1 on white and does not
-   carry 13px text. */
-.page[data-page="security"] .gzs-note {
-  margin: 24px 0 0;
-  padding-top: 20px;
-  max-width: 48ch;
-  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--gzs-muted);
-  text-wrap: pretty;
+.page[data-page="security"] .gzs-marks__label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--meta);
+  white-space: nowrap;
 }
 
 
@@ -493,8 +497,6 @@
   .page[data-page="security"] .gzs-grid--4 { grid-template-columns: minmax(0, 1fr); }
   .page[data-page="security"] .gzs-card,
   .page[data-page="security"] .gzs-card--sm { padding: 24px 24px 28px; }
-  .page[data-page="security"] .gzs-marks { gap: 16px; }
-  .page[data-page="security"] .gzs-marks__img { height: 88px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
