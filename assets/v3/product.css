@@ -37,7 +37,7 @@
    01 · the fold
 
    Centred over the lattice, and it arrives smaller than it ends. The type
-   opens at 75% and passes full size on its way to 110% over the first 36vh of
+   opens at 66% and passes full size on its way to 110% over the first 36vh of
    scroll, so the statement starts quiet on the graph behind it and is at its
    largest by the time you leave it.
 
@@ -91,7 +91,7 @@
 /* The two ends are properties rather than literals so the phone can hold a
    narrower range without a second set of keyframes. */
 .page[data-page="product"] .hero-lattice__inner {
-  --fold-from: 0.75;
+  --fold-from: 0.66;
   --fold-to: 1.1;
 }
 /* At 391 the lead runs the full column, and 1.1 would push it 39px wider than
@@ -99,7 +99,7 @@
    sentence, not a scrollbar. The phone grows over a shorter distance. */
 @media (max-width: 760px) {
   .page[data-page="product"] .hero-lattice__inner {
-    --fold-from: 0.78;
+    --fold-from: 0.7;
     --fold-to: 1.03;
   }
 }
