@@ -36,25 +36,28 @@
 /* ==========================================================================
    01 · the fold
 
-   The statement was centred and held to the same 60px the second hero runs,
-   deliberately, so the page would not open on two competing ranks. That is
-   the trade being reversed: this is the page's main statement, so it takes
-   the grid's left edge and roughly twice the size, and the hero below it
-   becomes the second rank rather than its equal.
-   ========================================================================== */
-.page[data-page="product"] .hero-lattice__inner {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--space-6);
-  justify-items: stretch;
-  text-align: left;
-}
+   Centred over the lattice, and it arrives smaller than it ends. The type
+   holds at 86% until the page starts moving and reaches full size over the
+   first 30vh of scroll, so the statement opens quietly on the graph behind it
+   and grows into the page as you go.
 
+   Scale rather than font-size: font-size would relayout and re-break the
+   headline on every frame — the line "enterprise AI." would jump between two
+   and three lines as it grew. A transform paints the same laid-out block
+   larger, so the breaks are fixed, the band's height never changes, and there
+   is nothing under it to push around. The origin is the top edge, so it grows
+   downward from where it starts rather than drifting up.
+   ========================================================================== */
+
+/* The 12-column grid and the left alignment that were here are gone: the base
+   sheet already centres this fold, so removing the override is the change. */
 .page[data-page="product"] .hero-lattice__title {
-  grid-column: 1 / 11;
-  max-width: none;
+  /* Held to a measure. Left-aligned it ran the full column; centred, a line
+     that long leaves the second line stranded under it. */
+  max-width: 18ch;
   /* Inter Tight rather than the page's Geist. It is the same grotesque
      species, drawn narrower and with the sidebearings pulled in, which is
-     what a 100px statement wants and what Geist — drawn to stay legible at
+     what a large statement wants and what Geist — drawn to stay legible at
      interface sizes — deliberately does not do. Geist stays behind it, so a
      blocked webfont falls back to the face the rest of the page is set in
      rather than to the system stack. */
@@ -65,8 +68,6 @@
   line-height: 0.93;
   letter-spacing: -0.045em;
   color: var(--heading);
-  /* Balanced lines even out a three-line statement into a block; the break is
-     left to the measure. */
   text-wrap: balance;
 }
 
@@ -77,32 +78,42 @@
   color: #FF2E93;
 }
 
-/* Held to six of the twelve columns, so it reads as a column of text placed
-   under the statement rather than a line running the width of it. */
 .page[data-page="product"] .hero-lattice__lead {
-  grid-column: 1 / 7;
   /* Set with the statement it sits under, so the fold reads as one voice. */
   font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
                "Segoe UI", Helvetica, Arial, sans-serif;
   margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
-  margin-inline: 0;
-  max-width: none;
   font-size: clamp(1.0625rem, 0.45vw + 0.95rem, 1.3125rem);
   line-height: 1.55;
   color: var(--body);
 }
 
-@media (max-width: 900px) {
-  .page[data-page="product"] .hero-lattice__title,
-  .page[data-page="product"] .hero-lattice__lead {
-    grid-column: 1 / -1;
+@keyframes gz-fold-grow {
+  from { transform: scale(0.86); }
+  to   { transform: scale(1); }
+}
+
+/* Gated: a browser without scroll-driven animations gets the fold at full
+   size, which is the state it ends in anyway. Nothing half-drawn is left on
+   screen if the feature is missing. */
+@supports (animation-timeline: scroll(root block)) {
+  .page[data-page="product"] .hero-lattice__inner {
+    transform-origin: 50% 0;
+    animation: gz-fold-grow linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 30vh;
   }
-  /* Full width here is the column, not the measure: at 860 that ran the
-     sentence to 774px, about 95 characters a line. The body measure caps it. */
-  .page[data-page="product"] .hero-lattice__lead {
-    max-width: var(--measure-body);
+
+  /* Type that changes size as the page moves is motion. Anyone who has asked
+     for less of it gets the fold at its full size, still. */
+  @media (prefers-reduced-motion: reduce) {
+    .page[data-page="product"] .hero-lattice__inner {
+      animation: none;
+      transform: none;
+    }
   }
 }
+
 
 /* ==========================================================================
    02 · #layers — the capabilities ledger
