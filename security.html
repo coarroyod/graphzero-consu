@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@500&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/security.css?v=54">
+<link rel="stylesheet" href="assets/v3/security.css?v=55">
 <link rel="stylesheet" href="assets/footer.css?v=10">
 <link rel="stylesheet" href="assets/header.css?v=4">
 <link rel="stylesheet" href="assets/mobile.css?v=4">
@@ -257,19 +257,56 @@
       <p class="gzs-wrap gzs-combi">Combinations are supported: routine tasks on self-hosted models, sensitive content stripped before anything external.</p>
     </section>
 
-    <!-- 07 · Assurance -->
-    <section class="gzs-sec gzs-sec--last" id="assurance">
+    <!-- 07 · Assurance
+         The three certifications you can put a mark to are cards, each with
+         its artwork; the three that are assessments or still on the way sit
+         under them as a table. Status is a word in mono with a dot beside it
+         where the work is live, rather than a chip. On the woven white the
+         About and Early Access pages close on. -->
+    <section class="gzs-sec gzs-sec--last gzs-assure" id="assurance">
       <div class="gzs-wrap">
         <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><defs><linearGradient id="gzs-g8" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="gzs-g8-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#gzs-g8-c)" fill="url(#gzs-g8)"></rect></svg>07 &mdash; Assurance</p>
         <h2 class="gzs-h2">Certifications &amp; assessments.</h2>
       </div>
-      <ul class="gzs-wrap gzs-certs">
-        <li class="gzs-cert"><h3 class="gzs-cert__name">GDPR</h3><p class="gzs-cert__body">DPA, sub-processor list, TOMs and transfer impact assessment available on request.</p><span class="gzs-cert__cell"><span class="gzs-chip gzs-chip--solid">Compliant</span></span></li>
-        <li class="gzs-cert"><h3 class="gzs-cert__name">EU AI Act</h3><p class="gzs-cert__body">You always know you&rsquo;re talking to AI, and nothing here ranks or profiles people.</p><span class="gzs-cert__cell"><span class="gzs-chip gzs-chip--solid">Compliant by design</span></span></li>
-        <li class="gzs-cert"><h3 class="gzs-cert__name">ISO 27001</h3><p class="gzs-cert__body">Certification underway; our security management system follows the standard today.</p><span class="gzs-cert__cell"><span class="gzs-chip gzs-chip--pink">In progress</span></span></li>
-        <li class="gzs-cert"><h3 class="gzs-cert__name">ISO 42001 &mdash; AI management</h3><p class="gzs-cert__body">In preparation, following 27001.</p><span class="gzs-cert__cell"><span class="gzs-chip gzs-chip--quiet">In preparation</span></span></li>
-        <li class="gzs-cert"><h3 class="gzs-cert__name">CASA</h3><p class="gzs-cert__body">Google application security assessment, for Google Workspace connections.</p><span class="gzs-cert__cell"><span class="gzs-chip gzs-chip--pink">In progress</span></span></li>
-        <li class="gzs-cert"><h3 class="gzs-cert__name">Penetration testing</h3><p class="gzs-cert__body">Independent, before each major release; summary under NDA.</p><span class="gzs-cert__cell"><span class="gzs-chip gzs-chip--quiet">Per release</span></span></li>
+      <ul class="gzs-wrap gzs-tiles">
+        <li class="gzs-tile">
+          <span class="gzs-tile__rule" aria-hidden="true"></span>
+          <img class="gzs-tile__art" src="assets/media/gdpr.png" alt="" width="640" height="631" loading="lazy" decoding="async">
+          <h3 class="gzs-tile__name">GDPR</h3>
+          <p class="gzs-status">Compliant</p>
+          <p class="gzs-tile__body">DPA, sub-processor list, TOMs and transfer impact assessment available on request.</p>
+        </li>
+        <li class="gzs-tile">
+          <span class="gzs-tile__rule" aria-hidden="true"></span>
+          <img class="gzs-tile__art" src="assets/media/eu-ai-act.png" alt="" width="640" height="631" loading="lazy" decoding="async">
+          <h3 class="gzs-tile__name">EU AI Act</h3>
+          <p class="gzs-status">Compliant by design</p>
+          <p class="gzs-tile__body">You always know you&rsquo;re talking to AI, and nothing here ranks or profiles people.</p>
+        </li>
+        <li class="gzs-tile">
+          <span class="gzs-tile__rule" aria-hidden="true"></span>
+          <img class="gzs-tile__art" src="assets/media/iso-27001.png" alt="" width="557" height="640" loading="lazy" decoding="async">
+          <h3 class="gzs-tile__name">ISO 27001</h3>
+          <p class="gzs-status"><span class="gzs-status__dot gzs-status__dot--live" aria-hidden="true"></span>In progress</p>
+          <p class="gzs-tile__body">Certification underway; our security management system follows the standard today.</p>
+        </li>
+      </ul>
+      <ul class="gzs-wrap gzs-rows">
+        <li class="gzs-row">
+          <h3 class="gzs-row__name">ISO 42001 &mdash; AI management</h3>
+          <p class="gzs-row__body">In preparation, following 27001.</p>
+          <p class="gzs-status"><span class="gzs-status__dot gzs-status__dot--quiet" aria-hidden="true"></span>In preparation</p>
+        </li>
+        <li class="gzs-row">
+          <h3 class="gzs-row__name">CASA</h3>
+          <p class="gzs-row__body">Google application security assessment, for Google Workspace connections.</p>
+          <p class="gzs-status"><span class="gzs-status__dot gzs-status__dot--live" aria-hidden="true"></span>In progress</p>
+        </li>
+        <li class="gzs-row">
+          <h3 class="gzs-row__name">Penetration testing</h3>
+          <p class="gzs-row__body">Independent, before each major release; summary under NDA.</p>
+          <p class="gzs-status"><span class="gzs-status__dot gzs-status__dot--quiet" aria-hidden="true"></span>Per release</p>
+        </li>
       </ul>
     </section>
 

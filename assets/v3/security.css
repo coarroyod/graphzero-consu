@@ -292,6 +292,123 @@
   box-shadow: inset 0 0 0 1px #FF6A00;
 }
 
+/* ---- 07 · certifications and assessments ----
+   Three cards with their artwork for the schemes that have a mark, a table
+   for the three that do not. Container is the page's 1152, not the file's
+   1200, so the section keeps the left edge every section above it has. */
+.page[data-page="security"] .gzs-assure {
+  background-color: #FFFFFF;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
+}
+.page[data-page="security"] .gzs-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 44px auto 0;
+  padding: 0;
+  list-style: none;
+}
+.page[data-page="security"] .gzs-tile {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 32px 32px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .16);
+  transition: transform 250ms cubic-bezier(.2,.6,.2,1), box-shadow 150ms cubic-bezier(.2,.6,.2,1);
+}
+.page[data-page="security"] .gzs-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .26);
+}
+.page[data-page="security"] .gzs-tile__rule {
+  display: block;
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #FF6A00, #FF2E93);
+  margin-bottom: 22px;
+}
+.page[data-page="security"] .gzs-tile__art {
+  display: block;
+  height: 78px;
+  width: auto;
+  align-self: flex-start;
+  object-fit: contain;
+}
+.page[data-page="security"] .gzs-tile__name {
+  margin: 24px 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--gzs-ink);
+}
+.page[data-page="security"] .gzs-tile__body {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--gzs-muted);
+  text-wrap: pretty;
+}
+/* Status is a word, not a chip: mono, tracked, with a dot beside it where the
+   work is live. */
+.page[data-page="security"] .gzs-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gzs-muted);
+  white-space: nowrap;
+}
+.page[data-page="security"] .gzs-status__dot { width: 6px; height: 6px; border-radius: 999px; flex: 0 0 auto; }
+.page[data-page="security"] .gzs-status__dot--live { background: #FF2E93; }
+.page[data-page="security"] .gzs-status__dot--quiet { background: rgba(23, 35, 43, .28); }
+
+.page[data-page="security"] .gzs-rows {
+  margin: 20px auto 0;
+  padding: 0;
+  list-style: none;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .16);
+  overflow: hidden;
+}
+.page[data-page="security"] .gzs-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 150px;
+  gap: 32px;
+  align-items: center;
+  padding: 24px 32px;
+  box-shadow: inset 0 -1px 0 rgba(23, 35, 43, .1);
+  transition: background 150ms cubic-bezier(.2,.6,.2,1);
+}
+.page[data-page="security"] .gzs-row:hover { background: rgba(23, 35, 43, .03); }
+.page[data-page="security"] .gzs-row__name { margin: 0; font-size: 17px; font-weight: 500; letter-spacing: -0.02em; color: var(--gzs-ink); }
+.page[data-page="security"] .gzs-row__body { margin: 0; font-size: 15px; line-height: 1.55; color: var(--gzs-muted); text-wrap: pretty; }
+.page[data-page="security"] .gzs-row .gzs-status { margin: 0; }
+
+@media (max-width: 900px) {
+  .page[data-page="security"] .gzs-tiles { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  /* Name and status share the first line, the body runs under both. */
+  .page[data-page="security"] .gzs-row { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 20px; padding: 20px 24px; }
+  .page[data-page="security"] .gzs-row__body { grid-column: 1 / -1; }
+  .page[data-page="security"] .gzs-status { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="security"] .gzs-tile, .page[data-page="security"] .gzs-row { transition: none; }
+  .page[data-page="security"] .gzs-tile:hover { transform: none; }
+}
+
 /* ---- 03 · the two governance panels ---- */
 .page[data-page="security"] .gzs-panel {
   padding: 34px 36px 38px;
@@ -352,50 +469,6 @@
   color: var(--gzs-muted);
 }
 
-/* ---- 07 · the certification table ---- */
-/* The kit moves the grid up to the container and drops the row box, so the
-   three columns are one track set across all six entries rather than six
-   independent ones — which is what stops the names, bodies and chips from
-   each aligning to their own row. The <li> steps out of the box tree to let
-   its three children become cells; the row hover goes with the row. */
-.page[data-page="security"] .gzs-certs {
-  display: grid;
-  grid-template-columns: 1.1fr 1.5fr 200px;
-  margin: 40px auto 0;
-  padding: 0;
-  list-style: none;
-  border-radius: 16px;
-  box-shadow: var(--gzs-ring);
-  overflow: hidden;
-}
-.page[data-page="security"] .gzs-cert { display: contents; }
-.page[data-page="security"] .gzs-cert__name,
-.page[data-page="security"] .gzs-cert__body,
-.page[data-page="security"] .gzs-cert__cell {
-  box-shadow: inset 0 -1px 0 rgba(23, 35, 43, .08);
-}
-.page[data-page="security"] .gzs-cert__name { margin: 0; padding: 22px 24px 22px 28px; font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--gzs-ink); }
-.page[data-page="security"] .gzs-cert__body { margin: 0; padding: 22px 24px 22px 0; font-size: 14px; line-height: 1.45; color: var(--gzs-muted); text-wrap: pretty; }
-.page[data-page="security"] .gzs-cert__cell { padding: 22px 28px 22px 0; display: flex; justify-content: flex-end; align-items: center; }
-.page[data-page="security"] .gzs-chip {
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 999px;
-}
-.page[data-page="security"] .gzs-chip--solid { background: var(--gzs-ink); color: #ffffff; }
-.page[data-page="security"] .gzs-chip--pink {
-  background: rgba(255, 46, 147, .08);
-  color: var(--gzs-muted);
-  box-shadow: inset 0 0 0 1px var(--gzs-pink);
-}
-.page[data-page="security"] .gzs-chip--quiet {
-  background: rgba(23, 35, 43, .05);
-  color: var(--gzs-muted);
-  box-shadow: var(--gzs-ring);
-}
-
 /* ---- scroll-driven bits ----
    Both are gated on support. Ungated, a browser without scroll timelines runs
    gz-progress on the document timeline and leaves a 2px bar sitting at full
@@ -436,12 +509,6 @@
 }
 @media (max-width: 900px) {
   .page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  /* Two tracks: the name and its chip on one line, the body under both. The
-     name loses its bottom rule so one entry reads as one block. */
-  .page[data-page="security"] .gzs-certs { grid-template-columns: 1fr auto; }
-  .page[data-page="security"] .gzs-cert__name { grid-column: 1; padding: 20px 12px 6px 24px; box-shadow: none; }
-  .page[data-page="security"] .gzs-cert__cell { grid-column: 2; padding: 20px 24px 6px 0; align-items: start; box-shadow: none; }
-  .page[data-page="security"] .gzs-cert__body { grid-column: 1 / -1; padding: 0 24px 20px; }
 }
 /* The file has no media queries. At 1152 the marks need 353px against the
    right column's 506; by 980 the column is under 350 and they would start
@@ -461,7 +528,6 @@
   .page[data-page="security"] .gzs-panel { padding: 26px 24px 30px; }
   .page[data-page="security"] .gzs-card,
   .page[data-page="security"] .gzs-card--sm { padding: 24px 24px 28px; }
-  .page[data-page="security"] .gzs-cert { padding: 20px 22px; }
   .page[data-page="security"] .gzs-marks { gap: 16px; }
   .page[data-page="security"] .gzs-marks__img { height: 88px; }
 }
@@ -469,8 +535,6 @@
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="security"] .gzs-reveal,
   .page[data-page="security"] .gzs-progress { animation: none; }
-  .page[data-page="security"] .gzs-card,
-  .page[data-page="security"] .gzs-cert { transition: none; }
   .page[data-page="security"] .gzs-card:hover { transform: none; }
 }
 
