@@ -310,6 +310,25 @@
 .page[data-page="security"] .gzs-card--dark:hover { background: #17232B; }
 .page[data-page="security"] .gzs-card--tint:hover { background: rgba(23, 35, 43, .04); }
 
+/* ---- 05 · 06 · the pickers ----
+
+   These two grids are the only cards on the page you are meant to choose
+   between, so their hover says so: the ring goes orange. Same ring — inset,
+   1px, the same box — only the colour changes, and it takes the same easing
+   the wash and the lift already run on so the three move together.
+
+   Scoped to #deployment. The cards in 02 and 07 describe rather than offer,
+   and a chooser's mark on them would be a promise the page does not keep. */
+.page[data-page="security"] #deployment .gzs-card {
+  transition: background 150ms cubic-bezier(.2,.6,.2,1),
+              box-shadow 150ms cubic-bezier(.2,.6,.2,1),
+              transform 250ms cubic-bezier(.2,.6,.2,1);
+}
+.page[data-page="security"] #deployment .gzs-card:hover,
+.page[data-page="security"] #deployment .gzs-card:focus-within {
+  box-shadow: inset 0 0 0 1px #FF6A00;
+}
+
 /* ---- 03 · the two governance panels ---- */
 .page[data-page="security"] .gzs-panel {
   padding: 34px 36px 38px;
