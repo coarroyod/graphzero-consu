@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@500&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/security.css?v=56">
+<link rel="stylesheet" href="assets/v3/security.css?v=57">
 <link rel="stylesheet" href="assets/footer.css?v=10">
 <link rel="stylesheet" href="assets/header.css?v=4">
 <link rel="stylesheet" href="assets/mobile.css?v=4">
@@ -188,28 +188,53 @@
       </div>
     </section>
 
-    <!-- 03 · Governance -->
+    <!-- 03 · Governance
+         The two panels — the case against on a tinted plate, the case for on a
+         white one — become the split the rest of the page runs: the claim and
+         the case against down the left, the three answers numbered down the
+         right. Every word is the same; only the ticks and crosses are gone,
+         since the numbers and the columns now say which side is which. -->
     <section class="gzs-sec" id="governance">
-      <div class="gzs-wrap">
-        <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><defs><linearGradient id="gzs-g4" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="gzs-g4-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#gzs-g4-c)" fill="url(#gzs-g4)"></rect></svg>03 &mdash; Governance</p>
-        <h2 class="gzs-h2">Governance in one place.</h2>
-      </div>
-      <div class="gzs-wrap gzs-grid gzs-grid--2 gzs-grid--tight">
-        <div class="gzs-panel gzs-panel--muted">
-          <p class="gzs-panel__label">Without a knowledge layer</p>
-          <ul class="gzs-xlist">
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8A8E" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18 M6 6l12 12"></path></svg><span>Employees connect tools to assistants one by one, with whatever rights the OAuth screen granted.</span></li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8A8E" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18 M6 6l12 12"></path></svg><span>Nobody can list what is connected, or to whom.</span></li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8A8E" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18 M6 6l12 12"></path></svg><span>Data becomes accessible that shouldn&rsquo;t be &mdash; and no one notices.</span></li>
-          </ul>
+      <div class="gzs-wrap secsplit">
+        <div class="secsplit__lead">
+          <div>
+            <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><defs><linearGradient id="gzs-g4" x1="0.6" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#FF6A00"></stop><stop offset="0.45" stop-color="#FF6A00"></stop><stop offset="1" stop-color="#FF2E93"></stop></linearGradient><clipPath id="gzs-g4-c"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)"></path></clipPath></defs><rect x="14" y="0" width="36" height="64" clip-path="url(#gzs-g4-c)" fill="url(#gzs-g4)"></rect></svg>03 &mdash; Governance</p>
+            <h2 class="gzs-h2">Governance in one place.</h2>
+          </div>
+          <div class="gzs-case">
+            <p class="gzs-case__label">Without a knowledge layer</p>
+            <ul class="gzs-case__list">
+              <li>Employees connect tools to assistants one by one, with whatever rights the OAuth screen granted.</li>
+              <li>Nobody can list what is connected, or to whom.</li>
+              <li>Data becomes accessible that shouldn&rsquo;t be &mdash; and no one notices.</li>
+            </ul>
+          </div>
         </div>
-        <div class="gzs-panel">
-          <p class="gzs-panel__label gzs-panel__label--ink">With graphzero</p>
-          <ul class="gzs-clist">
-            <li><span class="gzs-tick" aria-hidden="true">&#10003;</span><div><h3 class="gzs-clist__title">One connection per source</h3><p class="gzs-clist__body">HubSpot, Salesforce, AFAS or DATEV is connected once, to graphzero by your admin &mdash; not by every employee into their assistants.</p></div></li>
-            <li><span class="gzs-tick" aria-hidden="true">&#10003;</span><div><h3 class="gzs-clist__title">Scoped centrally</h3><p class="gzs-clist__body">Which teams reach which source, read-only or read-write, is decided by the admin, applied everywhere, changed in one place.</p></div></li>
-            <li><span class="gzs-tick" aria-hidden="true">&#10003;</span><div><h3 class="gzs-clist__title">Full audit trail</h3><p class="gzs-clist__body">What was retrieved, by whom, and when. Every shared answer carries a record of what it rests on.</p></div></li>
-          </ul>
+        <div>
+          <p class="gzs-case__label gzs-case__label--ink">With graphzero</p>
+          <ol class="numlist">
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">01</span>
+          <div>
+            <h3 class="card-title">One connection per source</h3>
+            <p class="card-note">HubSpot, Salesforce, AFAS or DATEV is connected once, to graphzero by your admin &mdash; not by every employee into their assistants.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">02</span>
+          <div>
+            <h3 class="card-title">Scoped centrally</h3>
+            <p class="card-note">Which teams reach which source, read-only or read-write, is decided by the admin, applied everywhere, changed in one place.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">03</span>
+          <div>
+            <h3 class="card-title">Full audit trail</h3>
+            <p class="card-note">What was retrieved, by whom, and when. Every shared answer carries a record of what it rests on.</p>
+          </div>
+        </li>
+          </ol>
         </div>
       </div>
     </section>

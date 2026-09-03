@@ -199,6 +199,45 @@
 .page[data-page="security"] .numlist__num { color: #FF6A00; }
 .page[data-page="security"] .secsplit .gzs-intro { margin: 0; }
 
+/* ---- 03 · the case against, under the claim ----
+   A quiet label in the register's own mono, then the three points as a plain
+   list on the page's muted ink — no crosses; the column says which side this
+   is. The same label heads the register on the right, in ink. */
+.page[data-page="security"] .gzs-case__label {
+  margin: 0 0 14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gzs-muted);
+}
+.page[data-page="security"] .gzs-case__label--ink { color: var(--gzs-ink); font-weight: 500; }
+.page[data-page="security"] .gzs-case__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  max-width: 44ch;
+}
+.page[data-page="security"] .gzs-case__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gzs-muted);
+  text-wrap: pretty;
+}
+.page[data-page="security"] .gzs-case__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 8px;
+  height: 1px;
+  background: rgba(23, 35, 43, .4);
+}
+
 /* ---- cards ---- */
 .page[data-page="security"] .gzs-grid {
   display: grid;
@@ -210,7 +249,6 @@
 .page[data-page="security"] .gzs-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .page[data-page="security"] .gzs-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.page[data-page="security"] .gzs-grid--tight { margin-top: 40px; }
 .page[data-page="security"] .gzs-grid--near { margin-top: 36px; }
 
 .page[data-page="security"] .gzs-card {
@@ -417,59 +455,6 @@
   .page[data-page="security"] .gzs-tile:hover { transform: none; }
 }
 
-/* ---- 03 · the two governance panels ---- */
-.page[data-page="security"] .gzs-panel {
-  padding: 34px 36px 38px;
-  border-radius: 16px;
-  box-shadow: var(--gzs-ring);
-}
-.page[data-page="security"] .gzs-panel--muted { background: rgba(23, 35, 43, .03); }
-.page[data-page="security"] .gzs-panel__label {
-  margin: 0;
-  font-size: 12px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--gzs-quiet);
-}
-.page[data-page="security"] .gzs-panel__label--ink { color: var(--gzs-ink); font-weight: 500; }
-.page[data-page="security"] .gzs-xlist,
-.page[data-page="security"] .gzs-clist {
-  display: flex;
-  flex-direction: column;
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.page[data-page="security"] .gzs-xlist { gap: 14px; }
-.page[data-page="security"] .gzs-clist { gap: 20px; }
-.page[data-page="security"] .gzs-xlist li,
-.page[data-page="security"] .gzs-clist li { display: flex; align-items: flex-start; }
-.page[data-page="security"] .gzs-xlist li { gap: 12px; }
-.page[data-page="security"] .gzs-clist li { gap: 14px; }
-.page[data-page="security"] .gzs-xlist svg { flex: 0 0 auto; margin-top: 2px; }
-.page[data-page="security"] .gzs-xlist span { font-size: 15px; line-height: 1.45; color: var(--gzs-muted); }
-.page[data-page="security"] .gzs-tick {
-  flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  border-radius: 6px;
-  background: var(--gzs-ink);
-  color: #ffffff;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.page[data-page="security"] .gzs-clist__title { margin: 0; font-size: 16px; font-weight: 500; color: var(--gzs-ink); }
-.page[data-page="security"] .gzs-clist__body {
-  margin: 4px 0 0;
-  font-size: 15px;
-  line-height: 1.45;
-  color: var(--gzs-muted);
-  text-wrap: pretty;
-}
-
 .page[data-page="security"] .gzs-combi {
   max-width: 1152px;
   margin: 18px auto 0;
@@ -533,7 +518,6 @@
   .page[data-page="security"] .gzs-grid--2,
   .page[data-page="security"] .gzs-grid--3,
   .page[data-page="security"] .gzs-grid--4 { grid-template-columns: minmax(0, 1fr); }
-  .page[data-page="security"] .gzs-panel { padding: 26px 24px 30px; }
   .page[data-page="security"] .gzs-card,
   .page[data-page="security"] .gzs-card--sm { padding: 24px 24px 28px; }
   .page[data-page="security"] .gzs-marks { gap: 16px; }
