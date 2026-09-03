@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/security.css?v=50">
+<link rel="stylesheet" href="assets/v3/security.css?v=52">
 <link rel="stylesheet" href="assets/footer.css?v=10">
 <link rel="stylesheet" href="assets/header.css?v=4">
 <link rel="stylesheet" href="assets/mobile.css?v=4">
@@ -107,47 +107,89 @@
 
     <div class="gzs-rule" aria-hidden="true"></div>
 
-    <!-- 01 · Ownership -->
-    <section class="gzs-sec gzs-sec--dark" id="ownership">
-      <div class="gzs-wrap gzs-split">
-        <div>
-          <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF6A00"></path></svg>01 &mdash; Ownership</p>
-          <h2 class="gzs-h2">Your knowledge stays yours.</h2>
+    <!-- 01 · Ownership
+         The three commitments as a numbered register beside the claim — the
+         site's own .secsplit and .numlist, the layout the reference page runs.
+         Off the navy band: the reference sets both of these sections on
+         white, and the three cards that stood here are gone with the band. -->
+    <section class="gzs-sec" id="ownership">
+      <div class="gzs-wrap secsplit">
+        <div class="secsplit__lead">
+          <div>
+            <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg>01 &mdash; Ownership</p>
+            <h2 class="gzs-h2">Your knowledge stays yours.</h2>
+          </div>
+          <p class="gzs-intro">The knowledge base is an asset you own, not a service you rent.</p>
         </div>
-        <p class="gzs-intro">The knowledge base is an asset you own, not a service you rent. No embeddings-only store, no vendor-held copy, no export project.</p>
+        <ol class="numlist">
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">01</span>
+          <div>
+            <h3 class="card-title">No data training</h3>
+            <p class="card-note">Your data is never used to train models. Guaranteed in writing, in every contract.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">02</span>
+          <div>
+            <h3 class="card-title">Full export, any time</h3>
+            <p class="card-note">The knowledge base leaves in open formats, readable by people: pages, facts and sources, not embeddings.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">03</span>
+          <div>
+            <h3 class="card-title">Deletion propagates</h3>
+            <p class="card-note">When you remove a source, everything derived from it is removed as well: summaries, answers, and graph entries.</p>
+          </div>
+        </li>
+        </ol>
       </div>
-      <ul class="gzs-wrap gzs-grid gzs-grid--3">
-        <li class="gzs-card gzs-card--onDark gzs-reveal"><p class="gzs-card__n">01</p><h3 class="gzs-card__title">No data training</h3><p class="gzs-card__body">Your data is never used to train models. Guaranteed in writing, in every contract.</p></li>
-        <li class="gzs-card gzs-card--onDark gzs-reveal"><p class="gzs-card__n">02</p><h3 class="gzs-card__title">Full export, any time</h3><p class="gzs-card__body">The knowledge base leaves in open formats, readable by people: pages, facts and sources, not embeddings.</p></li>
-        <li class="gzs-card gzs-card--onDark gzs-reveal"><p class="gzs-card__n">03</p><h3 class="gzs-card__title">Deletion propagates</h3><p class="gzs-card__body">Remove a source and everything derived from it goes too &mdash; summaries, answers, graph entries.</p></li>
-      </ul>
     </section>
 
-    <!-- 02 · Inference control -->
+    <!-- 02 · Inference control
+         Same register: four numbered rows against the claim, the icons that
+         headed each card gone with the cards. -->
     <section class="gzs-sec" id="inference-control">
-      <div class="gzs-wrap">
-        <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg>02 &mdash; Inference control</p>
-        <h2 class="gzs-h2 gzs-h2--wide">Sensitive data never reaches a model that shouldn&rsquo;t see it.</h2>
-        <p class="gzs-intro gzs-intro--under">Most AI tools send whatever they retrieve into the prompt. graphzero decides what a model may see <em>before</em> inference runs.</p>
+      <div class="gzs-wrap secsplit">
+        <div class="secsplit__lead">
+          <div>
+            <p class="gzs-eyebrow"><svg class="gzs-mark" viewBox="14 0 36 64" aria-hidden="true"><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(20 32 32)" fill="#FF6A00"></path><path d="M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z" transform="rotate(200 32 32)" fill="#FF2E93"></path></svg>02 &mdash; Inference control</p>
+            <h2 class="gzs-h2">Sensitive data never reaches a model that shouldn&rsquo;t see it.</h2>
+          </div>
+          <p class="gzs-intro">Most AI tools send whatever they retrieve into the prompt. graphzero decides what a model may see before inference runs.</p>
+        </div>
+        <ol class="numlist">
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">01</span>
+          <div>
+            <h3 class="card-title">Sensitive-data masking</h3>
+            <p class="card-note">Fields marked sensitive &mdash; salaries, IBANs, health data &mdash; never appear in a prompt. The system can use them to find the answer; the model never sees them.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">02</span>
+          <div>
+            <h3 class="card-title">Sensitive-data rerouting</h3>
+            <p class="card-note">Content too sensitive for external inference is processed by an EU-hosted or self-hosted model instead. Decided per query, from how the data is tagged.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">03</span>
+          <div>
+            <h3 class="card-title">Permissions at fact level</h3>
+            <p class="card-note">Access rights from SharePoint, Drive and your other sources hold inside graphzero. Every answer is computed against the asker&rsquo;s rights, and a group channel sees only what every member may see.</p>
+          </div>
+        </li>
+        <li class="numlist__item">
+          <span class="numlist__num" aria-hidden="true">04</span>
+          <div>
+            <h3 class="card-title">Derived knowledge inherits its sources</h3>
+            <p class="card-note">A summary built from three documents is visible only to someone who may open all three. Revoke one source, and the answers built on it follow.</p>
+          </div>
+        </li>
+        </ol>
       </div>
-      <ul class="gzs-wrap gzs-grid gzs-grid--2">
-        <li class="gzs-card gzs-card--dark gzs-reveal">
-          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24 M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68 M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61 M2 2l20 20"></path></svg><span class="gzs-card__n">01</span></div>
-          <h3 class="gzs-card__title">Sensitive-data masking</h3><p class="gzs-card__body">Fields marked sensitive &mdash; salaries, IBANs, health data &mdash; never appear in a prompt. The system can use them to find the answer; the model never sees them.</p>
-        </li>
-        <li class="gzs-card gzs-card--dark gzs-reveal">
-          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8 M21 3v5h-5 M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16 M8 16H3v5"></path></svg><span class="gzs-card__n">02</span></div>
-          <h3 class="gzs-card__title">Sensitive-data rerouting</h3><p class="gzs-card__body">Content too sensitive for external inference is processed by an EU-hosted or self-hosted model instead. Decided per query, from how the data is tagged.</p>
-        </li>
-        <li class="gzs-card gzs-card--dark gzs-reveal">
-          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 17.4A2 2 0 0 0 2 18.8V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.2a2 2 0 0 0 1.4-.6l.8-.8a6.5 6.5 0 1 0-4-4Z M16.5 6.7a.8.8 0 1 0 1.6 0 .8.8 0 1 0-1.6 0"></path></svg><span class="gzs-card__n">03</span></div>
-          <h3 class="gzs-card__title">Permissions at fact level</h3><p class="gzs-card__body">Rights from SharePoint, Drive and your other sources hold inside graphzero. Every answer is computed against the asker&rsquo;s rights; a group channel sees only what every member may see.</p>
-        </li>
-        <li class="gzs-card gzs-card--dark gzs-reveal">
-          <div class="gzs-card__head"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z M2 12l8.6 3.91a2 2 0 0 0 1.66 0L21 12 M2 17l8.6 3.91a2 2 0 0 0 1.66 0L21 17"></path></svg><span class="gzs-card__n">04</span></div>
-          <h3 class="gzs-card__title">Derived knowledge inherits its sources</h3><p class="gzs-card__body">A summary built from three documents is visible only to someone who may open all three. Revoke one source, and the answers built on it follow.</p>
-        </li>
-      </ul>
     </section>
 
     <!-- 03 · Governance -->

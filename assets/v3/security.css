@@ -178,13 +178,6 @@
   color: var(--gzs-ink);
   text-wrap: balance;
 }
-.page[data-page="security"] .gzs-h2--wide { max-width: 30ch; }
-.page[data-page="security"] .gzs-split {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 64px;
-  align-items: start;
-}
 .page[data-page="security"] .gzs-intro {
   margin: 0;
   max-width: 58ch;
@@ -193,8 +186,17 @@
   color: var(--gzs-muted);
   text-wrap: pretty;
 }
-.page[data-page="security"] .gzs-intro--under { margin: 20px 0 0; max-width: 62ch; }
 .page[data-page="security"] .gzs-sub { margin-top: 56px; }
+
+/* ---- 01 · 02 · the numbered registers ----
+
+   Sections 01 and 02 run the site's own .secsplit and .numlist, the layout the
+   reference page runs. Two things are this page's: the numerals take the
+   orange rather than the base sheet's muted grey, and the eyebrow and claim sit
+   together as one grid child so the 18px between them is the page's own rather
+   than the split's 24. */
+.page[data-page="security"] .numlist__num { color: #FF6A00; }
+.page[data-page="security"] .secsplit .gzs-intro { margin: 0; }
 
 /* ---- cards ---- */
 .page[data-page="security"] .gzs-grid {
@@ -227,7 +229,6 @@
   height: 100%;
   box-sizing: border-box;
 }
-.page[data-page="security"] .gzs-card__head { display: flex; align-items: center; gap: 14px; }
 .page[data-page="security"] .gzs-card__n {
   margin: 0;
   font-size: 12px;
@@ -268,46 +269,7 @@
   min-height: 30px;
   color: var(--gzs-quiet);
 }
-
-/* ---- 01 · the band, and the three presets the kit's data carries ----
-
-   The kit stops colouring these per-section and starts colouring them per
-   card, from three presets in its logic: `dark` (navy fill, no ring, white
-   ink, accent icon), `tint` (a 4% navy wash inside the ring) and `light`
-   (transparent). 01 also becomes a navy section rather than a white one.
-
-   Cards on a fill lose the background half of the hover — the kit leaves them
-   only the lift, since a wash over a navy card does nothing. */
-.page[data-page="security"] .gzs-sec--dark {
-  background: #17232B;
-  padding-bottom: 96px;
-}
-.page[data-page="security"] .gzs-sec--dark .gzs-eyebrow { color: rgba(255, 255, 255, .55); }
-.page[data-page="security"] .gzs-sec--dark .gzs-h2 { color: #ffffff; }
-.page[data-page="security"] .gzs-sec--dark .gzs-intro { color: rgba(255, 255, 255, .72); }
-
-.page[data-page="security"] .gzs-card--onDark {
-  background: rgba(255, 255, 255, .06);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
-}
-.page[data-page="security"] .gzs-card--dark {
-  background: #17232B;
-  box-shadow: none;
-}
 .page[data-page="security"] .gzs-card--tint { background: rgba(23, 35, 43, .04); }
-
-.page[data-page="security"] .gzs-card--onDark .gzs-card__title,
-.page[data-page="security"] .gzs-card--dark .gzs-card__title { color: #ffffff; }
-.page[data-page="security"] .gzs-card--onDark .gzs-card__body,
-.page[data-page="security"] .gzs-card--dark .gzs-card__body { color: rgba(255, 255, 255, .72); }
-.page[data-page="security"] .gzs-card--onDark .gzs-card__n,
-.page[data-page="security"] .gzs-card--dark .gzs-card__n { color: rgba(255, 255, 255, .55); }
-
-.page[data-page="security"] .gzs-card--onDark:hover,
-.page[data-page="security"] .gzs-card--dark:hover,
-.page[data-page="security"] .gzs-card--tint:hover { background: inherit; transform: translateY(-2px); }
-.page[data-page="security"] .gzs-card--onDark:hover { background: rgba(255, 255, 255, .06); }
-.page[data-page="security"] .gzs-card--dark:hover { background: #17232B; }
 .page[data-page="security"] .gzs-card--tint:hover { background: rgba(23, 35, 43, .04); }
 
 /* ---- 05 · 06 · the pickers ----
@@ -472,7 +434,6 @@
   .page[data-page="security"] .gzs-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
-  .page[data-page="security"] .gzs-split { grid-template-columns: 1fr; gap: 24px; }
   .page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* Two tracks: the name and its chip on one line, the body under both. The
      name loses its bottom rule so one entry reads as one block. */
