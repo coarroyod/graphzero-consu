@@ -75,6 +75,30 @@
   text-wrap: balance;
 }
 
+/* The company's LinkedIn page, under the tagline: the mark, the word and an
+   arrow, in the ink the footer's own lines use. One link, so it is a link and
+   not a nav; it opens in a new tab because it leaves the site. */
+.gz-footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: clamp(0.875rem, 1.4vw, 1.125rem);
+  font-size: clamp(0.9375rem, 0.45vw + 0.82rem, 1.0625rem);
+  line-height: 1.4;
+  font-weight: 500;
+  color: #17232B;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+.gz-footer__social:hover,
+.gz-footer__social:focus-visible { text-decoration: underline; }
+.gz-footer__social-mark {
+  flex: 0 0 auto;
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+}
+
 .gz-footer__nav {
   display: flex;
   flex-wrap: wrap;
@@ -154,6 +178,9 @@
 .page[data-page="early-access"] .gz-footer__nav a,
 .page[data-page="security"] .gz-footer__nav a,
 .page[data-page="about"] .gz-footer__nav a,
+.page[data-page="early-access"] .gz-footer__social,
+.page[data-page="security"] .gz-footer__social,
+.page[data-page="about"] .gz-footer__social,
 .page[data-page="early-access"] .gz-footer__legal,
 .page[data-page="security"] .gz-footer__legal,
 .page[data-page="about"] .gz-footer__legal { color: #17232B; }
