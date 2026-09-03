@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/site.css?v=45">
 <link rel="stylesheet" href="assets/footer.css?v=4">
-<link rel="stylesheet" href="assets/header.css?v=3">
+<link rel="stylesheet" href="assets/header.css?v=4">
 <link rel="stylesheet" href="assets/about.css?v=7">
 <link rel="icon" href="assets/graphzero-favicon.png?v=1" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=1">
@@ -47,10 +47,16 @@
       </div>
     </nav>
 
-    <div class="lang" role="group" aria-label="Language">
-      <button class="lang__opt" type="button" data-lang="en" aria-current="true">EN</button>
-      <button class="lang__opt" type="button" data-lang="de">DE</button>
-      <button class="lang__opt" type="button" data-lang="nl">NL</button>
+    <!-- The language set and the call to action are one group at the bar's
+         right end, which is what puts the navigation next to the wordmark
+         rather than centred between them. -->
+    <div class="site-header__end">
+      <div class="lang" role="group" aria-label="Language">
+        <button class="lang__opt" type="button" data-lang="en" aria-current="true">EN</button>
+        <button class="lang__opt" type="button" data-lang="de">DE</button>
+        <button class="lang__opt" type="button" data-lang="nl">NL</button>
+      </div>
+      <a class="site-header__cta" href="early-access.html">Become a design partner &rarr;</a>
     </div>
   </header>
 

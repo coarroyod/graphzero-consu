@@ -15,7 +15,7 @@
   /* Was a solid var(--page). Now a translucent ground with the page blurred
      through it, so the bar reads as sitting on the page rather than as a panel
      laid over it. */
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: saturate(1.8) blur(14px);
   backdrop-filter: saturate(1.8) blur(14px);
   border-bottom: 1px solid transparent;
@@ -24,7 +24,6 @@
     background-color 240ms ease,
     border-color 240ms ease,
     backdrop-filter 240ms ease;
-  will-change: transform;
 }
 
 /* At rest against the top of the page the bar carries nothing at all — no
@@ -39,7 +38,7 @@
 
 /* Once the page has moved under it, the ground and a hairline come in. */
 .page .site-header[data-hdr="pinned"] {
-  border-bottom-color: rgba(23, 35, 43, 0.07);
+  border-bottom-color: rgba(23, 35, 43, 0.12);
 }
 
 /* Going down, it leaves. position: sticky keeps its space in flow, so the
@@ -53,9 +52,15 @@
    the page is showing behind. */
 .page .site-header[data-nav-open="true"] {
   transform: none;
-  background: rgba(255, 255, 255, 0.96);
-  -webkit-backdrop-filter: saturate(1.8) blur(14px);
-  backdrop-filter: saturate(1.8) blur(14px);
+  background: #ffffff;
+  /* No blur while the sheet is open, and no will-change on the bar at all.
+     Both of those establish a containing block for position: fixed, and the
+     sheet is a fixed child of this element — anchored to a 52px bar instead of
+     to the viewport, it collapsed to a 72px box and its rows spilled over the
+     page with no ground under them. The bar is solid here anyway, so there is
+     nothing behind it left to blur. */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* A bar that comes and goes is motion. Anyone who has asked for less of it
@@ -99,4 +104,122 @@
      other element on the page aligns to. Pulled back by exactly that much:
      178/2012 of the rendered width, and the width is height x 2012/780. */
   margin-left: calc(var(--logo-h) * -0.2283);
+}
+
+
+/* ==========================================================================
+   The bar's own line — Header 11b
+
+   The navigation moves off the centre of the bar and sits directly beside the
+   wordmark, as one group; the language set and a call to action make the group
+   at the other end. Each link becomes a pill, and the page you are on is the
+   one that is filled rather than the one that is coloured.
+
+   That last part is worth naming: the current item used to be marked in the
+   orange, which measures 2.87:1 on white — a nav label is body text and wanted
+   4.5. Filled, it is #17232B at 16.01:1 and the state reads more plainly
+   besides. The same goes for the language set, which loses its orange chip.
+
+   Wrapped in min-width so it cannot reach the phone bar: this sheet loads
+   after both site stylesheets, and an unwrapped rule here would outrank the
+   sheet layout their max-width:900px blocks set up.
+
+   One deviation from the file, deliberate: it puts the bar on a flat 28px of
+   side padding, which on a 1440 artboard sits the wordmark near the edge of
+   the screen. The site aligns the bar to the column the page's own content
+   runs on — an earlier fix, without which the wordmark and the language set
+   drift 136px apart from the page by 1600px wide. That alignment stays.
+   ========================================================================== */
+@media (min-width: 901px) {
+  .page .site-header { gap: 22px; }
+
+  /* Was margin-inline: auto, which is what centred it. */
+  .page .site-nav { margin-inline: 0; gap: 6px; }
+
+  .page .site-nav > a {
+    padding: 8px 9px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: #59666B;
+    transition: color 150ms cubic-bezier(.2, .6, .2, 1),
+                background 150ms cubic-bezier(.2, .6, .2, 1);
+  }
+  .page .site-nav > a:hover,
+  .page .site-nav > a:focus-visible { color: #17232B; }
+  .page .site-nav > a[aria-current] {
+    font-weight: 500;
+    color: #17232B;
+    background: rgba(23, 35, 43, .06);
+  }
+
+  .page .site-header__end {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* 12px on .06em, and no chip under the live one — the group is a set of
+     three labels where one is inked, not a control with a selected state.
+     The padding is not the file's: it draws the options with none at all,
+     which leaves a 20x15 target on a real button. This keeps the 10px the
+     file sets between them while giving each one a 24px box to hit. */
+  .page .lang { gap: 2px; }
+  .page .lang__opt {
+    padding: 6px 4px;
+    font-size: 12px;
+    letter-spacing: .06em;
+    color: #59666B;
+    background: none;
+  }
+  .page .lang__opt:hover,
+  .page .lang__opt:focus-visible { color: #17232B; }
+  .page .lang__opt[aria-current="true"] {
+    font-weight: 500;
+    color: #17232B;
+    background: none;
+  }
+
+  /* Outlined rather than filled: the bar already carries the page's one
+     filled control on Early Access and About, and a second solid navy pill at
+     the top of every page would outrank them. */
+  .page .site-header__cta {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    white-space: nowrap;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #17232B;
+    box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .28);
+    transition: transform 150ms cubic-bezier(.2, .6, .2, 1),
+                background 150ms cubic-bezier(.2, .6, .2, 1);
+  }
+  .page .site-header__cta:hover,
+  .page .site-header__cta:focus-visible {
+    color: #17232B;
+    text-decoration: none;
+    transform: translateY(-1px);
+    background: rgba(23, 35, 43, .04);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page .site-header__cta:hover,
+    .page .site-header__cta:focus-visible { transform: none; }
+  }
+}
+
+/* On the phone bar the group takes the place the language set held on its own,
+   and the call to action stays out of it: the sheet below already ends on one,
+   and two would be the same ask twice on one screen. */
+@media (max-width: 900px) {
+  .page .site-header__end {
+    order: 2;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  .page .site-header__end .lang { order: 0; margin-left: 0; }
+  .page .site-header__cta { display: none; }
 }
