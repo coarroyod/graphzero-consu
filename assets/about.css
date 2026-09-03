@@ -68,6 +68,8 @@
   margin: 28px 0 0;
   /* The Early Access hero's setting exactly, so the two folds share one
      display type. */
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   max-width: 13ch;
   font-size: clamp(3rem, 6.2vw, 5rem);
   line-height: 0.88;
