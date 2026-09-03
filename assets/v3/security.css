@@ -454,8 +454,17 @@
     animation-timeline: view();
     animation-range: entry 4% cover 26%;
   }
+  /* The deployment cards are the one place a reveal and a hover both want
+     the transform. An animation's value outranks the hover rule, so with the
+     slide in the reveal the four cards took the orange ring but never lifted
+     the way the inference cards beside them do. They keep the fade and give
+     up the 14px slide, and the lift is theirs again. */
+  .page[data-page="security"] #deployment .gzs-reveal {
+    animation-name: gzs-reveal-fade;
+  }
 }
 @keyframes gzs-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes gzs-reveal-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---- responsive ----
    The kit has none. Four columns at 1152 is a 264px card; at 900 it is 195px
