@@ -388,35 +388,27 @@
   color: var(--heading, #17232B);
 }
 
-/* ---- the thread, alive ----
-   Like a night side of the planet from orbit: nothing moves much, but nothing
-   is still. Every node breathes its opacity up by a third and back on a slow
-   clock of its own — 4.2 to 7.8 seconds, each started somewhere inside its own
-   cycle — so the field shimmers with no rhythm to catch. Two glints travel the
-   spine end to end, one orange, one pink, on different clocks, like traffic
-   on a road seen from above. Opacity rather than size: a node is three to eight
-   pixels, and a size change that small either reads as nothing or as a jolt.
-   The whole thing stops under prefers-reduced-motion. */
-@keyframes gzea-send {
-  0%        { stroke-dashoffset: 12;   opacity: .8; }
-  40%       { stroke-dashoffset: -100; opacity: .8; }
-  40.01%, 100% { stroke-dashoffset: -100; opacity: 0; }
-}
-.page[data-page="early-access"] .gzea-link {
-  animation-name: gzea-send;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-@keyframes gzea-breathe {
-  0%, 100% { opacity: var(--o); }
-  50%      { opacity: min(1, calc(var(--o) + 0.34)); }
+/* ---- the thread, lit ----
+   Seventeen of the thirty-four nodes — every other one down the run — light
+   up: a quick pop to full ink and 1.7x, gone again inside about six tenths of
+   a second, then dark for the rest of a cycle of its own. Cycles run 2.4 to
+   4.6 seconds and each node starts somewhere inside its own, so at any moment
+   three or four are lit, never the same ones, never in step — the tempo of the
+   packets on the About map, not a breath. The other seventeen hold still.
+   Scale on an SVG element animates everywhere; transform-box: fill-box keeps
+   each dot popping about its own centre. Off under prefers-reduced-motion. */
+@keyframes gzea-flash {
+  0%, 100% { opacity: var(--o); transform: scale(1); }
+  7%       { opacity: 1;        transform: scale(1.7); }
+  22%      { opacity: var(--o); transform: scale(1); }
 }
 .page[data-page="early-access"] .gzea-node {
-  animation-name: gzea-breathe;
-  animation-timing-function: ease-in-out;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: gzea-flash;
+  animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .page[data-page="early-access"] .gzea-node { animation: none; opacity: var(--o); }
-  .page[data-page="early-access"] .gzea-link { display: none; }
-  }
+  .page[data-page="early-access"] .gzea-node { animation: none; }
+}
