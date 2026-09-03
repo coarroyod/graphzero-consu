@@ -135,14 +135,25 @@
       style: 'display:block;flex:0 0 auto'
     });
     var defs = svg('defs', {});
-    var grad = svg('linearGradient', { id: id, x1: '0.15', y1: '0', x2: '0.35', y2: '1' });
-    var s0 = svg('stop', { offset: '0', 'stop-color': '#FF6A00' });
-    var s1 = svg('stop', { offset: '1', 'stop-color': '#FF2E93' });
-    grad.appendChild(s0); grad.appendChild(s1); defs.appendChild(grad);
-    blade.appendChild(defs);
+    /* One ramp across the whole mark. Filling each blade separately gave each
+       its own bounding box, so each ran the full orange-to-pink and the pink
+       landed in the middle of the mark. The two blades become a clip and a
+       single rect carries the gradient through them. */
+    var grad = svg('linearGradient', { id: id, x1: '0.6', y1: '0', x2: '0.4', y2: '1' });
+    grad.appendChild(svg('stop', { offset: '0', 'stop-color': '#FF6A00' }));
+    grad.appendChild(svg('stop', { offset: '0.45', 'stop-color': '#FF6A00' }));
+    grad.appendChild(svg('stop', { offset: '1', 'stop-color': '#FF2E93' }));
+    defs.appendChild(grad);
     var d = 'M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z';
-    blade.appendChild(svg('path', { d: d, transform: 'rotate(20 32 32)', fill: 'url(#' + id + ')' }));
-    blade.appendChild(svg('path', { d: d, transform: 'rotate(200 32 32)', fill: 'url(#' + id + ')' }));
+    var clip = svg('clipPath', { id: id + '-clip' });
+    clip.appendChild(svg('path', { d: d, transform: 'rotate(20 32 32)' }));
+    clip.appendChild(svg('path', { d: d, transform: 'rotate(200 32 32)' }));
+    defs.appendChild(clip);
+    blade.appendChild(defs);
+    blade.appendChild(svg('rect', {
+      x: '14', y: '0', width: '36', height: '64',
+      'clip-path': 'url(#' + id + '-clip)', fill: 'url(#' + id + ')'
+    }));
     wrap.appendChild(blade);
     /* The same tuck the lockup uses: the letter starts inside the mark's right
        sidebearing rather than after its box. */
