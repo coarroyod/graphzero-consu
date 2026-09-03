@@ -37,16 +37,27 @@
 }
 
 .gz-footer__mark {
-  display: block;
+  display: flex;
+  align-items: center;
   font-size: clamp(2rem, 4.4vw, 3.25rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
   color: #17232B;
 }
-/* The whole of the orange in the footer: the wordmark's slash, exactly as the
-   header carries it. */
-.gz-footer__slash { color: #FF6A00; }
+/* The mark itself, not a slash standing in for it. Sized in em off the
+   wordmark so the two scale together at every step of the clamp: the blade
+   pair is 36:64 in its own viewBox, and the header sets it at 1.23x the type's
+   size, which is the proportion kept here. The negative margin is the tuck the
+   lockup uses — the word starts inside the mark's right sidebearing rather
+   than after its box. */
+.gz-footer__logo {
+  flex: 0 0 auto;
+  display: block;
+  width: 0.69em;
+  height: 1.227em;
+}
+.gz-footer__word { margin-left: -0.045em; }
 
 .gz-footer__line {
   margin: clamp(0.875rem, 1.6vw, 1.25rem) 0 0;
@@ -132,9 +143,6 @@
 .page[data-page="early-access"] .gz-footer__mark,
 .page[data-page="security"] .gz-footer__mark,
 .page[data-page="about"] .gz-footer__mark,
-.page[data-page="early-access"] .gz-footer__slash,
-.page[data-page="security"] .gz-footer__slash,
-.page[data-page="about"] .gz-footer__slash,
 .page[data-page="early-access"] .gz-footer__line,
 .page[data-page="security"] .gz-footer__line,
 .page[data-page="about"] .gz-footer__line,
@@ -144,6 +152,12 @@
 .page[data-page="early-access"] .gz-footer__legal,
 .page[data-page="security"] .gz-footer__legal,
 .page[data-page="about"] .gz-footer__legal { color: #17232B; }
+
+/* On the orange the pair would half disappear — the orange blade into the
+   ground behind it — so both go solid, which is what the slash did here. */
+.page[data-page="early-access"] .gz-footer__blade,
+.page[data-page="security"] .gz-footer__blade,
+.page[data-page="about"] .gz-footer__blade { fill: #17232B; }
 
 /* With every line at the same solid navy, the white footer's hover — a link
    darkening to ink — has nothing left to do, and these links would answer the
