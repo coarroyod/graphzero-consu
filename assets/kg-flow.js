@@ -299,7 +299,12 @@
      Level 0 is the resting state and it is completely still — hairline boxes,
      hairline joins, no packets. */
   var LEVEL = { ingest: 1, graph: 2, agents: 3 };
-  var level = 0;
+  /* data-kg-flow="auto" is the phone figure on the Product page: there is no
+     module list beside it to point at, and no pointer to point with, so it
+     rests at level 2 — sources feeding the base, the base answering — and runs
+     while it is on screen. Elsewhere the attribute is bare and nothing changes. */
+  var auto = host.getAttribute('data-kg-flow') === 'auto';
+  var level = auto ? LEVEL.graph : 0;
 
   function ringOf(on) { return 'inset 0 0 0 1px ' + (on ? C.accent : C.line); }
 
@@ -401,5 +406,7 @@
       visible = entries[0].isIntersecting;
       if (visible) start(); else stop();
     }, { threshold: 0 }).observe(host);
+  } else if (auto) {
+    start();
   }
 })();

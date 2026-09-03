@@ -233,3 +233,15 @@
    Layout, copy and the figure inside are untouched.
    ========================================================================== */
 .page[data-page="product"] #context-layer::before { content: none; }
+
+/* The phone flow figure. Present in the markup at every width so the script
+   can find it; drawn only below 760px, where mobile.css shows it in place of
+   the wide SVG. The accent it lights with is read off --eu-blue, which this
+   page does not carry, so the page's orange is handed to it here. */
+.page[data-page="product"] .kg-flow--phone {
+  display: none;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  --eu-blue: #FF6A00;
+}

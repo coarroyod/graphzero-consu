@@ -13,10 +13,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css">
 <link rel="stylesheet" href="assets/v3/site.css?v=3">
-<link rel="stylesheet" href="assets/v3/product.css?v=21">
+<link rel="stylesheet" href="assets/v3/product.css?v=22">
 <link rel="stylesheet" href="assets/footer.css?v=10">
 <link rel="stylesheet" href="assets/header.css?v=5">
-<link rel="stylesheet" href="assets/mobile.css?v=4">
+<link rel="stylesheet" href="assets/mobile.css?v=5">
 <link rel="icon" href="assets/graphzero-favicon.png?v=1" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=1">
 </head>
@@ -204,6 +204,11 @@
                         <text class="af-ast-sub" x="952.5" y="386.0" text-anchor="middle">Answers from the</text><text class="af-ast-sub" x="952.5" y="402.0" text-anchor="middle">full, holistic picture</text>
                       </g>
                           </svg>
+          <!-- Phones only: the drawing above is 1100 units wide and unreadable
+               fitted to a phone, so below 760px it gives way to the compact
+               flow figure kg-flow.js draws — the same nine sources, base and
+               four assistants, in one screen. Hidden above 760px. -->
+          <div class="kg-flow kg-flow--phone" data-kg-flow="auto" aria-hidden="true"></div>
         </figure>
       </div>
     </section>
@@ -934,6 +939,7 @@
 </div>
 
 <script src="assets/v3/site.js?v=1" defer></script>
+<script src="assets/kg-flow.js?v=11" defer></script>
 <script src="assets/header.js?v=1" defer></script>
 </body>
 </html>
