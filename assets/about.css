@@ -32,7 +32,7 @@
 /* ---- the blade mark, at the three sizes the kit uses it ---- */
 .page[data-page="about"] .gza-mark { flex: 0 0 auto; width: 10px; height: 18px; display: block; }
 .page[data-page="about"] .gza-eyebrow--mono .gza-mark { width: 11px; height: 20px; }
-.page[data-page="about"] .gza-close__item .gza-mark { width: 14px; height: 25px; margin-top: 10px; }
+.page[data-page="about"] .gza-close__item .gza-mark { width: 14px; height: 25px; margin-top: 6px; }
 
 .page[data-page="about"] .gza-eyebrow {
   display: flex;
@@ -231,17 +231,18 @@
     repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
     repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
     repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
-  padding: 96px 5vw 0;
+  /* Brought onto the Early Access close, which carries the same two
+     statements and the same thread in about half the height. */
+  padding: 64px 5vw 0;
 }
 /* The claim opens on the left, the payoff lands on the right, and the thread
    between them is what carries the argument. The payoff is sized to its own
    text rather than to a column, so its block sits flush right instead of
    floating inside a wider one. */
-.page[data-page="about"] .gza-close__item { display: flex; gap: 18px; align-items: flex-start; max-width: 620px; }
+.page[data-page="about"] .gza-close__item { display: flex; gap: 16px; align-items: flex-start; }
 .page[data-page="about"] .gza-close__item--payoff {
   width: max-content;
-  max-width: 620px;
-  margin: -6px 0 0 auto;
+  margin: 0 0 0 auto;
 }
 
 /* preserveAspectRatio="none": the figure is a span between two lines of type,
@@ -251,21 +252,23 @@
 .page[data-page="about"] .gza-accum {
   display: block;
   width: 100%;
-  height: clamp(180px, 22vw, 300px);
-  margin: -6px 0 0;
+  height: 132px;
+  margin: 0;
   overflow: visible;
 }
 .page[data-page="about"] .gza-close__item p {
   margin: 0;
-  max-width: 22ch;
-  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  /* 30ch on the paragraph, where ch resolves against the statement's own size
+     — not on the flex box around it, where it would resolve against 16px. */
+  max-width: 30ch;
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.032em;
   font-weight: 500;
   color: var(--gza-ink);
   text-wrap: balance;
 }
-.page[data-page="about"] .gza-close__cta { margin: 64px auto 0; padding-bottom: 28px; }
+.page[data-page="about"] .gza-close__cta { margin: 40px auto 0; padding-bottom: 28px; }
 .page[data-page="about"] .gza-pill {
   display: inline-flex;
   white-space: nowrap;
