@@ -233,8 +233,28 @@
     repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
   padding: 96px 5vw 0;
 }
-.page[data-page="about"] .gza-close__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.page[data-page="about"] .gza-close__item { display: flex; gap: 18px; align-items: flex-start; }
+/* The claim opens on the left, the payoff lands on the right, and the thread
+   between them is what carries the argument. The payoff is sized to its own
+   text rather than to a column, so its block sits flush right instead of
+   floating inside a wider one. */
+.page[data-page="about"] .gza-close__item { display: flex; gap: 18px; align-items: flex-start; max-width: 620px; }
+.page[data-page="about"] .gza-close__item--payoff {
+  width: max-content;
+  max-width: 620px;
+  margin: -6px 0 0 auto;
+}
+
+/* preserveAspectRatio="none": the figure is a span between two lines of type,
+   so it stretches to whatever gap the container leaves rather than keeping a
+   fixed shape. Held to the viewBox's own ratio below 760px, where the stretch
+   would squash the field to half height and the circles into ellipses. */
+.page[data-page="about"] .gza-accum {
+  display: block;
+  width: 100%;
+  height: clamp(180px, 22vw, 300px);
+  margin: -6px 0 0;
+  overflow: visible;
+}
 .page[data-page="about"] .gza-close__item p {
   margin: 0;
   max-width: 22ch;
@@ -245,7 +265,7 @@
   color: var(--gza-ink);
   text-wrap: balance;
 }
-.page[data-page="about"] .gza-close__cta { margin: 44px auto 0; padding-bottom: 28px; }
+.page[data-page="about"] .gza-close__cta { margin: 64px auto 0; padding-bottom: 28px; }
 .page[data-page="about"] .gza-pill {
   display: inline-flex;
   white-space: nowrap;
@@ -315,13 +335,25 @@
   .page[data-page="about"] .gza-story__grid { grid-template-columns: 1fr; gap: 36px; }
   .page[data-page="about"] .gza-story__body { padding-left: 0; box-shadow: none; }
   .page[data-page="about"] .gza-eco__grid { grid-template-columns: 1fr; }
-  .page[data-page="about"] .gza-close__grid { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 760px) {
+  /* Held to the viewBox's own ratio, the figure is only ~90px tall, and the
+     -6px pull put its left tail behind the claim's last line. It clears it
+     instead. */
+  .page[data-page="about"] .gza-accum {
+    height: auto;
+    aspect-ratio: 1152 / 300;
+    margin-top: 10px;
+  }
 }
 @media (max-width: 700px) {
   .page[data-page="about"] .gza-hero { padding: 56px 5vw 64px; }
   .page[data-page="about"] .gza-story,
   .page[data-page="about"] .gza-eco { padding: 64px 5vw 72px; }
   .page[data-page="about"] .gza-close { padding-top: 64px; }
+  /* Stacked, the payoff stops being the right-hand half of a pair and is just
+     the second line, so it goes back to the left edge with the first. */
+  .page[data-page="about"] .gza-close__item--payoff { width: auto; margin-left: 0; }
   .page[data-page="about"] .gza-statements p { font-size: 21px; }
   .page[data-page="about"] .gza-story__lead { font-size: 18px; }
   .page[data-page="about"] .gza-eco__body { padding: 24px 24px 28px; }
