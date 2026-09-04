@@ -51,10 +51,11 @@
      scrim, as on the Early Access and About bands. isolation plus the
      negative z-indexes keep the swatches and copy above both layers. */
   .dark { position: relative; isolation: isolate; background-color: var(--ink); color: #fff; }
-  .dark::before { content: ""; position: absolute; inset: 0; z-index: -2; background-image: url("../assets/brand/paint.png"); background-size: 130% auto; background-position: 34% 26%; animation: gz-paint-drift 240s ease-in-out infinite alternate; }
+  .dark::before { content: ""; position: absolute; inset: 0; z-index: -2; background-image: url("../assets/brand/paint.png"); background-size: 130% auto; background-repeat: no-repeat; background-position: 34% 26%; animation: gz-paint-drift 240s ease-in-out infinite alternate; }
   .dark::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(23,35,43,.82) 0%, rgba(23,35,43,.88) 34%, rgba(23,35,43,.94) 72%); }
   @keyframes gz-paint-drift { from { background-position: 34% 26%; } to { background-position: 44% 32%; } }
   @media (prefers-reduced-motion: reduce) { .dark::before { animation: none; } }
+  @media (max-width: 900px) { .dark::before { background-size: cover; } }
   .dark .eyebrow { color: rgba(255,255,255,.55); }
 
   /* the name */

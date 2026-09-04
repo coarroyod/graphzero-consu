@@ -220,6 +220,7 @@
   z-index: -2;
   background-image: url("brand/paint.png");
   background-size: 130% auto;
+  background-repeat: no-repeat;
   background-position: 34% 26%;
   animation: gz-paint-drift 240s ease-in-out infinite alternate;
 }
@@ -470,4 +471,12 @@
   /* The flow figure's box ends where the drawing does: 66vw is the drawing's
      own ratio on a 90vw column, so no band of nothing under it on a phone. */
   .page[data-page="early-access"] .showcase__visual--flow { min-height: min(20rem, 66vw); }
+}
+
+/* On a narrow screen the band is tall and the painting at 130% width is
+   short, so it would repeat down the band and the dark edge of each copy
+   read as a stripe. Covered instead: one painting, cropped, over the whole
+   band. The drift still moves it. */
+@media (max-width: 900px) {
+  .page[data-page="early-access"] .gzea-gets::before { background-size: cover; }
 }

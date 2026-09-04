@@ -154,6 +154,7 @@
   z-index: -2;
   background-image: url("brand/paint.png");
   background-size: 130% auto;
+  background-repeat: no-repeat;
   background-position: 34% 26%;
   animation: gz-paint-drift 240s ease-in-out infinite alternate;
 }
@@ -459,4 +460,12 @@
 @media (max-width: 900px) {
   .page[data-page="about"] .gza-close__item--payoff { flex-direction: row; }
   .page[data-page="about"] .gza-close__item--payoff p { text-align: left; }
+}
+
+/* On a narrow screen the band is tall and the painting at 130% width is
+   short, so it would repeat down the band and the dark edge of each copy
+   read as a stripe. Covered instead: one painting, cropped, over the whole
+   band. The drift still moves it. */
+@media (max-width: 900px) {
+  .page[data-page="about"] .gza-story::before { background-size: cover; }
 }
