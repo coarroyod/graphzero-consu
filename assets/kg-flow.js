@@ -94,7 +94,7 @@
     ink: cs.getPropertyValue('--heading').trim() || '#000',
     body: cs.getPropertyValue('--meta').trim() || '#59666B',
     line: cs.getPropertyValue('--line').trim() || 'rgba(0,0,0,.16)',
-    accent: cs.getPropertyValue('--eu-blue').trim() || '#003399'
+    accent: cs.getPropertyValue('--eu-blue').trim() || '#FF6A00'
   };
 
   /* Longhand, never the `font` shorthand. The shorthand demands a family, and
@@ -313,6 +313,19 @@
   });
 
   paint();
+
+  /* The colours are read at mount. If a stylesheet lands after that — a slow
+     connection on a phone — the figure would keep the fallback, so they are
+     read once more when the page has fully loaded and the figure repainted. */
+  window.addEventListener('load', function () {
+    var cs2 = getComputedStyle(host);
+    var a = cs2.getPropertyValue('--eu-blue').trim();
+    var l = cs2.getPropertyValue('--line').trim();
+    if (a) C.accent = a;
+    if (l) C.line = l;
+    packets.concat([exchange]).forEach(function (d) { d.setAttribute('fill', C.accent); });
+    paint();
+  });
 
   /* ---------- motion ----------
      Only while a module is pointed at. The packets run the ingestion curves

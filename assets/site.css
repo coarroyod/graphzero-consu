@@ -3467,12 +3467,11 @@ plainest thing in the drawing rather than the most filled. */
   .page[data-page="early-access"] .strip--split .strip__panel::after { display: block; }
 }
 
-/* The knowledge-graph figure's accent. The script reads --eu-blue and this
-   stylesheet does not declare it, so the drawing was falling through to the
-   page's own #0000ff. Declared here rather than patched into the script, which
-   stays exactly as the reference wrote it. This is the figure's ink, not a
-   second accent for the page: nothing else reads it. */
-.page[data-page="early-access"] { --eu-blue: #003399; }
+/* The knowledge-graph figure's accent. The script reads --eu-blue off the
+   host; it is the brand orange here as everywhere on the site (declared again
+   further down, where the page's accents are set), so no order of loading can
+   leave the figure on the old blue. */
+.page[data-page="early-access"] { --eu-blue: #FF6A00; }
 
 /* Below the split's breakpoint this stylesheet halves .split's gap, on the
    reasoning that a stacked split's column gap becomes a heading-to-sub-heading
