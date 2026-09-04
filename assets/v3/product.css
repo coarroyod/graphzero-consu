@@ -321,8 +321,17 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(60% 55% at 50% 48%,
-    rgba(255, 255, 255, .96) 0%,
-    rgba(255, 255, 255, .85) 40%,
-    rgba(255, 255, 255, 0) 100%);
+  background:
+    radial-gradient(60% 55% at 50% 48%,
+      rgba(255, 255, 255, .96) 0%,
+      rgba(255, 255, 255, .85) 40%,
+      rgba(255, 255, 255, 0) 100%),
+    /* and the foot: the lines dissolve into the page over the last third,
+       so the fold runs into the section below without an edge — the same
+       hand-over the top fade makes into the bar. */
+    linear-gradient(to top,
+      #ffffff 0%,
+      rgba(255, 255, 255, .85) 12%,
+      rgba(255, 255, 255, .4) 22%,
+      rgba(255, 255, 255, 0) 34%);
 }
