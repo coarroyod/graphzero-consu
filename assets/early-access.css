@@ -29,13 +29,21 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  min-height: 660px;
+  /* The first screen, the way Security's fold is: the claim is centred in
+     the space above the two paragraphs at the foot rather than pressed up
+     under the header. svh so a phone's address bar cannot make it taller
+     than the screen; vh first for anything that does not know svh. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   flex-direction: column;
   max-width: 1300px;
   margin-inline: auto;
   padding: 60px 5vw 48px;
 }
+/* Two auto margins — this one and the one the notes already carry — split
+   the fold's free space evenly above and below the claim. */
+.page[data-page="early-access"] .gzea-fold > .gzea-eyebrow { margin-top: auto; }
 
 .page[data-page="early-access"] .gzea-fold > :not(.gzea-fold__graph) {
   position: relative;
@@ -163,29 +171,6 @@
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="early-access"] .gzea-btn:hover,
   .page[data-page="early-access"] .gzea-btn:focus-visible { transform: none; }
-}
-
-/* ---- the three claims, in mono ---- */
-.page[data-page="early-access"] .gzea-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 18px;
-  margin: 26px 0 0;
-  padding: 0;
-  list-style: none;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 12px;
-  line-height: 1.5;
-  letter-spacing: .04em;
-  color: #59666B;
-}
-/* The separators are drawn rather than set as list items, so a screen reader
-   reads three claims and not three claims and two middots. */
-.page[data-page="early-access"] .gzea-meta li + li::before {
-  content: "·";
-  margin-right: 18px;
-  color: #FF6A00;
 }
 
 /* ---- the two paragraphs at the foot ---- */
@@ -435,4 +420,16 @@
 @keyframes gzea-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="early-access"] .gzea-progress { animation: none; }
+}
+
+/* ---- section 2's superheader ---- */
+.page[data-page="early-access"] #product .ea-sec-head { margin-top: 22px; }
+
+/* ---- the close: the pay-off sets against the right edge it already sits on ---- */
+.page[data-page="early-access"] .gzea-close__item--payoff p { text-align: right; }
+@media (max-width: 900px) {
+  .page[data-page="early-access"] .gzea-close__item--payoff p { text-align: left; }
+  /* The flow figure's box ends where the drawing does: 66vw is the drawing's
+     own ratio on a 90vw column, so no band of nothing under it on a phone. */
+  .page[data-page="early-access"] .showcase__visual--flow { min-height: min(20rem, 66vw); }
 }

@@ -303,7 +303,12 @@
      module list beside it to point at, and no pointer to point with, so it
      rests at level 2 — sources feeding the base, the base answering — and runs
      while it is on screen. Elsewhere the attribute is bare and nothing changes. */
-  var auto = host.getAttribute('data-kg-flow') === 'auto';
+  var mode = host.getAttribute('data-kg-flow');
+  /* "auto-touch" is the Early Access figure: the module list drives it where
+     there is a pointer, and on a phone — no hover, one column — it runs on
+     its own the way the Product page's phone figure does. */
+  var auto = mode === 'auto' ||
+    (mode === 'auto-touch' && matchMedia('(hover: none), (max-width: 899px)').matches);
   var level = auto ? LEVEL.graph : 0;
 
   function ringOf(on) { return 'inset 0 0 0 1px ' + (on ? C.accent : C.line); }
