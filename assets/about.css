@@ -244,6 +244,10 @@
 
 /* ---- 03 · the close, on a woven white ---- */
 .page[data-page="about"] .gza-close {
+  /* The Early Access close's face, so the two statements set the same on
+     both pages. */
+  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   background-color: #FFFFFF;
   background-image:
     repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
@@ -411,4 +415,15 @@
     flex-direction: column;
     justify-content: center;
   }
+}
+
+/* The close, as the Early Access page sets it: the pay-off right-aligned
+   against the edge it sits on, its mark at the text's own right edge the way
+   the opening statement's mark sits at its left. Stacked on phones it stays
+   left, as there. */
+.page[data-page="about"] .gza-close__item--payoff { flex-direction: row-reverse; }
+.page[data-page="about"] .gza-close__item--payoff p { text-align: right; }
+@media (max-width: 900px) {
+  .page[data-page="about"] .gza-close__item--payoff { flex-direction: row; }
+  .page[data-page="about"] .gza-close__item--payoff p { text-align: left; }
 }
