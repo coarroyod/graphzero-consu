@@ -139,21 +139,21 @@
        its own bounding box, so each ran the full orange-to-pink and the pink
        landed in the middle of the mark. The two blades become a clip and a
        single rect carries the gradient through them. */
-    var grad = svg('linearGradient', { id: id, x1: '0.6', y1: '0', x2: '0.4', y2: '1' });
-    grad.appendChild(svg('stop', { offset: '0', 'stop-color': '#FF6A00' }));
-    grad.appendChild(svg('stop', { offset: '0.45', 'stop-color': '#FF6A00' }));
-    grad.appendChild(svg('stop', { offset: '1', 'stop-color': '#FF2E93' }));
+    /* The brand's own construction: two sail blades — straight back, curved
+       face — rotated ±20° about the centre, and one vertical ramp across both
+       in user space, pink through the outer 30% at each tip and orange
+       between. Per-blade units would run the ramp twice. */
+    var grad = svg('linearGradient', { id: id, gradientUnits: 'userSpaceOnUse', x1: '32', y1: '0', x2: '32', y2: '64' });
+    [['0', '#FF2E93'], ['0.3', '#FF6A00'], ['0.5', '#FF6A00'], ['0.7', '#FF6A00'], ['1', '#FF2E93']].forEach(function (s) {
+      grad.appendChild(svg('stop', { offset: s[0], 'stop-color': s[1] }));
+    });
     defs.appendChild(grad);
-    var d = 'M32 3 A25.5 25.5 0 0 1 32 41 A25.5 25.5 0 0 1 32 3 Z';
-    var clip = svg('clipPath', { id: id + '-clip' });
-    clip.appendChild(svg('path', { d: d, transform: 'rotate(20 32 32)' }));
-    clip.appendChild(svg('path', { d: d, transform: 'rotate(200 32 32)' }));
-    defs.appendChild(clip);
     blade.appendChild(defs);
-    blade.appendChild(svg('rect', {
-      x: '14', y: '0', width: '36', height: '64',
-      'clip-path': 'url(#' + id + '-clip)', fill: 'url(#' + id + ')'
-    }));
+    var d = 'M32 3 L 32 41 A 25.5 25.5 0 0 0 32 3 Z';
+    var pair = svg('g', { fill: 'url(#' + id + ')' });
+    pair.appendChild(svg('path', { d: d, transform: 'rotate(20 32 32)' }));
+    pair.appendChild(svg('path', { d: d, transform: 'rotate(200 32 32)' }));
+    blade.appendChild(pair);
     wrap.appendChild(blade);
     /* The same tuck the lockup uses: the letter starts inside the mark's right
        sidebearing rather than after its box. */

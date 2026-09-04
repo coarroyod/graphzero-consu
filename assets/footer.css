@@ -41,28 +41,14 @@
   .gz-footer__legal { grid-column: 1 / -1; }
 }
 
-.gz-footer__mark {
-  display: flex;
-  align-items: center;
-  font-size: clamp(2rem, 4.4vw, 3.25rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: #17232B;
-}
-/* The mark itself, not a slash standing in for it. Sized in em off the
-   wordmark so the two scale together at every step of the clamp: the blade
-   pair is 36:64 in its own viewBox, and the header sets it at 1.23x the type's
-   size, which is the proportion kept here. The negative margin is the tuck the
-   lockup uses — the word starts inside the mark's right sidebearing rather
-   than after its box. */
-.gz-footer__logo {
-  flex: 0 0 auto;
+/* The wordmark lockup file, never the word re-typed beside the mark. Sized
+   by height so the mark lands where the old 1.227em mark did across the
+   clamp: 39px of mark on a phone, 64 at the top. */
+.gz-footer__lockup {
   display: block;
-  width: 0.69em;
-  height: 1.227em;
+  height: clamp(2.45rem, 5.4vw, 4rem);
+  width: auto;
 }
-.gz-footer__word { margin-left: -0.045em; }
 
 .gz-footer__line {
   margin: clamp(0.625rem, 1vw, 0.75rem) 0 0;
@@ -169,9 +155,6 @@
 
 /* The slash is the orange on white; on the orange it would disappear, so the
    wordmark goes solid — which is what the design file's own footer mark does. */
-.page[data-page="early-access"] .gz-footer__mark,
-.page[data-page="security"] .gz-footer__mark,
-.page[data-page="about"] .gz-footer__mark,
 .page[data-page="early-access"] .gz-footer__line,
 .page[data-page="security"] .gz-footer__line,
 .page[data-page="about"] .gz-footer__line,
@@ -185,13 +168,8 @@
 .page[data-page="security"] .gz-footer__legal,
 .page[data-page="about"] .gz-footer__legal { color: #17232B; }
 
-/* On the orange the gradient would half disappear — its orange end into the
-   ground behind it — so the pair goes solid, which is what the slash did here.
-   A CSS fill beats the presentation attribute, so the same markup serves all
-   four pages and only Product's white footer shows the gradient. */
-.page[data-page="early-access"] .gz-footer__blade,
-.page[data-page="security"] .gz-footer__blade,
-.page[data-page="about"] .gz-footer__blade { fill: #17232B; }
+/* On the orange the three pages carry the single-ink navy lockup file, as the
+   brand rules ask — never the gradient on orange. That is markup, not CSS. */
 
 /* With every line at the same solid navy, the white footer's hover — a link
    darkening to ink — has nothing left to do, and these links would answer the

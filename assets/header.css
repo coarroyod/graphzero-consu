@@ -77,23 +77,14 @@
    left alone rather than unpicked: the same class still sets the footer's
    type on pages that use it, and the header's flex box is what centres this. */
 .page .site-header .brand__logo {
-  /* Measured, not guessed: the file is a 2012x780 canvas carrying 1695x460 of
-     artwork — 160px of transparent padding top and bottom, 178px at the left.
-     So 41% of its height is empty, and a box sized like the old text wordmark
-     rendered the mark two-thirds the size it should be.
-
-     The box is set so the artwork inside it lands at the wordmark's old
-     weight: 42px of box at 1440 puts 25px of ink on the line, against the
-     22px of type it replaces. */
-  --logo-h: clamp(2.125rem, 2.9vw, 2.625rem);
+  /* The wordmark lockup, cropped to its artwork, so the box is the mark's
+     own height: 25px of mark on the line at 1440, the weight the old lockup
+     had. Nothing to pull back — the mark's left edge is the file's. */
+  --logo-h: clamp(1.5rem, 1.75vw, 1.6rem);
   display: block;
   height: var(--logo-h);
   width: auto;
   max-width: 100%;
-  /* The left padding would set the mark 9px inside the container edge every
-     other element on the page aligns to. Pulled back by exactly that much:
-     178/2012 of the rendered width, and the width is height x 2012/780. */
-  margin-left: calc(var(--logo-h) * -0.2283);
 }
 
 
