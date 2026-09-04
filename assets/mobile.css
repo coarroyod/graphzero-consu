@@ -36,20 +36,6 @@
     height: min(20rem, 66vw);
   }
 
-  /* ---- the Product fold's wash ----
-     On a phone the two edge zones are a hundred pixels wide and, blurred,
-     all but vanish. Wider and a little stronger here, so the pink at the
-     left and the navy at the right read on a narrow screen too. The centre
-     behind the headline stays white, and the fade to white at the foot is
-     the same. */
-  .page[data-page="product"] .hero-lattice__stage::after {
-    opacity: .24;
-    filter: blur(28px);
-    background:
-      linear-gradient(100deg, rgba(255, 46, 147, 1) 0%, rgba(255, 46, 147, .5) 16%, rgba(255, 46, 147, 0) 36%),
-      linear-gradient(100deg, rgba(30, 48, 110, 0) 64%, rgba(30, 48, 110, .6) 84%, rgba(23, 35, 43, 1) 100%);
-  }
-
   /* ---- the Product page's second screen ----
      On a phone the heading, the lead and the drawing take about 640px, so the
      next section's heading was already in view under them. The screen holds

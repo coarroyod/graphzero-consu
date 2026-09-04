@@ -47,7 +47,19 @@
     var n = parseInt(m[1], 16);
     return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255];
   }
-  var ALPHA = 0.25;            /* how much of that blue actually lands */
+  /* How much ink lands: lighter than the lines were, since the colour now
+     carries across the fold; the dots a little more than the lines, since a
+     node is one small mark. */
+  var ALPHA = 0.32, ALPHA_DOTS = 0.55;
+  /* The sweep, from the LinkedIn banner: pink at the left, the brand orange as
+     a band left of centre, and the banner's lighter blue holding the right
+     two thirds. The four stops are the two hand-overs, as fractions of the
+     fold's width. */
+  var SWEEP = {
+    pink:  [1, 46 / 255, 147 / 255],
+    blue:  [60 / 255, 76 / 255, 140 / 255],
+    stops: [.03, .2, .25, .6]
+  };
 
   var TW = 1024, ETW = 1024, FIELD = 768;
   var REVEAL = 34, SETTLE = 9, COLLAPSE = 3.6;
@@ -300,7 +312,7 @@
       '  float core = smoothstep(1., .05, d);\n' +
       '  float glow = exp(-d * d * 2.6);\n' +
       '  float a = (core * .42 + glow * .30) * vA * (1. + vFl * .7);\n' +
-      '  outColor = vec4(vec3(1.), a);\n' +
+      '  outColor = vec4(0., 1., 0., a);\n' +
       '}');
 
     var pEdge = prog('#version 300 es\n' +
@@ -324,7 +336,7 @@
       '}', '#version 300 es\n' +
       'precision highp float;\n' +
       'in float vA; out vec4 outColor;\n' +
-      'void main(){ outColor = vec4(vec3(1.), vA); }');
+      'void main(){ outColor = vec4(1., 0., 0., vA); }');
 
     /* how wide is the graph right now? one fragment, one strided sweep */
     var pMeas = prog(QUAD_VS, '#version 300 es\n' +
@@ -363,16 +375,28 @@
        sit almost invisible next to the hubs. */
     var pPost = prog(QUAD_VS, '#version 300 es\n' +
       'precision highp float;\n' +
-      'uniform sampler2D uSrc; uniform float uGain, uAlpha; uniform vec3 uInk;\n' +
+      'uniform sampler2D uSrc; uniform float uGain, uAlpha, uAlpha2; uniform vec3 uInk, uPink, uBlue; uniform vec4 uStops;\n' +
+      /* The ink is not one colour but a ramp across the fold, read at the pixel:
+         pink at the left, the brand orange through a band, the banner's blue
+         from there to the right edge. The stops say where each hand-over
+         runs; the dots take the same ramp, so a node is the colour of the
+         place it sits in. */
+      'vec3 ramp(float x){\n' +
+      '  vec3 c = mix(uPink, uInk, smoothstep(uStops.x, uStops.y, x));\n' +
+      '  return mix(c, uBlue, smoothstep(uStops.z, uStops.w, x));\n' +
+      '}\n' +
       'in vec2 vUv; out vec4 outColor;\n' +
       'void main(){\n' +
-      '  float c = texture(uSrc, vUv).r * uGain;\n' +
-      '  c = c / (1. + c * .55);\n' +
-      '  float ink = clamp(pow(c, .78), 0., 1.);\n' +
+      '  vec2 s = texture(uSrc, vUv).rg * uGain;\n' +
+      '  vec2 c = s / (1. + s * .55);\n' +
+      '  float ink = clamp(pow(c.r, .78), 0., 1.);\n' +
+      '  float ink2 = clamp(pow(c.g, .78), 0., 1.);\n' +
+      '  vec3 tint = ramp(vUv.x);\n' +
       /* The page is opaque white underneath, so the ink is thinned here rather
          than the canvas being given an opacity: compositing one layer costs a
          multiply, compositing two costs a blend of the whole hero every frame. */
-      '  outColor = vec4(mix(vec3(1.), uInk, ink * uAlpha), 1.);\n' +
+      '  vec3 col = mix(vec3(1.), tint, ink * uAlpha);\n' +
+      '  outColor = vec4(mix(col, tint, ink2 * uAlpha2), 1.);\n' +
       '}');
 
     /* ---------------- topology ---------------- */
@@ -729,7 +753,11 @@
       gl.uniform1i(pPost.at('uSrc'), 0);
       gl.uniform1f(pPost.at('uGain'), CFG.gain);
       gl.uniform1f(pPost.at('uAlpha'), ALPHA);
+      gl.uniform1f(pPost.at('uAlpha2'), ALPHA_DOTS);
       gl.uniform3f(pPost.at('uInk'), INK[0], INK[1], INK[2]);
+      gl.uniform3f(pPost.at('uPink'), SWEEP.pink[0], SWEEP.pink[1], SWEEP.pink[2]);
+      gl.uniform3f(pPost.at('uBlue'), SWEEP.blue[0], SWEEP.blue[1], SWEEP.blue[2]);
+      gl.uniform4f(pPost.at('uStops'), SWEEP.stops[0], SWEEP.stops[1], SWEEP.stops[2], SWEEP.stops[3]);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
 

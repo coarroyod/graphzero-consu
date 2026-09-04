@@ -5,9 +5,10 @@
    page, and inside this page nothing here reaches any section but the three
    named below: the lattice fold, #layers, and the security band's ground.
 
-   The lattice canvas is untouched. The stage's top fade and its reduced-motion
-   fallback are not referenced in this file; the stage's ::after is, for the
-   wash under the lattice (below). Otherwise only the type on top moves.
+   The lattice canvas is untouched. .hero-lattice__stage, its fade and its
+   reduced-motion fallback are not referenced in this file — only the type
+   that rides on top of it moves. The colour across the fold is the engine's
+   own now (hero-lattice.js), not a wash under it.
    ========================================================================== */
 
 /* ---- the palette, for these two sections only ----
@@ -300,33 +301,4 @@
   width: 10px;
   height: 18px;
   display: block;
-}
-
-/* ---- the wash under the lattice ----
-   The LinkedIn banner's colours, laid on the white paper as a light wash from
-   the two sides only: pink reaching in from the left, navy from the right,
-   each gone well before the headline, so the centre of the fold stays pure
-   white. Multiplied, so white stays white wherever the wash is clear and the
-   lattice draws through it; blurred, so it reads as light rather than paint.
-
-   It sits between the canvas and the stage's top fade (the ::before at
-   z-index 1), so the bar's white dissolves it at the top the way it
-   dissolves the mesh. At the foot it is masked to nothing over the last
-   third, so the fold ends on white and runs into the next section without
-   an edge. */
-.page[data-page="product"] .hero-lattice__stage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: .16;
-  filter: blur(40px);
-  transform: scale(1.12);
-  background:
-    linear-gradient(100deg, rgba(255, 46, 147, 1) 0%, rgba(255, 46, 147, .5) 12%, rgba(255, 46, 147, 0) 26%),
-    linear-gradient(100deg, rgba(30, 48, 110, 0) 74%, rgba(30, 48, 110, .6) 88%, rgba(23, 35, 43, 1) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 96%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 96%);
 }
