@@ -203,8 +203,44 @@
 .page[data-page="early-access"] .gzea-gets {
   font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
                BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  background: #17232B;
   padding: 88px 5vw 96px;
+  position: relative;
+  isolation: isolate;
+  background-color: #17232B;      /* unchanged — the fallback if the image fails */
+}
+
+/* The painting behind a graduated navy scrim, so the band reads as navy
+   with depth and a faint warm cast, not as a photograph. isolation on the
+   section plus the negative z-indexes put the existing content above both
+   layers with no markup change and no z-index on any child. */
+.page[data-page="early-access"] .gzea-gets::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("brand/paint.png");
+  background-size: 130% auto;
+  background-position: 34% 26%;
+  animation: gz-paint-drift 240s ease-in-out infinite alternate;
+}
+
+/* At 82% the painting's brightest region resolves to about rgb(64,70,68),
+   keeping white body copy near 9.7:1; below roughly 55% it fails 4.5:1. */
+.page[data-page="early-access"] .gzea-gets::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(23, 35, 43, .82) 0%,
+    rgba(23, 35, 43, .88) 34%,
+    rgba(23, 35, 43, .94) 72%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .gzea-gets::before { animation: none; }
 }
 .page[data-page="early-access"] .gzea-gets__head {
   display: grid;
@@ -276,11 +312,8 @@
   font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
                BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   background-color: #FFFFFF;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
+  /* The woven texture is gone: the painted band above supplies the page's
+     texture, and the statements read better on plain paper. */
   padding: 64px 5vw 72px;
 }
 /* The file puts max-width: 30ch on this flex box. ch resolves against the box's

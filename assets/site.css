@@ -4413,3 +4413,12 @@ plainest thing in the drawing rather than the most filled. */
     max-width: 22rem;
   }
 }
+
+/* The painted ground's drift — one slow pass across the painting and back,
+   shared by the two navy bands (.gzea-gets on Early Access, .gza-story on
+   About). Defined once here; the sections that use it stop it under
+   prefers-reduced-motion. */
+@keyframes gz-paint-drift {
+  from { background-position: 34% 26%; }
+  to   { background-position: 44% 32%; }
+}
