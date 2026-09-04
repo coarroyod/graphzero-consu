@@ -3856,7 +3856,6 @@ plainest thing in the drawing rather than the most filled. */
   fill: var(--ink);
 }
 
-.tc-lid__slash { fill: var(--hl); }
 
 .tc-lid__name {
   font-family: var(--font-sans);

@@ -245,6 +245,13 @@
   overflow: hidden;
   --eu-blue: #FF6A00;
 }
+/* The sheet's .hero__figure svg { width: 100% } reaches into the drawing and
+   stretched the mark in the knowledge-base tile to the tile's width, pushing
+   the g off centre. Every svg the script draws carries its own size. */
+.page[data-page="product"] .kg-flow--phone svg {
+  width: auto;
+  height: auto;
+}
 
 /* ---- scroll progress, gated ----
    The 2px line Security and About carry, on this page too. Gated on support:
