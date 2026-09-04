@@ -1,5 +1,8 @@
 :root{
-  --radius-sm:0.5rem;--radius-md:1rem;--radius-lg:1.5rem;--radius-pill:999px;
+  /* Three tiers and nothing else: pill for anything clicked or read as a
+     control, lg for anything that behaves as a plate, and 0 for anything
+     full-bleed. The sm and md steps are gone so they cannot come back. */
+  --radius-lg:1.5rem;--radius-pill:999px;
   /* Elevation is intentionally empty: this system uses zero box-shadow.
      Depth comes from surface contrast + radius. Hairlines use inset rings. */
   --shadow-none:none;

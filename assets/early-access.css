@@ -129,7 +129,7 @@
 }
 .page[data-page="early-access"] .gzea-btn--solid {
   padding: 14px 26px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #17232B;
   color: #ffffff;
 }
@@ -157,7 +157,7 @@
 .page[data-page="early-access"] .gzea-btn--onDark {
   margin-top: 44px;
   padding: 14px 26px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #ffffff;
   color: #17232B;
 }
