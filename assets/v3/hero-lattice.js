@@ -41,13 +41,16 @@
      palette says the brand colour is — the same source kg-flow.js reads. The
      shader wants floats, so the token is parsed once at mount. */
   function ink() {
-    var v = getComputedStyle(document.documentElement).getPropertyValue('--eu-blue').trim();
+    /* --lattice-ink first, so a page can set the graph's colour without
+       touching the accent every other canvas reads; --eu-blue otherwise. */
+    var cs = getComputedStyle(document.documentElement);
+    var v = (cs.getPropertyValue('--lattice-ink') || cs.getPropertyValue('--eu-blue')).trim();
     var m = /^#([0-9a-f]{6})$/i.exec(v);
     if (!m) return [0x00 / 255, 0x33 / 255, 0x99 / 255];
     var n = parseInt(m[1], 16);
     return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255];
   }
-  var ALPHA = 0.25;            /* how much of that blue actually lands */
+  var ALPHA = 0.26;            /* how much of that ink actually lands */
 
   var TW = 1024, ETW = 1024, FIELD = 768;
   var REVEAL = 34, SETTLE = 9, COLLAPSE = 3.6;
