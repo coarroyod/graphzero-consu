@@ -3848,14 +3848,6 @@ plainest thing in the drawing rather than the most filled. */
 .tc-plate__label--invert text { fill: var(--ink-invert); }
 .tc-plate__label--invert .tc-plate__ico { stroke: var(--ink-invert); }
 
-.tc-lid__g {
-  font-family: var(--font-sans);
-  font-size: 38px;
-  font-weight: var(--weight-heading);
-  letter-spacing: var(--tracking-h3);
-  fill: var(--ink);
-}
-
 
 .tc-lid__name {
   font-family: var(--font-sans);

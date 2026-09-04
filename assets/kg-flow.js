@@ -119,46 +119,16 @@
      beside a "g"; it is the blade pair now, in the orange-to-pink gradient the
      lockup uses, with the "g" still type beside it. Each instance needs its own
      gradient id, so they are counted. */
-  var markSeq = 0;
+  /* The compact lockup — the mark and the g — is the brand's own file, never
+     the mark beside a g re-set in the page's type. Sized by the mark's height,
+     which is the file's height: the g inside it keeps its 57.9%. */
   function gzMark(fontPx) {
-    var wrap = el('span',
-      'display:inline-flex;align-items:center;font-weight:500;font-size:' + fontPx +
-      'px;letter-spacing:-0.04em;line-height:1;');
-    var id = 'kgf-mark-' + (markSeq++);
     var h = Math.round(fontPx * 1.18);
-    var blade = svg('svg', {
-      viewBox: '14 0 36 64',
-      width: Math.round(h * 0.5625),
-      height: h,
-      'aria-hidden': 'true',
-      focusable: 'false',
-      style: 'display:block;flex:0 0 auto'
-    });
-    var defs = svg('defs', {});
-    /* One ramp across the whole mark. Filling each blade separately gave each
-       its own bounding box, so each ran the full orange-to-pink and the pink
-       landed in the middle of the mark. The two blades become a clip and a
-       single rect carries the gradient through them. */
-    /* The brand's own construction: two sail blades — straight back, curved
-       face — rotated ±20° about the centre, and one vertical ramp across both
-       in user space, pink through the outer 30% at each tip and orange
-       between. Per-blade units would run the ramp twice. */
-    var grad = svg('linearGradient', { id: id, gradientUnits: 'userSpaceOnUse', x1: '32', y1: '0', x2: '32', y2: '64' });
-    [['0', '#FF2E93'], ['0.3', '#FF6A00'], ['0.5', '#FF6A00'], ['0.7', '#FF6A00'], ['1', '#FF2E93']].forEach(function (s) {
-      grad.appendChild(svg('stop', { offset: s[0], 'stop-color': s[1] }));
-    });
-    defs.appendChild(grad);
-    blade.appendChild(defs);
-    var d = 'M32 3 L 32 41 A 25.5 25.5 0 0 0 32 3 Z';
-    var pair = svg('g', { fill: 'url(#' + id + ')' });
-    pair.appendChild(svg('path', { d: d, transform: 'rotate(20 32 32)' }));
-    pair.appendChild(svg('path', { d: d, transform: 'rotate(200 32 32)' }));
-    blade.appendChild(pair);
-    wrap.appendChild(blade);
-    /* The same tuck the lockup uses: the letter starts inside the mark's right
-       sidebearing rather than after its box. */
-    wrap.appendChild(el('span', 'color:' + C.ink + ';margin-left:-0.045em', 'g'));
-    return wrap;
+    var img = document.createElement('img');
+    img.src = 'assets/brand/graphzero-compact.png';
+    img.alt = '';
+    img.setAttribute('style', 'display:block;height:' + h + 'px;width:auto;flex:0 0 auto');
+    return img;
   }
 
   function svg(tag, attrs) {
