@@ -177,7 +177,8 @@
 .page[data-page="early-access"] .gzea-notes {
   margin-top: auto;
   padding-top: 28px;
-  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
+  /* No hairline above the two paragraphs, and none under the fold: the fold
+     had three rules in one screen, which was two too many. */
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px 56px;
