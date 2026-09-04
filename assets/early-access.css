@@ -426,8 +426,13 @@
 .page[data-page="early-access"] #product .ea-sec-head { margin-top: 22px; }
 
 /* ---- the close: the pay-off sets against the right edge it already sits on ---- */
+/* Right-aligned, and mirrored: the mark sits at the text's own right edge, the
+   way the first statement's mark sits at its left, rather than floating on
+   the far side of a right-ranged block. */
+.page[data-page="early-access"] .gzea-close__item--payoff { flex-direction: row-reverse; }
 .page[data-page="early-access"] .gzea-close__item--payoff p { text-align: right; }
 @media (max-width: 900px) {
+  .page[data-page="early-access"] .gzea-close__item--payoff { flex-direction: row; }
   .page[data-page="early-access"] .gzea-close__item--payoff p { text-align: left; }
   /* The flow figure's box ends where the drawing does: 66vw is the drawing's
      own ratio on a 90vw column, so no band of nothing under it on a phone. */
