@@ -13,7 +13,9 @@
    and the footer should be one thing on every page.
    ========================================================================== */
 .gz-footer {
-  background: #ffffff;
+  position: relative;
+  isolation: isolate;
+  background-color: #FFFFFF;          /* fallback if the image fails */
   color: #17232B;
   /* A footer, not a last section. It ran 365px tall at 1440 — 96 above the
      wordmark, 56 between the brand block and the legal line, 44 above the rule
@@ -21,6 +23,23 @@
      changes size, only the space around it, so it reads as the same footer
      with the air taken out. 365px to 251. */
   padding-block: clamp(2.25rem, 4vw, 2.75rem) clamp(1.5rem, 2.5vw, 1.75rem);
+}
+
+/* The ground is the LinkedIn banner painting's own canvas grain, baked into
+   two files at their final strength — no veil, no opacity on top. The white
+   one is deliberately far fainter (4.2% grain depth against the orange's
+   16.3%): white can only be darkened, and past a few percent the grain reads
+   as dirt. isolation on the footer plus the negative z-index keep the
+   wordmark, nav, LinkedIn link and legal line above the texture with no
+   markup change and no z-index on any child. */
+.gz-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("brand/footer-white.png");
+  background-size: cover;
+  background-position: 0% 50%;
 }
 
 .gz-footer__inner {
@@ -132,9 +151,9 @@
    "the same footer as Security and About", which was not one thing. It is now:
    one block here, About's version, and the two copies are gone.
 
-   The weave is the design file's — four repeating gradients at 3px, 4px, 7px
-   and 5px on the diagonal. Product carries the same cloth on white, in its
-   own sheet, since it is the one page that keeps the white ground.
+   The ground is the painted grain (footer-orange.png); the four-thread weave
+   that stood here is gone. Product keeps the white ground with the fainter
+   white file, set on the base rule.
 
    Contrast on the orange: solid #17232B is 5.58:1, which is where every line
    of type sits. Security's old alphas put its positioning line and nav at
@@ -144,13 +163,13 @@
 .page[data-page="early-access"] .gz-footer,
 .page[data-page="security"] .gz-footer,
 .page[data-page="about"] .gz-footer {
-  background-color: #FF6A00;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.09) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(45deg, rgba(23,35,43,.05) 0 1px, transparent 1px 5px);
+  background-color: #FF6A00;          /* fallback if the image fails */
   color: #17232B;
+}
+.page[data-page="early-access"] .gz-footer::before,
+.page[data-page="security"] .gz-footer::before,
+.page[data-page="about"] .gz-footer::before {
+  background-image: url("brand/footer-orange.png");
 }
 
 /* The slash is the orange on white; on the orange it would disappear, so the

@@ -211,14 +211,6 @@
    sheet's and are untouched — this page and About already carry the same
    wordmark, the same line, the same four links and the same legal line.
    ========================================================================== */
-.page[data-page="product"] .gz-footer {
-  background-color: #FFFFFF;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
-}
 
 /* ==========================================================================
    05 · #context-layer — the painted panel goes
