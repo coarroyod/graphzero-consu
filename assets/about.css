@@ -57,6 +57,15 @@
   margin: 0 auto;
   box-sizing: border-box;
   background: none;
+  /* The first screen, the way Security's fold is: the whole of it, with the
+     content centred in it rather than set from the top. svh so a phone's
+     address bar cannot make it taller than the screen; vh first for anything
+     that does not know svh. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .page[data-page="about"] .gza-hero__grid {
   display: grid;
@@ -387,4 +396,19 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="about"] .gza-node { animation: none; }
+}
+
+
+/* On a phone the fold stacks, and the copy alone holds the first screen —
+   eyebrow, claim and the two statements centred in it, as on Security. The
+   map and the closing line follow below the fold. */
+@media (max-width: 760px) {
+  .page[data-page="about"] .gza-hero { justify-content: flex-start; }
+  .page[data-page="about"] .gza-hero__copy {
+    box-sizing: border-box;
+    min-height: calc(100svh - var(--header-h) - 56px - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

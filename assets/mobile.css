@@ -45,6 +45,12 @@
     padding-bottom: 40px;
   }
 
+  /* ---- the wordmark in the bar ----
+     34px of box put 20px of ink on a phone, level with the 12px superheaders
+     under it. 40px puts 24px of ink on the line — the same weight it has on a
+     desktop — inside the bar's 52px. */
+  .page[data-page] .site-header .brand__logo { --logo-h: 2.5rem; }
+
   /* ---- the About hero's map ----
 
      Its two city names are 11 units in a 560-unit box. Fitted to a phone that
