@@ -269,3 +269,25 @@
 @media (prefers-reduced-motion: reduce) {
   .page[data-page="product"] .gzp-progress { animation: none; }
 }
+
+/* ---- the Technical capabilities eyebrow ----
+   Set the way the other pages set theirs: the gradient mark beside a small,
+   tracked, uppercase label in the muted ink, rather than the orange word on
+   its own. The text is unchanged. */
+.page[data-page="product"] .tc__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.page[data-page="product"] .tc__mark {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 18px;
+  display: block;
+}

@@ -36,6 +36,15 @@
     height: min(20rem, 66vw);
   }
 
+  /* ---- the Product page's second screen ----
+     On a phone the heading, the lead and the drawing take about 640px, so the
+     next section's heading was already in view under them. The screen holds
+     a full viewport, and the next one starts below it. */
+  .page[data-page="product"] #context-layer {
+    min-height: 100svh;
+    padding-bottom: 40px;
+  }
+
   /* ---- the About hero's map ----
 
      Its two city names are 11 units in a 560-unit box. Fitted to a phone that
