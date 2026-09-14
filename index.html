@@ -10,10 +10,10 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&amp;family=Inter+Tight:wght@400..700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css?v=2">
 <link rel="stylesheet" href="assets/v3/site.css?v=6">
-<link rel="stylesheet" href="assets/v3/product.css?v=34">
+<link rel="stylesheet" href="assets/v3/product.css?v=35">
 <link rel="stylesheet" href="assets/footer.css?v=13">
 <link rel="stylesheet" href="assets/header.css?v=8">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
@@ -30,65 +30,65 @@
          paint where the browser cannot drive it. -->
     <div class="gzp-progress" aria-hidden="true"></div>
 
-  <!-- The wordmark is the way back to the top of the site. -->
-  <header class="site-header">
-    <!-- One identity is chosen, so the wordmark is just the wordmark: the
-         wrapper and its arrow are gone, as the note that stood here said to do.
-         The identity block in site.js looks for [data-identity-switch] and
-         returns when it finds none, so nothing sets data-identity any more —
-         which also means a name stored from an earlier visit cannot bring the
-         other one back with no control left to leave it. -->
-    <a class="brand" href="index.html" title="/graphzero">
-      <img class="brand__logo" src="assets/brand/graphzero-wordmark.png?v=2" alt="graphzero"
-           width="1000" height="240" decoding="async">
+  <!-- The Product page carries its own bar rather than the site's light one:
+       the hero below it is navy edge to edge, and a white bar over a navy hero
+       would cut the image in two. It sits outside <main> where site navigation
+       belongs, and takes the same ground as the hero so the two read as one
+       block. The other three pages keep the shared header. -->
+  <nav class="gzf-nav" aria-label="Primary">
+    <a class="gzf-nav__brand" href="index.html" title="/graphzero">
+      <!-- The lockup is composed here, not loaded as one file. An SVG behind
+           <img> is its own document: it cannot see this page's @font-face, so a
+           wordmark set as <text> inside it would quietly fall back to
+           Helvetica. The mark is the picture; the name is live text. -->
+      <img class="gzf-nav__mark" src="assets/brand/icon-prism-on-navy.svg" alt=""
+           width="23" height="23" decoding="async">
+      <span class="gzf-nav__word">graphzero</span>
     </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-    </button>
-
-    <nav class="site-nav" id="site-nav" aria-label="Primary">
+    <div class="gzf-nav__links">
       <a href="index.html" aria-current="page">Product</a>
       <a href="early-access.html">Early Access</a>
       <a href="security.html">Security</a>
       <a href="about.html">About</a>
-
-    </nav>
-
-    <!-- The language set and the call to action are one group at the bar's
-         right end, which is what puts the navigation next to the wordmark
-         rather than centred between them. -->
-    <div class="site-header__end">
-      <div class="lang" role="group" aria-label="Language">
-        <button class="lang__opt" type="button" data-lang="en" aria-current="true">EN</button>
-        <button class="lang__opt" type="button" data-lang="de">DE</button>
-        <button class="lang__opt" type="button" data-lang="nl">NL</button>
-      </div>
-      <a class="site-header__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
     </div>
-  </header>
+  </nav>
 
   <main id="main">
 
-    <!-- LATTICE — the /9 hero's own piece, kept as the page's opening image.
-         A WebGL force simulation: the graph grows node by node, springs pull it
-         into shape and the camera drifts to hold the mass in frame. It is ink
-         accumulated on white, so it carries the fold on its own and the copy
-         below it is untouched. The stage is empty markup until the script
-         mounts a canvas into it; if WebGL2 is missing, mount() reports false
-         and the band is simply the page's own white. -->
-    <section class="hero-lattice" id="lattice">
-      <div class="hero-lattice__stage" id="hero-lattice-stage" aria-hidden="true"></div>
+    <!-- THE FIELD — the page's opening image.
 
-      <!-- The copy rides on the lattice rather than sitting above it, which is
-           how the piece was composed: the graph is a ground for type, not a
-           picture of its own. Centred and on the same type scale as the fold
-           below, so the two heros read as one page rather than two. -->
-      <div class="wrap hero-lattice__inner">
-        <h1 class="display hero-lattice__title">The toolbox to deploy enterprise AI<span class="hero-lattice__stop">.</span></h1>
-        <p class="lead hero-lattice__lead">Our managed infrastructure enables in-house teams and integrators to deploy AI that is actually useful because it understands your company context. European by design, built to keep enterprise knowledge sovereign.</p>
+         A cloud of points travelling toward the viewer on the navy. Two
+         canvases draw it between them: everything past NEAR on the back one,
+         everything nearer on the front, with the headline in the gap. The
+         nearest points therefore pass in front of the type, which is the whole
+         reason for the split — the words sit inside the field rather than on
+         top of a picture of one.
+
+         The copy is the copy that was here before it, unchanged.
+
+         Both canvases carry the same attributes, so both build the same seeded
+         field and the two halves line up. assets/gz-hero-field.js finds them by
+         data-gz-field and does the rest; with the script blocked the section is
+         still a navy band with the headline on it. -->
+    <section class="gzf-hero" id="hero">
+      <canvas class="gzf-hero__layer gzf-hero__layer--back" aria-hidden="true"
+              data-gz-field data-gz-layer="back" data-gz-nodes="1800"
+              data-gz-spread="1.55" data-gz-dot="3" data-gz-bright="1.5"
+              data-gz-edge="1" data-gz-speed="0.95"
+              data-gz-scrim="soft" data-gz-scrim-strength="0.82"></canvas>
+
+      <div class="gzf-hero__copy">
+        <h1 class="gzf-hero__title">The toolbox to deploy enterprise AI<span class="gzf-hero__stop">.</span></h1>
+        <p class="gzf-hero__lead">Our managed infrastructure enables in-house teams and integrators to deploy AI that is actually useful because it understands your company context. European by design, built to keep enterprise knowledge sovereign.</p>
+        <a class="gzf-hero__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
       </div>
+
+      <canvas class="gzf-hero__layer gzf-hero__layer--front" aria-hidden="true"
+              data-gz-field data-gz-layer="front" data-gz-nodes="1800"
+              data-gz-spread="1.55" data-gz-dot="3" data-gz-bright="1.5"
+              data-gz-edge="1" data-gz-speed="0.95"
+              data-gz-scrim="soft" data-gz-scrim-strength="0.82"></canvas>
     </section>
 
     <section class="hero hero--stack" id="context-layer">
@@ -946,5 +946,6 @@
 <script src="assets/v3/site.js?v=4" defer></script>
 <script src="assets/kg-flow.js?v=16" defer></script>
 <script src="assets/header.js?v=1" defer></script>
+<script src="assets/gz-hero-field.js?v=1" defer></script>
 </body>
 </html>

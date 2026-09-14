@@ -327,3 +327,186 @@
       rgba(255, 255, 255, .4) 22%,
       rgba(255, 255, 255, 0) 34%);
 }
+
+
+/* ==========================================================================
+   The field hero, and the bar that sits on it
+   ==========================================================================
+
+   The Product page opens on navy rather than white, so it brings its own bar
+   instead of the shared light one. Bar and hero take the same ground and meet
+   with no gap, which is what makes them read as a single block even though the
+   bar sits outside <main> where site navigation belongs.
+   ========================================================================== */
+
+.page[data-page="product"] .gzf-nav {
+  background: #17232B;
+  height: 82px;
+  padding: 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page[data-page="product"] .gzf-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.page[data-page="product"] .gzf-nav__mark {
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+/* 450 is a real weight here, not a rounded one: the page asks the font host
+   for the 400-700 range rather than three fixed cuts. */
+.page[data-page="product"] .gzf-nav__word {
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 450;
+  font-size: 12.5px;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.page[data-page="product"] .gzf-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.page[data-page="product"] .gzf-nav__links a {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.66);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: color 160ms ease;
+}
+
+.page[data-page="product"] .gzf-nav__links a:hover {
+  color: #FFFFFF;
+}
+
+.page[data-page="product"] .gzf-nav__links a[aria-current="page"] {
+  color: #FFFFFF;
+  border-bottom-color: #FF6A00;
+}
+
+/* ---- the stage ---- */
+
+.page[data-page="product"] .gzf-hero {
+  position: relative;
+  background: #17232B;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* The back canvas is the only thing in flow, so it is what gives the section
+   its height; the copy and the near field are laid over it. */
+.page[data-page="product"] .gzf-hero__layer--back {
+  display: block;
+  width: 100%;
+  height: 660px;
+}
+
+.page[data-page="product"] .gzf-hero__layer--front {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.page[data-page="product"] .gzf-hero__copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 34px;
+  padding: 0 56px;
+  /* Transparent to the pointer, so the camera still follows the cursor
+     wherever it crosses the hero. The one thing that has to catch a click
+     takes its events back below. */
+  pointer-events: none;
+}
+
+.page[data-page="product"] .gzf-hero__title {
+  margin: 0;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 1;
+  letter-spacing: -0.042em;
+  color: #FFFFFF;
+  max-width: 840px;
+  text-wrap: balance;
+}
+
+.page[data-page="product"] .gzf-hero__stop { color: #FF2E93; }
+
+.page[data-page="product"] .gzf-hero__lead {
+  margin: 0;
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 520px;
+  text-wrap: pretty;
+}
+
+.page[data-page="product"] .gzf-hero__cta {
+  pointer-events: auto;
+  align-self: flex-start;
+  background: #FF6A00;
+  color: #17232B;
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  padding: 15px 26px;
+  border-radius: 2px;
+  margin-top: 4px;
+  transition: background-color 160ms ease;
+}
+
+.page[data-page="product"] .gzf-hero__cta:hover { background: #FF8A33; }
+
+/* ---- narrower screens ----
+
+   The measurements above are the desktop composition. Below it the type comes
+   down and the stage shortens, because 80px type and a 660px stage do not fit
+   a phone; nothing else about the piece changes. */
+@media (max-width: 1100px) {
+  .page[data-page="product"] .gzf-hero__title { font-size: 64px; max-width: 680px; }
+}
+
+@media (max-width: 860px) {
+  .page[data-page="product"] .gzf-nav { padding: 0 24px; height: 72px; gap: 16px; }
+  .page[data-page="product"] .gzf-nav__links { gap: 18px; }
+  .page[data-page="product"] .gzf-nav__links a { font-size: 13px; }
+  .page[data-page="product"] .gzf-hero__copy { padding: 0 24px; gap: 26px; }
+  .page[data-page="product"] .gzf-hero__layer--back { height: 560px; }
+  .page[data-page="product"] .gzf-hero__title { font-size: 48px; max-width: 520px; }
+}
+
+@media (max-width: 560px) {
+  .page[data-page="product"] .gzf-nav { padding: 0 20px; gap: 12px; }
+  .page[data-page="product"] .gzf-nav__links { gap: 13px; }
+  .page[data-page="product"] .gzf-nav__links a { font-size: 12.5px; }
+  .page[data-page="product"] .gzf-hero__copy { padding: 0 20px; gap: 22px; }
+  .page[data-page="product"] .gzf-hero__layer--back { height: 500px; }
+  .page[data-page="product"] .gzf-hero__title { font-size: 36px; letter-spacing: -0.03em; }
+  .page[data-page="product"] .gzf-hero__lead { font-size: 15px; }
+}
