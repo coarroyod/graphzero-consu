@@ -66,12 +66,12 @@
   color: var(--gzs-muted);
   font-variant-numeric: tabular-nums;
 }
-/* The mark, not a rule — the same blade pair the About page sets beside its
-   eyebrows, at the same 10x18. The swept gradient bar it replaces is gone, and
-   its keyframes with it. */
+/* The mark, not a rule — the same one the About page sets beside its eyebrows,
+   at the same 15x18: the width follows the mark's own 64:78. The swept
+   gradient bar it replaces is gone, and its keyframes with it. */
 .page[data-page="security"] .gzs-mark {
   flex: 0 0 auto;
-  width: 10px;
+  width: 15px;
   height: 18px;
   display: block;
 }

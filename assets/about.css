@@ -29,10 +29,10 @@
 
 .page[data-page="about"] .gza-wrap { max-width: 1152px; margin-inline: auto; }
 
-/* ---- the blade mark, at the three sizes the kit uses it ---- */
-.page[data-page="about"] .gza-mark { flex: 0 0 auto; width: 10px; height: 18px; display: block; }
-.page[data-page="about"] .gza-eyebrow--mono .gza-mark { width: 11px; height: 20px; }
-.page[data-page="about"] .gza-close__item .gza-mark { width: 14px; height: 25px; margin-top: 6px; }
+/* ---- the mark, at the three sizes the kit uses it ---- */
+.page[data-page="about"] .gza-mark { flex: 0 0 auto; width: 15px; height: 18px; display: block; }
+.page[data-page="about"] .gza-eyebrow--mono .gza-mark { width: 16px; height: 20px; }
+.page[data-page="about"] .gza-close__item .gza-mark { width: 21px; height: 25px; margin-top: 6px; }
 
 .page[data-page="about"] .gza-eyebrow {
   display: flex;

@@ -82,15 +82,16 @@
   text-transform: uppercase;
   color: #59666B;
 }
-/* The blade pair, not a rule — the same mark the Security and About eyebrows
-   carry. 11x20 here, the size the file draws it beside a mono eyebrow. */
+/* The mark, not a rule — the same one the Security and About eyebrows carry.
+   16x20 here, the size the file draws it beside a mono eyebrow: the width
+   follows the mark's own 64:78, so nothing is letterboxed inside the box. */
 .page[data-page="early-access"] .gzea-mark {
   flex: 0 0 auto;
   display: block;
-  width: 11px;
+  width: 16px;
   height: 20px;
 }
-.page[data-page="early-access"] .gzea-mark--lg { width: 14px; height: 25px; margin-top: 6px; }
+.page[data-page="early-access"] .gzea-mark--lg { width: 21px; height: 25px; margin-top: 6px; }
 .page[data-page="early-access"] .gzea-eyebrow--dark { color: rgba(255, 255, 255, .55); }
 
 /* ---- the claim ---- */
@@ -396,7 +397,7 @@
    is not set here. The mark is decorative, so the name is read once. */
 .page[data-page="early-access"] .gz-inline__mark {
   display: inline-block;
-  width: 9px;
+  width: 13px;
   height: 16px;
   vertical-align: -1px;
   margin-right: 2px;

@@ -290,7 +290,7 @@
 }
 .page[data-page="product"] .tc__mark {
   flex: 0 0 auto;
-  width: 10px;
+  width: 15px;
   height: 18px;
   display: block;
 }

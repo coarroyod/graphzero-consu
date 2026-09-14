@@ -115,17 +115,14 @@
     if (text != null) n.textContent = text;
     return n;
   }
-  /* graphzero's own mark, drawn rather than typed. It was a "/" in the accent
-     beside a "g"; it is the blade pair now, in the orange-to-pink gradient the
-     lockup uses, with the "g" still type beside it. Each instance needs its own
-     gradient id, so they are counted. */
-  /* The compact lockup — the mark and the g — is the brand's own file, never
-     the mark beside a g re-set in the page's type. Sized by the mark's height,
-     which is the file's height: the g inside it keeps its 57.9%. */
+  /* graphzero's own mark — the brand's own file, never a shape re-drawn here.
+     It is the prism icon now, cropped to its artwork like the lockup is.
+     Sized by height, width auto, which is what kept this working when the
+     file's proportions changed. */
   function gzMark(fontPx) {
     var h = Math.round(fontPx * 1.18);
     var img = document.createElement('img');
-    img.src = 'assets/brand/graphzero-compact.png';
+    img.src = 'assets/brand/graphzero-compact.png?v=2';
     img.alt = '';
     img.setAttribute('style', 'display:block;height:' + h + 'px;width:auto;flex:0 0 auto');
     return img;
