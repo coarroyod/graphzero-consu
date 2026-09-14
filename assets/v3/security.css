@@ -505,3 +505,110 @@
   .page[data-page="security"] .gzs-card:hover { transform: none; }
 }
 
+
+
+/* ==========================================================================
+   The bar, and the field behind the fold
+   ==========================================================================
+
+   Two changes only. The bar is the one Product and Early Access carry, on
+   white. The field is the Early Access drawing redrawn for this fold's shape
+   — same seed, same cloud, same three depth bands, same links, same veil —
+   laid behind the existing content as a background rather than as an element,
+   so nothing in the fold moves, changes order, or changes stacking.
+
+   The fold's own type, grid and certification marks are untouched: no selector
+   below reaches them.
+   ========================================================================== */
+
+.page[data-page="security"] .gzs-nav {
+  background: #FFFFFF;
+  height: 82px;
+  padding: 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid rgba(23, 35, 43, 0.1);
+}
+
+.page[data-page="security"] .gzs-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.page[data-page="security"] .gzs-nav__mark { display: block; width: 23px; height: 23px; }
+
+.page[data-page="security"] .gzs-nav__word {
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 450;
+  font-size: 12.5px;
+  letter-spacing: -0.025em;
+  color: #17232B;
+  line-height: 1;
+}
+
+.page[data-page="security"] .gzs-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.page[data-page="security"] .gzs-nav__links a {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  color: #59666B;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: color 160ms ease;
+}
+
+.page[data-page="security"] .gzs-nav__links a:hover { color: #17232B; }
+
+.page[data-page="security"] .gzs-nav__links a[aria-current="page"] {
+  color: #17232B;
+  border-bottom-color: #FF6A00;
+}
+
+/* ---- the field ----
+
+   A background on a pseudo-element, not a child: the fold is a flex column and
+   an extra child would join the layout. isolation keeps the z-index: -1 inside
+   this section, so the field cannot slide behind the page's own ground and
+   disappear. The fold already had no rule at its lower boundary and still has
+   none; the drawing fades out inside its own file before it gets there. */
+.page[data-page="security"] .gzs-hero {
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+}
+
+.page[data-page="security"] .gzs-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Relative to this stylesheet, which lives a folder deeper than the
+     others — a CSS url() resolves against the sheet, not the page. */
+  background: url("../brand/security-field.svg?v=1") center / cover no-repeat;
+  pointer-events: none;
+}
+
+/* The bar at narrower widths. Same steps the other two carry: the fold below
+   is untouched and keeps its own existing breakpoints. */
+@media (max-width: 860px) {
+  .page[data-page="security"] .gzs-nav { padding: 0 24px; height: 72px; gap: 16px; }
+  .page[data-page="security"] .gzs-nav__links { gap: 18px; }
+  .page[data-page="security"] .gzs-nav__links a { font-size: 13px; white-space: nowrap; }
+}
+
+@media (max-width: 560px) {
+  .page[data-page="security"] .gzs-nav { padding: 0 20px; gap: 12px; }
+  .page[data-page="security"] .gzs-nav__links { gap: 13px; }
+  .page[data-page="security"] .gzs-nav__links a { font-size: 12.5px; }
+}

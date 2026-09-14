@@ -2,8 +2,10 @@
   "name": "graphzero-consu",
   "private": true,
   "type": "module",
-  "description": "The graphzero site. Plain HTML, CSS and JS, served as-is. The one build step is the Early Access hero's field, which is drawn once and committed.",
+  "description": "The graphzero site. Plain HTML, CSS and JS, served as-is. The one build step draws the two white heroes' fields \u2014 Early Access and Security \u2014 which are committed, not generated at request time. `npm run gen:fields` redraws both.",
   "scripts": {
-    "gen:hero": "node scripts/gen-hero-field.mjs"
+    "gen:hero": "node scripts/gen-hero-field.mjs",
+    "gen:hero:security": "node scripts/gen-hero-field.mjs --out security-field.svg --width 1440 --height 828",
+    "gen:fields": "npm run gen:hero && npm run gen:hero:security"
   }
 }

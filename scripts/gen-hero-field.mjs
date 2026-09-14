@@ -27,12 +27,30 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const OUT = resolve(HERE, "..", "assets", "brand", "ea-field.svg");
+
+/* ---------- what to draw ----------
+
+   The same field serves both white heroes. Only the frame it is drawn into
+   changes: Early Access is a fixed 560px band, Security is a full fold and so
+   is both taller and a different shape. Everything else — seed, cloud, bands,
+   links, veil — is held identical on purpose, so the two pages are recognisably
+   the same drawing seen through a different window.
+
+   Defaults are Early Access's, so `node scripts/gen-hero-field.mjs` with no
+   arguments still writes exactly the file it always wrote. */
+const argv = process.argv.slice(2);
+function arg(name, fallback) {
+  const i = argv.indexOf(`--${name}`);
+  return i !== -1 && argv[i + 1] !== undefined ? argv[i + 1] : fallback;
+}
+
+const OUT = resolve(HERE, "..", "assets", "brand", arg("out", "ea-field.svg"));
 
 /* ---------- constants ---------- */
 
-const W = 1280;
-const H = 560;
+const W = Number(arg("width", 1280));
+const H = Number(arg("height", 560));
+const FLAT = Number(arg("flat", 0.108));
 const SEED = 90210;
 const N = 520;
 const SPAN = 3.4;
@@ -288,7 +306,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" pre
 <g mask="url(#fade)">${far.markup}${mid.markup}${links.markup}${sharp.markup}</g>
 <rect width="${W}" height="${H}" filter="url(#grain)" opacity="0.4"/>
 <rect width="${W}" height="${H}" fill="url(#veil)"/>
-<rect width="${W}" height="${H}" fill="rgba(255,255,255,0.108)"/>
+<rect width="${W}" height="${H}" fill="rgba(255,255,255,${FLAT})"/>
 </svg>
 `;
 
