@@ -10,12 +10,12 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&amp;family=Geist:wght@400;500;700&amp;family=Inter+Tight:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&amp;family=Geist:wght@400..700&amp;family=Inter+Tight:wght@400..700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css?v=2">
 <link rel="stylesheet" href="assets/site.css?v=49">
 <link rel="stylesheet" href="assets/footer.css?v=13">
 <link rel="stylesheet" href="assets/header.css?v=8">
-<link rel="stylesheet" href="assets/early-access.css?v=20">
+<link rel="stylesheet" href="assets/early-access.css?v=21">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
 <link rel="icon" href="assets/graphzero-favicon.png?v=4" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=3">
@@ -30,73 +30,67 @@
          paint where the browser cannot drive it. -->
     <div class="gzea-progress" aria-hidden="true"></div>
 
-  <header class="site-header">
-    <a class="brand" href="index.html" title="/graphzero">
-        <img class="brand__logo" src="assets/brand/graphzero-wordmark.png?v=2" alt="graphzero"
-           width="1000" height="240" decoding="async">
-      </a>
+  <!-- Early Access carries its own bar, the way Product does. Same 82px, same
+       composed lockup; this one is on white, so the rule beneath it is navy at
+       a tenth and the mark is the light-ground prism.
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-    </button>
+       The lockup is composed here rather than loaded as one file: an SVG behind
+       <img> is its own document and cannot see this page's @font-face, so a
+       wordmark set as <text> inside it falls back to Helvetica without saying
+       so. The mark is the picture; the name is live text. -->
+  <nav class="eaf-nav" aria-label="Primary">
+    <a class="eaf-nav__brand" href="index.html" title="/graphzero">
+      <img class="eaf-nav__mark" src="assets/brand/icon-prism.svg" alt=""
+           width="23" height="23" decoding="async">
+      <span class="eaf-nav__word">graphzero</span>
+    </a>
 
-    <nav class="site-nav" id="site-nav" aria-label="Primary">
+    <div class="eaf-nav__links">
       <a href="index.html">Product</a>
       <a href="early-access.html" aria-current="page">Early Access</a>
       <a href="security.html">Security</a>
       <a href="about.html">About</a>
-
-      <div class="nav-cta">
-        <a class="btn btn--accent" href="https://calendly.com/consuelo-ascending/30min">Become a design partner</a>
-      </div>
-    </nav>
-
-    <!-- The language set and the call to action are one group at the bar's
-         right end, which is what puts the navigation next to the wordmark
-         rather than centred between them. -->
-    <div class="site-header__end">
-      <div class="lang" role="group" aria-label="Language">
-        <button class="lang__opt" type="button" data-lang="en" aria-current="true">EN</button>
-        <button class="lang__opt" type="button" data-lang="de">DE</button>
-        <button class="lang__opt" type="button" data-lang="nl">NL</button>
-      </div>
-      <a class="site-header__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
     </div>
-  </header>
+  </nav>
 
   <main id="main">
 
     <!-- 01 — WHAT GRAPHZERO IS
-         The fold carries the claim and the two paragraphs that earn it, and
-         nothing else. No figure: the page has two drawings already and the
-         first of them is one screen down, so opening on a third would say the
-         same thing twice before the claim has landed. -->
-    <!-- 01 — WHAT GRAPHZERO IS
-         The fold now reads as one column over the graph rather than as type,
-         then a band, then copy. The drawing is the ground the claim sits on:
-         the page's own canvas, same points and same seed, moved behind the
-         type and masked away before it reaches the foot so nothing is read
-         through it. The two paragraphs that earn the claim are numbered and
-         set at the bottom of the fold, under a hairline.
 
-         Decorative to a screen reader; the paragraphs say what it says. -->
-    <section class="gzea-fold" id="top">
-      <div class="gzea-fold__graph" aria-hidden="true">
-        <canvas data-graph-hero></canvas>
+         The field, drawn once and committed as assets/brand/ea-field.svg. It
+         does not move, so it is a picture rather than a canvas and a render
+         loop: no script, no second thread, nothing for a phone to run. Depth
+         is the whole effect — the points are cut into three even bands by
+         distance, the far third blurred hard and drawn large and faint, the
+         near third sharp and small with the links only among those. That is
+         what a lens does, and it is why a flat file reads as deep.
+
+         The drawing dies out before the section ends, so there is no seam to
+         see on the way down: the two paragraphs that earn the claim now sit in
+         their own band of white below, and the join is a wide gutter rather
+         than an edge two elements share.
+
+         Decorative to a screen reader; the paragraphs say what it says.
+
+         Regenerate with `npm run gen:hero`. -->
+    <section class="eaf-hero" id="top">
+      <img class="eaf-hero__field" src="assets/brand/ea-field.svg?v=1" alt="" aria-hidden="true">
+
+      <div class="eaf-hero__copy">
+        <p class="eaf-hero__eyebrow"><svg class="gzea-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g1"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g1)"></rect></svg> Early access</p>
+        <h1 class="eaf-hero__title">Turn what your people know into what your company knows<span class="eaf-hero__stop">.</span></h1>
+        <div class="eaf-hero__ctas">
+          <a class="eaf-hero__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
+          <a class="eaf-hero__cta eaf-hero__cta--quiet" href="#product">See how it works &darr;</a>
+        </div>
       </div>
+    </section>
 
-      <p class="gzea-eyebrow" data-reveal><svg class="gzea-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g1"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g1)"></rect></svg>Early access</p>
-
-      <h1 class="gzea-title" data-reveal>Turn what your people know into what your company knows.</h1>
-
-      <div class="gzea-cta" data-reveal>
-        <a class="gzea-btn gzea-btn--solid" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
-        <a class="gzea-btn gzea-btn--quiet" href="#product">See how it works &darr;</a>
-      </div>
-
-
-      <div class="gzea-notes" data-reveal>
+    <!-- The two paragraphs that earn the claim. They were the foot of the old
+         fold; they are their own band of white now, which is what lets the
+         field above dissolve into the page instead of stopping at a line. -->
+    <section class="eaf-notes">
+      <div class="gzea-notes">
         <p class="gzea-notes__p">Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
         <p class="gzea-notes__p"><span class="gz-inline"><svg class="gz-inline__mark" viewBox="16 8 64 78" aria-hidden="true" focusable="false"><mask id="gzea-g2"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g2)"></rect></svg><span class="gz-inline__word">graphzero</span></span> brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
       </div>

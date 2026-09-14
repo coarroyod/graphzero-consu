@@ -1,0 +1,9 @@
+{
+  "name": "graphzero-consu",
+  "private": true,
+  "type": "module",
+  "description": "The graphzero site. Plain HTML, CSS and JS, served as-is. The one build step is the Early Access hero's field, which is drawn once and committed.",
+  "scripts": {
+    "gen:hero": "node scripts/gen-hero-field.mjs"
+  }
+}

@@ -482,3 +482,208 @@
 @media (max-width: 900px) {
   .page[data-page="early-access"] .gzea-gets::before { background-size: cover; }
 }
+
+
+/* ==========================================================================
+   The field hero, and the bar that sits on it
+   ==========================================================================
+
+   Early Access opens on a picture rather than a canvas: the field is drawn
+   once by scripts/gen-hero-field.mjs and committed, so this hero ships no
+   script and runs nothing. See the note in the markup for why depth is done
+   in three bands rather than by blur-per-dot.
+
+   The bottom of the drawing is masked away inside the file, so the section
+   ends in plain white and the band below it is the same white. No rule, no
+   colour change, no edge — just a wide gutter.
+   ========================================================================== */
+
+.page[data-page="early-access"] .eaf-nav {
+  background: #FFFFFF;
+  height: 82px;
+  padding: 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid rgba(23, 35, 43, 0.1);
+}
+
+.page[data-page="early-access"] .eaf-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.page[data-page="early-access"] .eaf-nav__mark { display: block; width: 23px; height: 23px; }
+
+.page[data-page="early-access"] .eaf-nav__word {
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 450;
+  font-size: 12.5px;
+  letter-spacing: -0.025em;
+  color: #17232B;
+  line-height: 1;
+}
+
+.page[data-page="early-access"] .eaf-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.page[data-page="early-access"] .eaf-nav__links a {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  color: #59666B;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: color 160ms ease;
+}
+
+.page[data-page="early-access"] .eaf-nav__links a:hover { color: #17232B; }
+
+.page[data-page="early-access"] .eaf-nav__links a[aria-current="page"] {
+  color: #17232B;
+  border-bottom-color: #FF6A00;
+}
+
+/* ---- the stage ---- */
+
+.page[data-page="early-access"] .eaf-hero {
+  position: relative;
+  height: 560px;
+  background: #FFFFFF;
+  /* Deliberately no border-bottom. The seam is the thing this hero is built
+     to avoid; a rule here would put it straight back. */
+}
+
+.page[data-page="early-access"] .eaf-hero__field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.page[data-page="early-access"] .eaf-hero__copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 0 56px;
+  pointer-events: none;
+}
+
+.page[data-page="early-access"] .eaf-hero__eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  color: #59666B;
+}
+
+.page[data-page="early-access"] .eaf-hero__title {
+  margin: 0;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1.02;
+  letter-spacing: -0.042em;
+  color: #17232B;
+  max-width: 820px;
+  text-wrap: balance;
+}
+
+.page[data-page="early-access"] .eaf-hero__stop { color: #FF2E93; }
+
+.page[data-page="early-access"] .eaf-hero__ctas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px 26px;
+  margin-top: 4px;
+}
+
+/* The one thing in the overlay that has to catch a click takes its pointer
+   events back; everything else stays transparent to them. */
+.page[data-page="early-access"] .eaf-hero__cta {
+  pointer-events: auto;
+  background: #17232B;
+  color: #FFFFFF;
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  padding: 15px 26px;
+  border-radius: 2px;
+  transition: background-color 160ms ease;
+}
+
+.page[data-page="early-access"] .eaf-hero__cta:hover { background: #35454F; }
+
+.page[data-page="early-access"] .eaf-hero__cta--quiet {
+  background: none;
+  color: #59666B;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(23, 35, 43, 0.22);
+  border-radius: 0;
+}
+
+.page[data-page="early-access"] .eaf-hero__cta--quiet:hover {
+  background: none;
+  color: #17232B;
+}
+
+/* ---- the band below ----
+
+   Same white, no rule. The distance is the separation: the drawing has already
+   faded out inside its own file by the time the section ends, and the copy
+   starts 96px into this one, so the join is a wide field of white rather than
+   an edge. */
+.page[data-page="early-access"] .eaf-notes {
+  background: #FFFFFF;
+  padding: 96px 56px 0;
+}
+
+.page[data-page="early-access"] .eaf-notes .gzea-notes { margin-top: 0; padding-top: 0; }
+
+/* ---- narrower screens ----
+
+   The brief's measurements are the desktop composition; 72px type and a 560px
+   stage do not fit a phone. Nothing else about the piece changes. */
+@media (max-width: 1100px) {
+  .page[data-page="early-access"] .eaf-hero__title { font-size: 58px; max-width: 680px; }
+}
+
+@media (max-width: 860px) {
+  .page[data-page="early-access"] .eaf-nav { padding: 0 24px; height: 72px; gap: 16px; }
+  .page[data-page="early-access"] .eaf-nav__links { gap: 18px; }
+  .page[data-page="early-access"] .eaf-nav__links a { font-size: 13px; }
+  .page[data-page="early-access"] .eaf-hero { height: 500px; }
+  .page[data-page="early-access"] .eaf-hero__copy { padding: 0 24px; gap: 24px; }
+  .page[data-page="early-access"] .eaf-hero__title { font-size: 44px; max-width: 520px; }
+  .page[data-page="early-access"] .eaf-notes { padding: 80px 24px 0; }
+}
+
+@media (max-width: 560px) {
+  .page[data-page="early-access"] .eaf-nav { padding: 0 20px; gap: 12px; }
+  .page[data-page="early-access"] .eaf-nav__links { gap: 13px; }
+  .page[data-page="early-access"] .eaf-nav__links a { font-size: 12.5px; }
+  .page[data-page="early-access"] .eaf-hero { height: 460px; }
+  .page[data-page="early-access"] .eaf-hero__copy { padding: 0 20px; gap: 20px; }
+  .page[data-page="early-access"] .eaf-hero__title { font-size: 34px; letter-spacing: -0.03em; }
+  .page[data-page="early-access"] .eaf-notes { padding: 72px 20px 0; }
+}
