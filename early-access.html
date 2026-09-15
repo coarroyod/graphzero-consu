@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/site.css?v=49">
 <link rel="stylesheet" href="assets/footer.css?v=13">
 <link rel="stylesheet" href="assets/header.css?v=8">
-<link rel="stylesheet" href="assets/early-access.css?v=22">
+<link rel="stylesheet" href="assets/early-access.css?v=23">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
 <link rel="stylesheet" href="assets/nav.css?v=4">
 <link rel="icon" href="assets/graphzero-favicon.png?v=4" type="image/png">
@@ -81,9 +81,37 @@
 
          Decorative to a screen reader; the paragraphs say what it says.
 
-         Regenerate with `npm run gen:hero`. -->
+         The ground is four layers and nothing else: white, one soft orange
+         bloom, then granite in two passes, then a hem. The hem is last on
+         purpose — above the grain, not under it — so the bottom of the fold
+         dissolves into the band below instead of the grain printing over the
+         fade and putting the edge back.
+
+         The granite runs lighter here than on Product (0.44 / 0.30 against
+         0.70 / 0.46). Same filters, same colour constants: this fold is nearly
+         empty white, where Product's carries a node graph and a wash over its
+         grain, so the same numbers would read heavier. Move the two opacities
+         together if you tune it, and leave baseFrequency alone — opacity is
+         strength, baseFrequency is coarseness, and coarseness is what makes it
+         read as stone rather than screen noise.
+
+         No node graph here on purpose. That drawing is Product's, and running
+         it on both pages makes the two interchangeable. -->
     <section class="gz-fold-pull eaf-hero" id="top">
-      <img class="eaf-hero__field" src="assets/brand/ea-field.svg?v=1" alt="" aria-hidden="true">
+      <svg class="eaf-hero__field" viewBox="0 0 1280 660" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="ea-bl" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FF8A33" stop-opacity="0.3"></stop><stop offset="0.5" stop-color="#FF6A00" stop-opacity="0.1"></stop><stop offset="1" stop-color="#FF6A00" stop-opacity="0"></stop></radialGradient>
+          <filter id="ea-blf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="70"></feGaussianBlur></filter>
+          <filter id="ea-gc" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" stitchTiles="stitch" result="n"></feTurbulence><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.32 0 0 0 0 0.26 0 0 0 0 0.19 0.62 0 0 0 -0.27"></feColorMatrix></filter>
+          <filter id="ea-gf" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" stitchTiles="stitch" result="n"></feTurbulence><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.32 0 0 0 0 0.26 0 0 0 0 0.19 0.7 0 0 0 -0.31"></feColorMatrix></filter>
+          <linearGradient id="ea-hem" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="0.72" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="1"></stop></linearGradient>
+        </defs>
+        <rect width="1280" height="660" fill="#FFFFFF"></rect>
+        <g class="eaf-bloom" filter="url(#ea-blf)"><ellipse cx="980" cy="300" rx="380" ry="300" fill="url(#ea-bl)"></ellipse></g>
+        <rect width="1280" height="660" filter="url(#ea-gc)" opacity="0.44"></rect>
+        <rect width="1280" height="660" filter="url(#ea-gf)" opacity="0.30"></rect>
+        <rect x="0" y="396" width="1280" height="264" fill="url(#ea-hem)"></rect>
+      </svg>
 
       <div class="eaf-hero__copy">
         <p class="eaf-hero__eyebrow labelrow"><svg class="labelmark" viewBox="0 0 56 24" width="56" height="24" aria-hidden="true"><line x1="5.5" y1="17.5" x2="24.5" y2="7.5" stroke="#FF8A33" stroke-opacity=".5" stroke-width="1.2"></line><line x1="24.5" y1="7.5" x2="43.5" y2="15.5" stroke="#FF8A33" stroke-opacity=".5" stroke-width="1.2"></line><rect x="3" y="15" width="5" height="5" rx="1" fill="#FF8A33" fill-opacity=".7"></rect><rect x="22" y="5" width="5" height="5" rx="1" fill="#FF6A00" fill-opacity="1"></rect><rect x="41" y="13" width="5" height="5" rx="1" fill="#FF8A33" fill-opacity=".7"></rect></svg><span class="labelrow__text">Early access</span></p>

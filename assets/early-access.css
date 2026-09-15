@@ -701,3 +701,28 @@
   .page[data-page="early-access"] .eaf-hero__title { font-size: 34px; letter-spacing: -0.03em; }
   .page[data-page="early-access"] .eaf-notes { padding: 72px 20px 0; }
 }
+
+
+/* ---- the fold's ground ----
+
+   Four layers in one inline SVG: white, one bloom, granite twice, then the hem
+   that dissolves the whole thing into the band below. Nothing else about the
+   fold changes — no text moves, nothing is resized.
+
+   The bloom is the only thing that moves, and it takes nearly two minutes to
+   go anywhere, which is the point: it should be noticed on the second look,
+   not the first. */
+
+.page[data-page="early-access"] .eaf-bloom {
+  animation: drift 116s ease-in-out infinite;
+  transform-origin: 980px 300px;
+}
+
+@keyframes drift {
+  0%, 100% { transform: none; }
+  50% { transform: translate(-26px, 18px) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .eaf-bloom { animation: none; }
+}
