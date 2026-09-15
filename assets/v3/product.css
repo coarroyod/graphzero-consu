@@ -462,8 +462,13 @@
   font-size: 17px;
   line-height: 1.6;
   color: #59666B;
-  max-width: 430px;
-  text-wrap: pretty;
+  /* Two lines, one sentence each. The break is an explicit <br> rather than a
+     measure narrow enough to force it, because the widths that happen to break
+     between the sentences sit in a 25px window — a hair wider and the line
+     ends on "We", a hair narrower and it runs to three. The sentences measure
+     445px and 502px, so 540 holds each on its own line with room to spare, and
+     nothing is left to chance. */
+  max-width: 540px;
 }
 
 .page[data-page="product"] .gzf-hero__cta {
