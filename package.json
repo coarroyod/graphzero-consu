@@ -6,6 +6,7 @@
   "scripts": {
     "gen:hero": "node scripts/gen-hero-field.mjs",
     "gen:hero:security": "node scripts/gen-hero-field.mjs --out security-field.svg --width 1440 --height 828",
-    "gen:fields": "npm run gen:hero && npm run gen:hero:security"
+    "gen:fields": "npm run gen:hero && npm run gen:hero:security",
+    "gen:graph": "node scripts/gen-hero-graph.mjs"
   }
 }
