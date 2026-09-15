@@ -556,7 +556,7 @@
 
 .page[data-page="early-access"] .eaf-hero {
   position: relative;
-  height: 560px;
+  height: 660px;
   background: #FFFFFF;
   /* Deliberately no border-bottom. The seam is the thing this hero is built
      to avoid; a rule here would put it straight back. */
@@ -576,10 +576,11 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* flex-end, not center: the block belongs in the corner. */
+  justify-content: flex-end;
   align-items: flex-start;
-  gap: 30px;
-  padding: 0 56px;
+  gap: 24px;
+  padding: 0 56px 72px;
   pointer-events: none;
 }
 
@@ -587,23 +588,36 @@
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: "Geist", system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1;
+  /* The gap is the only spacing in this row. A margin on the mark would be a
+     cross-axis offset here and would push it off the label's centre line. */
+  gap: 14px;
+}
+
+.page[data-page="early-access"] .eaf-hero__eyebrow .labelmark {
+  display: block;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 24px;
+  margin: 0;
+}
+
+.page[data-page="early-access"] .eaf-hero__eyebrow .labelrow__text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: #59666B;
+  line-height: 1;
 }
 
 .page[data-page="early-access"] .eaf-hero__title {
   margin: 0;
   font-family: "Inter Tight", system-ui, sans-serif;
   font-weight: 600;
-  font-size: 72px;
+  font-size: 64px;
   line-height: 1.02;
-  letter-spacing: -0.042em;
+  letter-spacing: -0.04em;
   color: #17232B;
-  max-width: 820px;
-  text-wrap: balance;
 }
 
 .page[data-page="early-access"] .eaf-hero__stop { color: #FF2E93; }
@@ -665,16 +679,16 @@
    The brief's measurements are the desktop composition; 72px type and a 560px
    stage do not fit a phone. Nothing else about the piece changes. */
 @media (max-width: 1100px) {
-  .page[data-page="early-access"] .eaf-hero__title { font-size: 58px; max-width: 680px; }
+  .page[data-page="early-access"] .eaf-hero__title { font-size: 54px; }
 }
 
 @media (max-width: 860px) {
   .page[data-page="early-access"] .eaf-nav { padding: 0 24px; height: 72px; gap: 16px; }
   .page[data-page="early-access"] .eaf-nav__links { gap: 18px; }
   .page[data-page="early-access"] .eaf-nav__links a { font-size: 13px; }
-  .page[data-page="early-access"] .eaf-hero { height: 500px; }
-  .page[data-page="early-access"] .eaf-hero__copy { padding: 0 24px; gap: 24px; }
-  .page[data-page="early-access"] .eaf-hero__title { font-size: 44px; max-width: 520px; }
+  .page[data-page="early-access"] .eaf-hero { height: 560px; }
+  .page[data-page="early-access"] .eaf-hero__copy { padding: 0 24px 56px; gap: 20px; }
+  .page[data-page="early-access"] .eaf-hero__title { font-size: 42px; }
   .page[data-page="early-access"] .eaf-notes { padding: 80px 24px 0; }
 }
 
@@ -682,8 +696,8 @@
   .page[data-page="early-access"] .eaf-nav { padding: 0 20px; gap: 12px; }
   .page[data-page="early-access"] .eaf-nav__links { gap: 13px; }
   .page[data-page="early-access"] .eaf-nav__links a { font-size: 12.5px; }
-  .page[data-page="early-access"] .eaf-hero { height: 460px; }
-  .page[data-page="early-access"] .eaf-hero__copy { padding: 0 20px; gap: 20px; }
+  .page[data-page="early-access"] .eaf-hero { height: 500px; }
+  .page[data-page="early-access"] .eaf-hero__copy { padding: 0 20px 44px; gap: 18px; }
   .page[data-page="early-access"] .eaf-hero__title { font-size: 34px; letter-spacing: -0.03em; }
   .page[data-page="early-access"] .eaf-notes { padding: 72px 20px 0; }
 }

@@ -15,8 +15,9 @@
 <link rel="stylesheet" href="assets/site.css?v=49">
 <link rel="stylesheet" href="assets/footer.css?v=13">
 <link rel="stylesheet" href="assets/header.css?v=8">
-<link rel="stylesheet" href="assets/early-access.css?v=21">
+<link rel="stylesheet" href="assets/early-access.css?v=22">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
+<link rel="stylesheet" href="assets/nav.css?v=4">
 <link rel="icon" href="assets/graphzero-favicon.png?v=4" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=3">
 </head>
@@ -30,26 +31,34 @@
          paint where the browser cannot drive it. -->
     <div class="gzea-progress" aria-hidden="true"></div>
 
-  <!-- Early Access carries its own bar, the way Product does. Same 82px, same
-       composed lockup; this one is on white, so the rule beneath it is navy at
-       a tenth and the mark is the light-ground prism.
+  <!-- One bar, four pages. Sticky, with no ground of its own: the veil behind
+       it is a blurred, masked gradient that is taller than the bar, so it has
+       somewhere to fade out instead of ending on a line. It is a sibling of
+       the fold, never a child — a bar inside the fold stops being sticky the
+       moment the fold scrolls away.
 
-       The lockup is composed here rather than loaded as one file: an SVG behind
+       The lockup is composed rather than loaded as one file: an SVG behind
        <img> is its own document and cannot see this page's @font-face, so a
        wordmark set as <text> inside it falls back to Helvetica without saying
-       so. The mark is the picture; the name is live text. -->
-  <nav class="eaf-nav" aria-label="Primary">
-    <a class="eaf-nav__brand" href="index.html" title="/graphzero">
-      <img class="eaf-nav__mark" src="assets/brand/icon-prism.svg" alt=""
-           width="23" height="23" decoding="async">
-      <span class="eaf-nav__word">graphzero</span>
-    </a>
+       so. The mark is the picture; the name is live text.
 
-    <div class="eaf-nav__links">
-      <a href="index.html">Product</a>
-      <a href="early-access.html" aria-current="page">Early Access</a>
-      <a href="security.html">Security</a>
-      <a href="about.html">About</a>
+       No call to action here — the hero carries one. assets/nav.js flips the
+       bar's ink wherever a [data-dark] band runs under it. -->
+  <nav class="gznav" aria-label="Primary">
+    <div class="nav-veil" aria-hidden="true"></div>
+    <div class="nav-row">
+      <a class="nav-brand" href="index.html" title="/graphzero">
+        <img class="nav-mark" src="assets/brand/icon-prism.svg" alt=""
+             width="23" height="23" decoding="async">
+        <span class="nav-wordmark">graphzero</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Product</a>
+        <a href="early-access.html" class="nav-active" aria-current="page">Early Access</a>
+        <a href="security.html">Security</a>
+        <a href="about.html">About</a>
+      </div>
     </div>
   </nav>
 
@@ -73,12 +82,12 @@
          Decorative to a screen reader; the paragraphs say what it says.
 
          Regenerate with `npm run gen:hero`. -->
-    <section class="eaf-hero" id="top">
+    <section class="gz-fold-pull eaf-hero" id="top">
       <img class="eaf-hero__field" src="assets/brand/ea-field.svg?v=1" alt="" aria-hidden="true">
 
       <div class="eaf-hero__copy">
-        <p class="eaf-hero__eyebrow"><svg class="gzea-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g1"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g1)"></rect></svg> Early access</p>
-        <h1 class="eaf-hero__title">Turn what your people know into what your company knows<span class="eaf-hero__stop">.</span></h1>
+        <p class="eaf-hero__eyebrow labelrow"><svg class="labelmark" viewBox="0 0 56 24" width="56" height="24" aria-hidden="true"><line x1="5.5" y1="17.5" x2="24.5" y2="7.5" stroke="#FF8A33" stroke-opacity=".5" stroke-width="1.2"></line><line x1="24.5" y1="7.5" x2="43.5" y2="15.5" stroke="#FF8A33" stroke-opacity=".5" stroke-width="1.2"></line><rect x="3" y="15" width="5" height="5" rx="1" fill="#FF8A33" fill-opacity=".7"></rect><rect x="22" y="5" width="5" height="5" rx="1" fill="#FF6A00" fill-opacity="1"></rect><rect x="41" y="13" width="5" height="5" rx="1" fill="#FF8A33" fill-opacity=".7"></rect></svg><span class="labelrow__text">Early access</span></p>
+        <h1 class="eaf-hero__title">Turn what your people know<br>into what your company knows<span class="eaf-hero__stop">.</span></h1>
         <div class="eaf-hero__ctas">
           <a class="eaf-hero__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
           <a class="eaf-hero__cta eaf-hero__cta--quiet" href="#product">See how it works &darr;</a>
@@ -152,7 +161,7 @@
          The four points were a horizontally scrolling track pinned to the
          viewport. They are a ruled register in two columns now: the same four
          in the same order, all four readable at once, and nothing that moves. -->
-    <section class="gzea-gets" id="early-access">
+    <section class="gzea-gets" id="early-access" data-dark>
       <div class="gzea-wrap">
         <p class="gzea-eyebrow gzea-eyebrow--dark" data-reveal><svg class="gzea-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g3"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g3)"></rect></svg>Design Partnership</p>
 
@@ -314,5 +323,6 @@
 <script src="assets/site.js?v=44" defer></script>
 <script src="assets/kg-flow.js?v=16" defer></script>
 <script src="assets/header.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>

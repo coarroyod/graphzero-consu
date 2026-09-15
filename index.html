@@ -13,10 +13,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&amp;family=Inter+Tight:wght@400..700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css?v=2">
 <link rel="stylesheet" href="assets/v3/site.css?v=6">
-<link rel="stylesheet" href="assets/v3/product.css?v=40">
+<link rel="stylesheet" href="assets/v3/product.css?v=41">
 <link rel="stylesheet" href="assets/footer.css?v=13">
 <link rel="stylesheet" href="assets/header.css?v=8">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
+<link rel="stylesheet" href="assets/nav.css?v=4">
 <link rel="icon" href="assets/graphzero-favicon.png?v=4" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=3">
 </head>
@@ -30,29 +31,34 @@
          paint where the browser cannot drive it. -->
     <div class="gzp-progress" aria-hidden="true"></div>
 
-  <!-- The bar carries no ground of its own. The page and the hero are the
-       same warm stone, so a transparent bar reads as part of the image rather
-       than as a strip laid over it, and there is no rule to cut the two apart.
-       It sits outside <main>, where site navigation belongs.
+  <!-- One bar, four pages. Sticky, with no ground of its own: the veil behind
+       it is a blurred, masked gradient that is taller than the bar, so it has
+       somewhere to fade out instead of ending on a line. It is a sibling of
+       the fold, never a child — a bar inside the fold stops being sticky the
+       moment the fold scrolls away.
 
-       No call to action here: the hero already carries one, and the same
-       button twice in a single screen was what we took out. -->
-  <nav class="gzf-nav" aria-label="Primary">
-    <a class="gzf-nav__brand" href="index.html" title="/graphzero">
-      <!-- The lockup is composed here, not loaded as one file. An SVG behind
-           <img> is its own document: it cannot see this page's @font-face, so a
-           wordmark set as <text> inside it would quietly fall back to
-           Helvetica. The mark is the picture; the name is live text. -->
-      <img class="gzf-nav__mark" src="assets/brand/icon-prism.svg" alt=""
-           width="23" height="23" decoding="async">
-      <span class="gzf-nav__word">graphzero</span>
-    </a>
+       The lockup is composed rather than loaded as one file: an SVG behind
+       <img> is its own document and cannot see this page's @font-face, so a
+       wordmark set as <text> inside it falls back to Helvetica without saying
+       so. The mark is the picture; the name is live text.
 
-    <div class="gzf-nav__links">
-      <a href="index.html" aria-current="page">Product</a>
-      <a href="early-access.html">Early Access</a>
-      <a href="security.html">Security</a>
-      <a href="about.html">About</a>
+       No call to action here — the hero carries one. assets/nav.js flips the
+       bar's ink wherever a [data-dark] band runs under it. -->
+  <nav class="gznav" aria-label="Primary">
+    <div class="nav-veil" aria-hidden="true"></div>
+    <div class="nav-row">
+      <a class="nav-brand" href="index.html" title="/graphzero">
+        <img class="nav-mark" src="assets/brand/icon-prism.svg" alt=""
+             width="23" height="23" decoding="async">
+        <span class="nav-wordmark">graphzero</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html" class="nav-active" aria-current="page">Product</a>
+        <a href="early-access.html">Early Access</a>
+        <a href="security.html">Security</a>
+        <a href="about.html">About</a>
+      </div>
     </div>
   </nav>
 
@@ -78,7 +84,7 @@
 
          Generated. Do not hand-edit between the markers: run `npm run gen:graph`
          and it is rewritten from scripts/gen-hero-graph.mjs. -->
-    <section class="gzf-hero" id="hero">
+    <section class="gz-fold-pull gzf-hero" id="hero">
       <!-- gz:hero-graph:start -->
       <svg class="gzh" viewBox="0 0 1280 742" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
 <defs>
@@ -964,5 +970,6 @@
 <script src="assets/v3/site.js?v=4" defer></script>
 <script src="assets/kg-flow.js?v=16" defer></script>
 <script src="assets/header.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>

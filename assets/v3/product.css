@@ -434,8 +434,8 @@
      88px of bottom padding is what lifts it off the edge. */
   justify-content: flex-end;
   align-items: flex-start;
-  gap: 26px;
-  padding: 0 56px 88px;
+  gap: 24px;
+  padding: 0 56px 72px;
   /* Transparent to the pointer, so the camera still follows the cursor
      wherever it crosses the hero. The one thing that has to catch a click
      takes its events back below. */
@@ -446,8 +446,8 @@
   margin: 0;
   font-family: "Inter Tight", system-ui, sans-serif;
   font-weight: 600;
-  font-size: 70px;
-  line-height: 1.04;
+  font-size: 64px;
+  line-height: 1.02;
   letter-spacing: -0.04em;
   color: #17232B;
   /* The break is an explicit <br> in the markup, so nothing is left to
@@ -459,7 +459,7 @@
 .page[data-page="product"] .gzf-hero__lead {
   margin: 0;
   font-family: "Geist", system-ui, sans-serif;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.6;
   color: #59666B;
   max-width: 430px;
@@ -497,7 +497,7 @@
   .page[data-page="product"] .gzf-nav { padding: 0 24px; height: 72px; gap: 16px; }
   .page[data-page="product"] .gzf-nav__links { gap: 18px; }
   .page[data-page="product"] .gzf-nav__links a { font-size: 13px; }
-  .page[data-page="product"] .gzf-hero__copy { padding: 0 24px 64px; gap: 22px; }
+  .page[data-page="product"] .gzf-hero__copy { padding: 0 24px 56px; gap: 20px; }
   .page[data-page="product"] .gzf-hero { height: 560px; }
   .page[data-page="product"] .gzf-hero__title { font-size: 42px; }
 }
@@ -506,7 +506,7 @@
   .page[data-page="product"] .gzf-nav { padding: 0 20px; gap: 12px; }
   .page[data-page="product"] .gzf-nav__links { gap: 13px; }
   .page[data-page="product"] .gzf-nav__links a { font-size: 12.5px; }
-  .page[data-page="product"] .gzf-hero__copy { padding: 0 20px 52px; gap: 20px; }
+  .page[data-page="product"] .gzf-hero__copy { padding: 0 20px 44px; gap: 18px; }
   .page[data-page="product"] .gzf-hero { height: 500px; }
   .page[data-page="product"] .gzf-hero__title { font-size: 34px; letter-spacing: -0.03em; }
   .page[data-page="product"] .gzf-hero__lead { font-size: 16px; }

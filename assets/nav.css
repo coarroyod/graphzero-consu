@@ -1,0 +1,176 @@
+/* ==========================================================================
+   The bar — one bar, four pages
+   ==========================================================================
+
+   Sticky, and carrying no ground of its own. What sits behind it is a veil:
+   a blurred, masked, gradient panel that is taller than the bar itself.
+
+   Two things about that veil are the whole of it, and neither survives being
+   simplified:
+
+     The fill is a gradient, not a flat colour. A flat panel leaves a visible
+     edge at its bottom however transparent you make it.
+
+     The veil is masked. backdrop-filter has a hard boundary even where the
+     fill has faded to nothing, so without the mask the blur itself draws the
+     line the gradient was there to avoid.
+
+   The bar is a sibling of the fold, never a child of it. A bar inside the
+   fold stops being sticky the moment the fold scrolls away; the fold's
+   -82px top margin is what pulls it up under the bar instead.
+
+   Ink inversion lives in nav.js: blur adds no luminance, so a transparent bar
+   over a navy band is unreadable at any fill level and the bar has to change
+   its own ink. Sections that need that carry data-dark.
+   ========================================================================== */
+
+.gznav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  height: 82px;
+  background: none;
+}
+
+.gznav .nav-veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Taller than the bar, so it has somewhere to fade out. */
+  height: 132px;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.16) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 42%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
+  transition: background 0.18s ease;
+}
+
+/* Above the veil, and the full height of the bar. */
+.gznav .nav-row {
+  position: relative;
+  height: 100%;
+  padding: 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.gznav .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.gznav .nav-mark {
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+/* 450 is a real weight: every page asks its font host for a range that
+   contains it rather than for fixed cuts. */
+.gznav .nav-wordmark {
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 450;
+  font-size: 12.5px;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: #17232b;
+  transition: color 0.18s ease;
+}
+
+.gznav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  color: #59666b;
+  transition: color 0.18s ease;
+}
+
+.gznav .nav-links a {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.gznav .nav-links a:hover {
+  opacity: 0.72;
+}
+
+.gznav .nav-links a.nav-active {
+  color: #17232b;
+  border-bottom-color: #ff6a00;
+  transition: color 0.18s ease;
+}
+
+/* The fold rises to meet it.
+
+   The selector is deliberately overweight. One fold carries `margin: 0 auto`
+   of its own to centre itself, and a shorthand resets margin-top to zero — so
+   a plain class loses to it and the fold drops back below the bar. This ties
+   that rule's specificity, and nav.css is the last sheet every page loads, so
+   it wins the tie. Only margin-top is set, so the auto centring survives. */
+.page .gz-fold-pull.gz-fold-pull {
+  margin-top: -82px;
+}
+
+@media (max-width: 860px) {
+  .gznav .nav-row {
+    padding: 0 24px;
+    gap: 16px;
+  }
+  .gznav .nav-links {
+    gap: 18px;
+  }
+  .gznav .nav-links a {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 560px) {
+  .gznav .nav-row {
+    padding: 0 20px;
+    gap: 12px;
+  }
+  .gznav .nav-links {
+    gap: 13px;
+  }
+  .gznav .nav-links a {
+    font-size: 12.5px;
+  }
+}
+
+/* The flip is a colour change, so anyone who asked for less motion still
+   gets it — it is legibility, not decoration. Only the easing goes. */
+@media (prefers-reduced-motion: reduce) {
+  .gznav .nav-veil,
+  .gznav .nav-wordmark,
+  .gznav .nav-links,
+  .gznav .nav-links a {
+    transition: none;
+  }
+}

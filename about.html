@@ -15,8 +15,9 @@
 <link rel="stylesheet" href="assets/site.css?v=49">
 <link rel="stylesheet" href="assets/footer.css?v=13">
 <link rel="stylesheet" href="assets/header.css?v=8">
-<link rel="stylesheet" href="assets/about.css?v=21">
+<link rel="stylesheet" href="assets/about.css?v=22">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
+<link rel="stylesheet" href="assets/nav.css?v=4">
 <link rel="icon" href="assets/graphzero-favicon.png?v=4" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=3">
 </head>
@@ -26,47 +27,43 @@
 
 <div class="page" data-page="about">
 
-  <header class="site-header">
-    <a class="brand" href="index.html" title="/graphzero">
-        <img class="brand__logo" src="assets/brand/graphzero-wordmark.png?v=2" alt="graphzero"
-           width="1000" height="240" decoding="async">
+  <!-- One bar, four pages. Sticky, with no ground of its own: the veil behind
+       it is a blurred, masked gradient that is taller than the bar, so it has
+       somewhere to fade out instead of ending on a line. It is a sibling of
+       the fold, never a child — a bar inside the fold stops being sticky the
+       moment the fold scrolls away.
+
+       The lockup is composed rather than loaded as one file: an SVG behind
+       <img> is its own document and cannot see this page's @font-face, so a
+       wordmark set as <text> inside it falls back to Helvetica without saying
+       so. The mark is the picture; the name is live text.
+
+       No call to action here — the hero carries one. assets/nav.js flips the
+       bar's ink wherever a [data-dark] band runs under it. -->
+  <nav class="gznav" aria-label="Primary">
+    <div class="nav-veil" aria-hidden="true"></div>
+    <div class="nav-row">
+      <a class="nav-brand" href="index.html" title="/graphzero">
+        <img class="nav-mark" src="assets/brand/icon-prism.svg" alt=""
+             width="23" height="23" decoding="async">
+        <span class="nav-wordmark">graphzero</span>
       </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-    </button>
-
-    <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <a href="index.html">Product</a>
-      <a href="early-access.html">Early Access</a>
-      <a href="security.html">Security</a>
-      <a href="about.html" aria-current="page">About</a>
-
-      <div class="nav-cta">
-        <a class="btn btn--accent" href="https://calendly.com/consuelo-ascending/30min">Become a design partner</a>
+      <div class="nav-links">
+        <a href="index.html">Product</a>
+        <a href="early-access.html">Early Access</a>
+        <a href="security.html">Security</a>
+        <a href="about.html" class="nav-active" aria-current="page">About</a>
       </div>
-    </nav>
-
-    <!-- The language set and the call to action are one group at the bar's
-         right end, which is what puts the navigation next to the wordmark
-         rather than centred between them. -->
-    <div class="site-header__end">
-      <div class="lang" role="group" aria-label="Language">
-        <button class="lang__opt" type="button" data-lang="en" aria-current="true">EN</button>
-        <button class="lang__opt" type="button" data-lang="de">DE</button>
-        <button class="lang__opt" type="button" data-lang="nl">NL</button>
-      </div>
-      <a class="site-header__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
     </div>
-  </header>
+  </nav>
 
     <main id="main">
 
     <div class="gza-progress" aria-hidden="true"></div>
 
     <!-- 00 · the fold -->
-    <section class="gza-hero" id="top">
+    <section class="gz-fold-pull gza-hero" id="top">
       <div class="gza-hero__grid">
         <div class="gza-hero__copy">
           <p class="gza-eyebrow gza-eyebrow--mono"><svg class="gza-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gza-g1"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gza-g1)"></rect></svg>About</p>
@@ -82,7 +79,7 @@
     </section>
 
     <!-- 01 · the story -->
-    <section class="gza-story" id="story">
+    <section class="gza-story" id="story" data-dark>
       <div class="gza-wrap">
         <p class="gza-eyebrow gza-eyebrow--invert"><svg class="gza-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gza-g2"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gza-g2)"></rect></svg>The story</p>
         <div class="gza-story__grid">
@@ -262,5 +259,6 @@
 
 <script src="assets/site.js?v=44" defer></script>
 <script src="assets/header.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>
