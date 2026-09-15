@@ -71,9 +71,13 @@
    gradient bar it replaces is gone, and its keyframes with it. */
 .page[data-page="security"] .gzs-mark {
   flex: 0 0 auto;
-  width: 15px;
-  height: 18px;
+  width: 56px;
+  height: 24px;
   display: block;
+  /* No margin. In an align-items: center row a margin-bottom is the cross axis
+     and lifts the mark off the label's centre line — the gap does the
+     spacing. */
+  margin: 0;
 }
 
 /* ---- 00 · the fold ----
@@ -379,12 +383,12 @@
   font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--gzs-muted);
+  color: #17232B;
   white-space: nowrap;
 }
 .page[data-page="security"] .gzs-status__dot { width: 6px; height: 6px; border-radius: var(--radius-pill); flex: 0 0 auto; }
-.page[data-page="security"] .gzs-status__dot--live { background: #FF2E93; }
-.page[data-page="security"] .gzs-status__dot--quiet { background: rgba(23, 35, 43, .28); }
+.page[data-page="security"] .gzs-status__dot--live { background: #FF6A00; }
+.page[data-page="security"] .gzs-status__dot--quiet { background: #B9C0C3; }
 
 .page[data-page="security"] .gzs-rows {
   margin: 20px auto 0;
@@ -588,15 +592,14 @@
   background: #FFFFFF;
 }
 
-.page[data-page="security"] .gzs-hero::before {
-  content: "";
+.page[data-page="security"] .gzs-hero__ground {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
-  /* Relative to this stylesheet, which lives a folder deeper than the
-     others — a CSS url() resolves against the sheet, not the page. */
-  background: url("../brand/security-field.svg?v=1") center / cover no-repeat;
   pointer-events: none;
+  display: block;
 }
 
 /* The bar at narrower widths. Same steps the other two carry: the fold below
@@ -612,3 +615,68 @@
   .page[data-page="security"] .gzs-nav__links { gap: 13px; }
   .page[data-page="security"] .gzs-nav__links a { font-size: 12.5px; }
 }
+
+
+/* ==========================================================================
+   Grounds, and the fold's own texture
+   ==========================================================================
+
+   The page is white the whole way down, with one lift: Deployment holds the
+   card grids, and a half-step of tone is what separates a grid of white cards
+   from the page they sit on without drawing a line around the section. The
+   assurance tiles take the same half-step, inverted — tiles on tone, section
+   on white.
+
+   No dark band anywhere. This is the longest, densest page on the site, and
+   on a page people actually read, legibility wins the argument.
+   ========================================================================== */
+
+.page[data-page="security"] #deployment { background: #FAFAF9; }
+.page[data-page="security"] #deployment .gzs-card { background: #FFFFFF; }
+.page[data-page="security"] .gzs-tile { background: #FAFAF9; }
+
+/* The eyebrow row spaces itself with the gap and nothing else. */
+.page[data-page="security"] .gzs-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ---- the fold's bloom ----
+
+   The Early Access recipe exactly — same filters, same colour constants, same
+   0.44 / 0.30 at 0.28 / 1.2 — so the two folds read as one material. Only the
+   bloom has moved: low left here, where Early Access has it upper right.
+
+   Not the Product hero's 0.70 / 0.46. That hero carries a node graph and a
+   wash over its grain; on a near-empty fold the same numbers read much
+   heavier. If this is ever tuned, move both opacities together and leave
+   baseFrequency alone: opacity is strength, baseFrequency is coarseness, and
+   coarseness is what makes it stone rather than screen noise. */
+
+.page[data-page="security"] .gzs-bloom {
+  animation: drift 116s ease-in-out infinite;
+  transform-origin: 300px 470px;
+}
+
+@keyframes drift {
+  0%, 100% { transform: none; }
+  50% { transform: translate(22px, -16px) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="security"] .gzs-bloom { animation: none; }
+}
+
+/* ---- two colours the scan caught ----
+
+   Both are the same fault the brief names for the status labels: a small size
+   in a light colour on a light ground. Orange numerals at 14px measure 2.87:1
+   on white, and the card footers' quiet grey 3.55:1 at 11px — both under 4.5.
+
+   Navy for the numerals, following the brief's own reasoning about orange, and
+   the palette's slate for the footers, which is 5.9:1 on white. Scoped to this
+   page, so the numerals stay orange in Product's closing band. */
+
+.page[data-page="security"] .numlist__num { color: #17232B; }
+.page[data-page="security"] .gzs-card__foot { color: #59666B; }
