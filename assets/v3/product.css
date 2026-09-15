@@ -340,14 +340,15 @@
    ========================================================================== */
 
 .page[data-page="product"] .gzf-nav {
-  background: #17232B;
+  /* No ground and no rule. The page and the hero are the same stone, so the
+     bar reads as part of the image instead of a strip laid over it. */
+  background: transparent;
   height: 82px;
   padding: 0 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .page[data-page="product"] .gzf-nav__brand {
@@ -371,21 +372,22 @@
   font-weight: 450;
   font-size: 12.5px;
   letter-spacing: -0.025em;
-  color: #FFFFFF;
+  color: #17232B;
   line-height: 1;
 }
 
 .page[data-page="product"] .gzf-nav__links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 34px;
 }
 
 .page[data-page="product"] .gzf-nav__links a {
   font-family: "Geist", system-ui, sans-serif;
   font-size: 14px;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.66);
+  white-space: nowrap;
+  color: #59666B;
   text-decoration: none;
   padding-bottom: 3px;
   border-bottom: 2px solid transparent;
@@ -393,11 +395,11 @@
 }
 
 .page[data-page="product"] .gzf-nav__links a:hover {
-  color: #FFFFFF;
+  color: #17232B;
 }
 
 .page[data-page="product"] .gzf-nav__links a[aria-current="page"] {
-  color: #FFFFFF;
+  color: #17232B;
   border-bottom-color: #FF6A00;
 }
 
@@ -428,10 +430,12 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* flex-end, not center: this is what puts the block in the corner. The
+     88px of bottom padding is what lifts it off the edge. */
+  justify-content: flex-end;
   align-items: flex-start;
-  gap: 34px;
-  padding: 0 56px;
+  gap: 26px;
+  padding: 0 56px 88px;
   /* Transparent to the pointer, so the camera still follows the cursor
      wherever it crosses the hero. The one thing that has to catch a click
      takes its events back below. */
@@ -442,14 +446,12 @@
   margin: 0;
   font-family: "Inter Tight", system-ui, sans-serif;
   font-weight: 600;
-  font-size: 80px;
-  line-height: 1;
-  letter-spacing: -0.042em;
-  /* Navy now the ground is stone. The words and their size are untouched;
-     white on #F3EDE2 would be about 1.2:1 and unreadable. */
+  font-size: 70px;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
   color: #17232B;
-  max-width: 840px;
-  text-wrap: balance;
+  /* The break is an explicit <br> in the markup, so nothing is left to
+     balance and no width has to stand in for a decision. */
 }
 
 .page[data-page="product"] .gzf-hero__stop { color: #FF2E93; }
@@ -457,18 +459,18 @@
 .page[data-page="product"] .gzf-hero__lead {
   margin: 0;
   font-family: "Geist", system-ui, sans-serif;
-  font-size: 16px;
-  line-height: 1.62;
-  color: rgba(23, 35, 43, 0.8);
-  max-width: 520px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #59666B;
+  max-width: 430px;
   text-wrap: pretty;
 }
 
 .page[data-page="product"] .gzf-hero__cta {
   pointer-events: auto;
   align-self: flex-start;
-  background: #FF6A00;
-  color: #17232B;
+  background: #17232B;
+  color: #FFFFFF;
   font-family: "Geist", system-ui, sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -480,7 +482,7 @@
   transition: background-color 160ms ease;
 }
 
-.page[data-page="product"] .gzf-hero__cta:hover { background: #FF8A33; }
+.page[data-page="product"] .gzf-hero__cta:hover { background: #35454F; }
 
 /* ---- narrower screens ----
 
@@ -488,26 +490,26 @@
    down and the stage shortens, because 80px type and a 660px stage do not fit
    a phone; nothing else about the piece changes. */
 @media (max-width: 1100px) {
-  .page[data-page="product"] .gzf-hero__title { font-size: 64px; max-width: 680px; }
+  .page[data-page="product"] .gzf-hero__title { font-size: 56px; }
 }
 
 @media (max-width: 860px) {
   .page[data-page="product"] .gzf-nav { padding: 0 24px; height: 72px; gap: 16px; }
   .page[data-page="product"] .gzf-nav__links { gap: 18px; }
   .page[data-page="product"] .gzf-nav__links a { font-size: 13px; }
-  .page[data-page="product"] .gzf-hero__copy { padding: 0 24px; gap: 26px; }
+  .page[data-page="product"] .gzf-hero__copy { padding: 0 24px 64px; gap: 22px; }
   .page[data-page="product"] .gzf-hero { height: 560px; }
-  .page[data-page="product"] .gzf-hero__title { font-size: 48px; max-width: 520px; }
+  .page[data-page="product"] .gzf-hero__title { font-size: 42px; }
 }
 
 @media (max-width: 560px) {
   .page[data-page="product"] .gzf-nav { padding: 0 20px; gap: 12px; }
   .page[data-page="product"] .gzf-nav__links { gap: 13px; }
   .page[data-page="product"] .gzf-nav__links a { font-size: 12.5px; }
-  .page[data-page="product"] .gzf-hero__copy { padding: 0 20px; gap: 22px; }
+  .page[data-page="product"] .gzf-hero__copy { padding: 0 20px 52px; gap: 20px; }
   .page[data-page="product"] .gzf-hero { height: 500px; }
-  .page[data-page="product"] .gzf-hero__title { font-size: 36px; letter-spacing: -0.03em; }
-  .page[data-page="product"] .gzf-hero__lead { font-size: 15px; }
+  .page[data-page="product"] .gzf-hero__title { font-size: 34px; letter-spacing: -0.03em; }
+  .page[data-page="product"] .gzf-hero__lead { font-size: 16px; }
 }
 
 
@@ -555,4 +557,71 @@
   .page[data-page="product"] .gzh-spark,
   .page[data-page="product"] .gzh-drift1,
   .page[data-page="product"] .gzh-drift2 { animation: none; }
+}
+
+
+/* ==========================================================================
+   Section labels, and the page's grounds
+   ========================================================================== */
+
+/* The label row: the mark, a gap, the words. The gap is the only spacing in
+   it — a margin on the svg would be a cross-axis offset in an
+   align-items: center row and would push the mark off the label's centre
+   line, which is exactly the thing that went wrong before. */
+.page[data-page="product"] .labelrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.page[data-page="product"] .labelrow .labelmark {
+  display: block;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 24px;
+  margin: 0;
+}
+
+.page[data-page="product"] .labelrow__text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #59666B;
+  line-height: 1;
+}
+
+/* ---- grounds ----
+
+   Three, and no more: the page is stone, anything that reads as a card sits a
+   shade above it, and the closing claim sits a shade below. The band that
+   closed the page in orange is that claim now, so the section no longer
+   carries .dark and its badges are the artwork's own black again. */
+
+.page[data-page="product"] { background: #F3EDE2; }
+
+.page[data-page="product"] .card,
+.page[data-page="product"] .card--ring,
+.page[data-page="product"] .layer-card,
+.page[data-page="product"] .tc__panel,
+.page[data-page="product"] .af-card {
+  background: #FBF8F2;
+}
+
+.page[data-page="product"] #security {
+  background-color: #E6DCC9;
+  background-image: none;
+  /* site.css turns this section's ink white for the orange ground it used to
+     have, and says in as many words that dark ink is what the band actually
+     wants — "a change of design, not of colour, so it is not made unasked".
+     The band is sand now, so it is asked for: the ink comes back. */
+  --surface-dark: #E6DCC9;
+  --heading: #17232B;
+  /* Slate is the palette's body grey, but #59666B on this sand measures
+     4.37:1 — under the line. Navy at .72 lands on the same tone and reads
+     5.4:1, so it is the slate the ground can actually carry. */
+  --body: rgba(23, 35, 43, 0.72);
+  --meta: rgba(23, 35, 43, 0.72);
+  --line: rgba(23, 35, 43, 0.16);
+  color: #17232B;
 }
