@@ -88,12 +88,12 @@
 }
 .page[data-page="about"] .gza-display__accent { color: #FF6A00; }
 .page[data-page="about"] .gza-display__stop { color: #FF2E93; }
-/* A rule above them and a step down in size: the pair reads as a note under
-   the headline rather than as a second headline after it. */
+/* A step down in size, so the pair reads as a note under the headline rather
+   than as a second headline after it. The rule that used to open them is
+   gone; the distance does the work on its own. */
 .page[data-page="about"] .gza-statements {
   margin-top: 38px;
   padding-top: 28px;
-  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -122,18 +122,6 @@
 .page[data-page="about"] .gza-flow { display: block; overflow: visible; }
 @keyframes gza-flow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -420; } }
 .page[data-page="about"] .gza-packet { animation-name: gza-flow; animation-timing-function: linear; animation-iteration-count: infinite; }
-.page[data-page="about"] .gza-hero__claim {
-  margin: 56px 0 0;
-  padding-top: 30px;
-  max-width: 104ch;
-  /* The same weight as the rule above the statements, so the fold reads as
-     three banded tiers rather than two rules of different strength. */
-  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .16);
-  font-size: 19px;
-  line-height: 1.5;
-  color: var(--gza-muted);
-  text-wrap: pretty;
-}
 
 /* ---- 01 · the story, on the navy ---- */
 .page[data-page="about"] .gza-story {
@@ -397,7 +385,6 @@
   .page[data-page="about"] .gza-statements p { font-size: 21px; }
   .page[data-page="about"] .gza-story__lead { font-size: 18px; }
   .page[data-page="about"] .gza-eco__body { padding: 24px 24px 28px; }
-  .page[data-page="about"] .gza-hero__claim { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
