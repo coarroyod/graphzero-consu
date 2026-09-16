@@ -469,3 +469,122 @@
 @media (max-width: 900px) {
   .page[data-page="about"] .gza-story::before { background-size: cover; }
 }
+
+
+/* ==========================================================================
+   The fold's ground, and the Europe figure
+   ==========================================================================
+
+   Same recipe as the Early Access and Security folds — same filters, same
+   colour constants, granite 0.44 / 0.30 over baseFrequency 0.28 / 1.2 — so all
+   three white folds read as one material. Only the bloom moves: upper right
+   here.
+   ========================================================================== */
+
+.page[data-page="about"] .gza-hero { position: relative; isolation: isolate; }
+
+.page[data-page="about"] .gza-hero__ground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
+.page[data-page="about"] .gza-bloom {
+  animation: drift 116s ease-in-out infinite;
+  transform-origin: 900px 300px;
+}
+
+@keyframes drift {
+  0%, 100% { transform: none; }
+  50% { transform: translate(-26px, 18px) scale(1.06); }
+}
+
+/* ---- the map ----
+
+   The wrap is the labels' coordinate system: they are placed as percentages
+   of it, which are the cities' own cell centres — col 8 and col 12 of 23,
+   row 9 of 18 — so they follow the figure at any width without being
+   re-measured. */
+
+.page[data-page="about"] .gzeu-wrap { position: relative; display: block; }
+.page[data-page="about"] .gzeu { display: block; width: 100%; height: auto; }
+
+.page[data-page="about"] .gzeu-label {
+  position: absolute;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  /* Navy, not slate. Both cities are interior points of the continent, so the
+     glyphs necessarily sit over land tiles: slate measures 3.08:1 there and
+     fails, navy 13.3:1 against the strongest tile beneath. Moving the labels
+     was not an option — there is no clear ground beside either city — and
+     leader lines were rejected. */
+  color: #17232B;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.page[data-page="about"] .gzeu-label--ams {
+  left: 37%;
+  top: 52.8%;
+  transform: translate(-100%, -50%);
+  padding-right: 14px;
+}
+
+.page[data-page="about"] .gzeu-label--ber {
+  left: 54.3%;
+  top: 52.8%;
+  transform: translate(0, -50%);
+  padding-left: 14px;
+}
+
+/* Four breathing curves at different amplitudes with staggered delays, so the
+   groups never fall into step. No sparks: tiles flashing to full orange pull
+   the eye around the frame, and the cities are meant to be the only saturated
+   marks here. */
+@keyframes tile1 { 0%, 100% { opacity: .78 } 50% { opacity: 1 } }
+@keyframes tile2 { 0%, 100% { opacity: 1 } 50% { opacity: .72 } }
+@keyframes tile3 { 0%, 100% { opacity: .85 } 50% { opacity: 1 } }
+@keyframes tile4 { 0%, 100% { opacity: 1 } 50% { opacity: .8 } }
+
+.page[data-page="about"] .gzeu-t1 { animation: tile1 5s ease-in-out infinite; animation-delay: 0s; }
+.page[data-page="about"] .gzeu-t2 { animation: tile2 5s ease-in-out infinite; animation-delay: .45s; }
+.page[data-page="about"] .gzeu-t3 { animation: tile3 5s ease-in-out infinite; animation-delay: .9s; }
+.page[data-page="about"] .gzeu-t4 { animation: tile4 5s ease-in-out infinite; animation-delay: 1.35s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="about"] .gza-bloom,
+  .page[data-page="about"] .gzeu-t1,
+  .page[data-page="about"] .gzeu-t2,
+  .page[data-page="about"] .gzeu-t3,
+  .page[data-page="about"] .gzeu-t4 { animation: none; }
+}
+
+/* ---- the eyebrow row ---- */
+.page[data-page="about"] .gza-eyebrow {
+  display: flex;
+  align-items: center;
+  /* The gap is the only spacing: a margin on the mark would be the cross axis
+     here and would lift it off the label's centre line. */
+  gap: 12px;
+}
+
+.page[data-page="about"] .gza-mark,
+.page[data-page="about"] .gza-eyebrow--mono .gza-mark,
+.page[data-page="about"] .gza-close__item .gza-mark {
+  flex: 0 0 auto;
+  display: block;
+  width: 56px;
+  height: 24px;
+  margin: 0;
+}
+
+/* ---- the grounds below ----
+
+   White, with the ecosystem band a half-step up because it holds cards. */
+.page[data-page="about"] .gza-eco { background: #FAFAF9; }
