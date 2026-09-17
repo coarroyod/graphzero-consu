@@ -1,0 +1,711 @@
+/* ==========================================================================
+   Early Access — the 2026 system
+   ==========================================================================
+
+   The same foundations as the Product page, re-scoped to this one: palette,
+   type, radii, elevation, blooms, the section-opening gradient, buttons, the
+   edge glyph and every motion primitive. They are lifted from
+   assets/v4/product.css rather than retyped, so the two pages cannot drift.
+
+   Worth factoring into one shared sheet once a third page joins the system;
+   two copies is the point at which that stops being premature.
+
+   No serif on this page. Scoped throughout, so Product, Security and About
+   are untouched.
+   ========================================================================== */
+
+.page[data-page="early-access"] {
+  /* ---- palette ---- */
+  --paper: #ffffff;
+  --ink: #171310;
+  --ink-80: #3b3630;
+  --ink-50: #6f675e;
+  --signal: #ec5b23;
+  --signal-deep: #8c3a18;
+  --sand: #f3e9dd;
+  --clay: #e9c8ab;
+  --oxide: linear-gradient(150deg, #3a1b0f, #241610, #1b120d);
+
+  --hair: 1px solid rgba(23, 19, 16, 0.08);
+  --hair-c: rgba(23, 19, 16, 0.08);
+
+  /* ---- radii, one scale ---- */
+  --r-band: 24px;
+  --r-card: 18px;
+  --r-row: 12px;
+  --r-chip: 999px;
+
+  /* ---- elevation ---- */
+  --lift: 0 1px 0 rgba(23, 19, 16, 0.04), 0 10px 28px rgba(23, 19, 16, 0.05);
+  --lift-hi: 0 18px 44px rgba(23, 19, 16, 0.08);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- type ---- */
+  --f-sans:
+    "Archivo", system-ui, -apple-system, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+  --f-quote: "Newsreader", Georgia, "Times New Roman", serif;
+  --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  background: var(--paper);
+  color: var(--ink-80);
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.68;
+}
+
+/* ---- type roles ---- */
+
+.page[data-page="early-access"] h1,
+.page[data-page="early-access"] h2,
+.page[data-page="early-access"] h3 {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.page[data-page="early-access"] .gz4-h1 {
+  font-size: 56px;
+  letter-spacing: -0.042em;
+  line-height: 1.06;
+  margin: 0;
+}
+.page[data-page="early-access"] .gz4-h2,
+.page[data-page="early-access"] h2.h2 {
+  font-size: 40px;
+  letter-spacing: -0.036em;
+  line-height: 1.1;
+  margin: 0;
+}
+.page[data-page="early-access"] h3 {
+  font-size: 20px;
+  letter-spacing: -0.026em;
+  line-height: 1.3;
+}
+.page[data-page="early-access"] .small {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.page[data-page="early-access"] .gz4-label,
+.page[data-page="early-access"] .eyebrow {
+  font-family: var(--f-mono);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-50);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- the one section-opening rule ---- */
+
+.page[data-page="early-access"] .gz4-open {
+  position: relative;
+}
+.page[data-page="early-access"] .gz4-open::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(236, 91, 35, 0.75),
+    rgba(236, 91, 35, 0.15) 42%,
+    rgba(23, 19, 16, 0.06) 78%
+  );
+}
+
+/* ---- grid ---- */
+
+.page[data-page="early-access"] .gz4-wrap,
+.page[data-page="early-access"] .wrap {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 72px;
+  box-sizing: border-box;
+}
+
+/* ---- blooms ----
+
+   The signature. An absolutely positioned radial, heavily blurred, at z-index
+   0 inside a relative, overflowing-hidden section. Every piece of content in
+   such a section has to sit at z-index 1 or it paints underneath. */
+
+.page[data-page="early-access"] .gz4-bloom {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(30px);
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.22), transparent 70%);
+}
+.page[data-page="early-access"] .gz4-bloom--soft {
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.12), transparent 70%);
+  filter: blur(36px);
+}
+.page[data-page="early-access"] .gz4-bloom--hot {
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.3), transparent 70%);
+  filter: blur(26px);
+}
+
+.page[data-page="early-access"] section {
+  position: relative;
+}
+.page[data-page="early-access"] section > *:not(.gz4-bloom) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Buttons, chips, rows
+   ========================================================================== */
+
+.page[data-page="early-access"] .gz4-btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 10px;
+  padding: 15px 26px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+.page[data-page="early-access"] .gz4-btn:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+  transform: translateX(3px);
+}
+
+.page[data-page="early-access"] .gz4-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.page[data-page="early-access"] .gz4-btn--ghost:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--paper);
+}
+.page[data-page="early-access"] .gz4-btn--onDark {
+  background: transparent;
+  color: var(--paper);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.page[data-page="early-access"] .gz4-btn--onDark:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+.page[data-page="early-access"] .gz4-chip {
+  display: inline-block;
+  background: var(--sand);
+  color: var(--ink);
+  border-radius: var(--r-chip);
+  padding: 6px 13px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    background-color 200ms var(--ease),
+    color 200ms var(--ease),
+    transform 200ms var(--ease);
+}
+.page[data-page="early-access"] .gz4-chip:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+.page[data-page="early-access"] .gz4-chip--grey {
+  background: rgba(23, 19, 16, 0.06);
+  color: var(--ink-50);
+}
+
+.page[data-page="early-access"] a:focus-visible,
+.page[data-page="early-access"] button:focus-visible,
+.page[data-page="early-access"] [tabindex]:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Motion primitives
+   ========================================================================== */
+
+@keyframes gzWordIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.46em);
+    filter: blur(11px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes gzWipeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.32em);
+    filter: blur(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes gzSettle {
+  from {
+    opacity: 0;
+    transform: translateY(38px) scale(0.962);
+    filter: blur(11px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes gzEnter {
+  from {
+    opacity: 0;
+    transform: translateY(44px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes gzRise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+    filter: blur(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes gzPlate {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.965);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes gzFloat {
+  from {
+    transform: translateY(46px) scale(0.94);
+  }
+  to {
+    transform: translateY(-58px) scale(1.14);
+  }
+}
+@keyframes gzRecede {
+  from {
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+  to {
+    transform: translateY(-22px) scale(0.972);
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+}
+@keyframes gzRule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes gzNavIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes gzProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes gzTicker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Scroll-driven reveals. No delays anywhere here on purpose: a scroll
+   timeline ignores animation-delay, and the stagger is meant to come from the
+   rows crossing the fold at different moments. */
+.page[data-page="early-access"] [data-gz4="enter"],
+.page[data-page="early-access"] [data-gz4="wipe"],
+.page[data-page="early-access"] [data-gz4="settle"] {
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@supports (animation-timeline: view()) {
+  .page[data-page="early-access"] [data-gz4="enter"] {
+    animation: gzEnter linear both;
+    animation-timeline: view();
+    animation-range: entry 16% entry 94%;
+  }
+  .page[data-page="early-access"] [data-gz4="wipe"] {
+    animation: gzWipeIn linear both;
+    animation-timeline: view();
+    animation-range: entry 22% entry 96%;
+  }
+  .page[data-page="early-access"] [data-gz4="settle"] {
+    animation: gzSettle linear both;
+    animation-timeline: view();
+    animation-range: entry 14% cover 26%;
+  }
+  /* Within a pair, the two cards deliberately do not land together. */
+  .page[data-page="early-access"] [data-gz4="settle"]:nth-child(even) {
+    animation-range: entry 14% cover 32%;
+  }
+
+  .page[data-page="early-access"] .gz4-bloom {
+    animation: gzFloat linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+
+
+/* ==========================================================================
+   The bar
+   ========================================================================== */
+
+.page[data-page="early-access"] .gznav { height: 62px; border-bottom: var(--hair); }
+.page[data-page="early-access"] .gznav .nav-row { height: 62px; padding-inline: 72px; }
+.page[data-page="early-access"] .gznav .nav-veil {
+  height: 62px; opacity: 0;
+  background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  -webkit-mask-image: none; mask-image: none;
+}
+.page[data-page="early-access"] .gznav .nav-wordmark { font-family: var(--f-sans); font-weight: 500; font-size: 13px; letter-spacing: -0.02em; color: var(--ink); }
+.page[data-page="early-access"] .gznav .nav-links { gap: 30px; color: #4a443d; }
+.page[data-page="early-access"] .gznav .nav-links a {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; border-bottom: 0; padding-bottom: 0;
+}
+.page[data-page="early-access"] .gznav .nav-links a:hover { color: var(--signal-deep); opacity: 1; }
+.page[data-page="early-access"] .gznav .nav-links a.nav-active { color: var(--ink); border-bottom: 0; }
+.page[data-page="early-access"] .gz4-progress {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--signal); transform-origin: 0 50%; transform: scaleX(0); z-index: 2;
+}
+.page[data-page="early-access"] .gz-fold-pull.gz-fold-pull { margin-top: 0; }
+
+@keyframes gzVeilIn { from { opacity: 0; } to { opacity: 1; } }
+@supports (animation-timeline: scroll(root)) {
+  .page[data-page="early-access"] .gznav .nav-veil {
+    animation: gzVeilIn 1s linear both;
+    animation-timeline: scroll(root); animation-range: 560px 760px;
+  }
+  .page[data-page="early-access"] .gz4-progress {
+    animation: gzProgress linear both; animation-timeline: scroll(root);
+  }
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.page[data-page="early-access"] .eaf-hero { background: var(--paper); overflow: hidden; padding: 0 0 72px; }
+.page[data-page="early-access"] .eaf-hero__inner { padding-top: 86px; }
+
+/* Column guides: the margins plus the two verticals the brief names. */
+.page[data-page="early-access"] .gz4-guides {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  max-width: 1440px; margin-inline: auto;
+}
+.page[data-page="early-access"] .gz4-guides span {
+  position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(23, 19, 16, 0.07);
+}
+.page[data-page="early-access"] .gz4-guides span:nth-child(1) { left: 72px; }
+.page[data-page="early-access"] .gz4-guides span:nth-child(2) { left: 519px; }
+.page[data-page="early-access"] .gz4-guides span:nth-child(3) { left: 966px; }
+
+.page[data-page="early-access"] .eaf-h1 {
+  font-size: 60px; line-height: 1.04; letter-spacing: -0.042em;
+  color: var(--ink); font-weight: 500; margin: 20px 0 30px; max-width: 900px;
+}
+.page[data-page="early-access"] .gz4-w { display: inline-block; animation: gzWordIn 1.25s var(--ease) both; }
+.page[data-page="early-access"] .gz4-w:nth-child(1) { animation-delay: .30s; }
+.page[data-page="early-access"] .gz4-w:nth-child(2) { animation-delay: .37s; }
+.page[data-page="early-access"] .gz4-w:nth-child(3) { animation-delay: .44s; }
+.page[data-page="early-access"] .gz4-w:nth-child(4) { animation-delay: .51s; }
+.page[data-page="early-access"] .gz4-w:nth-child(5) { animation-delay: .58s; }
+.page[data-page="early-access"] .gz4-w:nth-child(6) { animation-delay: .65s; }
+.page[data-page="early-access"] .gz4-w:nth-child(7) { animation-delay: .72s; }
+.page[data-page="early-access"] .gz4-w:nth-child(8) { animation-delay: .79s; }
+.page[data-page="early-access"] .gz4-w:nth-child(9) { animation-delay: .86s; }
+.page[data-page="early-access"] .gz4-w:nth-child(10) { animation-delay: .93s; }
+
+.page[data-page="early-access"] .eaf-hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; animation: gzRise 1.25s var(--ease) 1s both; }
+.page[data-page="early-access"] .gz4-ticks { display: flex; justify-content: space-between; margin: 46px 0 0; }
+.page[data-page="early-access"] .gz4-ticks span { width: 1px; height: 9px; background: rgba(23, 19, 16, 0.22); }
+.page[data-page="early-access"] .eaf-hero__rule { height: 1px; background: var(--hair-c); transform-origin: 0 50%; animation: gzRule 1.6s var(--ease) both; margin-top: 6px; }
+
+.page[data-page="early-access"] .eaf-register {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px 72px; margin-top: 34px;
+}
+.page[data-page="early-access"] .eaf-register__col { padding-top: 16px; }
+.page[data-page="early-access"] .eaf-register__col--today { box-shadow: inset 0 1px 0 var(--ink-50); }
+.page[data-page="early-access"] .eaf-register__col--gz { box-shadow: inset 0 1px 0 var(--signal); }
+.page[data-page="early-access"] .eaf-register__col p:last-child { margin: 12px 0 0; color: var(--ink-80); max-width: 46ch; }
+.page[data-page="early-access"] .eaf-register__col b { color: var(--ink); font-weight: 500; }
+.page[data-page="early-access"] .eaf-inline-mark { width: auto; height: 1.05em; vertical-align: -0.14em; margin-right: 5px; }
+
+@supports (animation-timeline: view()) {
+  .page[data-page="early-access"] .eaf-hero__inner {
+    animation: gzRecede linear both; animation-timeline: view(); animation-range: exit 10% exit 100%;
+  }
+}
+
+/* ==========================================================================
+   Ticker
+   ========================================================================== */
+
+.page[data-page="early-access"] .gz4-ticker { background: var(--ink); overflow: hidden; padding: 14px 0; display: flex; }
+.page[data-page="early-access"] .gz4-ticker__run { display: flex; flex: 0 0 auto; white-space: nowrap; animation: gzTicker 64s linear infinite; }
+.page[data-page="early-access"] .gz4-ticker__item {
+  display: inline-flex; align-items: center; gap: 16px; padding-right: 16px;
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #b9afa4;
+}
+
+/* ==========================================================================
+   01 · Modular toolbox
+   ==========================================================================
+   No animated filter on the section itself — it would break the sticky figure
+   column. The bloom and the children animate instead. */
+
+.page[data-page="early-access"] .eaf-toolbox {
+  background: linear-gradient(160deg, #fbf7f3, #f7f3ee 52%, #ffffff);
+  border-radius: var(--r-band);
+  padding-block: 104px;
+  overflow: hidden;
+}
+.page[data-page="early-access"] .eaf-toolbox__head {
+  display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 18px 24px; margin-bottom: 46px;
+}
+.page[data-page="early-access"] .eaf-toolbox__head .gz4-h2 { grid-column: 1; }
+.page[data-page="early-access"] .eaf-toolbox__head .gz4-label:first-child { grid-column: 1 / -1; }
+.page[data-page="early-access"] .eaf-hint { justify-self: end; }
+
+.page[data-page="early-access"] .eaf-toolbox__grid { display: grid; grid-template-columns: 1fr 620px; gap: 56px; align-items: start; }
+.page[data-page="early-access"] .eaf-mods { display: flex; flex-direction: column; gap: 10px; }
+.page[data-page="early-access"] .eaf-mod {
+  display: grid; grid-template-columns: 44px 1fr; gap: 0 14px;
+  padding: 20px; border-radius: var(--r-row); cursor: default;
+  transition: background-color 220ms var(--ease), transform 220ms var(--ease), box-shadow 220ms var(--ease);
+}
+.page[data-page="early-access"] .eaf-mod:hover,
+.page[data-page="early-access"] .eaf-mod.is-on { background: rgba(236, 91, 35, 0.07); transform: translateY(-3px); box-shadow: var(--lift); }
+.page[data-page="early-access"] .eaf-mod__n { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-50); padding-top: 5px; }
+.page[data-page="early-access"] .eaf-mod__t { font-size: 21px; letter-spacing: -0.026em; margin: 0; }
+.page[data-page="early-access"] .eaf-mod__b { font-size: 15.5px; line-height: 1.6; color: var(--ink-80); margin: 6px 0 0; }
+
+.page[data-page="early-access"] .eaf-figcard {
+  position: sticky; top: 96px; margin: 0;
+  background: var(--paper); border-radius: var(--r-band);
+  box-shadow: inset 0 0 0 1px var(--hair-c), 0 1px 0 rgba(23, 19, 16, 0.04), 0 18px 44px rgba(23, 19, 16, 0.07);
+  padding: 30px;
+}
+.page[data-page="early-access"] .eaf-fig { display: block; width: 100%; height: auto; }
+.page[data-page="early-access"] .eaf-figfoot {
+  display: flex; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: var(--hair);
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-50);
+}
+
+/* ---- the figure's own parts ---- */
+
+.page[data-page="early-access"] .eaf-cap { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.2em; fill: var(--ink-50); }
+.page[data-page="early-access"] .eaf-pill rect { fill: var(--paper); stroke: rgba(23, 19, 16, 0.12); stroke-width: 1; transition: stroke 220ms ease, fill 220ms ease, stroke-width 220ms ease; }
+.page[data-page="early-access"] .eaf-pill text { font-family: var(--f-sans); font-size: 12px; fill: var(--ink); }
+.page[data-page="early-access"] .eaf-curve { fill: none; stroke: url(#eaCurve); stroke-width: 1; opacity: 0.5; transition: opacity 220ms ease; }
+.page[data-page="early-access"] .eaf-comet { fill: none; stroke: #ec5b23; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 30 420; animation: gzFlow 5.2s linear infinite; }
+.page[data-page="early-access"] .eaf-link { stroke: url(#eaLink); stroke-width: 1.4; fill: none; }
+.page[data-page="early-access"] .eaf-link-comet { fill: none; stroke: #ec5b23; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 18 52; animation: gzFlowLink 2.6s linear infinite; }
+.page[data-page="early-access"] .eaf-base rect { fill: var(--paper); stroke: rgba(23, 19, 16, 0.12); stroke-width: 1; transition: stroke 220ms ease, fill 220ms ease, stroke-width 220ms ease; }
+.page[data-page="early-access"] .eaf-base { opacity: 0.4; transition: opacity 220ms ease; }
+.page[data-page="early-access"] .eaf-base-t { font-family: var(--f-sans); font-weight: 500; font-size: 13px; fill: var(--ink); }
+.page[data-page="early-access"] .eaf-agents rect { fill: var(--paper); stroke: rgba(23, 19, 16, 0.12); stroke-width: 1; }
+.page[data-page="early-access"] .eaf-tile rect { transition: stroke 220ms ease, stroke-width 220ms ease; }
+.page[data-page="early-access"] .eaf-agents { opacity: 0.34; transition: opacity 220ms ease; }
+.page[data-page="early-access"] .eaf-glow { opacity: 0.12; animation: gzGlow 5.2s ease-in-out infinite; }
+
+/* Cumulative: a later stage never dims what an earlier one lit. */
+.page[data-page="early-access"] .eaf-figcard[data-stage="0"] .eaf-pill rect,
+.page[data-page="early-access"] .eaf-figcard[data-stage="1"] .eaf-pill rect,
+.page[data-page="early-access"] .eaf-figcard[data-stage="2"] .eaf-pill rect { stroke: rgba(236, 91, 35, 0.6); stroke-width: 1.4; fill: #fff8f4; }
+.page[data-page="early-access"] .eaf-figcard[data-stage="0"] .eaf-curve,
+.page[data-page="early-access"] .eaf-figcard[data-stage="1"] .eaf-curve,
+.page[data-page="early-access"] .eaf-figcard[data-stage="2"] .eaf-curve { opacity: 1; }
+.page[data-page="early-access"] .eaf-figcard[data-stage="1"] .eaf-base,
+.page[data-page="early-access"] .eaf-figcard[data-stage="2"] .eaf-base { opacity: 1; }
+.page[data-page="early-access"] .eaf-figcard[data-stage="1"] .eaf-base rect,
+.page[data-page="early-access"] .eaf-figcard[data-stage="2"] .eaf-base rect { stroke: rgba(236, 91, 35, 0.6); stroke-width: 1.4; fill: #fff8f4; }
+.page[data-page="early-access"] .eaf-figcard[data-stage="2"] .eaf-agents { opacity: 1; }
+.page[data-page="early-access"] .eaf-figcard[data-stage="2"] .eaf-tile rect { stroke: rgba(236, 91, 35, 0.6); stroke-width: 1.4; }
+
+@keyframes gzFlow { from { stroke-dashoffset: 30; } to { stroke-dashoffset: -420; } }
+@keyframes gzFlowLink { from { stroke-dashoffset: 18; } to { stroke-dashoffset: -88; } }
+@keyframes gzFlowPlate { from { stroke-dashoffset: 22; } to { stroke-dashoffset: -362; } }
+@keyframes gzGlow { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.34; } }
+
+/* ==========================================================================
+   02 · Design partnership — the one dark band
+   ========================================================================== */
+
+.page[data-page="early-access"] .eaf-partner {
+  background: var(--oxide); border-radius: var(--r-band);
+  padding-block: 104px; overflow: hidden; color: #c9c0b6;
+}
+.page[data-page="early-access"] .eaf-partner .gz4-label { color: #c9c0b6; }
+.page[data-page="early-access"] .eaf-partner .gz4-h2 { color: var(--paper); }
+.page[data-page="early-access"] .eaf-partner__head { display: grid; grid-template-columns: 1fr 380px; gap: 16px 48px; align-items: end; margin-bottom: 56px; }
+.page[data-page="early-access"] .eaf-partner__head .gz4-label:first-child { grid-column: 1 / -1; }
+.page[data-page="early-access"] .eaf-partner__support { color: #c9c0b6; text-align: right; margin: 0; }
+.page[data-page="early-access"] .eaf-gets { display: grid; grid-template-columns: repeat(4, 1fr); }
+.page[data-page="early-access"] .eaf-get { padding: 0 26px; border-left: 1px solid rgba(251, 249, 245, 0.14); }
+.page[data-page="early-access"] .eaf-get:first-child { padding-left: 0; border-left: 0; }
+.page[data-page="early-access"] .eaf-get__n { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em; color: #c9c0b6; }
+.page[data-page="early-access"] .eaf-get__t { font-size: 19px; letter-spacing: -0.026em; color: var(--paper); margin: 12px 0 8px; }
+.page[data-page="early-access"] .eaf-get__b { font-size: 15px; line-height: 1.6; color: #c9c0b6; margin: 0; }
+.page[data-page="early-access"] .eaf-partner__cta { margin-top: 56px; }
+
+/* ==========================================================================
+   03 · The opportunity — the hero's bookend
+   ========================================================================== */
+
+.page[data-page="early-access"] .eaf-opp { background: var(--paper); padding-block: 104px; overflow: hidden; }
+.page[data-page="early-access"] .eaf-opp__grid { display: grid; grid-template-columns: 1fr 430px; gap: 96px; align-items: end; margin: 30px 0 0; }
+.page[data-page="early-access"] .eaf-opp__head {
+  font-size: 56px; line-height: 1.08; letter-spacing: -0.042em; color: var(--ink);
+  font-weight: 500; margin: 0; max-width: 820px;
+}
+.page[data-page="early-access"] .eaf-w { display: inline-block; }
+.page[data-page="early-access"] .eaf-w--hot { color: var(--signal); }
+.page[data-page="early-access"] .eaf-opp__bridge { font-size: 21px; line-height: 1.62; color: var(--ink-50); max-width: 400px; margin: 0; }
+
+@supports (animation-timeline: view()) {
+  .page[data-page="early-access"] .eaf-w {
+    animation: gzWordIn linear both; animation-timeline: view();
+  }
+  .page[data-page="early-access"] .eaf-opp__bridge {
+    animation: gzWipeIn linear both; animation-timeline: view(); animation-range: entry 22% cover 36%;
+  }
+}
+
+.page[data-page="early-access"] .eaf-plates { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 52px; }
+.page[data-page="early-access"] .eaf-plate { margin: 0; }
+.page[data-page="early-access"] .eaf-plate__art { position: relative; height: 240px; border-radius: 16px; overflow: hidden; box-shadow: var(--lift); }
+.page[data-page="early-access"] .eaf-plate__mesh {
+  position: absolute; inset: -40px; filter: blur(24px);
+  background:
+    radial-gradient(38% 46% at 26% 30%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(42% 50% at 76% 72%, rgba(236, 91, 35, 0.10), transparent 72%),
+    radial-gradient(40% 44% at 60% 18%, rgba(23, 19, 16, 0.05), transparent 70%);
+}
+/* True aspect ratio, and never blurred: a stretched viewBox turns every dot
+   into a soft ellipse and the plate stops reading as drawn. */
+.page[data-page="early-access"] .eaf-plate-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.page[data-page="early-access"] .eaf-plate__vig { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 37%, rgba(23, 19, 16, 0.075)); }
+.page[data-page="early-access"] .eaf-plate__grain {
+  position: absolute; inset: 0; opacity: 0.13; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+}
+.page[data-page="early-access"] .eaf-plate-comet { stroke: #ec5b23; stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 22 340; animation: gzFlowPlate 4.2s linear infinite; }
+.page[data-page="early-access"] .eaf-plate-glow { opacity: 0.12; animation: gzGlow 4.2s ease-in-out infinite; }
+.page[data-page="early-access"] .eaf-plate__cap { margin-top: 14px; padding-top: 12px; border-top: var(--hair); }
+.page[data-page="early-access"] .eaf-plate__cap p { margin: 6px 0 0; font-size: 14px; line-height: 1.55; color: var(--ink-80); }
+
+@supports (animation-timeline: view()) {
+  .page[data-page="early-access"] .eaf-plate:nth-child(1) { animation: gzSettle linear both; animation-timeline: view(); animation-range: entry 14% cover 30%; }
+  .page[data-page="early-access"] .eaf-plate:nth-child(2) { animation: gzSettle linear both; animation-timeline: view(); animation-range: entry 18% cover 30%; }
+}
+
+.page[data-page="early-access"] .eaf-opp__foot { display: flex; align-items: center; gap: 22px; margin-top: 52px; flex-wrap: wrap; }
+
+/* ---- footer ---- */
+.page[data-page="early-access"] .gz-footer { background: var(--paper); background-image: none; border-top: var(--hair); border-radius: 0; }
+.page[data-page="early-access"] .gz-footer__nav a { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+.page[data-page="early-access"] .gz-footer__social { color: var(--ink); transition: color 160ms ease; }
+.page[data-page="early-access"] .gz-footer__social:hover { color: var(--signal); }
+
+/* ---- narrower ---- */
+@media (max-width: 1180px) {
+  .page[data-page="early-access"] .gz4-wrap { padding-inline: 40px; }
+  .page[data-page="early-access"] .gznav .nav-row { padding-inline: 40px; }
+  .page[data-page="early-access"] .eaf-toolbox__grid { grid-template-columns: 1fr; }
+  .page[data-page="early-access"] .eaf-figcard { position: static; }
+  .page[data-page="early-access"] .eaf-opp__grid { grid-template-columns: 1fr; gap: 28px; }
+  .page[data-page="early-access"] .gz4-guides { display: none; }
+  .page[data-page="early-access"] .eaf-h1 { font-size: 46px; }
+  .page[data-page="early-access"] .eaf-opp__head { font-size: 42px; }
+  .page[data-page="early-access"] .eaf-gets { grid-template-columns: 1fr 1fr; gap: 34px 0; }
+}
+@media (max-width: 760px) {
+  .page[data-page="early-access"] .gz4-wrap { padding-inline: 22px; }
+  .page[data-page="early-access"] .gznav .nav-row { padding-inline: 22px; }
+  .page[data-page="early-access"] .eaf-h1 { font-size: 34px; }
+  .page[data-page="early-access"] .eaf-opp__head { font-size: 32px; }
+  .page[data-page="early-access"] .eaf-register,
+  .page[data-page="early-access"] .eaf-plates { grid-template-columns: 1fr; }
+  .page[data-page="early-access"] .eaf-gets { grid-template-columns: 1fr; }
+  .page[data-page="early-access"] .eaf-get { padding: 0; border-left: 0; }
+  .page[data-page="early-access"] .eaf-toolbox__head { grid-template-columns: 1fr; }
+  .page[data-page="early-access"] .eaf-hint { justify-self: start; }
+  .page[data-page="early-access"] .eaf-partner__head { grid-template-columns: 1fr; }
+  .page[data-page="early-access"] .eaf-partner__support { text-align: left; }
+}
+
+/* ---- the edge glyph ----
+
+   Fixed at 15px. Without this the inline SVG falls back to its intrinsic size
+   and the two nodes render as half-metre discs — which is exactly what
+   happened the first time this sheet was written without it. */
+.page[data-page="early-access"] .gz4-edge { width: 15px; height: 15px; flex: 0 0 auto; display: block; }
+
+/* groups the figure script and the stage label reach for */
+.page[data-page="early-access"] .eaf-hero__head { max-width: 1000px; }
+.page[data-page="early-access"] .eaf-stage { color: var(--signal-deep); }

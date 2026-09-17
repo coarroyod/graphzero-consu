@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&amp;family=Geist:wght@400..700&amp;family=Inter+Tight:wght@400..700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;family=DM+Sans:wght@500&amp;family=Geist:wght@400..700&amp;family=Inter+Tight:wght@400..700&amp;display=swap">
 <link rel="stylesheet" href="assets/design-system/styles.css?v=2">
 <link rel="stylesheet" href="assets/site.css?v=49">
 <link rel="stylesheet" href="assets/footer.css?v=13">
@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="assets/early-access.css?v=23">
 <link rel="stylesheet" href="assets/mobile.css?v=12">
 <link rel="stylesheet" href="assets/nav.css?v=4">
+<link rel="stylesheet" href="assets/v4/early-access.css?v=2">
 <link rel="icon" href="assets/graphzero-favicon.png?v=4" type="image/png">
 <link rel="apple-touch-icon" href="assets/graphzero-icon.png?v=3">
 </head>
@@ -46,6 +47,7 @@
        bar's ink wherever a [data-dark] band runs under it. -->
   <nav class="gznav" aria-label="Primary">
     <div class="nav-veil" aria-hidden="true"></div>
+    <div class="gz4-progress" aria-hidden="true"></div>
     <div class="nav-row">
       <a class="nav-brand" href="index.html" title="/graphzero">
         <img class="nav-mark" src="assets/brand/icon-prism.svg" alt=""
@@ -90,41 +92,34 @@
 
          No node graph here on purpose. That drawing is Product's, and running
          it on both pages makes the two interchangeable. -->
-    <section class="gz-fold-pull eaf-hero" id="top">
-      <svg class="eaf-hero__field" viewBox="0 0 1280 660" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-        <defs>
-          <radialGradient id="ea-bl" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FF8A33" stop-opacity="0.3"></stop><stop offset="0.5" stop-color="#FF6A00" stop-opacity="0.1"></stop><stop offset="1" stop-color="#FF6A00" stop-opacity="0"></stop></radialGradient>
-          <filter id="ea-blf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="70"></feGaussianBlur></filter>
-          <filter id="ea-gc" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" stitchTiles="stitch" result="n"></feTurbulence><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.32 0 0 0 0 0.26 0 0 0 0 0.19 0.62 0 0 0 -0.27"></feColorMatrix></filter>
-          <filter id="ea-gf" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" stitchTiles="stitch" result="n"></feTurbulence><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.32 0 0 0 0 0.26 0 0 0 0 0.19 0.7 0 0 0 -0.31"></feColorMatrix></filter>
-          <linearGradient id="ea-hem" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="0.72" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="1"></stop></linearGradient>
-        </defs>
-        <rect width="1280" height="660" fill="#FFFFFF"></rect>
-        <g class="eaf-bloom" filter="url(#ea-blf)"><ellipse cx="980" cy="300" rx="380" ry="300" fill="url(#ea-bl)"></ellipse></g>
-        <rect width="1280" height="660" filter="url(#ea-gc)" opacity="0.44"></rect>
-        <rect width="1280" height="660" filter="url(#ea-gf)" opacity="0.30"></rect>
-        <rect x="0" y="396" width="1280" height="264" fill="url(#ea-hem)"></rect>
-      </svg>
-
-      <div class="eaf-hero__copy">
-        <p class="eaf-hero__eyebrow labelrow"><svg class="labelmark" viewBox="0 0 56 24" width="56" height="24" aria-hidden="true"><line x1="5.5" y1="17.5" x2="24.5" y2="7.5" stroke="#FF8A33" stroke-opacity=".5" stroke-width="1.2"></line><line x1="24.5" y1="7.5" x2="43.5" y2="15.5" stroke="#FF8A33" stroke-opacity=".5" stroke-width="1.2"></line><rect x="3" y="15" width="5" height="5" rx="1" fill="#FF8A33" fill-opacity=".7"></rect><rect x="22" y="5" width="5" height="5" rx="1" fill="#FF6A00" fill-opacity="1"></rect><rect x="41" y="13" width="5" height="5" rx="1" fill="#FF8A33" fill-opacity=".7"></rect></svg><span class="labelrow__text">Early access</span></p>
-        <h1 class="eaf-hero__title">Turn what your people know<br>into what your company knows<span class="eaf-hero__stop">.</span></h1>
-        <div class="eaf-hero__ctas">
-          <a class="eaf-hero__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
-          <a class="eaf-hero__cta eaf-hero__cta--quiet" href="#product">See how it works &darr;</a>
+    <section class="gz-fold-pull eaf-hero gz4-open" id="top">
+      <div class="gz4-bloom gz4-bloom--soft" style="width:720px;height:520px;right:-120px;top:-40px"></div>
+      <div class="eaf-hero__inner gz4-wrap">
+        <div class="eaf-hero__head">
+          <p class="gz4-label"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#171310"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg> Early access</p>
+          <h1 class="eaf-h1"><span class="gz4-w">Turn</span> <span class="gz4-w">what</span> <span class="gz4-w">your</span> <span class="gz4-w">people</span> <span class="gz4-w">know</span> <span class="gz4-w">into</span> <span class="gz4-w">what</span> <span class="gz4-w">your</span> <span class="gz4-w">company</span> <span class="gz4-w">knows<span style="color:#EC5B23">.</span></span></h1>
+          <div class="eaf-hero__ctas">
+            <a class="gz4-btn" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
+            <a class="gz4-btn gz4-btn--ghost" href="#product">See how it works &darr;</a>
+          </div>
+        </div>
+        <div class="gz4-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="eaf-hero__rule"></div>
+        <div class="eaf-register">
+          <div class="eaf-register__col eaf-register__col--today">
+            <p class="gz4-label">Today</p>
+            <p>Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
+          </div>
+          <div class="eaf-register__col eaf-register__col--gz">
+            <p class="gz4-label">With graphzero</p>
+            <p><img class="eaf-inline-mark" src="assets/brand/graphzero-compact.png?v=2" alt="" width="256" height="312"><b>graphzero</b></span> brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
+          </div>
         </div>
       </div>
+      <div class="gz4-guides" aria-hidden="true"><span></span><span></span><span></span></div>
     </section>
 
-    <!-- The two paragraphs that earn the claim. They were the foot of the old
-         fold; they are their own band of white now, which is what lets the
-         field above dissolve into the page instead of stopping at a line. -->
-    <section class="eaf-notes">
-      <div class="gzea-notes">
-        <p class="gzea-notes__p">Every day, your people create knowledge &mdash; in conversations, decisions, documents, and the work they do. Much of it remains fragmented across people, teams, and tools.</p>
-        <p class="gzea-notes__p"><span class="gz-inline"><svg class="gz-inline__mark" viewBox="16 8 64 78" aria-hidden="true" focusable="false"><mask id="gzea-g2"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g2)"></rect></svg><span class="gz-inline__word">graphzero</span></span> brings this knowledge together, keeps it current, and makes it available to your people and AI.</p>
-      </div>
-    </section>
+    <div class="gz4-ticker" aria-hidden="true"><div class="gz4-ticker__run"><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Early access</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Direct collaboration</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>EU infrastructure</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Flexible by design</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Early access</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Direct collaboration</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>EU infrastructure</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Flexible by design</span></div><div class="gz4-ticker__run"><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Early access</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Direct collaboration</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>EU infrastructure</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Flexible by design</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Early access</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Direct collaboration</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>EU infrastructure</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Flexible by design</span></div><div class="gz4-ticker__run"><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Early access</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Direct collaboration</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>EU infrastructure</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Flexible by design</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Early access</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Direct collaboration</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>EU infrastructure</span><span class="gz4-ticker__item"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg>Flexible by design</span></div></div>
 
 
     <!-- 02 — HOW THE PRODUCT WORKS
@@ -135,189 +130,98 @@
          almost word for word, as "Flexible by design" in the design-partner
          block, and saying it in both places was the one real repetition on
          the page. -->
-    <section class="band" id="product">
-      <div class="wrap sec sec--pb">
-        <p class="gzea-eyebrow gzea-eyebrow--sec" data-reveal><svg class="gzea-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g9"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g9)"></rect></svg>Modular toolbox</p>
-        <h2 class="h2 sec-head ea-sec-head" data-reveal>One technological core. <br class="br-wide">Different ways to deploy.</h2>
-
-        <div class="showcase ea-showcase">
-          <div class="showcase__text">
-            <div class="showcase__list">
-              <div class="showcase__item" data-flow="ingest" data-reveal>
-                <span class="showcase__num" aria-hidden="true">01</span>
-                <h3 class="showcase__title">Integrations and ingestion</h3>
-                <p class="small showcase__body">Continuous, incremental sync running entirely on EU infrastructure, with change detection and deletion propagation on every cycle. Rapidly expanding coverage across European knowledge systems &mdash; every use case our customers request is within reach.</p>
-              </div>
-              <div class="showcase__item" data-flow="graph" data-reveal>
-                <span class="showcase__num" aria-hidden="true">02</span>
-                <h3 class="showcase__title">Knowledge base</h3>
-                <p class="small showcase__body">Knowledge Graph hosted in the EU or own cloud, with full export and built-in knowledge protection incl. permissions enforced at the individual fact. Compatible by MCP with any AI Assistant, making outcomes relevant and reliable, without compromising knowledge.</p>
-              </div>
-              <div class="showcase__item" data-flow="agents" data-reveal>
-                <span class="showcase__num" aria-hidden="true">03</span>
-                <h3 class="showcase__title">Search and agents</h3>
-                <p class="small showcase__body">Knowledge Graph paired with its own AI Assistant (can be white-labeled), reachable through a web interface or as a chatbot inside Slack or Microsoft Teams. One admin panel to govern model, data, and tool usage across the company. Full support of common models, incl. EU-hosted Anthropic models.</p>
-              </div>
-            </div>
-          </div>
-
-          <figure class="showcase__visual showcase__visual--flow">
-            <div class="kg-flow" data-kg-flow="auto-touch" aria-hidden="true"></div>
+    <section class="band gz4-open eaf-toolbox" id="product">
+      <div class="gz4-bloom" style="width:560px;height:420px;left:6%;top:8%"></div>
+      <div class="gz4-wrap">
+        <div class="eaf-toolbox__head">
+          <p class="gz4-label"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#171310"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg> 01 &middot; Modular toolbox</p>
+          <h2 class="gz4-h2">One technological core. Different ways to deploy.</h2>
+          <p class="gz4-label eaf-hint">Point at a module &mdash; the figure follows</p>
+        </div>
+        <div class="eaf-toolbox__grid">
+          <div class="eaf-mods"><div class="eaf-mod" data-module="0" tabindex="0"><span class="eaf-mod__n">01</span><div><h3 class="eaf-mod__t">Integrations and ingestion</h3><p class="eaf-mod__b">Continuous, incremental sync running entirely on EU infrastructure, with change detection and deletion propagation on every cycle. Rapidly expanding coverage across European knowledge systems &mdash; every use case our customers request is within reach.</p></div></div><div class="eaf-mod" data-module="1" tabindex="0"><span class="eaf-mod__n">02</span><div><h3 class="eaf-mod__t">Knowledge base</h3><p class="eaf-mod__b">Knowledge Graph hosted in the EU or own cloud, with full export and built-in knowledge protection incl. permissions enforced at the individual fact. Compatible by MCP with any AI Assistant, making outcomes relevant and reliable, without compromising knowledge.</p></div></div><div class="eaf-mod" data-module="2" tabindex="0"><span class="eaf-mod__n" style="color:#8C3A18">03</span><div><h3 class="eaf-mod__t">Search and agents</h3><p class="eaf-mod__b">Knowledge Graph paired with its own AI Assistant (can be white-labeled), reachable through a web interface or as a chatbot inside Slack or Microsoft Teams. One admin panel to govern model, data, and tool usage across the company. Full support of common models, incl. EU-hosted Anthropic models.</p></div></div></div>
+          <figure class="eaf-figcard">
+            <!-- gz:ea-toolbox:start -->
+<svg class="eaf-fig" viewBox="0 0 560 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Nine business systems feeding a knowledge base in the EU or your own cloud, which answers through Claude, Copilot, ChatGPT or graphzero's own search and agents.">
+<defs>
+<linearGradient id="eaCurve" gradientUnits="userSpaceOnUse" x1="150" y1="196" x2="352" y2="196"><stop offset="0" stop-color="rgba(23,19,16,0.14)"></stop><stop offset="1" stop-color="rgba(236,91,35,0.85)"></stop></linearGradient>
+<linearGradient id="eaLink" gradientUnits="userSpaceOnUse" x1="364" y1="196" x2="416" y2="196"><stop offset="0" stop-color="rgba(236,91,35,0.4)"></stop><stop offset="1" stop-color="rgba(236,91,35,0.95)"></stop></linearGradient>
+<filter id="eaGlow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="20"></feGaussianBlur></filter>
+</defs>
+<text class="eaf-cap" x="0" y="22">YOUR SYSTEMS</text>
+<g class="eaf-pills"><g class="eaf-pill"><rect x="0" y="40" width="150" height="26" rx="7"></rect><text x="12" y="57.5">SharePoint</text></g><g class="eaf-pill"><rect x="0" y="80" width="150" height="26" rx="7"></rect><text x="12" y="97.5">Outlook</text></g><g class="eaf-pill"><rect x="0" y="120" width="150" height="26" rx="7"></rect><text x="12" y="137.5">Google Drive</text></g><g class="eaf-pill"><rect x="0" y="160" width="150" height="26" rx="7"></rect><text x="12" y="177.5">Gmail</text></g><g class="eaf-pill"><rect x="0" y="200" width="150" height="26" rx="7"></rect><text x="12" y="217.5">HubSpot</text></g><g class="eaf-pill"><rect x="0" y="240" width="150" height="26" rx="7"></rect><text x="12" y="257.5">DATEV</text></g><g class="eaf-pill"><rect x="0" y="280" width="150" height="26" rx="7"></rect><text x="12" y="297.5">AFAS</text></g><g class="eaf-pill"><rect x="0" y="320" width="150" height="26" rx="7"></rect><text x="12" y="337.5">Exact</text></g><g class="eaf-pill"><rect x="0" y="360" width="150" height="26" rx="7"></rect><text x="12" y="377.5">Personio</text></g></g>
+<g class="eaf-curves"><path class="eaf-curve" d="M150,53 C224,53 268,196 352,196"></path><path class="eaf-curve" d="M150,93 C224,93 268,196 352,196"></path><path class="eaf-curve" d="M150,133 C224,133 268,196 352,196"></path><path class="eaf-curve" d="M150,173 C224,173 268,196 352,196"></path><path class="eaf-curve" d="M150,213 C224,213 268,196 352,196"></path><path class="eaf-curve" d="M150,253 C224,253 268,196 352,196"></path><path class="eaf-curve" d="M150,293 C224,293 268,196 352,196"></path><path class="eaf-curve" d="M150,333 C224,333 268,196 352,196"></path><path class="eaf-curve" d="M150,373 C224,373 268,196 352,196"></path></g>
+<g class="eaf-comets"><path class="eaf-comet" d="M150,53 C224,53 268,196 352,196" style="animation-delay:0s"></path><path class="eaf-comet" d="M150,93 C224,93 268,196 352,196" style="animation-delay:-0.58s"></path><path class="eaf-comet" d="M150,133 C224,133 268,196 352,196" style="animation-delay:-1.16s"></path><path class="eaf-comet" d="M150,173 C224,173 268,196 352,196" style="animation-delay:-1.74s"></path><path class="eaf-comet" d="M150,213 C224,213 268,196 352,196" style="animation-delay:-2.32s"></path><path class="eaf-comet" d="M150,253 C224,253 268,196 352,196" style="animation-delay:-2.9s"></path><path class="eaf-comet" d="M150,293 C224,293 268,196 352,196" style="animation-delay:-3.48s"></path><path class="eaf-comet" d="M150,333 C224,333 268,196 352,196" style="animation-delay:-4.06s"></path><path class="eaf-comet" d="M150,373 C224,373 268,196 352,196" style="animation-delay:-4.64s"></path></g>
+<path class="eaf-link" d="M364,196 L416,196"></path><path class="eaf-link-comet" d="M364,196 L416,196"></path>
+<ellipse class="eaf-glow" cx="300" cy="196" rx="86" ry="82" fill="#EC5B23" filter="url(#eaGlow)"></ellipse>
+<g class="eaf-base"><rect x="236" y="130" width="128" height="132" rx="16"></rect>
+<image href="assets/brand/graphzero-compact.png?v=2" x="272" y="146" width="56" height="56"></image>
+<text class="eaf-base-t" x="300" y="222" text-anchor="middle">Knowledge Base</text>
+<text class="eaf-cap" x="300" y="242" text-anchor="middle">EU OR OWN CLOUD</text></g>
+<g class="eaf-agents"><rect x="416" y="104" width="144" height="184" rx="16"></rect><g class="eaf-tile"><rect x="428" y="124" width="52" height="52" rx="12"></rect><image href="assets/media/logo-claude.svg" x="442" y="138" width="24" height="24"></image></g><g class="eaf-tile"><rect x="492" y="124" width="52" height="52" rx="12"></rect><image href="assets/media/logo-copilot.svg" x="506" y="138" width="24" height="24"></image></g><g class="eaf-tile"><rect x="428" y="188" width="52" height="52" rx="12"></rect><image href="assets/media/logo-chatgpt.svg" x="442" y="202" width="24" height="24"></image></g><g class="eaf-tile"><rect x="492" y="188" width="52" height="52" rx="12"></rect><image href="assets/brand/icon-prism.svg" x="506" y="202" width="24" height="24"></image></g>
+<text class="eaf-cap" x="488" y="268" text-anchor="middle">WEB &#183; SLACK &#183; TEAMS</text></g>
+</svg>
+<!-- gz:ea-toolbox:end -->
+            <figcaption class="eaf-figfoot"><span>Fig. 01 &mdash; the toolbox</span><span class="eaf-stage">Stage 01 &middot; Ingestion</span></figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- 03 / 04 — THE DESIGN-PARTNER SEQUENCE
-         One section, one composition. The ask and the four chapters used to
-         be two sections stacked, which put a screen of empty navy between the
-         statement and the thing it introduces. They are now the same pinned
-         block: the heading holds still at the top while the track runs
-         beneath it, so the reader never loses what the four are an answer to.
-
-         The figure that sat beside the heading is gone. The horizontal run is
-         the movement in this section, and a second animation next to it was
-         two things competing for the same job. -->
-    <!-- 03 — WHAT A DESIGN PARTNER GETS
-         The four points were a horizontally scrolling track pinned to the
-         viewport. They are a ruled register in two columns now: the same four
-         in the same order, all four readable at once, and nothing that moves. -->
-    <section class="gzea-gets" id="early-access" data-dark>
-      <div class="gzea-wrap">
-        <p class="gzea-eyebrow gzea-eyebrow--dark" data-reveal><svg class="gzea-mark" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g3"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g3)"></rect></svg>Design Partnership</p>
-
-        <div class="gzea-gets__head">
-          <h2 class="gzea-gets__title" data-reveal>We&rsquo;re building graphzero with design partners.</h2>
-          <p class="gzea-gets__lead" data-reveal>Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
+    <section class="gzea-gets gz4-open eaf-partner" id="early-access" data-dark>
+      <div class="gz4-bloom" style="width:620px;height:440px;right:4%;top:-8%"></div>
+      <div class="gz4-wrap">
+        <div class="eaf-partner__head">
+          <p class="gz4-label"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#FBF9F5"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg> 02 &middot; Design partnership</p>
+          <h2 class="gz4-h2">We&rsquo;re building graphzero <span style="color:#EC5B23">with design partners.</span></h2>
+          <p class="eaf-partner__support">Get early access to the knowledge base and work directly with the graphzero team as we develop the product.</p>
         </div>
-
-        <div class="gzea-gets__grid" data-reveal>
-        <div class="gzea-get">
-          <span class="gzea-get__n" aria-hidden="true">01</span>
-          <div>
-            <h3 class="gzea-get__title">Early access</h3>
-            <p class="gzea-get__body">Be among the first to use graphzero.</p>
-          </div>
-        </div>
-        <div class="gzea-get">
-          <span class="gzea-get__n" aria-hidden="true">02</span>
-          <div>
-            <h3 class="gzea-get__title">Direct collaboration</h3>
-            <p class="gzea-get__body">Work closely with our team and give input as the product evolves.</p>
-          </div>
-        </div>
-        <div class="gzea-get">
-          <span class="gzea-get__n" aria-hidden="true">03</span>
-          <div>
-            <h3 class="gzea-get__title">AI usage without compromises</h3>
-            <p class="gzea-get__body">The strongest control available for enterprise AI: sensitivity tagged at the level of the individual fact, permissions that propagate with it, and traceability on every fact with a full audit trail.</p>
-          </div>
-        </div>
-        <div class="gzea-get">
-          <span class="gzea-get__n" aria-hidden="true">04</span>
-          <div>
-            <h3 class="gzea-get__title">Flexible by design</h3>
-            <p class="gzea-get__body">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p>
-          </div>
-        </div>
-        </div>
-
-        <a class="gzea-btn gzea-btn--onDark" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
+        <div class="eaf-gets"><div class="eaf-get" data-gz4="wipe"><span class="eaf-get__n">01</span><h3 class="eaf-get__t">Early access</h3><p class="eaf-get__b">Be among the first to use graphzero.</p></div><div class="eaf-get" data-gz4="wipe"><span class="eaf-get__n">02</span><h3 class="eaf-get__t">Direct collaboration</h3><p class="eaf-get__b">Work closely with our team and give input as the product evolves.</p></div><div class="eaf-get" data-gz4="wipe"><span class="eaf-get__n">03</span><h3 class="eaf-get__t">AI usage without compromises</h3><p class="eaf-get__b">The strongest control available for enterprise AI: sensitivity tagged at the level of the individual fact, permissions that propagate with it, and traceability on every fact with a full audit trail.</p></div><div class="eaf-get" data-gz4="wipe"><span class="eaf-get__n">04</span><h3 class="eaf-get__t">Flexible by design</h3><p class="eaf-get__b">Start with the knowledge base. Extend it with search and agents. Or use it in the tools and workflows you already have.</p></div></div>
+        <a class="gz4-btn gz4-btn--onDark eaf-partner__cta" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
       </div>
     </section>
 
-    <!-- 05 — BECOME A DESIGN PARTNER
-         The close. Centred, narrow and quiet — the counterweight to the
-         section above it, which is the one place on the page that moves.
-
-         No button here. The page asks once, at the end of the sequence the
-         ask belongs to; repeating it a screen later made the closing
-         statement a second pitch instead of a conclusion. -->
-    <!-- 04 — THE CLOSE
-         Off the navy and onto the woven white the About page closes on, with
-         the same accumulation running between the two statements: the claim
-         opens left, the thread gathers as it crosses, the payoff lands right.
-         The figure is the same geometry, written out flat. -->
-    <section class="gzea-close">
-      <div class="gzea-wrap">
-        <div class="gzea-close__item gzea-close__item--open"><svg class="gzea-mark gzea-mark--lg" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g4"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g4)"></rect></svg><p>The amount of knowledge organizations create is growing faster than ever.</p></div>
-        <svg class="gzea-accum" viewBox="0 0 1152 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path d="M22.0 4.0 L57.9 6.4 L87.1 9.1 L114.3 12.2 L140.2 15.5 L165.2 19.1 L189.5 23.0 L213.2 27.1 L236.5 31.5 L259.3 36.2 L281.8 41.1 L304.0 46.2 L325.9 51.7 L347.6 57.3 L369.0 63.3 L390.2 69.4 L411.3 75.9 L432.1 82.5 L452.8 89.4 L473.3 96.5 L493.6 103.9 L513.8 111.5 L533.9 119.4 L553.8 127.5 L573.7 135.8 L593.4 144.3 L613.0 153.1 L632.5 162.1 L651.9 171.4 L671.2 180.8 L690.4 190.6 L709.5 200.5 L728.5 210.6 L747.5 221.0 L766.3 231.6 L785.1 242.5 L803.8 253.5 L822.5 264.8 L841.1 276.3 L859.6 288.0 L878.0 300.0" fill="none" stroke="rgba(23,35,43,.22)" stroke-width="1"></path>
-      <g stroke="rgba(23,35,43,.1)" stroke-width="1" fill="none">
-        <line x1="161.0" y1="12.0" x2="174.0" y2="26.6"></line>
-        <line x1="174.0" y1="26.6" x2="225.3" y2="17.6"></line>
-        <line x1="225.3" y1="17.6" x2="239.1" y2="44.1"></line>
-        <line x1="239.1" y1="44.1" x2="275.9" y2="36.8"></line>
-        <line x1="275.9" y1="36.8" x2="307.1" y2="40.1"></line>
-        <line x1="307.1" y1="40.1" x2="335.2" y2="56.5"></line>
-        <line x1="335.2" y1="56.5" x2="344.4" y2="55.0"></line>
-        <line x1="344.4" y1="55.0" x2="369.6" y2="50.4"></line>
-        <line x1="369.6" y1="50.4" x2="403.9" y2="77.8"></line>
-        <line x1="403.9" y1="77.8" x2="388.3" y2="93.4"></line>
-        <line x1="403.9" y1="77.8" x2="455.3" y2="78.3"></line>
-        <line x1="455.3" y1="78.3" x2="456.7" y2="88.2"></line>
-        <line x1="456.7" y1="88.2" x2="487.7" y2="92.6"></line>
-        <line x1="487.7" y1="92.6" x2="483.9" y2="105.2"></line>
-        <line x1="483.9" y1="105.2" x2="519.8" y2="116.7"></line>
-        <line x1="519.8" y1="116.7" x2="553.6" y2="124.4"></line>
-        <line x1="553.6" y1="124.4" x2="557.1" y2="149.2"></line>
-        <line x1="557.1" y1="149.2" x2="590.1" y2="146.2"></line>
-        <line x1="590.1" y1="146.2" x2="613.4" y2="136.3"></line>
-        <line x1="613.4" y1="136.3" x2="674.0" y2="178.0"></line>
-        <line x1="674.0" y1="178.0" x2="695.7" y2="186.7"></line>
-        <line x1="695.7" y1="186.7" x2="695.5" y2="174.9"></line>
-        <line x1="695.5" y1="174.9" x2="709.5" y2="172.1"></line>
-        <line x1="695.7" y1="186.7" x2="712.4" y2="189.3"></line>
-        <line x1="712.4" y1="189.3" x2="777.3" y2="210.4"></line>
-        <line x1="777.3" y1="210.4" x2="753.5" y2="214.7"></line>
-        <line x1="777.3" y1="210.4" x2="815.4" y2="228.4"></line>
-        <line x1="815.4" y1="228.4" x2="823.4" y2="251.0"></line>
-        <line x1="823.4" y1="251.0" x2="844.5" y2="270.0"></line>
-        <line x1="844.5" y1="270.0" x2="860.2" y2="263.8"></line>
-        <line x1="860.2" y1="263.8" x2="878.0" y2="268.0"></line>
-      </g>
-      <g>
-        <circle cx="105.7" cy="4.8" r="1.74" fill="#17232B" opacity="0.34"></circle>
-        <circle class="gzea-node" style="--o:0.36;animation-duration:3.76s;animation-delay:-1.32s" cx="120.8" cy="17.2" r="1.81" fill="#17232B" opacity="0.36"></circle>
-        <circle cx="161.0" cy="12.0" r="1.88" fill="#17232B" opacity="0.38"></circle>
-        <circle class="gzea-node" style="--o:0.39;animation-duration:4.28s;animation-delay:-3.97s" cx="174.0" cy="26.6" r="1.95" fill="#17232B" opacity="0.39"></circle>
-        <circle cx="225.3" cy="17.6" r="2.02" fill="#17232B" opacity="0.41"></circle>
-        <circle class="gzea-node" style="--o:0.43;animation-duration:2.60s;animation-delay:-1.43s" cx="239.1" cy="44.1" r="2.09" fill="#17232B" opacity="0.43"></circle>
-        <circle cx="275.9" cy="36.8" r="2.15" fill="#17232B" opacity="0.45"></circle>
-        <circle class="gzea-node" style="--o:0.47;animation-duration:3.12s;animation-delay:-3.04s" cx="307.1" cy="40.1" r="2.22" fill="#17232B" opacity="0.47"></circle>
-        <circle cx="335.2" cy="56.5" r="2.29" fill="#17232B" opacity="0.49"></circle>
-        <circle class="gzea-node" style="--o:0.51;animation-duration:3.64s;animation-delay:-1.01s" cx="344.4" cy="55.0" r="2.36" fill="#17232B" opacity="0.51"></circle>
-        <circle cx="369.6" cy="50.4" r="2.43" fill="#17232B" opacity="0.52"></circle>
-        <circle class="gzea-node" style="--o:0.54;animation-duration:4.16s;animation-delay:-2.10s" cx="403.9" cy="77.8" r="2.50" fill="#17232B" opacity="0.54"></circle>
-        <circle cx="388.3" cy="93.4" r="2.56" fill="#17232B" opacity="0.56"></circle>
-        <circle class="gzea-node" style="--o:0.58;animation-duration:2.48s;animation-delay:-2.37s" cx="455.3" cy="78.3" r="2.63" fill="#17232B" opacity="0.58"></circle>
-        <circle cx="456.7" cy="88.2" r="2.70" fill="#17232B" opacity="0.60"></circle>
-        <circle class="gzea-node" style="--o:0.62;animation-duration:3.00s;animation-delay:-1.90s" cx="487.7" cy="92.6" r="2.77" fill="#17232B" opacity="0.62"></circle>
-        <circle cx="483.9" cy="105.2" r="2.84" fill="#17232B" opacity="0.64"></circle>
-        <circle class="gzea-node" style="--o:0.65;animation-duration:3.51s;animation-delay:-1.43s" cx="519.8" cy="116.7" r="2.91" fill="#17232B" opacity="0.65"></circle>
-        <circle cx="553.6" cy="124.4" r="2.97" fill="#FF6A00" opacity="0.67"></circle>
-        <circle class="gzea-node" style="--o:0.69;animation-duration:4.03s;animation-delay:-0.97s" cx="557.1" cy="149.2" r="3.04" fill="#FF6A00" opacity="0.69"></circle>
-        <circle cx="590.1" cy="146.2" r="3.11" fill="#FF6A00" opacity="0.71"></circle>
-        <circle class="gzea-node" style="--o:0.73;animation-duration:4.55s;animation-delay:-0.50s" cx="613.4" cy="136.3" r="3.18" fill="#FF6A00" opacity="0.73"></circle>
-        <circle cx="674.0" cy="178.0" r="3.25" fill="#FF6A00" opacity="0.75"></circle>
-        <circle class="gzea-node" style="--o:0.76;animation-duration:2.87s;animation-delay:-1.74s" cx="695.7" cy="186.7" r="3.32" fill="#FF6A00" opacity="0.76"></circle>
-        <circle cx="695.5" cy="174.9" r="3.38" fill="#FF6A00" opacity="0.78"></circle>
-        <circle class="gzea-node" style="--o:0.80;animation-duration:3.39s;animation-delay:-2.59s" cx="709.5" cy="172.1" r="3.45" fill="#FF6A00" opacity="0.80"></circle>
-        <circle cx="712.4" cy="189.3" r="3.52" fill="#FF6A00" opacity="0.82"></circle>
-        <circle class="gzea-node" style="--o:0.84;animation-duration:3.91s;animation-delay:-0.57s" cx="777.3" cy="210.4" r="3.59" fill="#FF6A00" opacity="0.84"></circle>
-        <circle cx="753.5" cy="214.7" r="3.66" fill="#FF6A00" opacity="0.86"></circle>
-        <circle class="gzea-node" style="--o:0.88;animation-duration:4.43s;animation-delay:-2.97s" cx="815.4" cy="228.4" r="3.73" fill="#FF6A00" opacity="0.88"></circle>
-        <circle cx="823.4" cy="251.0" r="3.79" fill="#FF6A00" opacity="0.89"></circle>
-        <circle class="gzea-node" style="--o:0.91;animation-duration:2.75s;animation-delay:-2.57s" cx="844.5" cy="270.0" r="3.86" fill="#FF2E93" opacity="0.91"></circle>
-        <circle cx="860.2" cy="263.8" r="3.93" fill="#FF2E93" opacity="0.93"></circle>
-        <circle class="gzea-node" style="--o:0.95;animation-duration:3.27s;animation-delay:-1.22s" cx="878.0" cy="268.0" r="4.00" fill="#FF2E93" opacity="0.95"></circle>
-      </g>
-        </svg>
-        <div class="gzea-close__item gzea-close__item--payoff"><svg class="gzea-mark gzea-mark--lg" viewBox="16 8 64 78" aria-hidden="true"><mask id="gzea-g5"><rect x="16" y="8" width="64" height="78" fill="#000"></rect><circle cx="48" cy="40" r="32" fill="#fff"></circle><rect x="38" y="40" width="20" height="46" rx="5" fill="#fff"></rect><rect x="38" y="52" width="20" height="22" rx="5" fill="#000"></rect></mask><rect x="16" y="8" width="64" height="78" fill="#FF6A00" mask="url(#gzea-g5)"></rect></svg><p>The opportunity is to turn that growing body of knowledge into an organizational advantage.</p></div>
+    <section class="gzea-close gz4-open eaf-opp">
+      <div class="gz4-bloom gz4-bloom--soft" style="width:600px;height:440px;right:-60px;top:-40px"></div>
+      <div class="gz4-wrap">
+        <p class="gz4-label"><svg class="gz4-edge" viewBox="0 0 44 44" aria-hidden="true"><line x1="11" y1="22" x2="33" y2="22" stroke="#EC5B23" stroke-width="2.6" stroke-linecap="round"></line><circle cx="11" cy="22" r="5.4" fill="#171310"></circle><circle cx="33" cy="22" r="5.4" fill="#EC5B23"></circle></svg> 03 &middot; The opportunity</p>
+        <div class="eaf-opp__grid">
+          <h2 class="eaf-opp__head"><span class="eaf-w">What</span> <span class="eaf-w">your</span> <span class="eaf-w">people</span> <span class="eaf-w">know</span> <span class="eaf-w">is</span> <span class="eaf-w">powerful.</span> <br><span class="eaf-w">Together,</span> <span class="eaf-w">it</span> <span class="eaf-w eaf-w--hot">changes</span> <span class="eaf-w eaf-w--hot">what's</span> <span class="eaf-w eaf-w--hot">possible.</span> </h2>
+          <p class="eaf-opp__bridge">But that knowledge is scattered across people, teams, and tools.</p>
+        </div>
+        <div class="eaf-hero__rule"></div>
+        <div class="gz4-ticks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="eaf-plates">
+          <figure class="eaf-plate" data-gz4="settle">
+            <div class="eaf-plate__art" style="background:linear-gradient(140deg,#F8F4EE,#F1ECE4)">
+              <div class="eaf-plate__mesh"></div>
+              <!-- gz:ea-plate-today:start -->
+<svg class="eaf-plate-svg" viewBox="0 0 636 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><circle cx="135.87" cy="92.59" r="4.7" fill="#171310" fill-opacity="0.5"></circle><circle cx="560.92" cy="35.95" r="4.87" fill="#171310" fill-opacity="0.5"></circle><circle cx="49.01" cy="73.32" r="4.77" fill="#171310" fill-opacity="0.5"></circle><circle cx="581.62" cy="132.69" r="4.78" fill="#171310" fill-opacity="0.5"></circle><circle cx="423.34" cy="172.67" r="4.23" fill="#171310" fill-opacity="0.5"></circle><circle cx="208.56" cy="98.14" r="4.18" fill="#171310" fill-opacity="0.5"></circle><circle cx="432.74" cy="122.59" r="3.9" fill="#171310" fill-opacity="0.5"></circle><circle cx="255.02" cy="74.69" r="4.95" fill="#171310" fill-opacity="0.5"></circle><circle cx="84.52" cy="54.21" r="5.02" fill="#171310" fill-opacity="0.5"></circle><circle cx="517.16" cy="190" r="3.02" fill="#171310" fill-opacity="0.5"></circle><circle cx="480.15" cy="142.74" r="3.57" fill="#171310" fill-opacity="0.5"></circle><circle cx="557.12" cy="81.67" r="4.49" fill="#171310" fill-opacity="0.5"></circle><circle cx="467.27" cy="34.68" r="3.75" fill="#171310" fill-opacity="0.5"></circle><circle cx="188.38" cy="136.14" r="3.1" fill="#171310" fill-opacity="0.5"></circle><circle cx="335.1" cy="66.33" r="3.41" fill="#171310" fill-opacity="0.5"></circle><circle cx="540.84" cy="146.07" r="3.05" fill="#171310" fill-opacity="0.5"></circle><circle cx="419.38" cy="76.21" r="3.29" fill="#171310" fill-opacity="0.5"></circle><circle cx="176.78" cy="44.81" r="3.79" fill="#171310" fill-opacity="0.5"></circle><circle cx="464.55" cy="91.78" r="3.41" fill="#171310" fill-opacity="0.5"></circle><circle cx="63.01" cy="121.53" r="4.81" fill="#171310" fill-opacity="0.5"></circle><circle cx="382.75" cy="110.7" r="5.02" fill="#171310" fill-opacity="0.5"></circle><circle cx="273.77" cy="197.06" r="5.09" fill="#171310" fill-opacity="0.5"></circle><circle cx="210.09" cy="196.88" r="5.07" fill="#171310" fill-opacity="0.5"></circle></svg>
+<!-- gz:ea-plate-today:end -->
+              <div class="eaf-plate__vig"></div>
+              <div class="eaf-plate__grain"></div>
+            </div>
+            <figcaption class="eaf-plate__cap"><span class="gz4-label">Fig. 05 &mdash; Today</span><p>Knowledge accumulates across people, teams and tools and stays where it landed.</p></figcaption>
+          </figure>
+          <figure class="eaf-plate" data-gz4="settle">
+            <div class="eaf-plate__art" style="background:linear-gradient(140deg,#FFF3EB,#F4DDC9)">
+              <div class="eaf-plate__mesh"></div>
+              <!-- gz:ea-plate-gz:start -->
+<svg class="eaf-plate-svg" viewBox="0 0 636 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><filter id="eaPlateGlow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="14"></feGaussianBlur></filter></defs><line x1="135.87" y1="92.59" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line class="eaf-plate-comet" x1="135.87" y1="92.59" x2="318" y2="120" style="animation-delay:0s"></line><line x1="49.01" y1="73.32" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="423.34" y1="172.67" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="432.74" y1="122.59" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="84.52" y1="54.21" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line class="eaf-plate-comet" x1="84.52" y1="54.21" x2="318" y2="120" style="animation-delay:-0.7s"></line><line x1="480.15" y1="142.74" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="467.27" y1="34.68" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="335.1" y1="66.33" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="419.38" y1="76.21" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line class="eaf-plate-comet" x1="419.38" y1="76.21" x2="318" y2="120" style="animation-delay:-1.4s"></line><line x1="464.55" y1="91.78" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="382.75" y1="110.7" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><line x1="210.09" y1="196.88" x2="318" y2="120" stroke="rgba(236,91,35,0.42)" stroke-width="1"></line><circle cx="135.87" cy="92.59" r="4.7" fill="#171310" fill-opacity="0.95"></circle><circle cx="560.92" cy="35.95" r="4.87" fill="#171310" fill-opacity="0.4"></circle><circle cx="49.01" cy="73.32" r="4.77" fill="#171310" fill-opacity="0.95"></circle><circle cx="581.62" cy="132.69" r="4.78" fill="#171310" fill-opacity="0.4"></circle><circle cx="423.34" cy="172.67" r="4.23" fill="#171310" fill-opacity="0.95"></circle><circle cx="208.56" cy="98.14" r="4.18" fill="#171310" fill-opacity="0.4"></circle><circle cx="432.74" cy="122.59" r="3.9" fill="#171310" fill-opacity="0.95"></circle><circle cx="255.02" cy="74.69" r="4.95" fill="#171310" fill-opacity="0.4"></circle><circle cx="84.52" cy="54.21" r="5.02" fill="#171310" fill-opacity="0.95"></circle><circle cx="517.16" cy="190" r="3.02" fill="#171310" fill-opacity="0.4"></circle><circle cx="480.15" cy="142.74" r="3.57" fill="#171310" fill-opacity="0.95"></circle><circle cx="557.12" cy="81.67" r="4.49" fill="#171310" fill-opacity="0.4"></circle><circle cx="467.27" cy="34.68" r="3.75" fill="#171310" fill-opacity="0.95"></circle><circle cx="188.38" cy="136.14" r="3.1" fill="#171310" fill-opacity="0.4"></circle><circle cx="335.1" cy="66.33" r="3.41" fill="#171310" fill-opacity="0.95"></circle><circle cx="540.84" cy="146.07" r="3.05" fill="#171310" fill-opacity="0.4"></circle><circle cx="419.38" cy="76.21" r="3.29" fill="#171310" fill-opacity="0.95"></circle><circle cx="176.78" cy="44.81" r="3.79" fill="#171310" fill-opacity="0.4"></circle><circle cx="464.55" cy="91.78" r="3.41" fill="#171310" fill-opacity="0.95"></circle><circle cx="63.01" cy="121.53" r="4.81" fill="#171310" fill-opacity="0.4"></circle><circle cx="382.75" cy="110.7" r="5.02" fill="#171310" fill-opacity="0.95"></circle><circle cx="273.77" cy="197.06" r="5.09" fill="#171310" fill-opacity="0.4"></circle><circle cx="210.09" cy="196.88" r="5.07" fill="#171310" fill-opacity="0.95"></circle><ellipse class="eaf-plate-glow" cx="318" cy="120" rx="34" ry="34" fill="#EC5B23" filter="url(#eaPlateGlow)"></ellipse><circle cx="318" cy="120" r="13" fill="none" stroke="#FFFFFF" stroke-width="2"></circle><circle cx="318" cy="120" r="8" fill="#EC5B23"></circle></svg>
+<!-- gz:ea-plate-gz:end -->
+              <div class="eaf-plate__vig"></div>
+              <div class="eaf-plate__grain"></div>
+            </div>
+            <figcaption class="eaf-plate__cap"><span class="gz4-label">Fig. 06 &mdash; With graphzero</span><p>The same knowledge, connected into one base your people and AI can reason over.</p></figcaption>
+          </figure>
+        </div>
+        <div class="eaf-opp__foot">
+          <a class="gz4-btn" href="https://calendly.com/consuelo-ascending/30min">Become a design partner &rarr;</a>
+          <span class="gz4-label">Early access &middot; EU infrastructure</span>
+        </div>
       </div>
+      <div class="gz4-guides" aria-hidden="true"><span></span><span></span><span></span></div>
     </section>
-
-  </main>
 
   <footer class="gz-footer">
     <div class="wrap gz-footer__inner">
@@ -335,7 +239,6 @@
           <span class="gz-footer__sep" aria-hidden="true">&middot;</span>
           <a href="about.html">About</a>
       </nav>
-      <p class="gz-footer__legal">&copy; 2026 graphzero &middot; Made in Europe</p>
     </div>
   </footer>
 
@@ -345,5 +248,6 @@
 <script src="assets/kg-flow.js?v=16" defer></script>
 <script src="assets/header.js?v=1" defer></script>
 <script src="assets/nav.js?v=1" defer></script>
+<script src="assets/v4/early-access.js?v=1" defer></script>
 </body>
 </html>
