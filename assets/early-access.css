@@ -208,7 +208,8 @@
   padding: 88px 5vw 96px;
   position: relative;
   isolation: isolate;
-  background-color: #17232B;      /* unchanged — the fallback if the image fails */
+  background-color: #241610;      /* the oxide's middle stop — so a failed
+                                     image can never fall back to navy */
 }
 
 /* The painting behind a graduated navy scrim, so the band reads as navy

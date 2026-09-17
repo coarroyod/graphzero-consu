@@ -24,11 +24,7 @@
   --signal-deep: #8c3a18;
   --sand: #f3e9dd;
   --clay: #e9c8ab;
-  /* The brief called this "oxide" and gave three rust-brown values. Oxide is
-     the iron-rust family, so the band came out brown — which is not what it
-     was meant to look like. Same gradient shape, same three-step fall in
-     lightness, moved onto the site's own navy. */
-  --oxide: linear-gradient(150deg, #1e2c36, #17232b, #121b21);
+  --oxide: linear-gradient(150deg, #3a1b0f, #241610, #1b120d);
 
   --hair: 1px solid rgba(23, 19, 16, 0.08);
   --hair-c: rgba(23, 19, 16, 0.08);
@@ -732,3 +728,16 @@
 /* groups the figure script and the stage label reach for */
 .page[data-page="early-access"] .eaf-hero__head { max-width: 1000px; }
 .page[data-page="early-access"] .eaf-stage { color: var(--signal-deep); }
+
+/* ---- the old band's navy furniture ----
+
+   .gzea-gets carried a painting and, over it, a navy scrim at 82-88% — an
+   almost opaque sheet at z-index -1, covering this element's own background.
+   The oxide gradient was painting underneath it the whole time, which is why
+   the band read blue-grey with a faint warm cast instead of rust, and why the
+   orange opening line looked dull: it sits at z-index -2, under the scrim too.
+
+   The scrim and the painting go. The oxide is the ground now, so there is
+   nothing left for a scrim to sit over. */
+.page[data-page="early-access"] .eaf-partner::after { content: none; }
+.page[data-page="early-access"] .eaf-partner::before { z-index: 1; }
