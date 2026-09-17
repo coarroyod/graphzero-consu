@@ -477,9 +477,18 @@
   z-index: 2;
 }
 
+/* The bar is present from the first pixel — the hero needs navigation, and a
+   bar that is only translated out of view still holds focusable links, which
+   is worse than not having it. What arrives after the hero is its ground: the
+   blurred white veil fades in over the same 640-860px the brief gives, and
+   until then the bar sits on the hero's own white under a hairline. One
+   element, one landmark, one set of links, two states. */
+.page[data-page="product"] .gznav { border-bottom: var(--hair); }
+.page[data-page="product"] .gznav .nav-veil { opacity: 0; }
+
 @supports (animation-timeline: scroll(root)) {
-  .page[data-page="product"] .gznav {
-    animation: gzNavIn 1s linear both;
+  .page[data-page="product"] .gznav .nav-veil {
+    animation: gzVeilIn 1s linear both;
     animation-timeline: scroll(root);
     animation-range: 640px 860px;
   }
@@ -1034,3 +1043,8 @@
    are paper on ink rather than the old orange, which measured 2.87:1. */
 .page[data-page="product"] .gz4-rotate .rotator__item { color: var(--paper); }
 .page[data-page="product"] .hl { color: var(--signal-deep); }
+
+@keyframes gzVeilIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* With the bar always in view the fold no longer rises under it. */
+.page[data-page="product"] .gz-fold-pull.gz-fold-pull { margin-top: 0; }
