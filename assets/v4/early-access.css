@@ -24,7 +24,11 @@
   --signal-deep: #8c3a18;
   --sand: #f3e9dd;
   --clay: #e9c8ab;
-  --oxide: linear-gradient(150deg, #3a1b0f, #241610, #1b120d);
+  /* The brief called this "oxide" and gave three rust-brown values. Oxide is
+     the iron-rust family, so the band came out brown — which is not what it
+     was meant to look like. Same gradient shape, same three-step fall in
+     lightness, moved onto the site's own navy. */
+  --oxide: linear-gradient(150deg, #1e2c36, #17232b, #121b21);
 
   --hair: 1px solid rgba(23, 19, 16, 0.08);
   --hair-c: rgba(23, 19, 16, 0.08);
