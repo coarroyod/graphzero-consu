@@ -594,31 +594,249 @@
 
 /* ==========================================================================
    02 · Design partnership — the one dark band
+   ==========================================================================
+
+   Self-contained on purpose. This section used to borrow .gz4-open,
+   .gz4-wrap, .gz4-label, .gz4-h2 and .gz4-btn from the page's shared set, and
+   it also still carried .gzea-gets from the pre-redesign sheet — which is how
+   a navy scrim from another stylesheet ended up painting over its ground.
+   Nothing here is shared with another section now, so a change to this band
+   cannot reach one, and no other sheet can reach in.
+
+   Every colour below is a literal. No tokens, no derived tints.
    ========================================================================== */
 
-/* The selector is deliberately overweight. The old sheet still paints this
-   section navy (rgb(23,35,43)) at the same specificity, so today the oxide
-   only wins because this file loads later — a fragile way to hold a colour.
-   Beating it outright means a reordered <link> cannot silently bring the navy
-   back. */
-.page[data-page="early-access"] .eaf-partner.eaf-partner {
-  background-color: transparent;
-  background-image: var(--oxide);
-  border-radius: var(--r-band);
-  padding-block: 104px; overflow: hidden; color: #c9c0b6;
+.page[data-page="early-access"] .eap {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 76px 0 68px;
+  border-radius: 24px;
+  border-top: 1px solid rgba(23, 19, 16, 0.08);
+  background: linear-gradient(150deg, #3a1b0f 0%, #241610 55%, #1b120d 100%);
+  color: #ffffff;
+  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Helvetica, Arial, sans-serif;
+  animation: gzEnter linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 18%;
 }
-.page[data-page="early-access"] .eaf-partner .gz4-label { color: #c9c0b6; }
-.page[data-page="early-access"] .eaf-partner .gz4-h2 { color: var(--paper); }
-.page[data-page="early-access"] .eaf-partner__head { display: grid; grid-template-columns: 1fr 380px; gap: 16px 48px; align-items: end; margin-bottom: 56px; }
-.page[data-page="early-access"] .eaf-partner__head .gz4-label:first-child { grid-column: 1 / -1; }
-.page[data-page="early-access"] .eaf-partner__support { color: #c9c0b6; text-align: right; margin: 0; }
-.page[data-page="early-access"] .eaf-gets { display: grid; grid-template-columns: repeat(4, 1fr); }
-.page[data-page="early-access"] .eaf-get { padding: 0 26px; border-left: 1px solid rgba(251, 249, 245, 0.14); }
-.page[data-page="early-access"] .eaf-get:first-child { padding-left: 0; border-left: 0; }
-.page[data-page="early-access"] .eaf-get__n { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em; color: #c9c0b6; }
-.page[data-page="early-access"] .eaf-get__t { font-size: 19px; letter-spacing: -0.026em; color: var(--paper); margin: 12px 0 8px; }
-.page[data-page="early-access"] .eaf-get__b { font-size: 15px; line-height: 1.6; color: #c9c0b6; margin: 0; }
-.page[data-page="early-access"] .eaf-partner__cta { margin-top: 56px; }
+
+/* The band runs the full width of the page, as every section here does, so
+   the brief's 72px side padding is measured from the same centred 1440
+   column the neighbouring sections use. Putting it on the section itself
+   would push this band's copy out of line with the copy above and below it
+   at every width. Same 72px, same edge. */
+.page[data-page="early-access"] .eap__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 72px;
+  box-sizing: border-box;
+}
+
+/* The doubled .eap is not decoration. A foundation rule in this sheet,
+   `section > :not(.gz4-bloom)`, gives every direct child of every section
+   position:relative and z-index:1 so it clears that section's bloom — and it
+   names the old bloom class explicitly. This bloom is not that class, so it
+   was caught by the rule: it went relative (claiming 400px of layout it
+   should never occupy) and stacked above the copy. Rather than edit a
+   selector three other sections depend on, this one out-weighs it. */
+.page[data-page="early-access"] .eap .eap__bloom {
+  position: absolute;
+  left: 62%;
+  top: -100px;
+  width: 540px;
+  height: 400px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.3), transparent 70%);
+  filter: blur(36px);
+  animation: gzFloat linear both;
+  animation-timeline: view();
+  animation-range: cover 0% cover 100%;
+}
+
+/* ---- header ---- */
+
+.page[data-page="early-access"] .eap__head {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 72px;
+  align-items: end;
+}
+
+.page[data-page="early-access"] .eap__eyebrow {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #b9afa4;
+}
+
+/* Fixed at 15px. An inline SVG with no size falls back to its intrinsic box
+   and the two nodes render as saucers — which is what happened the first
+   time this band was built. */
+.page[data-page="early-access"] .eap__edge {
+  display: block;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-right: 9px;
+}
+
+.page[data-page="early-access"] .eap__h2 {
+  margin: 22px 0 0;
+  font-family: "Archivo", "Inter Tight", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.036em;
+  color: #ffffff;
+  animation: gzWipeIn linear both;
+  animation-timeline: view();
+  animation-range: entry 10% cover 26%;
+}
+
+.page[data-page="early-access"] .eap__h2-hot { color: #ec5b23; }
+
+.page[data-page="early-access"] .eap__support {
+  margin: 0;
+  padding-bottom: 4px;
+  font-size: 16px;
+  line-height: 1.68;
+  color: #c9c0b6;
+}
+
+/* ---- the four columns ---- */
+
+.page[data-page="early-access"] .eap__cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 48px;
+  border-top: 1px solid rgba(251, 249, 245, 0.2);
+}
+
+/* All four share one range on purpose. The stagger is their own positions
+   on the page, not a delay — animation-delay is ignored on a scroll
+   timeline and adding one would simply do nothing. */
+.page[data-page="early-access"] .eap__col {
+  padding: 26px 28px 0 28px;
+  border-right: 1px solid rgba(251, 249, 245, 0.14);
+  animation: gzWipeIn linear both;
+  animation-timeline: view();
+  animation-range: entry 24% entry 94%;
+}
+.page[data-page="early-access"] .eap__col:first-child { padding-left: 0; }
+.page[data-page="early-access"] .eap__col:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.page[data-page="early-access"] .eap__n {
+  display: block;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #9a9086;
+}
+
+.page[data-page="early-access"] .eap__t {
+  margin: 12px 0 0;
+  font-family: "Archivo", "Inter Tight", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+
+.page[data-page="early-access"] .eap__b {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c9c0b6;
+}
+
+/* ---- the call ---- */
+
+.page[data-page="early-access"] .eap__cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 42px;
+  padding: 14px 24px;
+  border: 1px solid rgba(251, 249, 245, 0.34);
+  border-radius: 10px;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  background: transparent;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page[data-page="early-access"] .eap__cta:hover {
+  background: #ec5b23;
+  border-color: #ec5b23;
+  transform: translateY(-2px);
+}
+
+/* ---- narrower ---- */
+
+@media (max-width: 1180px) {
+  .page[data-page="early-access"] .eap__inner { padding-inline: 40px; }
+  .page[data-page="early-access"] .eap__head { grid-template-columns: 1fr; gap: 28px; }
+  .page[data-page="early-access"] .eap__cols { grid-template-columns: 1fr 1fr; }
+  /* On two rows the third and fourth columns need the rule that was the
+     grid's top border, and column two loses the divider at the row's edge. */
+  .page[data-page="early-access"] .eap__col:nth-child(2) { border-right: 0; padding-right: 0; }
+  .page[data-page="early-access"] .eap__col:nth-child(3) { padding-left: 0; }
+  .page[data-page="early-access"] .eap__col:nth-child(n + 3) {
+    margin-top: 26px;
+    border-top: 1px solid rgba(251, 249, 245, 0.14);
+  }
+}
+
+@media (max-width: 760px) {
+  .page[data-page="early-access"] .eap { padding: 56px 0 52px; }
+  .page[data-page="early-access"] .eap__inner { padding-inline: 22px; }
+  .page[data-page="early-access"] .eap__h2 { font-size: 32px; }
+  .page[data-page="early-access"] .eap__cols { grid-template-columns: 1fr; }
+  .page[data-page="early-access"] .eap__col {
+    padding: 26px 0 0 0;
+    border-right: 0;
+  }
+  .page[data-page="early-access"] .eap__col:nth-child(2) { padding-right: 0; }
+  /* Stacked, the rule between two items needs the same 26px above it that
+     the padding gives it below, or it crowds the paragraph it follows. */
+  .page[data-page="early-access"] .eap__col:nth-child(n + 2) {
+    margin-top: 26px;
+    border-top: 1px solid rgba(251, 249, 245, 0.14);
+  }
+}
+
+/* Scoped to this band rather than the `*` the brief wrote, because a bare
+   universal selector inside this sheet would stop the motion on every other
+   section on the page too — and those were not in scope. Everything here
+   animates to its final state with `both`, so switching the animations off
+   leaves the finished band, which is also what a browser without
+   scroll-driven animations renders. */
+@media (prefers-reduced-motion: reduce) {
+  .page[data-page="early-access"] .eap,
+  .page[data-page="early-access"] .eap * {
+    animation: none !important;
+  }
+}
 
 /* ==========================================================================
    03 · The opportunity — the hero's bookend
@@ -701,7 +919,6 @@
   .page[data-page="early-access"] .gz4-guides { display: none; }
   .page[data-page="early-access"] .eaf-h1 { font-size: 46px; }
   .page[data-page="early-access"] .eaf-opp__head { font-size: 42px; }
-  .page[data-page="early-access"] .eaf-gets { grid-template-columns: 1fr 1fr; gap: 34px 0; }
 }
 @media (max-width: 760px) {
   .page[data-page="early-access"] .gz4-wrap { padding-inline: 22px; }
@@ -710,12 +927,8 @@
   .page[data-page="early-access"] .eaf-opp__head { font-size: 32px; }
   .page[data-page="early-access"] .eaf-register,
   .page[data-page="early-access"] .eaf-plates { grid-template-columns: 1fr; }
-  .page[data-page="early-access"] .eaf-gets { grid-template-columns: 1fr; }
-  .page[data-page="early-access"] .eaf-get { padding: 0; border-left: 0; }
   .page[data-page="early-access"] .eaf-toolbox__head { grid-template-columns: 1fr; }
   .page[data-page="early-access"] .eaf-hint { justify-self: start; }
-  .page[data-page="early-access"] .eaf-partner__head { grid-template-columns: 1fr; }
-  .page[data-page="early-access"] .eaf-partner__support { text-align: left; }
 }
 
 /* ---- the edge glyph ----
@@ -729,15 +942,3 @@
 .page[data-page="early-access"] .eaf-hero__head { max-width: 1000px; }
 .page[data-page="early-access"] .eaf-stage { color: var(--signal-deep); }
 
-/* ---- the old band's navy furniture ----
-
-   .gzea-gets carried a painting and, over it, a navy scrim at 82-88% — an
-   almost opaque sheet at z-index -1, covering this element's own background.
-   The oxide gradient was painting underneath it the whole time, which is why
-   the band read blue-grey with a faint warm cast instead of rust, and why the
-   orange opening line looked dull: it sits at z-index -2, under the scrim too.
-
-   The scrim and the painting go. The oxide is the ground now, so there is
-   nothing left for a scrim to sit over. */
-.page[data-page="early-access"] .eaf-partner::after { content: none; }
-.page[data-page="early-access"] .eaf-partner::before { z-index: 1; }
