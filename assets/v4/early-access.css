@@ -849,15 +849,17 @@
    sentences measures 833px at that size. Thirteen pixels short, so both
    sentences wrapped and the statement rendered as four ragged lines with a
    <br> stranded in the middle of it. The cap is the thing that was wrong,
-   not the break.
+   not the break: at 1000px each sentence holds one line, and it keeps
+   holding one down to about 500px, below which a phone wraps it and should.
 
-   The size is now fluid and the cap is wide enough that each sentence holds
-   one line: at the ceiling the longer sentence measures 899px against a
-   1000px cap, and 5.2vw keeps that true down to about 540px, below which a
-   phone wraps it and should. 60px is the page's own h1 size — this section
-   is the hero's bookend and speaks at the same volume, never over it. */
+   The size steps with the hero rather than scaling freely, and sits one
+   notch under it at every step — 56/43/32 against the hero's 60/46/34. A
+   fluid size was tried and overtook the hero below 1180px, where the hero
+   steps down to 46px and a 5.2vw closing headline was still at 53px. This
+   section closes what the hero opens; it should never be the louder of the
+   two at any width. */
 .page[data-page="early-access"] .eaf-opp__head {
-  font-size: clamp(30px, 5.2vw, 60px);
+  font-size: 56px;
   line-height: 1.08; letter-spacing: -0.042em; color: var(--ink);
   font-weight: 500; margin: 52px 0 0; max-width: 1000px;
 }
@@ -935,11 +937,13 @@
   .page[data-page="early-access"] .eaf-figcard { position: static; }
   .page[data-page="early-access"] .gz4-guides { display: none; }
   .page[data-page="early-access"] .eaf-h1 { font-size: 46px; }
+  .page[data-page="early-access"] .eaf-opp__head { font-size: 43px; }
 }
 @media (max-width: 760px) {
   .page[data-page="early-access"] .gz4-wrap { padding-inline: 22px; }
   .page[data-page="early-access"] .gznav .nav-row { padding-inline: 22px; }
   .page[data-page="early-access"] .eaf-h1 { font-size: 34px; }
+  .page[data-page="early-access"] .eaf-opp__head { font-size: 32px; }
   .page[data-page="early-access"] .eaf-register,
   .page[data-page="early-access"] .eaf-plates { grid-template-columns: 1fr; }
   .page[data-page="early-access"] .eaf-toolbox__head { grid-template-columns: 1fr; }
