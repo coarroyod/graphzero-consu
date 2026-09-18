@@ -923,12 +923,6 @@
 
 .page[data-page="early-access"] .eaf-opp__foot { display: flex; align-items: center; gap: 22px; margin-top: 52px; flex-wrap: wrap; }
 
-/* ---- footer ---- */
-.page[data-page="early-access"] .gz-footer { background: var(--paper); background-image: none; border-top: var(--hair); border-radius: 0; }
-.page[data-page="early-access"] .gz-footer__nav a { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
-.page[data-page="early-access"] .gz-footer__social { color: var(--ink); transition: color 160ms ease; }
-.page[data-page="early-access"] .gz-footer__social:hover { color: var(--signal); }
-
 /* ---- narrower ---- */
 @media (max-width: 1180px) {
   .page[data-page="early-access"] .gz4-wrap { padding-inline: 40px; }

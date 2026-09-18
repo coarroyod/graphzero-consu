@@ -77,14 +77,10 @@
   }
 
   /* ---- targets ----
-     The footer's four links and the inline "full picture" links sit on an
-     18-20px line, under the 24px minimum a finger wants. The padding is
-     vertical only and the links are inline-block, so nothing reflows around
-     them. */
-  .gz-footer__nav a {
-    display: inline-block;
-    padding-block: 4px;
-  }
+     The inline "full picture" links sit on an 18-20px line, under the 24px
+     minimum a finger wants. The padding is vertical only and the links are
+     inline-block, so nothing reflows around them. The footer's own links
+     carry the same target in footer-2026.css now. */
   .page .link-underline {
     display: inline-block;
     padding-block: 4px;

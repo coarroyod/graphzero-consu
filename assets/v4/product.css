@@ -918,14 +918,6 @@
 .page[data-page="product"] #security .h2 { color: var(--paper); }
 .page[data-page="product"] #security .markrow__badge { filter: invert(1); }
 
-/* ---- footer ---- */
-
-.page[data-page="product"] .gz-footer { background: var(--paper); background-image: none; border-top: var(--hair); }
-.page[data-page="product"] .gz-footer__legal { display: none; }
-.page[data-page="product"] .gz-footer__nav a { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
-.page[data-page="product"] .gz-footer__social { color: var(--ink); transition: color 160ms ease; }
-.page[data-page="product"] .gz-footer__social:hover { color: var(--signal); }
-
 /* ---- narrower screens ---- */
 
 @media (max-width: 1100px) {

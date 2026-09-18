@@ -1,0 +1,256 @@
+/* ==========================================================================
+   The footer — one component, every page
+   ==========================================================================
+
+   Two parts. Four full-bleed bars settling from the page's own paper down
+   into the dark band, and the band itself: a bloom, a flow, three columns
+   and a closing rule.
+
+   Identical on all four pages. The only thing that differs is which nav link
+   carries aria-current, and that is also what colours it — no per-page class
+   and no per-page rule, so the four pages cannot drift apart.
+
+   Every colour here is a literal. No tokens, no derived tints.
+   ========================================================================== */
+
+.gzf {
+  position: relative;
+  overflow: hidden;
+  font-family: "Inter Tight", "Geist", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* ---- the sediment ---- */
+
+.gzf__sediment { display: block; }
+.gzf__bar { display: block; width: 100%; }
+.gzf__bar--1 { height: 12px; background: #fbf8f4; }
+.gzf__bar--2 { height: 16px; background: #f7f1ea; }
+.gzf__bar--3 { height: 22px; background: #f3e9dd; }
+.gzf__bar--4 {
+  height: 30px;
+  background: #efdcc9;
+  position: relative;
+  overflow: hidden;
+}
+
+/* preserveAspectRatio="none" is deliberate: the ticks are meant to shear
+   with the width of the page, not to hold an angle. */
+.gzf__ticks { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.gzf__ticks line { stroke: rgba(236, 91, 35, 0.35); stroke-width: 1; }
+
+/* A <line> has no interior, so SVG's default black fill never paints — but
+   it is still declared, and the only colours this component declares should
+   be the ones it uses. */
+.gzf__ticks, .gzf__ticks line, .gzf__edge line { fill: none; }
+
+/* ---- the dark band ---- */
+
+.gzf__band {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 60px 72px 40px;
+  background: linear-gradient(150deg, #3a1b0f 0%, #241610 55%, #1b120d 100%);
+  color: #ffffff;
+}
+
+.gzf__bloom {
+  position: absolute;
+  left: -80px;
+  top: -110px;
+  width: 540px;
+  height: 400px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.26), transparent 70%);
+  filter: blur(36px);
+  animation: gzFootGlow 7s ease-in-out infinite;
+}
+
+.gzf__flow {
+  position: absolute;
+  left: 72px;
+  top: 0;
+  width: calc(100% - 144px);
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.gzf__flow-g {
+  fill: none;
+  stroke: rgba(236, 91, 35, 0.5);
+  stroke-width: 1;
+  stroke-dasharray: 26 420;
+  stroke-linecap: round;
+}
+.gzf__flow-g path { animation: gzFlowFoot 5.4s linear infinite; }
+
+/* Everything above the two background layers. */
+.gzf__row,
+.gzf__close { position: relative; z-index: 1; }
+
+/* ---- the three columns ---- */
+
+.gzf__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.gzf__lockup { display: flex; align-items: center; gap: 11px; }
+.gzf__mark { display: block; height: 34px; width: auto; }
+/* Every piece of text here states its own line-height. Inherited, they came
+   from each page's base — 1.68 on the two 2026 pages, 1.4 on the other two —
+   and the same component rendered 444px tall on one page and 439px on
+   another. A shared footer that is not the same height on every page is not
+   shared. */
+.gzf__word {
+  font-family: "Archivo", "Inter Tight", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -0.027em;
+  color: #ffffff;
+}
+
+.gzf__tagline {
+  margin: 16px 0 0;
+  max-width: 360px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #c9c0b6;
+}
+
+.gzf__cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 26px;
+  padding: 13px 22px;
+  border: 1px solid rgba(251, 249, 245, 0.34);
+  border-radius: 10px;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  background: transparent;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gzf__cta:hover {
+  background: #ec5b23;
+  border-color: #ec5b23;
+  transform: translateY(-2px);
+}
+
+/* No heading over either column, and both start level with the lockup. */
+.gzf__nav { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.gzf__nav a {
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  color: #e4ded6;
+  transition: color 160ms ease;
+}
+.gzf__nav a:hover { color: #ec5b23; }
+
+/* The sheet this replaced carried keyboard-focus styling and the brief's
+   table does not mention it, so it is rebuilt here rather than dropped: a
+   link nobody can see themselves land on is a regression, not a
+   simplification. The ring uses the accent already on the list, and the
+   hover colour comes along so focus and hover read the same. */
+.gzf__nav a:focus-visible,
+.gzf__cta:focus-visible {
+  outline: 2px solid #ec5b23;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.gzf__nav a:focus-visible { color: #ec5b23; }
+.gzf__cta:focus-visible { border-radius: 10px; }
+
+/* The current page, and the only thing that differs between the four
+   copies of this footer. */
+.gzf__nav a[aria-current="page"] { color: #ffffff; }
+
+.gzf__social { display: inline-flex; align-items: center; gap: 10px; }
+.gzf__in { width: 15px; height: 15px; flex: 0 0 auto; display: block; fill: currentColor; }
+
+/* ---- the closing rule ---- */
+
+.gzf__close {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(251, 249, 245, 0.16);
+}
+.gzf__edge { display: block; flex: 0 0 auto; width: 16px; height: 16px; }
+.gzf__place {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9a9086;
+}
+
+/* ---- narrower ---- */
+
+@media (max-width: 1180px) {
+  .gzf__band { padding: 52px 40px 36px; }
+  .gzf__flow { left: 40px; width: calc(100% - 80px); }
+  .gzf__row { gap: 44px; }
+}
+
+@media (max-width: 760px) {
+  .gzf__band { padding: 44px 22px 32px; }
+  .gzf__flow { left: 22px; width: calc(100% - 44px); }
+  .gzf__row { grid-template-columns: 1fr; gap: 34px; }
+  .gzf__tagline { max-width: none; }
+  /* The one departure from the brief, and it is about what the drawing
+     becomes rather than what it is. The flow keeps its 1296-unit viewBox at
+     every width, so on a 390px screen each 26-unit dash lands about 7px
+     long: not a flow any more, just a scatter of orange ticks behind the
+     copy. The bloom carries the band on a phone. */
+  .gzf__flow { display: none; }
+  /* A 15px link sits on an 18px line, under the 24px a finger wants. The
+     padding is vertical only and the gap comes down to match, so the rhythm
+     of the stack is unchanged and nothing reflows around it. */
+  .gzf__nav { gap: 6px; }
+  .gzf__nav a { padding-block: 4px; }
+}
+
+/* ---- motion ----
+
+   Both are time-based and continuous. Neither goes on a scroll timeline and
+   the footer gets no entrance animation: it is the bottom of the page, and
+   something that animates in as you arrive at it has nowhere to arrive from.
+
+   The glow is gzFootGlow, not gzGlow. A gzGlow already exists on the Early
+   Access sheet, driving that page's plate hub at 0.12/0.34; a second
+   definition under the same name would silently reassign it on whichever
+   sheet loaded last. This footer is on every page, so it must not take a
+   name another sheet already owns. */
+@keyframes gzFootGlow {
+  0%, 100% { opacity: 0.16; }
+  50% { opacity: 0.4; }
+}
+@keyframes gzFlowFoot {
+  from { stroke-dashoffset: 26; }
+  to { stroke-dashoffset: -420; }
+}
+
+/* Scoped to the footer rather than the bare `*` — this sheet is loaded by
+   every page, and a universal rule here would switch off the motion on all
+   four of them. */
+@media (prefers-reduced-motion: reduce) {
+  .gzf, .gzf * { animation: none !important; }
+}
