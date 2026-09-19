@@ -735,10 +735,122 @@
   gap: 24px;
   align-items: start;
 }
-.page[data-page="product"] #context-layer .hero__copy { grid-column: 1 / span 6; }
-.page[data-page="product"] #context-layer .hero__lead { grid-column: 8 / span 5; margin: 0; }
-.page[data-page="product"] #context-layer .hero__title { margin: 14px 0 0; }
-.page[data-page="product"] #context-layer .hero__figure { grid-column: 1 / -1; margin: 54px 0 0; }
+/* ---- 01 · The layer — one centred plate ----
+
+   This was a two-column grid: eyebrow and headline hard left, the deck to
+   their right, the drawing full width underneath. The drawing is optically
+   centred, so the headline never lined up with it and the section read
+   off-axis. Everything sits on one axis now, and the header and the figure
+   share a single white plate so they read as one object. */
+
+/* Same box every other section on this page gets. .wrap, which this section
+   used to carry, caps the column at 1440 and pads it by 72 — without the cap
+   the plate keeps growing past 1440 while the sections above and below stop,
+   and the new plate would hang wider than both. The brief's 72px is the same
+   72px, just stated here. */
+.page[data-page="product"] .context {
+  max-width: 1440px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: 76px 72px 64px;
+  border-top: 1px solid rgba(23, 19, 16, 0.08);
+}
+.page[data-page="product"] .context__plate {
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(23, 19, 16, 0.07);
+}
+
+.page[data-page="product"] .context__head {
+  padding: 84px 72px 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+.page[data-page="product"] .context__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #6f675e;
+}
+.page[data-page="product"] .context__eyebrow svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 9px;
+  flex: 0 0 auto;
+}
+.page[data-page="product"] .context__title {
+  margin: 0;
+  font-family: "Archivo", "Inter Tight", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 46px;
+  line-height: 1.08;
+  letter-spacing: -0.036em;
+  color: #171310;
+  max-width: 880px;
+  text-wrap: pretty;
+}
+.page[data-page="product"] .context__deck {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.68;
+  color: #3b3630;
+  max-width: 600px;
+  text-wrap: pretty;
+}
+
+.page[data-page="product"] .context__figure {
+  position: relative;
+  padding: 0 40px 56px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf7f3 100%);
+}
+
+/* The direct child only. On a phone the wide drawing steps aside for the
+   compact flow figure kg-flow.js builds inside this same box, and that one
+   sizes itself by height — a blanket `svg` rule reaches into it and undoes
+   that. */
+.page[data-page="product"] .context__figure > svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Keeps .gz4-bloom alongside, which is what binds it to gzFloat; these come
+   later in the file and at the same weight, so they win on the two
+   properties they restate. */
+.page[data-page="product"] .context__bloom {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 520px;
+  height: 360px;
+  margin: -180px 0 0 -260px;
+  pointer-events: none;
+  filter: blur(28px);
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.11), transparent 70%);
+}
+
+/* The page narrows its gutter at 1180, so the plate does too — otherwise it
+   sits 32px inside its neighbours for the whole band between 900 and 1180. */
+@media (max-width: 1180px) {
+  .page[data-page="product"] .context { padding-inline: 40px; }
+}
+
+@media (max-width: 900px) {
+  .page[data-page="product"] .context { padding: 56px 24px 48px; }
+  .page[data-page="product"] .context__head { padding: 56px 28px 44px; }
+  .page[data-page="product"] .context__title { font-size: 34px; }
+  .page[data-page="product"] .context__figure { padding: 0 20px 40px; }
+}
 
 /* Figure A's card */
 .page[data-page="product"] .gz4-figcard {
@@ -942,8 +1054,6 @@
   .page[data-page="product"] .gz4-hero__side { grid-column: 1 / -1; }
   .page[data-page="product"] .gz4-plates { grid-template-columns: 1fr; }
   .page[data-page="product"] #layers .layer-grid { grid-template-columns: 1fr; }
-  .page[data-page="product"] #context-layer .hero__copy,
-  .page[data-page="product"] #context-layer .hero__lead { grid-column: 1 / -1; }
 }
 
 /* The fold rises under the 62px bar on this page, not the site's 82. The bar

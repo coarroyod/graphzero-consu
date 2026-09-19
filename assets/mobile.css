@@ -22,10 +22,10 @@
      Early Access page draws with kg-flow.js — the same nine sources, base and
      four assistants, fitted to the column in one screen, its packets running
      while it is in view. The scroller and its fade go with the SVG. */
-  .page[data-page="product"] #context-layer .hero__figure {
+  .page[data-page="product"] #context-layer .context__figure {
     overflow: visible;
   }
-  .page[data-page="product"] #context-layer .hero__figure > svg {
+  .page[data-page="product"] #context-layer .context__figure > svg {
     display: none;
   }
   /* 66vw is the drawing's own ratio (404 tall for 556 wide) on a column that
