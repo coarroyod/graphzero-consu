@@ -212,8 +212,10 @@
 }
 .page[data-page="security"] .gzs-marks__img {
   display: block;
+  flex: 0 0 auto;
   height: 26px;
   width: auto;
+  object-fit: contain;
 }
 .page[data-page="security"] .gzs-marks__label {
   font-family: var(--f-mono);
@@ -416,10 +418,21 @@
   height: 2px;
   background: var(--oxide);
 }
+/* align-self is the whole of this rule. The tile is a flex column, and a
+   flex column stretches its children across its full width unless told not
+   to — so `width: auto` resolved to the stretched width, 245px, while the
+   height stayed pinned at 76. Square artwork came out three times too wide
+   and read as a low-quality image. Nothing was wrong with the files.
+
+   object-fit is belt and braces: if anything ever does constrain both axes
+   again, the mark letterboxes rather than smears. */
 .page[data-page="security"] .gzs-tile__art {
   display: block;
+  align-self: flex-start;
   height: 76px;
   width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 .page[data-page="security"] .gzs-tile__name {
   margin: 0;
