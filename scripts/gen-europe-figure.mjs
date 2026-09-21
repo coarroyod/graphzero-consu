@@ -135,7 +135,11 @@ for (const t of tiles) {
 const cutoff = [...tiles].sort((a, b) => b.w - a.w)[
   Math.floor(tiles.length * 0.1)
 ].w;
-for (const t of tiles) t.fill = t.w > cutoff ? "#FF8A33" : "#FFB27A";
+/* One accent. The figure used to carry three oranges of its own —
+   #FF8A33, #FFB27A, and #FF6A00 for the cities — none of them the oxide
+   the rest of the site runs on. Everything is oxide now, and the depth
+   comes from the per-tile opacity below, which already varies. */
+for (const t of tiles) t.fill = "#EC5B23";
 
 const SIDE = 13;
 const RX = SIDE / 5;
@@ -163,7 +167,7 @@ const groups = [0, 1, 2, 3].map(
 
 const markers = CITIES.map(
   (p) =>
-    `<rect x="${f(cx(p.c) - CITY_SIDE / 2)}" y="${f(cy(p.r) - CITY_SIDE / 2)}" width="${f(CITY_SIDE)}" height="${f(CITY_SIDE)}" rx="${f(CITY_RX)}" fill="#FF6A00"></rect>`,
+    `<rect x="${f(cx(p.c) - CITY_SIDE / 2)}" y="${f(cy(p.r) - CITY_SIDE / 2)}" width="${f(CITY_SIDE)}" height="${f(CITY_SIDE)}" rx="${f(CITY_RX)}" fill="#EC5B23"></rect>`,
 ).join("");
 
 const svg = `<svg class="gzeu" viewBox="0 0 ${W} ${H}" width="100%" aria-hidden="true" focusable="false">${groups.join("")}<g class="gzeu-cities">${markers}</g></svg>`;

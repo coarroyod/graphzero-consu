@@ -1,501 +1,549 @@
 /* ==========================================================================
-   About — implemented from GraphZero About Page.dc.html
+   About — the Signal system
+   ==========================================================================
 
-   Read out of the Claude Design project; sizes, colours, radii and insets are
-   the kit's own values. Same design system as the rest of the site, same
-   navy/orange/pink, so nothing needed reconciling.
+   The same tokens the Security page runs: white ground, oxide the only
+   accent, hairline elevation rather than shadow, one motion duration.
 
-   Two things the kit does that this does not:
+   The nav and the footer are not touched here. Neither is the Europe
+   figure's own drawing — its tiles, breathing and city labels are carried
+   over from the sheet this replaces and sit at the foot of this file.
 
-   1. Its <europe-flow> loads D3 from unpkg.com at runtime — ~280KB of library
-      to run one Mercator projection over 18 fixed points. The projection is
-      deterministic, so it is precomputed and the network ships as a static
-      SVG: identical geometry, no third-party request. That also matters on
-      this page in particular, whose argument is that nothing leaves Europe.
-      The projection was checked against the map — Lisbon westernmost,
-      Bucharest easternmost, Stockholm northernmost, Athens southernmost,
-      Amsterdam left of and above Berlin and Paris.
-
-   2. It ships no media query at all. The breakpoints at the foot are ours.
+   Scoped to the page throughout, so nothing here can reach another one.
    ========================================================================== */
 
 .page[data-page="about"] {
-  --gza-ink: #17232B;
-  --gza-muted: #59666B;
-  --gza-quiet: #7E8A8E;
-  --gza-hair: rgba(23, 35, 43, .12);
-  --gza-ring: inset 0 0 0 1px rgba(23, 35, 43, .16);
+  --ink: #171310;
+  --body: #3b3630;
+  --muted: #6f675e;
+  --oxide: #ec5b23;
+  --oxide-deep: #8c3a18;
+
+  --warm: linear-gradient(160deg, #fbf7f3 0%, #ffffff 62%);
+  --close: linear-gradient(120deg, #fff6f0 0%, #ffffff 58%);
+  --plate-fig: linear-gradient(180deg, #fbfaf9 0%, #ffffff 100%);
+
+  --hair: rgba(23, 19, 16, 0.07);
+  --hair-soft: rgba(23, 19, 16, 0.05);
+  --ring: inset 0 0 0 1px rgba(23, 19, 16, 0.07);
+  --ring-soft: inset 0 0 0 1px rgba(23, 19, 16, 0.05);
+  --lift: inset 0 0 0 1px rgba(236, 91, 35, 0.4), 0 16px 36px rgba(23, 19, 16, 0.08);
+
+  --f: "Archivo", "Inter Tight", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The site's shared hairline token is navy; on this palette that is a
+     second hue, and shared components on the page draw with it. */
+  --line: rgba(23, 19, 16, 0.12);
+
+  background: #ffffff;
 }
 
-.page[data-page="about"] .gza-wrap { max-width: 1152px; margin-inline: auto; }
+/* Type and ink go on main, not on the page.
 
-/* ---- the mark, at the three sizes the kit uses it ---- */
-.page[data-page="about"] .gza-mark { flex: 0 0 auto; width: 15px; height: 18px; display: block; }
-.page[data-page="about"] .gza-eyebrow--mono .gza-mark { width: 16px; height: 20px; }
-.page[data-page="about"] .gza-close__item .gza-mark { width: 21px; height: 25px; margin-top: 6px; }
+   The brief says not to touch the nav or the footer, and both sit outside
+   main but inside the page wrapper — so setting font-family and color there
+   cascades into them. Nothing they paint changed, because both set their own
+   on every element that carries text, but their containers were inheriting
+   this page's Archivo and body ink. Scoped here, they inherit nothing from
+   the restyle at all. The ground stays on the page, which is whose it is. */
+.page[data-page="about"] #main {
+  font-family: var(--f);
+  color: var(--body);
+}
+
+.page[data-page="about"] .gza-wrap {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 40px;
+  box-sizing: border-box;
+}
+
+/* ---- the eyebrow, shared ---- */
 
 .page[data-page="about"] .gza-eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
   margin: 0;
-  font-size: 12px;
-  letter-spacing: .08em;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--gza-muted);
+  color: var(--muted);
+  white-space: nowrap;
 }
-.page[data-page="about"] .gza-eyebrow--mono {
-  letter-spacing: .12em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-.page[data-page="about"] .gza-eyebrow--invert { color: rgba(255, 255, 255, .55); }
-
-/* ---- 00 · the fold ---- */
-.page[data-page="about"] .gza-hero {
-  padding: 88px 5vw 96px;
-  max-width: 1300px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  background: none;
-  /* The first screen, the way Security's fold is: the whole of it, with the
-     content centred in it rather than set from the top. svh so a phone's
-     address bar cannot make it taller than the screen; vh first for anything
-     that does not know svh. */
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.page[data-page="about"] .gza-hero__grid {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-.page[data-page="about"] .gza-display {
-  margin: 28px 0 0;
-  /* The Early Access hero's setting exactly, so the two folds share one
-     display type. */
-  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
-               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  max-width: 13ch;
-  font-size: clamp(3rem, 6.2vw, 5rem);
-  line-height: 0.88;
-  letter-spacing: -0.052em;
-  font-weight: 500;
-  color: var(--gza-ink);
-}
-.page[data-page="about"] .gza-display__accent { color: #FF6A00; }
-.page[data-page="about"] .gza-display__stop { color: #FF2E93; }
-/* A step down in size, so the pair reads as a note under the headline rather
-   than as a second headline after it. The rule that used to open them is
-   gone; the distance does the work on its own. */
-.page[data-page="about"] .gza-statements {
-  margin-top: 38px;
-  padding-top: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 44ch;
-}
-.page[data-page="about"] .gza-statements p {
-  margin: 0;
-  font-size: 24px;
-  line-height: 1.22;
-  letter-spacing: -0.028em;
-  font-weight: 500;
-  color: var(--gza-ink);
-  text-wrap: pretty;
-}
-/* The kit lets the figure spill past its column on both sides. */
-.page[data-page="about"] .gza-hero__figure {
-  width: 122%;
-  margin-left: -11%;
-  max-width: 760px;
-  justify-self: center;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.page[data-page="about"] .gza-flow { display: block; overflow: visible; }
-@keyframes gza-flow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -420; } }
-.page[data-page="about"] .gza-packet { animation-name: gza-flow; animation-timing-function: linear; animation-iteration-count: infinite; }
-
-/* ---- 01 · the story, on the navy ---- */
-.page[data-page="about"] .gza-story {
-  padding: 88px 5vw 96px;
-  position: relative;
-  isolation: isolate;
-  background-color: #17232B;      /* unchanged — the fallback if the image fails */
+.page[data-page="about"] .gza-edge {
+  display: block;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-right: 9px;
+  fill: none;
 }
 
-/* The painting behind a graduated navy scrim, so the band reads as navy
-   with depth and a faint warm cast, not as a photograph. isolation on the
-   section plus the negative z-indexes put the existing content above both
-   layers with no markup change and no z-index on any child. */
-.page[data-page="about"] .gza-story::before {
+/* The 1px lit strip that opens a band on a new ground. */
+.page[data-page="about"] .gza-story::before,
+.page[data-page="about"] .gza-close::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: -2;
-  background-image: url("brand/paint.png");
-  background-size: 130% auto;
-  background-repeat: no-repeat;
-  background-position: 34% 26%;
-  animation: gz-paint-drift 240s ease-in-out infinite alternate;
-}
-
-/* At 82% the painting's brightest region resolves to about rgb(64,70,68),
-   keeping white body copy near 9.7:1; below roughly 55% it fails 4.5:1. */
-.page[data-page="about"] .gza-story::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
+  inset: 0 0 auto 0;
+  height: 1px;
+  z-index: 1;
   background: linear-gradient(
-    180deg,
-    rgba(23, 35, 43, .82) 0%,
-    rgba(23, 35, 43, .88) 34%,
-    rgba(23, 35, 43, .94) 72%
+    90deg,
+    rgba(236, 91, 35, 0.75),
+    rgba(236, 91, 35, 0.15) 42%,
+    rgba(23, 19, 16, 0.06) 78%
   );
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .page[data-page="about"] .gza-story::before { animation: none; }
+/* ==========================================================================
+   1 · the fold — centred, the map on a plate
+   ========================================================================== */
+
+.page[data-page="about"] .gza-hero {
+  background: #ffffff;
+  padding: 0;
+}
+.page[data-page="about"] .gza-hero__head {
+  max-width: 1200px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  /* 88 of clearance, plus the 82 the fold is pulled up by.
+
+     .gz-fold-pull lifts this section under the sticky bar so the ground runs
+     behind it, which means the brief's 88px top padding was leaving six
+     actual pixels between the bar and the eyebrow — the eyebrow sat under
+     the bar. 170 is the brief's 88 measured from where the bar ends. */
+  padding: 170px 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+}
+.page[data-page="about"] .gza-display {
+  margin: 0;
+  max-width: 900px;
+  font-size: 76px;
+  line-height: 0.98;
+  font-weight: 500;
+  letter-spacing: -0.046em;
+  color: var(--ink);
+}
+.page[data-page="about"] .gza-display__accent { color: inherit; }
+.page[data-page="about"] .gza-display__stop { color: var(--oxide); }
+
+.page[data-page="about"] .gza-hero__note {
+  margin: 0;
+  max-width: 520px;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--body);
+}
+.page[data-page="about"] .gza-hero__claim {
+  margin: 0;
+  max-width: 620px;
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.page[data-page="about"] .gza-figwrap {
+  max-width: 1200px;
+  margin: 44px auto 0;
+  box-sizing: border-box;
+  padding: 0 40px 76px;
+}
+.page[data-page="about"] .gza-figplate {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  background: var(--plate-fig);
+  border-radius: 24px;
+  padding: 40px 40px 28px;
+  box-shadow: var(--ring-soft);
+}
+.page[data-page="about"] .gza-figplate__bloom {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 520px;
+  height: 380px;
+  margin: -190px 0 0 -260px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.06), transparent 70%);
+  filter: blur(26px);
+}
+.page[data-page="about"] .gza-figplate__art {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin-inline: auto;
+}
+.page[data-page="about"] .gza-figplate__foot {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* nowrap on every mono label: they are the one thing that breaks. */
+.page[data-page="about"] .gza-figplate__foot span { white-space: nowrap; }
+.page[data-page="about"] .gza-figplate__where { color: var(--oxide-deep); }
+
+/* ==========================================================================
+   2 · the story — warm band, split plate
+   ========================================================================== */
+
+.page[data-page="about"] .gza-story {
+  position: relative;
+  background: var(--warm);
+  border-top: 1px solid rgba(23, 19, 16, 0.08);
+  padding-block: 88px;
 }
 .page[data-page="about"] .gza-story__grid {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 64px;
-  align-items: start;
-  margin-top: 40px;
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--ring);
+}
+/* the photo column */
+.page[data-page="about"] .gza-story__grid > div:first-child {
+  flex: 1 1 380px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .page[data-page="about"] .gza-portrait {
-  border-radius: var(--radius-lg);
+  flex: 1 1 auto;
+  min-height: 340px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
-  height: 420px;
 }
-.page[data-page="about"] .gza-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page[data-page="about"] .gza-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+}
 .page[data-page="about"] .gza-portrait__caption {
-  margin: 14px 0 0;
-  font-size: 13px;
-  color: rgba(255, 255, 255, .72);
+  margin: 0;
+  padding: 14px 24px;
+  background: #fbf7f3;
+  border-top: 1px solid var(--hair);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
 }
+/* the text column */
 .page[data-page="about"] .gza-story__body {
-  padding-left: 56px;
-  box-shadow: inset 1px 0 0 rgba(255, 255, 255, .16);
+  flex: 1.1 1 420px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+.page[data-page="about"] .gza-story__tick {
+  display: block;
+  width: 34px;
+  height: 2px;
+  background: var(--oxide);
 }
 .page[data-page="about"] .gza-h2 {
   margin: 0;
-  max-width: 18ch;
-  font-size: clamp(2.2rem, 3.6vw, 3.75rem);
-  line-height: 1.0;
-  letter-spacing: -0.04em;
+  font-size: 38px;
+  line-height: 1.12;
   font-weight: 500;
-  color: #ffffff;
-}
-.page[data-page="about"] .gza-story__lead {
-  margin: 28px 0 0;
-  max-width: 48ch;
-  font-size: 20px;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, .72);
+  letter-spacing: -0.036em;
+  color: var(--ink);
   text-wrap: pretty;
 }
-.page[data-page="about"] .gza-story__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 36px;
-  padding-bottom: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
-  text-decoration: none;
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .4);
-  transition: box-shadow 150ms cubic-bezier(.2,.6,.2,1);
+.page[data-page="about"] .gza-story__lead {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.62;
+  color: var(--body);
+  text-wrap: pretty;
 }
-.page[data-page="about"] .gza-story__link:hover,
-.page[data-page="about"] .gza-story__link:focus-visible { box-shadow: inset 0 -1px 0 #FF6A00; color: #ffffff; }
 
-/* ---- 02 · the ecosystem ---- */
-.page[data-page="about"] .gza-eco { padding: 88px 5vw 96px; }
-.page[data-page="about"] .gza-eco__head { display: flex; align-items: baseline; gap: 24px; }
-.page[data-page="about"] .gza-eco__head .gza-eyebrow { white-space: nowrap; }
-.page[data-page="about"] .gza-eco__rule { flex: 1; height: 1px; background: var(--gza-hair); }
-.page[data-page="about"] .gza-eco__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin: 36px auto 0;
-  padding: 0;
-  list-style: none;
+/* As a flex child this link otherwise blockifies to the column's full width,
+   and the arrow orphans onto a second line above a rule running the whole
+   way across. fit-content plus nowrap keeps the rule under the words. */
+.page[data-page="about"] .gza-story__link {
+  align-self: flex-start;
+  width: fit-content;
+  white-space: nowrap;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(236, 91, 35, 0.45);
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--oxide-deep);
+  transition: color 180ms ease, border-color 180ms ease;
 }
+.page[data-page="about"] .gza-story__link:hover {
+  color: var(--oxide);
+  border-bottom-color: var(--oxide);
+}
+
+/* ==========================================================================
+   3 · the ecosystem — two linked cards
+   ========================================================================== */
+
+.page[data-page="about"] .gza-eco {
+  background: var(--warm);
+  padding-block: 0 88px;
+}
+.page[data-page="about"] .gza-eco__head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.page[data-page="about"] .gza-eco__rule {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--line);
+}
+.page[data-page="about"] .gza-eco__grid {
+  margin: 26px auto 0;
+  padding-inline: 40px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+.page[data-page="about"] .gza-eco__grid > li { display: flex; }
+
 .page[data-page="about"] .gza-eco__card {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--gza-ring);
-  color: var(--gza-ink);
+  box-shadow: var(--ring);
   text-decoration: none;
-  transition: transform 250ms cubic-bezier(.2,.6,.2,1), background 150ms cubic-bezier(.2,.6,.2,1);
+  color: inherit;
+  transition: box-shadow 180ms ease, transform 180ms ease;
 }
-.page[data-page="about"] .gza-eco__card:hover,
-.page[data-page="about"] .gza-eco__card:focus-visible {
-  transform: translateY(-2px);
-  background: rgba(23, 35, 43, .04);
-  color: var(--gza-ink);
+.page[data-page="about"] .gza-eco__card:hover {
+  box-shadow: var(--lift);
+  transform: translateY(-3px);
 }
-.page[data-page="about"] .gza-eco__shot { display: block; width: 100%; height: 220px; background: #ececec; }
-.page[data-page="about"] .gza-eco__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* The Aithos artwork is a wordmark on a flat ground rather than a photograph.
-   Covered, it is cropped top and bottom and reads as an empty panel; contained,
-   it sits whole on its own ground. The Stack's is a photograph and stays
-   covered. */
-.page[data-page="about"] .gza-eco__shot--mark { background: #EDECE8; }
-.page[data-page="about"] .gza-eco__shot--mark img { object-fit: contain; padding: 26px; box-sizing: border-box; }
-.page[data-page="about"] .gza-eco__body { display: flex; flex-direction: column; flex: 1; padding: 30px 34px 34px; }
-.page[data-page="about"] .gza-eco__n { display: flex; align-items: center; gap: 12px; font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--gza-muted); font-variant-numeric: tabular-nums; }
-.page[data-page="about"] .gza-eco__hair { flex: 1; height: 1px; background: var(--gza-hair); }
-.page[data-page="about"] .gza-eco__title { display: block; margin-top: 18px; max-width: 26ch; font-size: 22px; line-height: 1.18; letter-spacing: -0.025em; font-weight: 500; }
-.page[data-page="about"] .gza-eco__text { display: block; margin-top: 12px; max-width: 52ch; font-size: 15px; line-height: 1.5; color: var(--gza-muted); text-wrap: pretty; }
-.page[data-page="about"] .gza-eco__foot { margin-top: auto; padding-top: 26px; display: block; }
-.page[data-page="about"] .gza-eco__cta { font-size: 15px; font-weight: 500; white-space: nowrap; }
-
-/* ---- 03 · the close, on a woven white ---- */
-.page[data-page="about"] .gza-close {
-  /* The Early Access close's face, so the two statements set the same on
-     both pages. */
-  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
-               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  background-color: #FFFFFF;
-  /* The woven texture is gone: the painted band above supplies the page's
-     texture, and the statements read better on plain paper. */
-  /* Brought onto the Early Access close, which carries the same two
-     statements and the same thread in about half the height. */
-  padding: 64px 5vw 0;
-}
-/* The claim opens on the left, the payoff lands on the right, and the thread
-   between them is what carries the argument. The payoff is sized to its own
-   text rather than to a column, so its block sits flush right instead of
-   floating inside a wider one. */
-.page[data-page="about"] .gza-close__item { display: flex; gap: 16px; align-items: flex-start; }
-.page[data-page="about"] .gza-close__item--payoff {
-  width: max-content;
-  margin: 0 0 0 auto;
-}
-
-/* preserveAspectRatio="none": the figure is a span between two lines of type,
-   so it stretches to whatever gap the container leaves rather than keeping a
-   fixed shape. Held to the viewBox's own ratio below 760px, where the stretch
-   would squash the field to half height and the circles into ellipses. */
-.page[data-page="about"] .gza-accum {
+.page[data-page="about"] .gza-eco__shot { display: block; height: 220px; overflow: hidden; }
+.page[data-page="about"] .gza-eco__shot img {
   display: block;
   width: 100%;
-  height: 132px;
-  margin: 0;
-  overflow: visible;
+  height: 100%;
+  object-fit: cover;
 }
-.page[data-page="about"] .gza-close__item p {
-  margin: 0;
-  /* 30ch on the paragraph, where ch resolves against the statement's own size
-     — not on the flex box around it, where it would resolve against 16px. */
-  max-width: 30ch;
-  font-size: clamp(1.35rem, 2vw, 1.9rem);
-  line-height: 1.12;
-  letter-spacing: -0.032em;
+.page[data-page="about"] .gza-eco__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 32px 32px 34px;
+}
+.page[data-page="about"] .gza-eco__n {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--oxide);
+}
+.page[data-page="about"] .gza-eco__hair { flex: 1 1 auto; height: 1px; background: var(--line); }
+.page[data-page="about"] .gza-eco__title {
+  display: block;
+  margin-top: 16px;
+  font-size: 23px;
+  line-height: 1.2;
   font-weight: 500;
-  color: var(--gza-ink);
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.page[data-page="about"] .gza-eco__text {
+  display: block;
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.64;
+  color: var(--body);
+  text-wrap: pretty;
+}
+.page[data-page="about"] .gza-eco__foot {
+  display: block;
+  margin-top: auto;
+  padding-top: 16px;
+}
+.page[data-page="about"] .gza-eco__cta {
+  font-size: 15px;
+  color: var(--oxide-deep);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   4 · the close — display band
+   ========================================================================== */
+
+.page[data-page="about"] .gza-close {
+  position: relative;
+  overflow: hidden;
+  background: var(--close);
+  border-top: 1px solid rgba(23, 19, 16, 0.08);
+  padding: 96px 0 104px;
+}
+.page[data-page="about"] .gza-close::after {
+  content: "";
+  position: absolute;
+  left: -120px;
+  top: -110px;
+  width: 460px;
+  height: 320px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.16), transparent 70%);
+  filter: blur(46px);
+}
+.page[data-page="about"] .gza-close__row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+/* The headline takes its own line; the payoff and the call share the next
+   one, which is what puts the call at the foot of the page's last thought. */
+.page[data-page="about"] .gza-close__item--open { flex: 1 1 100%; }
+.page[data-page="about"] .gza-close__item--open p {
+  margin: 0;
+  max-width: 21ch;
+  font-size: clamp(42px, 5.4vw, 78px);
+  line-height: 0.98;
+  font-weight: 600;
+  letter-spacing: -0.046em;
+  color: var(--ink);
   text-wrap: balance;
 }
-.page[data-page="about"] .gza-close__cta { margin: 40px auto 0; padding-bottom: 28px; }
-.page[data-page="about"] .gza-pill {
-  display: inline-flex;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 13px 24px;
-  border-radius: var(--radius-pill);
-  background: #17232B;
-  color: #ffffff;
-  text-decoration: none;
-  transition: transform 150ms cubic-bezier(.2,.6,.2,1), opacity 150ms;
+.page[data-page="about"] .gza-close__hot { color: var(--oxide-deep); }
+
+.page[data-page="about"] .gza-close__item--payoff { flex: 1 1 420px; min-width: 0; }
+.page[data-page="about"] .gza-close__item--payoff p {
+  margin: 0;
+  max-width: 620px;
+  padding-left: 24px;
+  border-left: 2px solid var(--oxide);
+  font-size: 21px;
+  line-height: 1.52;
+  color: var(--body);
+  text-wrap: pretty;
 }
-.page[data-page="about"] .gza-pill:hover,
-.page[data-page="about"] .gza-pill:focus-visible { transform: translateY(-1px); opacity: .9; color: #ffffff; }
 
+.page[data-page="about"] .gza-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  background: var(--ink);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 18px 30px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.page[data-page="about"] .gza-pill:hover {
+  background: var(--oxide);
+  transform: translateX(4px);
+}
 
-/* ---- scroll-driven, gated ---- */
+/* ---- the scroll progress ---- */
+
 .page[data-page="about"] .gza-progress { display: none; }
 @supports (animation-timeline: scroll(root block)) {
   .page[data-page="about"] .gza-progress {
     display: block;
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 2px;
-    z-index: 60;
+    z-index: 9;
     transform-origin: 0 50%;
-    transform: scaleX(0);
-    background: linear-gradient(90deg, #FF2E93 0%, #FF6A00 44%, #FF6A00 56%, #1E306E 84%, #17232B 100%); /* the banner: pink into orange into navy */
-    animation: gza-progress linear both;
+    background: var(--oxide);
+    animation: gzaProgress linear both;
     animation-timeline: scroll(root block);
   }
-}
-@keyframes gza-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@supports (animation-timeline: view()) {
-  .page[data-page="about"] .gza-reveal {
-    animation: gza-reveal both cubic-bezier(.2,.6,.2,1);
-    animation-timeline: view();
-    animation-range: entry 4% cover 26%;
+  @keyframes gzaProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
   }
 }
-@keyframes gza-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* ---- responsive ---- */
-@media (max-width: 1000px) {
-  .page[data-page="about"] .gza-hero__grid { grid-template-columns: 1fr; gap: 40px; }
-  .page[data-page="about"] .gza-hero__figure { width: 100%; margin-left: 0; }
-  .page[data-page="about"] .gza-story__grid { grid-template-columns: 1fr; gap: 36px; }
-  .page[data-page="about"] .gza-story__body { padding-left: 0; box-shadow: none; }
-  .page[data-page="about"] .gza-eco__grid { grid-template-columns: 1fr; }
+/* ==========================================================================
+   Narrower
+   ========================================================================== */
+
+@media (max-width: 1060px) {
+  .page[data-page="about"] .gza-display { font-size: 58px; }
 }
-@media (max-width: 760px) {
-  /* Held to the viewBox's own ratio, the figure is only ~90px tall, and the
-     -6px pull put its left tail behind the claim's last line. It clears it
-     instead. */
-  .page[data-page="about"] .gza-accum {
-    height: auto;
-    aspect-ratio: 1152 / 300;
-    margin-top: 10px;
-  }
-}
-@media (max-width: 700px) {
-  .page[data-page="about"] .gza-hero { padding: 56px 5vw 64px; }
+
+@media (max-width: 720px) {
+  .page[data-page="about"] .gza-hero__head { padding: 138px 24px 0; }
+  .page[data-page="about"] .gza-figwrap { padding: 0 24px 56px; }
+  .page[data-page="about"] .gza-figplate { padding: 24px 20px 20px; }
+  .page[data-page="about"] .gza-wrap,
+  .page[data-page="about"] .gza-eco__grid { padding-inline: 24px; }
   .page[data-page="about"] .gza-story,
-  .page[data-page="about"] .gza-eco { padding: 64px 5vw 72px; }
-  .page[data-page="about"] .gza-close { padding-top: 64px; }
-  /* Stacked, the payoff stops being the right-hand half of a pair and is just
-     the second line, so it goes back to the left edge with the first. */
-  .page[data-page="about"] .gza-close__item--payoff { width: auto; margin-left: 0; }
-  .page[data-page="about"] .gza-statements p { font-size: 21px; }
-  .page[data-page="about"] .gza-story__lead { font-size: 18px; }
-  .page[data-page="about"] .gza-eco__body { padding: 24px 24px 28px; }
+  .page[data-page="about"] .gza-eco { padding-block: 56px; }
+  .page[data-page="about"] .gza-eco { padding-top: 0; }
+  .page[data-page="about"] .gza-close { padding: 56px 0 64px; }
+  .page[data-page="about"] .gza-display { font-size: 40px; }
+  .page[data-page="about"] .gza-h2 { font-size: 30px; }
+  .page[data-page="about"] .gza-story__body { padding: 36px 26px; }
+  .page[data-page="about"] .gza-close__item--open p { font-size: clamp(34px, 9vw, 48px); }
+  .page[data-page="about"] .gza-close__item--payoff p { font-size: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page[data-page="about"] .gza-packet,
-  .page[data-page="about"] .gza-reveal,
   .page[data-page="about"] .gza-progress { animation: none; }
   .page[data-page="about"] .gza-eco__card,
-  .page[data-page="about"] .gza-pill,
-  .page[data-page="about"] .gza-story__link { transition: none; }
-  .page[data-page="about"] .gza-eco__card:hover,
+  .page[data-page="about"] .gza-pill { transition: none; }
+  .page[data-page="about"] .gza-eco__card:hover { transform: none; }
   .page[data-page="about"] .gza-pill:hover { transform: none; }
 }
 
-/* ---- the thread, lit ----
-   Seventeen of the thirty-four nodes — every other one down the run — light
-   up: a quick pop to full ink and 1.7x, gone again inside about six tenths of
-   a second, then dark for the rest of a cycle of its own. Cycles run 2.4 to
-   4.6 seconds and each node starts somewhere inside its own, so at any moment
-   three or four are lit, never the same ones, never in step — the tempo of the
-   packets on the About map, not a breath. The other seventeen hold still.
-   Scale on an SVG element animates everywhere; transform-box: fill-box keeps
-   each dot popping about its own centre. Off under prefers-reduced-motion. */
-@keyframes gza-flash {
-  0%, 100% { opacity: var(--o); transform: scale(1); }
-  7%       { opacity: 1;        transform: scale(1.7); }
-  22%      { opacity: var(--o); transform: scale(1); }
-}
-.page[data-page="about"] .gza-node {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation-name: gza-flash;
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .page[data-page="about"] .gza-node { animation: none; }
-}
-
-
-/* On a phone the fold stacks, and the copy alone holds the first screen —
-   eyebrow, claim and the two statements centred in it, as on Security. The
-   map and the closing line follow below the fold. */
-@media (max-width: 760px) {
-  .page[data-page="about"] .gza-hero { justify-content: flex-start; }
-  .page[data-page="about"] .gza-hero__copy {
-    box-sizing: border-box;
-    min-height: calc(100svh - var(--header-h) - 56px - 40px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-}
-
-/* The close, as the Early Access page sets it: the pay-off right-aligned
-   against the edge it sits on, its mark at the text's own right edge the way
-   the opening statement's mark sits at its left. Stacked on phones it stays
-   left, as there. */
-.page[data-page="about"] .gza-close__item--payoff { flex-direction: row-reverse; }
-.page[data-page="about"] .gza-close__item--payoff p { text-align: right; }
-@media (max-width: 900px) {
-  .page[data-page="about"] .gza-close__item--payoff { flex-direction: row; }
-  .page[data-page="about"] .gza-close__item--payoff p { text-align: left; }
-}
-
-/* On a narrow screen the band is tall and the painting at 130% width is
-   short, so it would repeat down the band and the dark edge of each copy
-   read as a stripe. Covered instead: one painting, cropped, over the whole
-   band. The drift still moves it. */
-@media (max-width: 900px) {
-  .page[data-page="about"] .gza-story::before { background-size: cover; }
-}
-
-
 /* ==========================================================================
-   The fold's ground, and the Europe figure
+   The Europe figure
    ==========================================================================
-
-   Same recipe as the Early Access and Security folds — same filters, same
-   colour constants, granite 0.44 / 0.30 over baseFrequency 0.28 / 1.2 — so all
-   three white folds read as one material. Only the bloom moves: upper right
-   here.
+   Carried over unchanged from the sheet this replaces. The brief restyles
+   the page around the figure, not the drawing itself: its tiles, its
+   breathing and the two city labels are the same rules as before.
    ========================================================================== */
-
-.page[data-page="about"] .gza-hero { position: relative; isolation: isolate; }
-
-.page[data-page="about"] .gza-hero__ground {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  display: block;
-}
-
-.page[data-page="about"] .gza-bloom {
-  animation: drift 116s ease-in-out infinite;
-  transform-origin: 900px 300px;
-}
-
-@keyframes drift {
-  0%, 100% { transform: none; }
-  50% { transform: translate(-26px, 18px) scale(1.06); }
-}
-
-/* ---- the map ----
-
-   The wrap is the labels' coordinate system: they are placed as percentages
-   of it, which are the cities' own cell centres — col 8 and col 12 of 23,
-   row 9 of 18 — so they follow the figure at any width without being
-   re-measured. */
 
 .page[data-page="about"] .gzeu-wrap { position: relative; display: block; }
 .page[data-page="about"] .gzeu { display: block; width: 100%; height: auto; }
@@ -511,7 +559,7 @@
      fails, navy 13.3:1 against the strongest tile beneath. Moving the labels
      was not an option — there is no clear ground beside either city — and
      leader lines were rejected. */
-  color: #17232B;
+  color: #171310;
   white-space: nowrap;
   pointer-events: none;
 }
@@ -544,34 +592,3 @@
 .page[data-page="about"] .gzeu-t3 { animation: tile3 5s ease-in-out infinite; animation-delay: .9s; }
 .page[data-page="about"] .gzeu-t4 { animation: tile4 5s ease-in-out infinite; animation-delay: 1.35s; }
 
-@media (prefers-reduced-motion: reduce) {
-  .page[data-page="about"] .gza-bloom,
-  .page[data-page="about"] .gzeu-t1,
-  .page[data-page="about"] .gzeu-t2,
-  .page[data-page="about"] .gzeu-t3,
-  .page[data-page="about"] .gzeu-t4 { animation: none; }
-}
-
-/* ---- the eyebrow row ---- */
-.page[data-page="about"] .gza-eyebrow {
-  display: flex;
-  align-items: center;
-  /* The gap is the only spacing: a margin on the mark would be the cross axis
-     here and would lift it off the label's centre line. */
-  gap: 12px;
-}
-
-.page[data-page="about"] .gza-mark,
-.page[data-page="about"] .gza-eyebrow--mono .gza-mark,
-.page[data-page="about"] .gza-close__item .gza-mark {
-  flex: 0 0 auto;
-  display: block;
-  width: 56px;
-  height: 24px;
-  margin: 0;
-}
-
-/* ---- the grounds below ----
-
-   White, with the ecosystem band a half-step up because it holds cards. */
-.page[data-page="about"] .gza-eco { background: #FAFAF9; }
