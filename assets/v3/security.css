@@ -18,9 +18,11 @@
   --ink: #171310;
   --body: #3b3630;
   --muted: #6f675e;
-  --ground: #edebe8;
+  --ground: #ffffff;
+  --warm: linear-gradient(160deg, #fbf7f3, #f7f3ee 52%, #ffffff);
   --plate: #ffffff;
   --plate-warm: linear-gradient(180deg, #ffffff 0%, #fbf7f3 100%);
+  --band: linear-gradient(150deg, #3a1b0f 0%, #241610 55%, #1b120d 100%);
   --oxide: #ec5b23;
   --oxide-deep: #8c3a18;
   --oxide-light: #ff9a63;
@@ -70,6 +72,24 @@
   box-sizing: border-box;
 }
 .page[data-page="security"] .gzs-sec { padding-block: 88px; }
+
+/* ---- the warm run ----
+
+   The page ground is white, matching Product and Early Access, and white
+   plates on a white ground are just their own hairlines. The two sections
+   that carry plates take Product's warm gradient, exactly as Product does
+   under its own cards.
+
+   They are two sections but read as one run, so the gradient is written
+   across the pair rather than restarted in each: Deployment takes the top
+   half and Assurance carries on from where it left off. Restarting it would
+   put a step back to #FBF7F3 at the seam between them. */
+.page[data-page="security"] #deployment {
+  background-image: linear-gradient(160deg, #fbf7f3, #f9f5f0 100%);
+}
+.page[data-page="security"] #assurance {
+  background-image: linear-gradient(160deg, #f9f5f0, #f7f3ee 46%, #ffffff);
+}
 .page[data-page="security"] .gzs-sub { margin-top: 76px; }
 
 /* ---- type ---- */
@@ -142,7 +162,7 @@
 .page[data-page="security"] .gzs-hero {
   position: relative;
   overflow: hidden;
-  background: #171310;
+  background: var(--band);
   padding: 150px 0 96px;
 }
 
