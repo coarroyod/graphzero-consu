@@ -1,443 +1,511 @@
 /* ==========================================================================
-   Security — implemented from GraphZero Security Page.dc.html
+   Security — the 2026 system
+   ==========================================================================
 
-   Read out of the Claude Design project rather than approximated: every size,
-   colour, radius, ring and inset below is the kit's own value.
+   Two grounds and one accent, which is the whole discipline of this page:
+   #EDEBE8 for the page, #171310 for the two dark bands, oxide for everything
+   that needs to be looked at. No second hue, no photography, no illustration.
 
-   The kit and this site turn out to run the SAME design system — its
-   tokens/typography.css is byte-for-byte the scale the site already carries
-   (92/56/32/18/16/14/12, --weight-heading 500, Inter Tight / Schibsted
-   Grotesk), and its colours are the navy/orange/pink already standardised
-   here. So nothing had to be reconciled; the kit is this system.
+   Elevation is a hairline, not a shadow — inset 0 0 0 1px rgba(23,19,16,.07)
+   at rest — and a shadow only appears under the cursor.
 
-   Values are literal rather than tokenised, as the kit writes them, which also
-   makes the page immune to the --body/--meta inversion v3/site.css still
-   declares on #security for the Product page's orange band.
-
-   What the kit does not ship: any media query. Its grids are fixed at 2, 3 and
-   4 columns, which is a 264px card at 1152 but a 78px one on a phone. The
-   breakpoints at the foot are this file's own.
+   Scoped to this page throughout. .secsplit, .numlist, .card-title and
+   .card-note are the site's own classes and the Product page runs them too,
+   so every rule that touches them is qualified by the page.
    ========================================================================== */
 
 .page[data-page="security"] {
-  --gzs-ink: #17232B;
-  --gzs-muted: #59666B;
-  --gzs-quiet: #7E8A8E;
-  --gzs-accent: #FF6A00;
-  --gzs-pink: #FF2E93;
-  --gzs-ring: inset 0 0 0 1px rgba(23, 35, 43, .16);
-  --gzs-hair: rgba(23, 35, 43, .12);
+  --ink: #171310;
+  --body: #3b3630;
+  --muted: #6f675e;
+  --ground: #edebe8;
+  --plate: #ffffff;
+  --plate-warm: linear-gradient(180deg, #ffffff 0%, #fbf7f3 100%);
+  --oxide: #ec5b23;
+  --oxide-deep: #8c3a18;
+  --oxide-light: #ff9a63;
+  --on-dark: #d6cec5;
+  --on-dark-muted: #b9afa4;
+
+  --hair: rgba(23, 19, 16, 0.07);
+  --rule: rgba(23, 19, 16, 0.12);
+  --rule-soft: rgba(23, 19, 16, 0.08);
+  --ring: inset 0 0 0 1px rgba(23, 19, 16, 0.07);
+  --lift: inset 0 0 0 1px rgba(236, 91, 35, 0.4), 0 16px 36px rgba(23, 19, 16, 0.08);
+
+  --f: "Archivo", "Inter Tight", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  background: var(--ground);
+  font-family: var(--f);
+  color: var(--body);
+
+  /* The site's own hairline token, repointed. It is navy — rgba(23,35,43,.16)
+     — and shared components on this page draw with it: .numlist__item takes
+     its top rule from it, and that navy was landing on the cream as a second
+     hue the palette does not have. Setting it here fixes every borrower at
+     once rather than one selector at a time. */
+  --line: rgba(23, 19, 16, 0.12);
 }
 
 /* v3/site.css sets --body and --meta to white alphas on #security, for the
-   orange band the Product page runs under that id. This fold is white, so
-   they go back. */
+   orange band the Product page runs under that same id. This page's fold is
+   dark but paints its own colours, so they are put back here. */
 .page[data-page="security"] #security {
-  --body: #59666B;
-  --meta: #59666B;
-  --line: rgba(23, 35, 43, .16);
-  --surface-dark: #17232B;
-  background: #ffffff;
+  --body: #3b3630;
+  --meta: #6f675e;
 }
 
-/* ---- shared shell ---- */
+/* ---- the content column ----
+
+   The brief states this as one box: max-width 1200, padding 88px 40px. The
+   vertical half lives on the section instead, because Deployment and
+   Assurance each hold three or four of these wraps in a row and 88px on
+   every one of them would space the page by a multiple of itself. Same
+   column, same gutters, same rhythm between sections. */
 .page[data-page="security"] .gzs-wrap {
-  max-width: 1152px;
+  max-width: 1200px;
   margin-inline: auto;
+  padding-inline: 40px;
+  box-sizing: border-box;
 }
-.page[data-page="security"] .gzs-sec {
-  padding: 88px 5vw 0;
-}
-.page[data-page="security"] .gzs-sec--last { padding-bottom: 96px; }
-.page[data-page="security"] .gzs-rule {
-  height: 1px;
-  background: var(--gzs-hair);
-}
+.page[data-page="security"] .gzs-sec { padding-block: 88px; }
+.page[data-page="security"] .gzs-sub { margin-top: 76px; }
 
-/* ---- the eyebrow, and its sweeping bar ---- */
-.page[data-page="security"] .gzs-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0;
-  font-size: 12px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--gzs-muted);
-  font-variant-numeric: tabular-nums;
-}
-/* The mark, not a rule — the same one the About page sets beside its eyebrows,
-   at the same 15x18: the width follows the mark's own 64:78. The swept
-   gradient bar it replaces is gone, and its keyframes with it. */
-.page[data-page="security"] .gzs-mark {
-  flex: 0 0 auto;
-  width: 56px;
-  height: 24px;
-  display: block;
-  /* No margin. In an align-items: center row a margin-bottom is the cross axis
-     and lifts the mark off the label's centre line — the gap does the
-     spacing. */
-  margin: 0;
-}
-
-/* ---- 00 · the fold ----
-
-   Two columns: the claim and its lead against the three certification marks
-   and the ISO note. The drawn network that stood behind this fold is gone,
-   along with its drift keyframes — the marks are the evidence now, and a
-   decorative graph behind them argued the same point twice. The three pill
-   badges are gone with it: they were the same three names the marks carry.
-
-   The heading comes down from clamp(3.25rem, 6vw, 5.5rem) to the file's
-   clamp(2.4rem, 4.4vw, 3.4rem). It is sharing the fold now rather than
-   holding it alone. */
-.page[data-page="security"] .gzs-hero {
-  padding: 84px 5vw 88px;
-  /* The white fold is the whole first screen — the navy band under it should
-     not show until you scroll. svh rather than vh so a phone's collapsing
-     address bar cannot make the fold taller than the screen it is measured
-     against; vh first for anything that does not know svh. */
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.page[data-page="security"] .gzs-hero__grid {
-  display: grid;
-  /* The file's 1.15fr/1fr, widened twice. At 80px in Inter Tight the claim
-     needs 674px to set in two lines — measured: 630 broke it into three —
-     so the left column takes 1.6fr. The marks keep 422 against the 400 they
-     need down to 1200px wide, and the fold stacks before they would have to
-     shrink. */
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 56px;
-  align-items: center;
-}
+/* ---- type ---- */
 
 .page[data-page="security"] .gzs-display {
-  margin: 22px 0 0;
-  max-width: none;
-  /* The Early Access headline's setting, face and all, so the three folds
-     share one display type. Colour is the page's own. */
-  font-family: "Inter Tight", "Schibsted Grotesk", "Geist", -apple-system,
-               BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: clamp(3rem, 6.2vw, 5rem);
-  line-height: 0.88;
-  letter-spacing: -0.052em;
+  margin: 18px 0 0;
+  font-size: 60px;
+  line-height: 1.04;
   font-weight: 500;
-  color: var(--gzs-ink);
-  text-wrap: balance;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+.page[data-page="security"] .gzs-h2 {
+  margin: 14px 0 0;
+  font-size: 42px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.036em;
+  color: var(--ink);
+  text-wrap: pretty;
 }
 .page[data-page="security"] .gzs-lead {
-  margin: 24px 0 0;
-  max-width: 48ch;
-  font-size: 20px;
-  line-height: 1.5;
-  color: var(--gzs-muted);
+  margin: 22px 0 0;
+  max-width: 660px;
+  font-size: 18px;
+  line-height: 1.64;
+  color: var(--on-dark);
+}
+.page[data-page="security"] .gzs-intro {
+  margin: 20px 0 0;
+  max-width: 460px;
+  font-size: 16px;
+  line-height: 1.66;
+  color: var(--body);
   text-wrap: pretty;
 }
 
-/* ---- the marks ----
-   A legend: the three marks at 72px with one mono status word under each,
-   the group right-aligned in the hero's right column. The sentence that
-   qualified the ISO mark is gone from here; the certifications table further
-   down carries it. */
-.page[data-page="security"] .gzs-hero__proof { justify-self: end; }
+.page[data-page="security"] .gzs-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.page[data-page="security"] .gzs-edge {
+  display: block;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-right: 9px;
+  fill: none;
+}
+.page[data-page="security"] .gzs-hero .gzs-eyebrow { color: var(--on-dark-muted); }
+
+/* ==========================================================================
+   00 · the fold — dark band
+   ==========================================================================
+
+   The bar is not wrapped into this band, and must not be: it is sticky, and
+   a sticky bar inside a block stops sticking the moment that block scrolls
+   away. It stays a sibling and the fold's -82px top margin pulls the dark
+   ground up behind it, which reads as one block and keeps the bar working.
+   data-dark on the section is what tells nav.js to flip the bar's ink. */
+
+.page[data-page="security"] .gzs-hero {
+  position: relative;
+  overflow: hidden;
+  background: #171310;
+  padding: 150px 0 96px;
+}
+
+/* the lit top edge */
+.page[data-page="security"] .gzs-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(236, 91, 35, 0.9),
+    rgba(236, 91, 35, 0.2) 46%,
+    rgba(255, 255, 255, 0.06) 82%
+  );
+}
+
+/* the bloom, top right */
+.page[data-page="security"] .gzs-hero::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: -180px;
+  width: 680px;
+  height: 560px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(236, 91, 35, 0.34), transparent 70%);
+  filter: blur(56px);
+  animation: gzsBloom 11s ease-in-out infinite;
+}
+@keyframes gzsBloom {
+  0%, 100% { opacity: 0.16; }
+  50% { opacity: 0.4; }
+}
+
+.page[data-page="security"] .gzs-hero > * { position: relative; z-index: 1; }
+
+.page[data-page="security"] .gzs-hero__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 72px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.page[data-page="security"] .gzs-hero__copy { flex: 1 1 520px; min-width: 0; }
+.page[data-page="security"] .gzs-hero__proof { flex: 0 1 auto; }
+
+/* The badge artwork is dark, so the chips are white — on the band itself the
+   marks would be ink on ink. */
 .page[data-page="security"] .gzs-marks {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 26px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .page[data-page="security"] .gzs-marks__item {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 12px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px 18px;
 }
-/* Sized by height so the three sit on one optical line whatever their
-   proportions — two are near-square and the ISO mark is portrait. */
 .page[data-page="security"] .gzs-marks__img {
   display: block;
-  height: 72px;
+  height: 26px;
   width: auto;
 }
 .page[data-page="security"] .gzs-marks__label {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--meta);
+  color: var(--body);
   white-space: nowrap;
 }
 
+/* ==========================================================================
+   01–04 · the registers
+   ==========================================================================
+   All four are light, all four are the same shape: the claim on the left,
+   the numbered rows on the right. Hairlines on the ground, no plates. */
 
-/* ---- section heads ---- */
-.page[data-page="security"] .gzs-h2 {
-  margin: 18px 0 0;
-  max-width: 22ch;
-  font-size: clamp(2rem, 3.2vw, 3.5rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  font-weight: 500;
-  color: var(--gzs-ink);
-  text-wrap: balance;
+.page[data-page="security"] .secsplit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 72px;
+  align-items: flex-start;
 }
-.page[data-page="security"] .gzs-intro {
+.page[data-page="security"] .secsplit__lead {
+  flex: 1 1 380px;
+  max-width: 520px;
+}
+.page[data-page="security"] .numlist {
+  flex: 1.15 1 460px;
+  min-width: 0;
   margin: 0;
-  max-width: 58ch;
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--gzs-muted);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+/* The rule above the first row belongs to the list, so the rows carry only a
+   bottom one. The shared rule gives every row a top border too, which would
+   double every line between them. */
+.page[data-page="security"] .numlist__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+  padding: 26px 0;
+  border-top: 0;
+  border-bottom: 1px solid var(--rule);
+}
+.page[data-page="security"] .numlist__num {
+  flex: 0 0 auto;
+  width: 56px;
+  padding-top: 3px;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--oxide);
+}
+.page[data-page="security"] .numlist__item > div { flex: 1 1 320px; min-width: 0; }
+.page[data-page="security"] .numlist .card-title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.026em;
+  color: var(--ink);
+}
+.page[data-page="security"] .numlist .card-note {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.64;
+  color: var(--body);
   text-wrap: pretty;
 }
-.page[data-page="security"] .gzs-sub { margin-top: 56px; }
 
-/* ---- 01 · 02 · the numbered registers ----
+/* ==========================================================================
+   05 · Deployment — four cards
+   ========================================================================== */
 
-   Sections 01 and 02 run the site's own .secsplit and .numlist, the layout the
-   reference page runs. Two things are this page's: the numerals take the
-   orange rather than the base sheet's muted grey, and the eyebrow and claim sit
-   together as one grid child so the 18px between them is the page's own rather
-   than the split's 24. */
-.page[data-page="security"] .numlist__num { color: #FF6A00; }
-.page[data-page="security"] .secsplit .gzs-intro { margin: 0; }
-
-/* ---- cards ---- */
 .page[data-page="security"] .gzs-grid {
   display: grid;
   gap: 20px;
-  margin: 44px auto 0;
-  padding: 0;
+  margin: 40px auto 0;
+  padding-inline: 40px;
   list-style: none;
 }
-.page[data-page="security"] .gzs-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.page[data-page="security"] .gzs-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.page[data-page="security"] .gzs-grid--near { margin-top: 36px; }
+.page[data-page="security"] .gzs-grid--4 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
 .page[data-page="security"] .gzs-card {
-  padding: 30px 30px 34px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--gzs-ring);
-  transition: background 150ms cubic-bezier(.2,.6,.2,1), transform 250ms cubic-bezier(.2,.6,.2,1);
+  box-sizing: border-box;
+  border-radius: 18px;
+  box-shadow: var(--ring);
+  padding: 30px 28px;
+  background: var(--plate);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
-.page[data-page="security"] .gzs-card:hover {
-  background: rgba(23, 35, 43, .04);
-  transform: translateY(-2px);
-}
-.page[data-page="security"] .gzs-card--sm { padding: 28px 28px 32px; }
 .page[data-page="security"] .gzs-card--stack {
+  background: var(--plate-warm);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  box-sizing: border-box;
+  justify-content: space-between;
 }
-.page[data-page="security"] .gzs-card__n {
-  margin: 0;
-  font-size: 12px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  color: var(--gzs-quiet);
-  font-variant-numeric: tabular-nums;
+
+/* One hover for every card on the page. */
+.page[data-page="security"] .gzs-card:hover,
+.page[data-page="security"] .gzs-tile:hover {
+  box-shadow: var(--lift);
+  transform: translateY(-3px);
 }
+
 .page[data-page="security"] .gzs-card__title {
-  margin: 18px 0 0;
+  margin: 0;
   font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
   font-weight: 500;
-  color: var(--gzs-ink);
+  line-height: 1.26;
+  letter-spacing: -0.026em;
+  color: var(--ink);
 }
-.page[data-page="security"] .gzs-card__title--sm { margin-top: 20px; font-size: 17px; line-height: 1.24; letter-spacing: -0.015em; }
-.page[data-page="security"] .gzs-card__title--md { margin-top: 0; font-size: 19px; }
 .page[data-page="security"] .gzs-card__body {
-  margin: 10px 0 0;
-  max-width: 52ch;
+  margin: 12px 0 0;
   font-size: 15px;
-  line-height: 1.5;
-  color: var(--gzs-muted);
+  line-height: 1.64;
+  color: var(--body);
   text-wrap: pretty;
 }
-.page[data-page="security"] .gzs-card--stack .gzs-card__body { margin-top: 12px; }
-.page[data-page="security"] .gzs-card__body--sm { margin-top: 8px; font-size: 14px; }
 .page[data-page="security"] .gzs-card__foot {
-  margin: auto 0 0;
-  padding-top: 20px;
-  box-shadow: inset 0 1px 0 rgba(23, 35, 43, .1);
+  margin: 22px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(23, 19, 16, 0.1);
+  font-family: var(--f-mono);
   font-size: 11px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  line-height: 1.4;
-  /* The kit's own floor. "EU infrastructure · dedicated" wraps to two lines
-     where "your data centre" does not, and without it the four rules sit at
-     four different heights. */
-  min-height: 30px;
-  color: var(--gzs-quiet);
-}
-.page[data-page="security"] .gzs-card--tint { background: rgba(23, 35, 43, .04); }
-.page[data-page="security"] .gzs-card--tint:hover { background: rgba(23, 35, 43, .04); }
-
-/* ---- 05 · 06 · the pickers ----
-
-   These two grids are the only cards on the page you are meant to choose
-   between, so their hover says so: the ring goes orange. Same ring — inset,
-   1px, the same box — only the colour changes, and it takes the same easing
-   the wash and the lift already run on so the three move together.
-
-   Scoped to #deployment. The cards in 02 and 07 describe rather than offer,
-   and a chooser's mark on them would be a promise the page does not keep. */
-.page[data-page="security"] #deployment .gzs-card {
-  transition: background 150ms cubic-bezier(.2,.6,.2,1),
-              box-shadow 150ms cubic-bezier(.2,.6,.2,1),
-              transform 250ms cubic-bezier(.2,.6,.2,1);
-}
-.page[data-page="security"] #deployment .gzs-card:hover,
-.page[data-page="security"] #deployment .gzs-card:focus-within {
-  box-shadow: inset 0 0 0 1px #FF6A00;
-  /* The orange ring is the whole signal here; the grey wash the other cards
-     take on hover stays off these. Lift and easing are unchanged. */
-  background: transparent;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--oxide-deep);
 }
 
-/* ---- 07 · certifications and assessments ----
-   Three cards with their artwork for the schemes that have a mark, a table
-   for the three that do not. Container is the page's 1152, not the file's
-   1200, so the section keeps the left edge every section above it has. */
-/* The sections above share their spacing by leaning on the next one's top
-   padding, which was fine while every ground was white. With a woven ground
-   here, that put the texture flush against the last line of 06. The 88px the
-   eyebrow sits below that line is split now: 48 of it white, on 06's own
-   foot, and 40 inside the texture. The eyebrow does not move; the texture
-   starts 48px later. */
-.page[data-page="security"] #deployment { padding-bottom: 48px; }
-.page[data-page="security"] .gzs-assure {
-  padding-top: 40px;
-  background-color: #FFFFFF;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(23,35,43,.05) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.045) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(23,35,43,.03) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(45deg, rgba(23,35,43,.025) 0 1px, transparent 1px 5px);
+/* ==========================================================================
+   06 · Inference — three cards, glyph in the gutter
+   ========================================================================== */
+
+/* Two tracks: the glyph's gutter and the text. The brief writes this as a
+   flex row, and as a flex row it breaks — the heading and the body are
+   siblings of the glyph, so making them full-width items in a row that does
+   not wrap pushes the body clean out of the card. A grid puts the glyph in
+   the gutter and keeps both lines of text in the second track, which is what
+   the flex row was describing. */
+.page[data-page="security"] .gzs-grid--near .gzs-card {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 16px;
+  align-items: start;
 }
+.page[data-page="security"] .gzs-edge--card {
+  grid-column: 1;
+  grid-row: 1;
+  width: 16px;
+  height: 16px;
+  margin: 3px 0 0;
+}
+.page[data-page="security"] .gzs-grid--near .gzs-card > h3 { grid-column: 2; grid-row: 1; }
+.page[data-page="security"] .gzs-grid--near .gzs-card > p { grid-column: 2; grid-row: 2; margin-top: 10px; }
+
+.page[data-page="security"] .gzs-combi {
+  margin: 30px auto 0;
+  max-width: 1200px;
+  padding-left: 20px;
+  border-left: 2px solid var(--oxide);
+  font-size: 16px;
+  line-height: 1.66;
+  color: var(--body);
+}
+
+/* ==========================================================================
+   07 · Assurance — three plates, then a table
+   ========================================================================== */
+
 .page[data-page="security"] .gzs-tiles {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  margin: 44px auto 0;
-  padding: 0;
+  margin: 40px auto 0;
+  padding-inline: 40px;
   list-style: none;
 }
 .page[data-page="security"] .gzs-tile {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 30px 32px 32px;
-  border-radius: var(--radius-lg);
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .16);
-  transition: transform 250ms cubic-bezier(.2,.6,.2,1), box-shadow 150ms cubic-bezier(.2,.6,.2,1);
-}
-.page[data-page="security"] .gzs-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .26);
+  gap: 18px;
+  background: var(--plate-warm);
+  border-radius: 18px;
+  box-shadow: var(--ring);
+  padding: 28px;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 .page[data-page="security"] .gzs-tile__rule {
   display: block;
-  width: 28px;
+  width: 34px;
   height: 2px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, #FF6A00, #FF2E93);
-  margin-bottom: 22px;
+  background: var(--oxide);
 }
 .page[data-page="security"] .gzs-tile__art {
   display: block;
-  height: 78px;
+  height: 76px;
   width: auto;
-  align-self: flex-start;
-  object-fit: contain;
 }
 .page[data-page="security"] .gzs-tile__name {
-  margin: 24px 0 0;
-  font-size: 20px;
+  margin: 0;
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: -0.025em;
-  color: var(--gzs-ink);
+  letter-spacing: -0.026em;
+  line-height: 1.2;
+  color: var(--ink);
 }
+/* The name and its status read as one unit, so the gap between them is the
+   status's own margin rather than the column's 18px. */
+.page[data-page="security"] .gzs-tile__name + .gzs-status { margin-top: -12px; }
 .page[data-page="security"] .gzs-tile__body {
-  margin: 14px 0 0;
+  margin: 0;
   font-size: 15px;
-  line-height: 1.55;
-  color: var(--gzs-muted);
+  line-height: 1.64;
+  color: var(--body);
   text-wrap: pretty;
 }
-/* Status is a word, not a chip: mono, tracked, with a dot beside it where the
-   work is live. */
+
 .page[data-page="security"] .gzs-status {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 8px 0 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  margin: 0;
+  font-family: var(--f-mono);
   font-size: 11px;
-  letter-spacing: .1em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #17232B;
-  white-space: nowrap;
+  color: var(--muted);
 }
-.page[data-page="security"] .gzs-status__dot { width: 6px; height: 6px; border-radius: var(--radius-pill); flex: 0 0 auto; }
-.page[data-page="security"] .gzs-status__dot--live { background: #FF6A00; }
-.page[data-page="security"] .gzs-status__dot--quiet { background: #B9C0C3; }
+.page[data-page="security"] .gzs-tile .gzs-status { color: var(--oxide-deep); }
+.page[data-page="security"] .gzs-status__dot {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.page[data-page="security"] .gzs-status__dot--live { background: var(--oxide); }
+.page[data-page="security"] .gzs-status__dot--quiet { background: #c9c2b9; }
 
+/* ---- the table ----
+
+   Grid, not flex with basis widths. With flex the description takes its
+   basis and drops onto its own line below about 1150px, and from there the
+   three columns no longer line up row to row. */
 .page[data-page="security"] .gzs-rows {
+  max-width: 1200px;
   margin: 20px auto 0;
-  padding: 0;
   list-style: none;
-  border-radius: var(--radius-lg);
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(23, 35, 43, .16);
+  padding: 0;
+  background: var(--plate);
+  border-radius: 18px;
+  box-shadow: var(--ring);
   overflow: hidden;
 }
 .page[data-page="security"] .gzs-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 150px;
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) 190px;
+  gap: 0 32px;
   align-items: center;
-  padding: 24px 32px;
-  box-shadow: inset 0 -1px 0 rgba(23, 35, 43, .1);
-  transition: background 150ms cubic-bezier(.2,.6,.2,1);
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--rule-soft);
+  transition: background 180ms ease;
 }
-.page[data-page="security"] .gzs-row:hover { background: rgba(23, 35, 43, .03); }
-.page[data-page="security"] .gzs-row__name { margin: 0; font-size: 17px; font-weight: 500; letter-spacing: -0.02em; color: var(--gzs-ink); }
-.page[data-page="security"] .gzs-row__body { margin: 0; font-size: 15px; line-height: 1.55; color: var(--gzs-muted); text-wrap: pretty; }
-.page[data-page="security"] .gzs-row .gzs-status { margin: 0; }
-
-@media (max-width: 900px) {
-  .page[data-page="security"] .gzs-tiles { grid-template-columns: minmax(0, 1fr); }
+.page[data-page="security"] .gzs-row:last-child { border-bottom: 0; }
+.page[data-page="security"] .gzs-row:hover { background: #fbf7f3; }
+.page[data-page="security"] .gzs-row__name {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.026em;
+  line-height: 1.3;
+  color: var(--ink);
 }
-@media (max-width: 760px) {
-  /* Name and status share the first line, the body runs under both. */
-  .page[data-page="security"] .gzs-row { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 20px; padding: 20px 24px; }
-  .page[data-page="security"] .gzs-row__body { grid-column: 1 / -1; }
-  .page[data-page="security"] .gzs-status { font-size: 12px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .page[data-page="security"] .gzs-tile, .page[data-page="security"] .gzs-row { transition: none; }
-  .page[data-page="security"] .gzs-tile:hover { transform: none; }
-}
-
-.page[data-page="security"] .gzs-combi {
-  max-width: 1152px;
-  margin: 18px auto 0;
+.page[data-page="security"] .gzs-row__body {
+  margin: 0;
   font-size: 15px;
-  color: var(--gzs-muted);
+  line-height: 1.55;
+  color: var(--body);
+  text-wrap: pretty;
 }
+.page[data-page="security"] .gzs-row .gzs-status { justify-content: flex-end; }
 
-/* ---- scroll-driven bits ----
-   Both are gated on support. Ungated, a browser without scroll timelines runs
-   gz-progress on the document timeline and leaves a 2px bar sitting at full
-   width across the top of every page load. */
+/* ---- the scroll progress ---- */
+
 .page[data-page="security"] .gzs-progress { display: none; }
 @supports (animation-timeline: scroll(root block)) {
   .page[data-page="security"] .gzs-progress {
@@ -447,236 +515,56 @@
     left: 0;
     right: 0;
     height: 2px;
-    z-index: 60;
+    z-index: 9;
     transform-origin: 0 50%;
-    transform: scaleX(0);
-    background: linear-gradient(90deg, #FF2E93 0%, #FF6A00 44%, #FF6A00 56%, #1E306E 84%, #17232B 100%); /* the banner: pink into orange into navy */
-    animation: gzs-progress linear both;
+    background: var(--oxide);
+    animation: gzsProgress linear both;
     animation-timeline: scroll(root block);
   }
-}
-@keyframes gzs-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@supports (animation-timeline: view()) {
-  .page[data-page="security"] .gzs-reveal {
-    animation: gzs-reveal both cubic-bezier(.2,.6,.2,1);
-    animation-timeline: view();
-    animation-range: entry 4% cover 26%;
-  }
-  /* The deployment cards are the one place a reveal and a hover both want
-     the transform. An animation's value outranks the hover rule, so with the
-     slide in the reveal the four cards took the orange ring but never lifted
-     the way the inference cards beside them do. They keep the fade and give
-     up the 14px slide, and the lift is theirs again. */
-  .page[data-page="security"] #deployment .gzs-reveal {
-    animation-name: gzs-reveal-fade;
+  @keyframes gzsProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
   }
 }
-@keyframes gzs-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@keyframes gzs-reveal-fade { from { opacity: 0; } to { opacity: 1; } }
-
-/* ---- responsive ----
-   The kit has none. Four columns at 1152 is a 264px card; at 900 it is 195px
-   and at 430 it is 78px, so each grid steps down where its own measure runs
-   out rather than all of them at one width. */
-@media (max-width: 1080px) {
-  .page[data-page="security"] .gzs-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 900px) {
-  .page[data-page="security"] .gzs-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-/* The file has no media queries. At 1152 the marks need 353px against the
-   right column's 506; by 980 the column is under 350 and they would start
-   shrinking, so the fold stacks first and they keep their size. */
-@media (max-width: 1150px) {
-  .page[data-page="security"] .gzs-hero__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .page[data-page="security"] .gzs-hero__proof { justify-self: start; }
-  .page[data-page="security"] .gzs-display { max-width: 22ch; }
-}
-
-@media (max-width: 700px) {
-  .page[data-page="security"] .gzs-hero { padding: 64px 5vw 56px; }
-  .page[data-page="security"] .gzs-sec { padding-top: 64px; }
-  .page[data-page="security"] .gzs-grid--2,
-  .page[data-page="security"] .gzs-grid--3,
-  .page[data-page="security"] .gzs-grid--4 { grid-template-columns: minmax(0, 1fr); }
-  .page[data-page="security"] .gzs-card,
-  .page[data-page="security"] .gzs-card--sm { padding: 24px 24px 28px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page[data-page="security"] .gzs-reveal,
-  .page[data-page="security"] .gzs-progress { animation: none; }
-  .page[data-page="security"] .gzs-card:hover { transform: none; }
-}
-
-
 
 /* ==========================================================================
-   The bar, and the field behind the fold
-   ==========================================================================
-
-   Two changes only. The bar is the one Product and Early Access carry, on
-   white. The field is the Early Access drawing redrawn for this fold's shape
-   — same seed, same cloud, same three depth bands, same links, same veil —
-   laid behind the existing content as a background rather than as an element,
-   so nothing in the fold moves, changes order, or changes stacking.
-
-   The fold's own type, grid and certification marks are untouched: no selector
-   below reaches them.
+   Narrower
    ========================================================================== */
 
-.page[data-page="security"] .gzs-nav {
-  background: #FFFFFF;
-  height: 82px;
-  padding: 0 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  border-bottom: 1px solid rgba(23, 35, 43, 0.1);
+@media (max-width: 1060px) {
+  .page[data-page="security"] .gzs-display { font-size: 46px; }
 }
 
-.page[data-page="security"] .gzs-nav__brand {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  flex: 0 0 auto;
-}
-
-.page[data-page="security"] .gzs-nav__mark { display: block; width: 23px; height: 23px; }
-
-.page[data-page="security"] .gzs-nav__word {
-  font-family: "Inter Tight", system-ui, sans-serif;
-  font-weight: 450;
-  font-size: 12.5px;
-  letter-spacing: -0.025em;
-  color: #17232B;
-  line-height: 1;
-}
-
-.page[data-page="security"] .gzs-nav__links {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.page[data-page="security"] .gzs-nav__links a {
-  font-family: "Geist", system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1;
-  color: #59666B;
-  text-decoration: none;
-  padding-bottom: 3px;
-  border-bottom: 2px solid transparent;
-  transition: color 160ms ease;
-}
-
-.page[data-page="security"] .gzs-nav__links a:hover { color: #17232B; }
-
-.page[data-page="security"] .gzs-nav__links a[aria-current="page"] {
-  color: #17232B;
-  border-bottom-color: #FF6A00;
-}
-
-/* ---- the field ----
-
-   A background on a pseudo-element, not a child: the fold is a flex column and
-   an extra child would join the layout. isolation keeps the z-index: -1 inside
-   this section, so the field cannot slide behind the page's own ground and
-   disappear. The fold already had no rule at its lower boundary and still has
-   none; the drawing fades out inside its own file before it gets there. */
-.page[data-page="security"] .gzs-hero {
-  position: relative;
-  isolation: isolate;
-  background: #FFFFFF;
-}
-
-.page[data-page="security"] .gzs-hero__ground {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  display: block;
-}
-
-/* The bar at narrower widths. Same steps the other two carry: the fold below
-   is untouched and keeps its own existing breakpoints. */
 @media (max-width: 860px) {
-  .page[data-page="security"] .gzs-nav { padding: 0 24px; height: 72px; gap: 16px; }
-  .page[data-page="security"] .gzs-nav__links { gap: 18px; }
-  .page[data-page="security"] .gzs-nav__links a { font-size: 13px; white-space: nowrap; }
+  /* The table's three tracks become one, with the status under the
+     description rather than beside it. */
+  .page[data-page="security"] .gzs-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+  }
+  .page[data-page="security"] .gzs-row .gzs-status { justify-content: flex-start; }
 }
 
-@media (max-width: 560px) {
-  .page[data-page="security"] .gzs-nav { padding: 0 20px; gap: 12px; }
-  .page[data-page="security"] .gzs-nav__links { gap: 13px; }
-  .page[data-page="security"] .gzs-nav__links a { font-size: 12.5px; }
-}
-
-
-/* ==========================================================================
-   Grounds, and the fold's own texture
-   ==========================================================================
-
-   The page is white the whole way down, with one lift: Deployment holds the
-   card grids, and a half-step of tone is what separates a grid of white cards
-   from the page they sit on without drawing a line around the section. The
-   assurance tiles take the same half-step, inverted — tiles on tone, section
-   on white.
-
-   No dark band anywhere. This is the longest, densest page on the site, and
-   on a page people actually read, legibility wins the argument.
-   ========================================================================== */
-
-.page[data-page="security"] #deployment { background: #FAFAF9; }
-.page[data-page="security"] #deployment .gzs-card { background: #FFFFFF; }
-.page[data-page="security"] .gzs-tile { background: #FAFAF9; }
-
-/* The eyebrow row spaces itself with the gap and nothing else. */
-.page[data-page="security"] .gzs-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* ---- the fold's bloom ----
-
-   The Early Access recipe exactly — same filters, same colour constants, same
-   0.44 / 0.30 at 0.28 / 1.2 — so the two folds read as one material. Only the
-   bloom has moved: low left here, where Early Access has it upper right.
-
-   Not the Product hero's 0.70 / 0.46. That hero carries a node graph and a
-   wash over its grain; on a near-empty fold the same numbers read much
-   heavier. If this is ever tuned, move both opacities together and leave
-   baseFrequency alone: opacity is strength, baseFrequency is coarseness, and
-   coarseness is what makes it stone rather than screen noise. */
-
-.page[data-page="security"] .gzs-bloom {
-  animation: drift 116s ease-in-out infinite;
-  transform-origin: 300px 470px;
-}
-
-@keyframes drift {
-  0%, 100% { transform: none; }
-  50% { transform: translate(22px, -16px) scale(1.05); }
+@media (max-width: 720px) {
+  .page[data-page="security"] .gzs-sec { padding-block: 56px; }
+  .page[data-page="security"] .gzs-wrap,
+  .page[data-page="security"] .gzs-grid,
+  .page[data-page="security"] .gzs-tiles { padding-inline: 24px; }
+  .page[data-page="security"] .gzs-combi { margin-inline: 24px; }
+  .page[data-page="security"] .gzs-h2 { font-size: 32px; }
+  .page[data-page="security"] .gzs-display { font-size: 36px; }
+  .page[data-page="security"] .gzs-hero { padding: 120px 0 64px; }
+  .page[data-page="security"] .gzs-row { padding: 24px; }
+  .page[data-page="security"] .gzs-sub { margin-top: 52px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page[data-page="security"] .gzs-bloom { animation: none; }
+  .page[data-page="security"] .gzs-hero::after,
+  .page[data-page="security"] .gzs-progress { animation: none; }
+  .page[data-page="security"] .gzs-card,
+  .page[data-page="security"] .gzs-tile,
+  .page[data-page="security"] .gzs-row { transition: none; }
+  .page[data-page="security"] .gzs-card:hover,
+  .page[data-page="security"] .gzs-tile:hover { transform: none; }
 }
-
-/* ---- two colours the scan caught ----
-
-   Both are the same fault the brief names for the status labels: a small size
-   in a light colour on a light ground. Orange numerals at 14px measure 2.87:1
-   on white, and the card footers' quiet grey 3.55:1 at 11px — both under 4.5.
-
-   Navy for the numerals, following the brief's own reasoning about orange, and
-   the palette's slate for the footers, which is 5.9:1 on white. Scoped to this
-   page, so the numerals stay orange in Product's closing band. */
-
-.page[data-page="security"] .numlist__num { color: #17232B; }
-.page[data-page="security"] .gzs-card__foot { color: #59666B; }
