@@ -1156,3 +1156,88 @@
 
 /* With the bar always in view the fold no longer rises under it. */
 .page[data-page="product"] .gz-fold-pull.gz-fold-pull { margin-top: 0; }
+
+/* ==========================================================================
+   Recognition and affiliations
+   ==========================================================================
+
+   The company has no customer logos yet, so this row carries the two things
+   that do the same work: a national financial paper that covered us, and the
+   two institutions we belong to. Both already existed on the About page,
+   where nobody arriving at the front page would ever find them.
+
+   Deliberately quiet. A logo bar shouts because it can afford to; this
+   states two facts and gets out of the way, which is the more confident
+   register anyway. */
+
+.page[data-page="product"] .gz4-proof {
+  border-top: 1px solid rgba(23, 19, 16, 0.08);
+  border-bottom: 1px solid rgba(23, 19, 16, 0.08);
+  padding-block: 34px;
+  background: #ffffff;
+}
+.page[data-page="product"] .gz4-proof__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 96px;
+}
+.page[data-page="product"] .gz4-proof__group { min-width: 0; }
+
+/* flex, not inline-flex. As an inline box the label sat on the same line as
+   the name that follows it, which reads as one run-on sentence instead of a
+   label above its value. */
+.page[data-page="product"] .gz4-proof__label {
+  display: flex;
+  align-items: center;
+  margin: 0 0 12px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-50);
+  white-space: nowrap;
+}
+.page[data-page="product"] .gz4-proof__label .gz4-edge { margin-right: 9px; }
+
+.page[data-page="product"] .gz4-proof__items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+.page[data-page="product"] .gz4-proof__sep {
+  flex: 0 0 auto;
+  display: block;
+  width: 1px;
+  height: 15px;
+  background: rgba(23, 19, 16, 0.2);
+}
+
+.page[data-page="product"] .gz4-proof__item {
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 180ms ease, border-color 180ms ease;
+  white-space: nowrap;
+}
+.page[data-page="product"] .gz4-proof__item:hover {
+  color: var(--signal-deep);
+  border-bottom-color: rgba(236, 91, 35, 0.45);
+}
+/* The paper is the stronger claim of the two, so it is the one set larger. */
+.page[data-page="product"] .gz4-proof__item--lead {
+  font-size: 21px;
+  letter-spacing: -0.024em;
+}
+
+@media (max-width: 860px) {
+  .page[data-page="product"] .gz4-proof__row { gap: 26px 48px; }
+  .page[data-page="product"] .gz4-proof__item { white-space: normal; }
+  .page[data-page="product"] .gz4-proof__item--lead { font-size: 19px; }
+}
