@@ -1279,6 +1279,29 @@
 @keyframes gzCore { 0%, 100% { r: 11; } 50% { r: 14; } }
 @keyframes gzBandScan { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
 
+/* The drawings fill the plate, and this rule is what makes that true.
+
+   Each svg carries height="178", but a presentation attribute is the weakest
+   thing in the cascade and it was not being honoured once the element was
+   absolutely positioned — the svg fell back to its own aspect ratio and came
+   out 347px tall inside a 178px plate, scaled 1.95x and clipped.
+
+   At 1440 that was invisible: the column is exactly 306, the viewBox width,
+   so the scale was 1 and everything landed where it was drawn. At every
+   other width the drawing drifted down while figure 04's sweep — which is a
+   CSS box at top:75px, not part of the svg — stayed put. The band and its
+   highlight came apart, which is exactly what it looked like.
+
+   With an explicit height the two agree at any width: preserveAspectRatio
+   none gives figures 01 and 04 a y-scale of exactly 1, so a y of 75 in the
+   viewBox is 75 real pixels, which is where the sweep window sits. */
+.page[data-page="product"] .gz4-plate__art > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* the one rule that starts everything */
 .page[data-page="product"] [data-figbox]:hover [data-anim] {
   animation-play-state: running !important;
