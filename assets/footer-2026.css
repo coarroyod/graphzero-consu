@@ -193,14 +193,40 @@
   border-top: 1px solid rgba(251, 249, 245, 0.16);
 }
 .gzf__edge { display: block; flex: 0 0 auto; width: 16px; height: 16px; }
-.gzf__place {
+
+/* ---- the legal line ----
+
+   The company at one end of the rule and the registered address at the
+   other, so the bar is anchored on both sides rather than leaving the mark
+   alone on the left with everything crowded right.
+
+   The address is set in sentence case at 0.06em. The rest of this system is
+   uppercase mono at 0.2em, which is right for a short label and wrong for a
+   street address — tracked out and capitalised it stops reading as an
+   address and starts reading as a caption. */
+.gzf__copy {
+  display: inline-flex;
+  align-items: center;
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   line-height: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #9a9086;
+  color: #b9afa4;
+  white-space: nowrap;
 }
+.gzf__copy .gzf__edge { margin-right: 10px; }
+.gzf__addr {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  color: #9a9086;
+  text-align: right;
+}
+
 
 /* ---- narrower ---- */
 
@@ -226,6 +252,10 @@
      of the stack is unchanged and nothing reflows around it. */
   .gzf__nav { gap: 6px; }
   .gzf__nav a { padding-block: 4px; }
+  /* The address is too long to sit opposite the glyph on a phone. */
+  /* The address is too long to sit opposite the company on a phone. */
+  .gzf__close { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .gzf__addr { text-align: left; }
 }
 
 /* ---- motion ----
