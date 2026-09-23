@@ -151,6 +151,20 @@
   }
 }
 
+/* Under 400 the wordmark gives way to the mark alone.
+
+   The brand lockup is about 92px of the bar and the four links need roughly
+   230 at their smallest comfortable size. On a 360px Android — a very common
+   width — those do not both fit, and what was falling off the end was
+   About, followed by Security. A visitor who cannot reach half the site is a
+   worse outcome than one who sees the mark without the word beside it, and
+   the mark is still the link home. */
+@media (max-width: 400px) {
+  .gznav .nav-wordmark { display: none; }
+  .gznav .nav-row { padding: 0 16px; }
+  .gznav .nav-links { gap: 10px; }
+}
+
 @media (max-width: 560px) {
   .gznav .nav-row {
     padding: 0 20px;
@@ -159,8 +173,12 @@
   .gznav .nav-links {
     gap: 13px;
   }
+  /* A 12.5px line is a 15px box. The padding is the tap target, and it is
+     vertical only: the bar is 82px tall and its row centres, so nothing
+     moves and nothing else reflows. */
   .gznav .nav-links a {
     font-size: 12.5px;
+    padding-block: 12px;
   }
 }
 
